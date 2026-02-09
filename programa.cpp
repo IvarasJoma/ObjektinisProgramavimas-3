@@ -16,6 +16,18 @@ bool arIvestisSveikasisSkaicius(const std::string& s, bool leistiNuli) {
     return true;
 }
 
+double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai) {
+    if (ndPazymiai.empty()) return 0.0;
+    double suma = 0;
+    for (int pazymys : ndPazymiai) suma += pazymys;
+    return suma / ndPazymiai.size();
+}
+
+double skaiciuotiGalutiniVidurki(const Studentas& s) {
+    double ndVidurkis = skaiciuotiNDVidurki(s.namuDarbuTarpiniaiRezultatai);
+    return 0.4 * ndVidurkis + 0.6 * s.egzaminoRezultatas;
+}
+
 int main() {
     std::vector<Studentas> studentuSarasas;
     std::string input;
@@ -53,7 +65,7 @@ int main() {
         studentas.namuDarbuTarpiniaiRezultatai.reserve(pazymiuSkaicius);
         for (int j = 0; j < pazymiuSkaicius; j++) {
             while (true) {
-                std::cout << "Iveskite studento namų darbų pažymius (skalėje nuo 1 iki 10): ";
+                std::cout << "Iveskite " << pazymiuSkaicius - j << " likusius studento namų darbų pažymius (skalėje nuo 1 iki 10). Įvedus vieną pažymį, paspauskite klavišą ENTER: ";
                 std::getline(std::cin, input);
                 if (tikrintiIvesti(input) && arIvestisSveikasisSkaicius(input, true)){
                     int val = std::stoi(input);
@@ -74,6 +86,12 @@ int main() {
         }
         studentas.egzaminoRezultatas = std::stoi(input);
         studentuSarasas.push_back(std::move(studentas));
+    }
+    std::cout << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė" << std::setw(18) << "Galutinis (Vid.)" << "\n";
+    std::cout << std::string(48, '-') << "\n";
+    for (const auto& studentas : studentuSarasas) {
+        double galutinisVidurkis = skaiciuotiGalutiniVidurki(studentas);
+        std::cout << std::left << std::setw(15) << studentas.Vardas << std::setw(15) << studentas.Pavarde << std::fixed << std::setprecision(2) << galutinisVidurkis << "\n";
     }
     return 0;
 }
