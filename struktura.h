@@ -2,6 +2,7 @@
 #define STRUKTURA_H
 
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #include <iomanip> 
 
