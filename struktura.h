@@ -1,3 +1,6 @@
+#ifndef STRUKTURA_H
+#define STRUKTURA_H
+
 #include <iostream>
 #include <vector>
 
@@ -6,3 +9,5 @@ struct Studentas {
     std::vector<int> namuDarbuTarpiniaiRezultatai;
     int egzaminoRezultatas;
 };
+
+#endif
