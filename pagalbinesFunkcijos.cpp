@@ -23,8 +23,20 @@ double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai) {
     return suma / ndPazymiai.size();
 }
 
-double skaiciuotiGalutiniVidurki(const Studentas& studentas) {
+double skaiciuotiNDVidurki(const int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius) {
+    if (!namuDarbuTarpiniaiRezultatai || pazymiuSkaicius <= 0) return 0.0;
+    double suma = 0.0;
+    for (int i = 0; i < pazymiuSkaicius; i++) suma += namuDarbuTarpiniaiRezultatai[i];
+    return suma / pazymiuSkaicius;
+}
+
+double skaiciuotiGalutiniVidurki(const StudentasVektorius& studentas) {
     double ndVidurkis = skaiciuotiNDVidurki(studentas.namuDarbuTarpiniaiRezultatai);
+    return 0.4 * ndVidurkis + 0.6 * studentas.egzaminoRezultatas;
+}
+
+double skaiciuotiGalutiniVidurki(const StudentasMasyvas& studentas, int pazymiuSkaicius) {
+    double ndVidurkis = skaiciuotiNDVidurki(studentas.namuDarbuTarpiniaiRezultatai, pazymiuSkaicius);
     return 0.4 * ndVidurkis + 0.6 * studentas.egzaminoRezultatas;
 }
 
@@ -39,7 +51,19 @@ double skaiciuotiNDMediana(std::vector<int> ndPazymiai) {
     }
 }
 
-double skaiciuotiGalutineMediana(const Studentas& studentas) {
+double skaiciuotiNDMediana(int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius) {
+    if (!namuDarbuTarpiniaiRezultatai || pazymiuSkaicius <= 0) return 0.0;
+    std::sort(namuDarbuTarpiniaiRezultatai, namuDarbuTarpiniaiRezultatai + pazymiuSkaicius);
+    if (pazymiuSkaicius % 2 == 1) return namuDarbuTarpiniaiRezultatai[pazymiuSkaicius / 2];
+    return (namuDarbuTarpiniaiRezultatai[pazymiuSkaicius / 2 - 1] + namuDarbuTarpiniaiRezultatai[pazymiuSkaicius / 2]) / 2.0;
+}
+
+double skaiciuotiGalutineMediana(const StudentasVektorius& studentas) {
     double ndMediana = skaiciuotiNDMediana(studentas.namuDarbuTarpiniaiRezultatai);
+    return 0.4 * ndMediana + 0.6 * studentas.egzaminoRezultatas;
+}
+
+double skaiciuotiGalutineMediana(const StudentasMasyvas& studentas, int pazymiuSkaicius) {
+    double ndMediana = skaiciuotiNDMediana(studentas.namuDarbuTarpiniaiRezultatai, pazymiuSkaicius);
     return 0.4 * ndMediana + 0.6 * studentas.egzaminoRezultatas;
 }

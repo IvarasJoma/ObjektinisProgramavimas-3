@@ -1,7 +1,6 @@
 #include "struktura.h"
 
 int main() {
-    std::vector<Studentas> studentuSarasas;
     std::string ivestis;
     char pasirinkimas;
     while (true) {
@@ -21,19 +20,19 @@ int main() {
         std::cout << "Studentų skaičius turi būti sveikasis teigiamas skaičius.\n";
     }
     int studentuSkaicius = std::stoi(ivestis);
-    studentuSarasas.reserve(studentuSkaicius);
+    StudentasMasyvas** studentuSarasas = new StudentasMasyvas*[studentuSkaicius];
     for (int i = 0; i < studentuSkaicius; i++){
-        Studentas studentas;
+        studentuSarasas[i] = new StudentasMasyvas();
         while (true) {
             std::cout << "Įveskite studento vardą: ";
-            std::getline(std::cin, studentas.Vardas);
-            if (tikrintiIvesti(studentas.Vardas)) break;
+            std::getline(std::cin, studentuSarasas[i]->Vardas);
+            if (tikrintiIvesti(studentuSarasas[i]->Vardas)) break;
             std::cout << "Studento vardas negali likti tuščias.\n";
         }
         while (true) {
             std::cout << "Įveskite studento pavardę: ";
-            std::getline(std::cin, studentas.Pavarde);
-            if (tikrintiIvesti(studentas.Pavarde)) break;
+            std::getline(std::cin, studentuSarasas[i]->Pavarde);
+            if (tikrintiIvesti(studentuSarasas[i]->Pavarde)) break;
             std::cout << "Studento pavardė negali likti tuščia.\n";
         }
         while (true) {
@@ -42,9 +41,9 @@ int main() {
             if (tikrintiIvesti(ivestis) && arIvestisSveikasisSkaicius(ivestis, true)) break;
             std::cout << "Studento namų darbų pažymių skaičius turi būti neneigiamas (daugiau arba lygus 0).\n";
         }
-        int pazymiuSkaicius = std::stoi(ivestis);
-        studentas.namuDarbuTarpiniaiRezultatai.clear();
-        studentas.namuDarbuTarpiniaiRezultatai.reserve(pazymiuSkaicius);
+        studentuSarasas[i]->namuDarbuKiekis = std::stoi(ivestis);
+        int pazymiuSkaicius = studentuSarasas[i]->namuDarbuKiekis;
+        studentuSarasas[i]->namuDarbuTarpiniaiRezultatai = new int[pazymiuSkaicius];
         for (int j = 0; j < pazymiuSkaicius; j++) {
             while (true) {
                 std::cout << "Įveskite " << pazymiuSkaicius - j << " likusius studento namų darbų pažymius (skalėje nuo 1 iki 10). Įvedus vieną pažymį, paspauskite klavišą ENTER: ";
@@ -55,7 +54,7 @@ int main() {
                 }
                 std::cout << "Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
             }
-            studentas.namuDarbuTarpiniaiRezultatai.push_back(std::stoi(ivestis));
+            studentuSarasas[i]->namuDarbuTarpiniaiRezultatai[j] = std::stoi(ivestis);
         }
         while (true) {
             std::cout << "Įveskite studento egzamino pažymį (skalėje nuo 1 iki 10): ";
@@ -66,14 +65,19 @@ int main() {
             }
             std::cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
         }
-        studentas.egzaminoRezultatas = std::stoi(ivestis);
-        studentuSarasas.push_back(std::move(studentas));
+        studentuSarasas[i]->egzaminoRezultatas = std::stoi(ivestis);
     }
     std::cout << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė" << std::setw(18) << (pasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)") << "\n";
     std::cout << std::string(48, '-') << "\n";
-    for (const auto& studentas : studentuSarasas) {
-        double galutinisRezultatas = (pasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
-        std::cout << std::left << std::setw(15) << studentas.Vardas << std::setw(15) << studentas.Pavarde << std::fixed << std::setprecision(2) << galutinisRezultatas << "\n";
+    for (int i = 0; i < studentuSkaicius; i++) {
+        int studentoNamuDarbuKiekis = studentuSarasas[i]->namuDarbuKiekis;
+        double galutinisRezultatas = (pasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(*studentuSarasas[i], studentoNamuDarbuKiekis) : skaiciuotiGalutineMediana(*studentuSarasas[i], studentoNamuDarbuKiekis);
+        std::cout << std::left << std::setw(15) << studentuSarasas[i]->Vardas << std::setw(15) << studentuSarasas[i]->Pavarde << std::fixed << std::setprecision(2) << galutinisRezultatas << "\n";
     }
+    for (int i = 0; i < studentuSkaicius; i++) {
+        delete[] studentuSarasas[i]->namuDarbuTarpiniaiRezultatai;
+        delete studentuSarasas[i];
+    }
+    delete[] studentuSarasas;
     return 0;
 }
