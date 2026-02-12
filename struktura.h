@@ -4,7 +4,8 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <iomanip> 
+#include <iomanip>
+#include <charconv>
 
 struct StudentasVektorius {
     std::string Vardas, Pavarde;
@@ -20,7 +21,6 @@ struct StudentasMasyvas {
 };
 
 bool tikrintiIvesti(const std::string& ivestis);
-bool arIvestisSveikasisSkaicius(const std::string& ivestis, bool leistiNuli);
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai);
 double skaiciuotiGalutiniVidurki(const StudentasVektorius& studentas);
 double skaiciuotiNDMediana(std::vector<int> ndPazymiai);
@@ -29,5 +29,6 @@ double skaiciuotiGalutineMediana(const StudentasMasyvas& studentas, int pazymiuS
 double skaiciuotiNDMediana(int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
 double skaiciuotiGalutiniVidurki(const StudentasMasyvas& studentas, int pazymiuSkaicius);
 double skaiciuotiNDVidurki(const int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
+void parodytiRezultatuLentele(std::vector<StudentasVektorius> studentuSarasas, char pasirinkimas);
 
 #endif

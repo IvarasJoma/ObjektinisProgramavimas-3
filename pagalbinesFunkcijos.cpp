@@ -6,16 +6,6 @@ bool tikrintiIvesti(const std::string& ivestis) {
     } return false;
 }
 
-bool arIvestisSveikasisSkaicius(const std::string& ivestis, bool leistiNuli) {
-    if (ivestis.empty()) return false;
-    for (char simbolis : ivestis) {
-        if (!std::isdigit(static_cast<unsigned char>(simbolis))) return false;
-    }
-    if (!leistiNuli && ivestis[0] == '0') return false;
-    if (ivestis.size() > 1 && ivestis[0] == '0')return false;
-    return true;
-}
-
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai) {
     if (ndPazymiai.empty()) return 0.0;
     double suma = 0;
@@ -66,4 +56,13 @@ double skaiciuotiGalutineMediana(const StudentasVektorius& studentas) {
 double skaiciuotiGalutineMediana(const StudentasMasyvas& studentas, int pazymiuSkaicius) {
     double ndMediana = skaiciuotiNDMediana(studentas.namuDarbuTarpiniaiRezultatai, pazymiuSkaicius);
     return 0.4 * ndMediana + 0.6 * studentas.egzaminoRezultatas;
+}
+
+void parodytiRezultatuLentele(std::vector<StudentasVektorius> studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+    std::cout << std::left << std::setw(15) << "Vardas" << std::setw(14) << "Pavardė" << std::setw(18) << (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)") << "\n";
+    std::cout << std::string(48, '-') << "\n";
+    for (const auto& studentas : studentuSarasas) {
+        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
+        std::cout << std::left << std::setw(15) << studentas.Vardas << std::setw(14) << studentas.Pavarde << std::fixed << std::setprecision(2) << galutinisRezultatas << "\n";
+    }
 }
