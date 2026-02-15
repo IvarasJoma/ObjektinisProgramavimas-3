@@ -1,9 +1,10 @@
 #include "struktura.h"
 
-int main() {
+int main(){
     std::string ivestis;
     char ivestiesPasirinkimas;
     char skaiciavimoMetodoPasirinkimas;
+    char pazymiuIvedimoBudas;
     StudentasMasyvas** studentuSarasas = nullptr;
     int studentuSkaicius = 0;
     int pazymiuSkaicius = 0;
@@ -16,6 +17,15 @@ int main() {
             if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'M') break;
         }
         std::cout << "Įveskite TIK vieną raidę: V arba M.\n";
+    }
+    while (true) {
+        std::cout << "Pažymių įvedimas: I - įvesti ranka, A - atsitiktinai generuoti: ";
+        if (!std::getline(std::cin, ivestis)) return 0;
+        if (tikrintiIvesti(ivestis) && ivestis.size() == 1) {
+            pazymiuIvedimoBudas = (char)std::toupper(static_cast<unsigned char>(ivestis[0]));
+            if (pazymiuIvedimoBudas == 'I' || pazymiuIvedimoBudas == 'A') break;
+        }
+        std::cout << "Įveskite TIK vieną raidę: I arba A.\n";
     }
     while (true){
         std::cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
@@ -51,37 +61,43 @@ int main() {
             if (tikrintiIvesti(studentuSarasas[studentuSkaicius - 1]->Pavarde)) break;
             std::cout << "Studento pavardė negali likti tuščia.\n";
         }
-        while (true) {
-            std::cout << "Įveskite studento namų darbų pažymius (skalėje nuo 1 iki 10). Įvedus pažymį, paspauskite klavišą ENTER. Suvedus visus pažymius, tuščiame lauke paspauskite klavišą ENTER: ";
-            std::getline(std::cin, ivestis);
-            if (ivestis.empty()){
-                break;
+        if (pazymiuIvedimoBudas == 'A') {
+            generuotiRezultatus(studentuSarasas[studentuSkaicius - 1]);
+            std::cout << "Sugeneruoti ND pažymiai: ";
+            for (int i = 0; i < studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis; ++i) {
+                std::cout << studentuSarasas[studentuSkaicius - 1]->namuDarbuTarpiniaiRezultatai[i] << ' ';
             }
-            int val = 0;
-            auto res = std::from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-            if (res.ec == std::errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10){
-                uztikrintiNamuDarbuMasyvoTalpa(studentuSarasas[studentuSkaicius - 1]->namuDarbuTarpiniaiRezultatai, studentuSarasas[studentuSkaicius - 1]->namuDarbuTalpa, studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis, studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis + 1);
-                studentuSarasas[studentuSkaicius - 1]->namuDarbuTarpiniaiRezultatai[studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis] = val;
-                studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis++;
-                continue;
-            } else {
+            std::cout << "\nSugeneruotas egzamino pažymys: " << studentuSarasas[studentuSkaicius - 1]->egzaminoRezultatas << "\n";
+        } else {
+            while (true) {
+                std::cout << "Įveskite studento namų darbų pažymius (skalėje nuo 1 iki 10). Įvedus pažymį, paspauskite klavišą ENTER. Suvedus visus pažymius, tuščiame lauke paspauskite klavišą ENTER: ";
+                std::getline(std::cin, ivestis);
+                if (ivestis.empty()) break;
+                int val = 0;
+                auto res = std::from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
+                if (res.ec == std::errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10) {
+                    uztikrintiNamuDarbuMasyvoTalpa(studentuSarasas[studentuSkaicius - 1]->namuDarbuTarpiniaiRezultatai, studentuSarasas[studentuSkaicius - 1]->namuDarbuTalpa, studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis, studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis + 1);
+                    studentuSarasas[studentuSkaicius - 1]->namuDarbuTarpiniaiRezultatai[studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis] = val;
+                    studentuSarasas[studentuSkaicius - 1]->namuDarbuKiekis++;
+                    continue;
+                }
                 std::cout << "Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
             }
-        }
-        while (true) {
-            std::cout << "Įveskite studento egzamino pažymį (skalėje nuo 1 iki 10): ";
-            std::getline(std::cin, ivestis);
-            if (!tikrintiIvesti(ivestis)){
+            while (true) {
+                std::cout << "Įveskite studento egzamino pažymį (skalėje nuo 1 iki 10): ";
+                std::getline(std::cin, ivestis);
+                if (!tikrintiIvesti(ivestis)) {
+                    std::cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
+                    continue;
+                }
+                int val = 0;
+                auto res = std::from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
+                if (res.ec == std::errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10) {
+                    studentuSarasas[studentuSkaicius - 1]->egzaminoRezultatas = val;
+                    break;
+                }
                 std::cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
-                continue;
             }
-            int val = 0;
-            auto res = std::from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-            if (res.ec == std::errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10){
-                studentuSarasas[studentuSkaicius - 1]->egzaminoRezultatas = val;
-                break;
-            }
-            std::cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
         }    
     }
     for (int i = 0; i < studentuSkaicius; i++) {

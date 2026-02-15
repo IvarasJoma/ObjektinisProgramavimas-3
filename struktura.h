@@ -6,6 +6,8 @@
 #include <vector>
 #include <iomanip>
 #include <charconv>
+#include <random>
+#include <chrono>
 
 struct StudentasVektorius {
     std::string Vardas, Pavarde;
@@ -34,5 +36,8 @@ void parodytiRezultatuLentele(std::vector<StudentasVektorius> studentuSarasas, c
 void parodytiRezultatuLentele(StudentasMasyvas**& studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas);
 void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& talpa, int pazymiuKiekis, int dydis);
 void uztikrintiStudentuMasyvoTalpa(StudentasMasyvas**& studentuSarasas, int& talpa, int studentuSkaicius, int dydis);
+void generuotiRezultatus(StudentasVektorius& studentas);
+int generuotiSveikusSkaicius(int nuo, int iki);
+void generuotiRezultatus(StudentasMasyvas* studentas);
 
 #endif

@@ -99,3 +99,33 @@ void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& tal
     namuDarbuTarpiniaiRezultatai = naujasMasyvas;
     talpa = naujaTalpa;
 }
+
+int generuotiSveikusSkaicius(int nuo, int iki) {
+    static std::mt19937 gen(static_cast<unsigned>(std::chrono::high_resolution_clock::now().time_since_epoch().count()));
+    std::uniform_int_distribution<int> dist(nuo, iki);
+    return dist(gen);
+}
+
+void generuotiRezultatus(StudentasVektorius& studentas) {
+    int ndKiekis = generuotiSveikusSkaicius(0, 20);
+    studentas.namuDarbuTarpiniaiRezultatai.clear();
+    studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
+    for (int i = 0; i < ndKiekis; ++i) {
+        studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikusSkaicius(1, 10));
+    }
+    studentas.egzaminoRezultatas = generuotiSveikusSkaicius(1, 10);
+}
+
+void generuotiRezultatus(StudentasMasyvas* studentas) {
+    delete[] studentas->namuDarbuTarpiniaiRezultatai;
+    studentas->namuDarbuTarpiniaiRezultatai = nullptr;
+    studentas->namuDarbuKiekis = 0;
+    studentas->namuDarbuTalpa = 0;
+    int ndKiekis = generuotiSveikusSkaicius(0, 20);
+    uztikrintiNamuDarbuMasyvoTalpa(studentas->namuDarbuTarpiniaiRezultatai, studentas->namuDarbuTalpa, studentas->namuDarbuKiekis, ndKiekis);
+    for (int i = 0; i < ndKiekis; ++i) {
+        studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikusSkaicius(1, 10);
+        studentas->namuDarbuKiekis++;
+    }
+    studentas->egzaminoRezultatas = generuotiSveikusSkaicius(1, 10);
+}
