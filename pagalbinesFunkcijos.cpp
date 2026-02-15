@@ -66,3 +66,36 @@ void parodytiRezultatuLentele(std::vector<StudentasVektorius> studentuSarasas, c
         std::cout << std::left << std::setw(15) << studentas.Vardas << std::setw(14) << studentas.Pavarde << std::fixed << std::setprecision(2) << galutinisRezultatas << "\n";
     }
 }
+
+void parodytiRezultatuLentele(StudentasMasyvas**& studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas){
+    std::cout << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė" << std::setw(18) << (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)") << "\n";
+    std::cout << std::string(48, '-') << "\n";
+    for (int i = 0; i < studentuSkaicius; i++) {
+        int studentoNamuDarbuKiekis = studentuSarasas[i]->namuDarbuKiekis;
+        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(*studentuSarasas[i], studentoNamuDarbuKiekis) : skaiciuotiGalutineMediana(*studentuSarasas[i], studentoNamuDarbuKiekis);
+        std::cout << std::left << std::setw(15) << studentuSarasas[i]->Vardas << std::setw(15) << studentuSarasas[i]->Pavarde << std::fixed << std::setprecision(2) << galutinisRezultatas << "\n";
+    }
+}
+
+void uztikrintiStudentuMasyvoTalpa(StudentasMasyvas**& studentuSarasas, int& talpa, int studentuSkaicius, int dydis){
+    if (dydis <= talpa) return;
+    int naujaTalpa = (talpa == 0) ? 2 : talpa * 2;
+    while (naujaTalpa < dydis) naujaTalpa *= 2;
+    StudentasMasyvas** naujasMasyvas = new StudentasMasyvas*[naujaTalpa];
+    for (int i = 0; i < studentuSkaicius; i++) naujasMasyvas[i] = studentuSarasas[i];
+    for (int i = studentuSkaicius; i < naujaTalpa; i++) naujasMasyvas[i] = nullptr;
+    delete[] studentuSarasas;
+    studentuSarasas = naujasMasyvas;
+    talpa = naujaTalpa;
+}
+
+void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& talpa, int pazymiuKiekis, int dydis){
+    if (dydis <= talpa) return;
+    int naujaTalpa = (talpa == 0) ? 2 : talpa * 2;
+    while (naujaTalpa < dydis) naujaTalpa *= 2;
+    int* naujasMasyvas = new int[naujaTalpa];
+    for (int i = 0; i < pazymiuKiekis; i++) naujasMasyvas[i] = namuDarbuTarpiniaiRezultatai[i];
+    delete[] namuDarbuTarpiniaiRezultatai;
+    namuDarbuTarpiniaiRezultatai = naujasMasyvas;
+    talpa = naujaTalpa;
+}

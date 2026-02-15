@@ -17,6 +17,7 @@ struct StudentasMasyvas {
     std::string Vardas, Pavarde;
     int* namuDarbuTarpiniaiRezultatai = nullptr;
     int namuDarbuKiekis = 0;
+    int namuDarbuTalpa = 0;
     int egzaminoRezultatas = 0;
 };
 
@@ -30,5 +31,8 @@ double skaiciuotiNDMediana(int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaiciu
 double skaiciuotiGalutiniVidurki(const StudentasMasyvas& studentas, int pazymiuSkaicius);
 double skaiciuotiNDVidurki(const int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
 void parodytiRezultatuLentele(std::vector<StudentasVektorius> studentuSarasas, char pasirinkimas);
+void parodytiRezultatuLentele(StudentasMasyvas**& studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas);
+void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& talpa, int pazymiuKiekis, int dydis);
+void uztikrintiStudentuMasyvoTalpa(StudentasMasyvas**& studentuSarasas, int& talpa, int studentuSkaicius, int dydis);
 
 #endif
