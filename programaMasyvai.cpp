@@ -1,4 +1,4 @@
-#include "struktura.h"
+#include "strukturaMasyvai.h"
 
 int main(){
     std::string ivestis;

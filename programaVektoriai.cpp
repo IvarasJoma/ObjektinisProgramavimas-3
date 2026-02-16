@@ -1,4 +1,4 @@
-#include "struktura.h"
+#include "strukturaVektoriai.h"
 
 int main(){
     std::vector<StudentasVektorius> studentuSarasas;

@@ -1,4 +1,5 @@
-#include "struktura.h"
+#include "strukturaMasyvai.h"
+#include "strukturaVektoriai.h"
 
 bool tikrintiIvesti(const std::string& ivestis) {
     for (char simbolis : ivestis) {
