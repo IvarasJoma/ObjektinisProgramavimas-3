@@ -100,20 +100,20 @@ void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& tal
     talpa = naujaTalpa;
 }
 
-int generuotiSveikusSkaicius(int nuo, int iki) {
+int generuotiSveikaSkaiciu(int nuo, int iki) {
     static std::mt19937 gen(static_cast<unsigned>(std::chrono::high_resolution_clock::now().time_since_epoch().count()));
     std::uniform_int_distribution<int> dist(nuo, iki);
     return dist(gen);
 }
 
 void generuotiRezultatus(StudentasVektorius& studentas) {
-    int ndKiekis = generuotiSveikusSkaicius(0, 20);
+    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
     studentas.namuDarbuTarpiniaiRezultatai.clear();
     studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
-        studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikusSkaicius(1, 10));
+        studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikaSkaiciu(1, 10));
     }
-    studentas.egzaminoRezultatas = generuotiSveikusSkaicius(1, 10);
+    studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }
 
 void generuotiRezultatus(StudentasMasyvas* studentas) {
@@ -121,11 +121,97 @@ void generuotiRezultatus(StudentasMasyvas* studentas) {
     studentas->namuDarbuTarpiniaiRezultatai = nullptr;
     studentas->namuDarbuKiekis = 0;
     studentas->namuDarbuTalpa = 0;
-    int ndKiekis = generuotiSveikusSkaicius(0, 20);
+    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
     uztikrintiNamuDarbuMasyvoTalpa(studentas->namuDarbuTarpiniaiRezultatai, studentas->namuDarbuTalpa, studentas->namuDarbuKiekis, ndKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
-        studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikusSkaicius(1, 10);
+        studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikaSkaiciu(1, 10);
         studentas->namuDarbuKiekis++;
     }
-    studentas->egzaminoRezultatas = generuotiSveikusSkaicius(1, 10);
+    studentas->egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
+}
+
+int nuskaitytiEilutesIsFailo(const std::string& failas, std::string*& nuskaitytasMasyvas) {
+    nuskaitytasMasyvas = nullptr;
+    std::ifstream fin(failas);
+    if (!fin) {
+        std::cerr << "Nepavyko atidaryti failo: " << failas << "\n";
+        return 0;
+    }
+    int count = 0;
+    std::string line;
+    while (std::getline(fin, line)) {
+        if (!line.empty()) count++;
+    }
+    if (count == 0) return 0;
+    nuskaitytasMasyvas = new std::string[count];
+    fin.clear();
+    fin.seekg(0);
+    int i = 0;
+    while (std::getline(fin, line)) {
+        if (line.empty()) continue;
+        if (i < count) nuskaitytasMasyvas[i++] = line;
+    }
+    return i;
+}
+
+void generuotiVardaPavarde(std::string& vardas, std::string& pavarde, const std::string* vyrVardai, int vyrVarduKiekis, const std::string* vyrPavardes, int vyrPavardziuKiekis, const std::string* motVardai, int motVarduKiekis, const std::string* motPavardes, int motPavardziuKiekis){
+    int lytis = generuotiSveikaSkaiciu(0, 1);
+    if (lytis == 0) {
+        if (vyrVarduKiekis <= 0 || vyrPavardziuKiekis <= 0) {
+            vardas = "Vardenis";
+            pavarde = "Pavardenis";
+            return;
+        }
+        int vardoIndeksas = generuotiSveikaSkaiciu(0, vyrVarduKiekis - 1);
+        int pavardesIndeksas = generuotiSveikaSkaiciu(0, vyrPavardziuKiekis - 1);
+        vardas = vyrVardai[vardoIndeksas];
+        pavarde = vyrPavardes[pavardesIndeksas];
+    } else {
+        if (motVarduKiekis <= 0 || motPavardziuKiekis <= 0) {
+            vardas = "Vardenė";
+            pavarde = "Pavardenė";
+            return;
+        }
+        int vardoIndeksas = generuotiSveikaSkaiciu(0, motVarduKiekis - 1);
+        int pavardesIndeksas = generuotiSveikaSkaiciu(0, motPavardziuKiekis - 1);
+        vardas = motVardai[vardoIndeksas];
+        pavarde = motPavardes[pavardesIndeksas];
+    }
+}
+
+void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){
+    if (vyrVardai.empty() || vyrPavardes.empty() || motVardai.empty() || motPavardes.empty()) {
+        studentas.Vardas = "Vardenis";
+        studentas.Pavarde = "Pavardenis";
+        return;
+    }
+    int lytis = generuotiSveikaSkaiciu(0, 1);
+    if (lytis == 0) {
+        int vardoIndeksas = generuotiSveikaSkaiciu(0, (int)vyrVardai.size() - 1);
+        int pavardesIndeksas = generuotiSveikaSkaiciu(0, (int)vyrPavardes.size() - 1);
+        studentas.Vardas = vyrVardai[vardoIndeksas];
+        studentas.Pavarde = vyrPavardes[pavardesIndeksas];
+    }
+    else {
+        int vardoIndeksas = generuotiSveikaSkaiciu(0, (int)motVardai.size() - 1);
+        int pavardesIndeksas = generuotiSveikaSkaiciu(0, (int)motPavardes.size() - 1);
+        studentas.Vardas = motVardai[vardoIndeksas];
+        studentas.Pavarde = motPavardes[pavardesIndeksas];
+    }
+}    
+
+std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
+    std::vector<std::string> rezultatas;
+    std::ifstream fin(failas);
+    if (!fin) {
+        std::cerr << "Nepavyko atidaryti failo: " << failas << "\n";
+        return rezultatas;
+    }
+    std::string line;
+    while (std::getline(fin, line)) {
+        if (!line.empty()) {
+            rezultatas.push_back(line);
+        }
+    }
+    return rezultatas;
 }

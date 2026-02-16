@@ -8,6 +8,7 @@
 #include <charconv>
 #include <random>
 #include <chrono>
+#include <fstream>
 
 struct StudentasVektorius {
     std::string Vardas, Pavarde;
@@ -37,7 +38,12 @@ void parodytiRezultatuLentele(StudentasMasyvas**& studentuSarasas, int studentuS
 void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& talpa, int pazymiuKiekis, int dydis);
 void uztikrintiStudentuMasyvoTalpa(StudentasMasyvas**& studentuSarasas, int& talpa, int studentuSkaicius, int dydis);
 void generuotiRezultatus(StudentasVektorius& studentas);
-int generuotiSveikusSkaicius(int nuo, int iki);
+int generuotiSveikaSkaiciu(int nuo, int iki);
 void generuotiRezultatus(StudentasMasyvas* studentas);
+int nuskaitytiEilutesIsFailo(const std::string& failas, std::string*& nuskaitytasMasyvas);
+void generuotiVardaPavarde(std::string& vardas, std::string& pavarde, const std::string* vyrVardai, int vyrVarduKiekis, const std::string* vyrPavardes, int vyrPavardziuKiekis, const std::string* motVardai, int motVarduKiekis, const std::string* motPavardes, int motPavardziuKiekis);
+std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
+void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes);
+
 
 #endif
