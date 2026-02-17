@@ -9,6 +9,7 @@
 #include <random>
 #include <chrono>
 #include <fstream>
+#include <format>
 
 struct StudentasMasyvas {
     std::string Vardas, Pavarde;
@@ -30,6 +31,5 @@ int generuotiSveikaSkaiciu(int nuo, int iki);
 void generuotiRezultatus(StudentasMasyvas* studentas);
 int nuskaitytiEilutesIsFailo(const std::string& failas, std::string*& nuskaitytasMasyvas);
 void generuotiVardaPavarde(std::string& vardas, std::string& pavarde, const std::string* vyrVardai, int vyrVarduKiekis, const std::string* vyrPavardes, int vyrPavardziuKiekis, const std::string* motVardai, int motVarduKiekis, const std::string* motPavardes, int motPavardziuKiekis);
-
 
 #endif

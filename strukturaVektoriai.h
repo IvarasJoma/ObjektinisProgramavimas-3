@@ -9,6 +9,7 @@
 #include <random>
 #include <chrono>
 #include <fstream>
+#include <format>
 
 struct StudentasVektorius {
     std::string Vardas, Pavarde;
@@ -28,6 +29,5 @@ void generuotiRezultatus(StudentasVektorius& studentas);
 int generuotiSveikaSkaiciu(int nuo, int iki);
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes);
-
 
 #endif

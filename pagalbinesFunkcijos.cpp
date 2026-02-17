@@ -1,13 +1,26 @@
 #include "strukturaMasyvai.h"
 #include "strukturaVektoriai.h"
 
-bool tikrintiIvesti(const std::string& ivestis) {
+using std::cout;
+using std::cerr;
+using std::format;
+using std::getline;
+using std::ifstream;
+using std::string;
+using std::vector;
+using std::sort;
+using std::isspace;
+using std::mt19937;
+using std::uniform_int_distribution;
+using std::chrono::high_resolution_clock;
+
+bool tikrintiIvesti(const string& ivestis) {
     for (char simbolis : ivestis) {
-        if (!std::isspace(static_cast<unsigned char>(simbolis))) return true;
+        if (!isspace(static_cast<unsigned char>(simbolis))) return true;
     } return false;
 }
 
-double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai) {
+double skaiciuotiNDVidurki(const vector<int>& ndPazymiai) {
     if (ndPazymiai.empty()) return 0.0;
     double suma = 0;
     for (int pazymys : ndPazymiai) suma += pazymys;
@@ -31,9 +44,9 @@ double skaiciuotiGalutiniVidurki(const StudentasMasyvas& studentas, int pazymiuS
     return 0.4 * ndVidurkis + 0.6 * studentas.egzaminoRezultatas;
 }
 
-double skaiciuotiNDMediana(std::vector<int> ndPazymiai) {
+double skaiciuotiNDMediana(vector<int> ndPazymiai) {
     if (ndPazymiai.empty()) return 0.0;
-    std::sort(ndPazymiai.begin(), ndPazymiai.end());
+    sort(ndPazymiai.begin(), ndPazymiai.end());
     int n = (int)ndPazymiai.size();
     if (n % 2 == 1) {
         return ndPazymiai[n / 2];
@@ -44,7 +57,7 @@ double skaiciuotiNDMediana(std::vector<int> ndPazymiai) {
 
 double skaiciuotiNDMediana(int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius) {
     if (!namuDarbuTarpiniaiRezultatai || pazymiuSkaicius <= 0) return 0.0;
-    std::sort(namuDarbuTarpiniaiRezultatai, namuDarbuTarpiniaiRezultatai + pazymiuSkaicius);
+    sort(namuDarbuTarpiniaiRezultatai, namuDarbuTarpiniaiRezultatai + pazymiuSkaicius);
     if (pazymiuSkaicius % 2 == 1) return namuDarbuTarpiniaiRezultatai[pazymiuSkaicius / 2];
     return (namuDarbuTarpiniaiRezultatai[pazymiuSkaicius / 2 - 1] + namuDarbuTarpiniaiRezultatai[pazymiuSkaicius / 2]) / 2.0;
 }
@@ -59,22 +72,22 @@ double skaiciuotiGalutineMediana(const StudentasMasyvas& studentas, int pazymiuS
     return 0.4 * ndMediana + 0.6 * studentas.egzaminoRezultatas;
 }
 
-void parodytiRezultatuLentele(std::vector<StudentasVektorius> studentuSarasas, char skaiciavimoMetodoPasirinkimas){
-    std::cout << std::left << std::setw(15) << "Vardas" << std::setw(14) << "Pavardė" << std::setw(18) << (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)") << "\n";
-    std::cout << std::string(48, '-') << "\n";
+void parodytiRezultatuLentele(vector<StudentasVektorius> studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+    cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
+    cout << string(56, '-') << "\n";
     for (const auto& studentas : studentuSarasas) {
         double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
-        std::cout << std::left << std::setw(15) << studentas.Vardas << std::setw(14) << studentas.Pavarde << std::fixed << std::setprecision(2) << galutinisRezultatas << "\n";
+        cout << format("{:<18} {:<18} {:<20.2f}\n", studentas.Vardas, studentas.Pavarde, galutinisRezultatas);
     }
 }
 
 void parodytiRezultatuLentele(StudentasMasyvas**& studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas){
-    std::cout << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė" << std::setw(18) << (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)") << "\n";
-    std::cout << std::string(48, '-') << "\n";
+    cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
+    cout << string(56, '-') << "\n";
     for (int i = 0; i < studentuSkaicius; i++) {
         int studentoNamuDarbuKiekis = studentuSarasas[i]->namuDarbuKiekis;
         double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(*studentuSarasas[i], studentoNamuDarbuKiekis) : skaiciuotiGalutineMediana(*studentuSarasas[i], studentoNamuDarbuKiekis);
-        std::cout << std::left << std::setw(15) << studentuSarasas[i]->Vardas << std::setw(15) << studentuSarasas[i]->Pavarde << std::fixed << std::setprecision(2) << galutinisRezultatas << "\n";
+        cout << format("{:<18} {:<18} {:<20.2f}\n", studentuSarasas[i]->Vardas, studentuSarasas[i]->Pavarde, galutinisRezultatas);
     }
 }
 
@@ -102,8 +115,8 @@ void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& tal
 }
 
 int generuotiSveikaSkaiciu(int nuo, int iki) {
-    static std::mt19937 gen(static_cast<unsigned>(std::chrono::high_resolution_clock::now().time_since_epoch().count()));
-    std::uniform_int_distribution<int> dist(nuo, iki);
+    static mt19937 gen(static_cast<unsigned>(high_resolution_clock::now().time_since_epoch().count()));
+    uniform_int_distribution<int> dist(nuo, iki);
     return dist(gen);
 }
 
@@ -131,31 +144,31 @@ void generuotiRezultatus(StudentasMasyvas* studentas) {
     studentas->egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }
 
-int nuskaitytiEilutesIsFailo(const std::string& failas, std::string*& nuskaitytasMasyvas) {
+int nuskaitytiEilutesIsFailo(const string& failas, string*& nuskaitytasMasyvas) {
     nuskaitytasMasyvas = nullptr;
-    std::ifstream fin(failas);
+    ifstream fin(failas);
     if (!fin) {
-        std::cerr << "Nepavyko atidaryti failo: " << failas << "\n";
+        cerr << "Nepavyko atidaryti failo: " << failas << "\n";
         return 0;
     }
     int count = 0;
-    std::string line;
-    while (std::getline(fin, line)) {
+    string line;
+    while (getline(fin, line)) {
         if (!line.empty()) count++;
     }
     if (count == 0) return 0;
-    nuskaitytasMasyvas = new std::string[count];
+    nuskaitytasMasyvas = new string[count];
     fin.clear();
     fin.seekg(0);
     int i = 0;
-    while (std::getline(fin, line)) {
+    while (getline(fin, line)) {
         if (line.empty()) continue;
         if (i < count) nuskaitytasMasyvas[i++] = line;
     }
     return i;
 }
 
-void generuotiVardaPavarde(std::string& vardas, std::string& pavarde, const std::string* vyrVardai, int vyrVarduKiekis, const std::string* vyrPavardes, int vyrPavardziuKiekis, const std::string* motVardai, int motVarduKiekis, const std::string* motPavardes, int motPavardziuKiekis){
+void generuotiVardaPavarde(string& vardas, string& pavarde, const string* vyrVardai, int vyrVarduKiekis, const string* vyrPavardes, int vyrPavardziuKiekis, const string* motVardai, int motVarduKiekis, const string* motPavardes, int motPavardziuKiekis){
     int lytis = generuotiSveikaSkaiciu(0, 1);
     if (lytis == 0) {
         if (vyrVarduKiekis <= 0 || vyrPavardziuKiekis <= 0) {
@@ -180,7 +193,7 @@ void generuotiVardaPavarde(std::string& vardas, std::string& pavarde, const std:
     }
 }
 
-void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){
+void generuotiVardaPavarde(StudentasVektorius& studentas, const vector<string>& vyrVardai, const vector<string>& vyrPavardes, const vector<string>& motVardai, const vector<string>& motPavardes){
     if (vyrVardai.empty() || vyrPavardes.empty() || motVardai.empty() || motPavardes.empty()) {
         studentas.Vardas = "Vardenis";
         studentas.Pavarde = "Pavardenis";
@@ -201,15 +214,15 @@ void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std:
     }
 }    
 
-std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
-    std::vector<std::string> rezultatas;
-    std::ifstream fin(failas);
+vector<string> nuskaitytiEilutesIVektoriu(const string& failas){
+    vector<string> rezultatas;
+    ifstream fin(failas);
     if (!fin) {
-        std::cerr << "Nepavyko atidaryti failo: " << failas << "\n";
+        cerr << "Nepavyko atidaryti failo: " << failas << "\n";
         return rezultatas;
     }
-    std::string line;
-    while (std::getline(fin, line)) {
+    string line;
+    while (getline(fin, line)) {
         if (!line.empty()) {
             rezultatas.push_back(line);
         }
