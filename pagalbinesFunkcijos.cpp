@@ -71,7 +71,7 @@ double skaiciuotiGalutineMediana(const StudentasMasyvas& studentas, int pazymiuS
     return 0.4 * ndMediana + 0.6 * studentas.egzaminoRezultatas;
 }
 
-void parodytiRezultatuLentele(vector<StudentasVektorius> studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void parodytiRezultatuLentele(const vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     cout << string(56, '-') << "\n";
     for (const auto& studentas : studentuSarasas) {
@@ -114,9 +114,9 @@ void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& tal
 }
 
 int generuotiSveikaSkaiciu(int nuo, int iki) {
-    static std::mt19937 gen(std::random_device{}());
-    std::uniform_int_distribution<int> dist(nuo, iki);
-    return dist(gen);
+    static std::mt19937 generatorius(std::random_device{}());
+    std::uniform_int_distribution<int> distribucija(nuo, iki);
+    return distribucija(generatorius);
 }
 
 void generuotiRezultatus(StudentasVektorius& studentas) {
@@ -150,19 +150,19 @@ int nuskaitytiEilutesIsFailo(const string& failas, string*& nuskaitytasMasyvas) 
         cerr << "Nepavyko atidaryti failo: " << failas << "\n";
         return 0;
     }
-    int count = 0;
-    string line;
-    while (getline(fin, line)) {
-        if (!line.empty()) count++;
+    int kiekis = 0;
+    string eilute;
+    while (getline(fin, eilute)) {
+        if (!eilute.empty()) kiekis++;
     }
-    if (count == 0) return 0;
-    nuskaitytasMasyvas = new string[count];
+    if (kiekis == 0) return 0;
+    nuskaitytasMasyvas = new string[kiekis];
     fin.clear();
     fin.seekg(0);
     int i = 0;
-    while (getline(fin, line)) {
-        if (line.empty()) continue;
-        if (i < count) nuskaitytasMasyvas[i++] = line;
+    while (getline(fin, eilute)) {
+        if (eilute.empty()) continue;
+        if (i < kiekis) nuskaitytasMasyvas[i++] = eilute;
     }
     return i;
 }
@@ -220,10 +220,10 @@ vector<string> nuskaitytiEilutesIVektoriu(const string& failas){
         cerr << "Nepavyko atidaryti failo: " << failas << "\n";
         return rezultatas;
     }
-    string line;
-    while (getline(fin, line)) {
-        if (!line.empty()) {
-            rezultatas.push_back(line);
+    string eilute;
+    while (getline(fin, eilute)) {
+        if (!eilute.empty()) {
+            rezultatas.push_back(eilute);
         }
     }
     return rezultatas;

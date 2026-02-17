@@ -23,8 +23,8 @@ int main(){
         cout << "Pasirinkite galutinio pažymio skaičiavimo metodą: V - vidurkiu grįstas, M - mediana grįstas: ";
         if (!getline(cin, ivestis)) return 0;
         if (tikrintiIvesti(ivestis) && ivestis.size() == 1){
-            skaiciavimoMetodoPasirinkimas = (char)toupper(static_cast<unsigned char>(ivestis[0]));
-            if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'M') break;
+            skaiciavimoMetodoPasirinkimas = ivestis[0];
+            if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'M' || skaiciavimoMetodoPasirinkimas == 'v' || skaiciavimoMetodoPasirinkimas == 'm') break;
         }
         cout << "Įveskite TIK vieną raidę: V arba M.\n";
     }
@@ -36,10 +36,10 @@ int main(){
         cout << "4 - Baigti darbą\n";
         cout << "Pasirinkite programos eigą: ";
         if (!getline(cin, ivestis)) return 0;
-        int val = 0;
-        auto res = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-        if (res.ec == errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 4) {
-            meniu = val;
+        int reiksme = 0;
+        auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+        if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 1 && reiksme <= 4) {
+            meniu = reiksme;
             break;
         }
         cout << "Įveskite TIK 1, 2, 3 arba 4.\n";
@@ -51,9 +51,9 @@ int main(){
             cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
             if (!getline(cin, ivestis)) return 0;
             if (tikrintiIvesti(ivestis) && ivestis.size() == 1){
-                ivestiesPasirinkimas = (char)toupper(static_cast<unsigned char>(ivestis[0]));
-                if (ivestiesPasirinkimas == 'T') break;
-                if (ivestiesPasirinkimas == 'N'){
+                ivestiesPasirinkimas = ivestis[0];
+                if (ivestiesPasirinkimas == 'T' || ivestiesPasirinkimas == 't') break;
+                if (ivestiesPasirinkimas == 'N' || ivestiesPasirinkimas == 'n'){
                     parodytiRezultatuLentele(studentuSarasas, skaiciavimoMetodoPasirinkimas);
                     return 0;
                 }
@@ -84,10 +84,10 @@ int main(){
                 cout << "Įveskite studento namų darbų pažymius (skalėje nuo 1 iki 10). Įvedus pažymį, paspauskite klavišą ENTER. Suvedus visus pažymius, tuščiame lauke paspauskite klavišą ENTER: ";
                 if (!getline(cin, ivestis)) return 0;
                 if (ivestis.empty()) break;
-                int val = 0;
-                auto res = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-                if (res.ec == errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10) {
-                    studentas.namuDarbuTarpiniaiRezultatai.push_back(val);
+                int reiksme = 0;
+                auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+                if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 1 && reiksme <= 10) {
+                    studentas.namuDarbuTarpiniaiRezultatai.push_back(reiksme);
                     continue;
                 }
                 cout << "Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
@@ -99,10 +99,10 @@ int main(){
                     cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
                     continue;
                 }
-                int val = 0;
-                auto res = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-                if (res.ec == errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10) {
-                    studentas.egzaminoRezultatas = val;
+                int reiksme = 0;
+                auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+                if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 1 && reiksme <= 10) {
+                    studentas.egzaminoRezultatas = reiksme;
                     break;
                 }
                 cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";

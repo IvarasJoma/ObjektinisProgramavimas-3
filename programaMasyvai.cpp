@@ -3,7 +3,6 @@
 using std::string;
 using std::cout;
 using std::cin;
-using std::toupper;
 using std::from_chars;
 using std::errc;
 
@@ -32,10 +31,10 @@ int main(){
             delete[] motVardai;
             delete[] motPavardes;
             return 0;
-        }    
+        }
         if (tikrintiIvesti(ivestis) && ivestis.size() == 1) {
-            skaiciavimoMetodoPasirinkimas = (char)toupper(static_cast<unsigned char>(ivestis[0]));
-            if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'M') break;
+            skaiciavimoMetodoPasirinkimas = ivestis[0];
+            if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'M' || skaiciavimoMetodoPasirinkimas == 'v' || skaiciavimoMetodoPasirinkimas == 'm') break;
         }
         cout << "Įveskite TIK vieną raidę: V arba M.\n";
     }
@@ -47,10 +46,10 @@ int main(){
         cout << "4 - Baigti darbą\n";
         cout << "Pasirinkite programos eigą: ";
         if (!getline(cin, ivestis)) return 0;
-        int val = 0;
-        auto res = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-        if (res.ec == errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 4) {
-            meniu = val;
+        int reiksme = 0;
+        auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+        if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 1 && reiksme <= 4) {
+            meniu = reiksme;
             break;
         }
         cout << "Įveskite TIK 1, 2, 3 arba 4.\n";
@@ -64,15 +63,21 @@ int main(){
     }
     while (true){
         cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
-        if (!getline(cin, ivestis)) return 0;
+        if (!getline(cin, ivestis)){
+            delete[] vyrVardai;
+            delete[] vyrPavardes;
+            delete[] motVardai;
+            delete[] motPavardes;
+            return 0;
+        }
         if (tikrintiIvesti(ivestis) && ivestis.size() == 1){
-            ivestiesPasirinkimas = (char)toupper(static_cast<unsigned char>(ivestis[0]));
-            if (ivestiesPasirinkimas == 'T'){
+            ivestiesPasirinkimas = ivestis[0];
+            if (ivestiesPasirinkimas == 'T' || ivestiesPasirinkimas == 't'){
                 uztikrintiStudentuMasyvoTalpa(studentuSarasas, talpa, studentuSkaicius, studentuSkaicius + 1);
                 studentuSarasas[studentuSkaicius] = new StudentasMasyvas();
                 studentuSkaicius++;
             }
-            else if (ivestiesPasirinkimas == 'N'){
+            else if (ivestiesPasirinkimas == 'N' || ivestiesPasirinkimas == 'n'){
                 parodytiRezultatuLentele(studentuSarasas, studentuSkaicius, skaiciavimoMetodoPasirinkimas);
                 break;
             }
@@ -108,11 +113,11 @@ int main(){
                 cout << "Įveskite studento namų darbų pažymius (skalėje nuo 1 iki 10). Įvedus pažymį, paspauskite klavišą ENTER. Suvedus visus pažymius, tuščiame lauke paspauskite klavišą ENTER: ";
                 if (!getline(cin, ivestis)) return 0;
                 if (ivestis.empty()) break;
-                int val = 0;
-                auto res = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-                if (res.ec == errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10) {
+                int reiksme = 0;
+                auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+                if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 1 && reiksme <= 10) {
                     uztikrintiNamuDarbuMasyvoTalpa(s->namuDarbuTarpiniaiRezultatai, s->namuDarbuTalpa, s->namuDarbuKiekis, s->namuDarbuKiekis + 1);
-                    s->namuDarbuTarpiniaiRezultatai[s->namuDarbuKiekis] = val;
+                    s->namuDarbuTarpiniaiRezultatai[s->namuDarbuKiekis] = reiksme;
                     s->namuDarbuKiekis++;
                     continue;
                 }
@@ -125,10 +130,10 @@ int main(){
                     cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
                     continue;
                 }
-                int val = 0;
-                auto res = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), val);
-                if (res.ec == errc{} && res.ptr == ivestis.data() + ivestis.size() && val >= 1 && val <= 10) {
-                    s->egzaminoRezultatas = val;
+                int reiksme = 0;
+                auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+                if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 1 && reiksme <= 10) {
+                    s->egzaminoRezultatas = reiksme;
                     break;
                 }
                 cout << "Studento egzamino pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
