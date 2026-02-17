@@ -26,7 +26,13 @@ int main(){
     int meniu = 0;
     while (true){
         cout << "Pasirinkite galutinio pažymio skaičiavimo metodą: V - vidurkiu grįstas, M - mediana grįstas: ";
-        if (!getline(cin, ivestis)) return 0;
+        if (!getline(cin, ivestis)){
+            delete[] vyrVardai;
+            delete[] vyrPavardes;
+            delete[] motVardai;
+            delete[] motPavardes;
+            return 0;
+        }    
         if (tikrintiIvesti(ivestis) && ivestis.size() == 1) {
             skaiciavimoMetodoPasirinkimas = (char)toupper(static_cast<unsigned char>(ivestis[0]));
             if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'M') break;

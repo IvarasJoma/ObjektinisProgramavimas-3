@@ -24,7 +24,7 @@ double skaiciuotiGalutineMediana(const StudentasMasyvas& studentas, int pazymiuS
 double skaiciuotiNDMediana(int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
 double skaiciuotiGalutiniVidurki(const StudentasMasyvas& studentas, int pazymiuSkaicius);
 double skaiciuotiNDVidurki(const int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
-void parodytiRezultatuLentele(StudentasMasyvas**& studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas);
+void parodytiRezultatuLentele(StudentasMasyvas** studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas);
 void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& talpa, int pazymiuKiekis, int dydis);
 void uztikrintiStudentuMasyvoTalpa(StudentasMasyvas**& studentuSarasas, int& talpa, int studentuSkaicius, int dydis);
 int generuotiSveikaSkaiciu(int nuo, int iki);

@@ -80,7 +80,7 @@ void parodytiRezultatuLentele(vector<StudentasVektorius> studentuSarasas, char s
     }
 }
 
-void parodytiRezultatuLentele(StudentasMasyvas**& studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas){
+void parodytiRezultatuLentele(StudentasMasyvas** studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas){
     cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     cout << string(56, '-') << "\n";
     for (int i = 0; i < studentuSkaicius; i++) {
@@ -119,7 +119,8 @@ int generuotiSveikaSkaiciu(int nuo, int iki) {
     return dist(gen);
 }
 
-void generuotiRezultatus(StudentasVektorius& studentas, int ndKiekis) {
+void generuotiRezultatus(StudentasVektorius& studentas) {
+    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
     studentas.namuDarbuTarpiniaiRezultatai.clear();
     studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
@@ -128,11 +129,12 @@ void generuotiRezultatus(StudentasVektorius& studentas, int ndKiekis) {
     studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }
 
-void generuotiRezultatus(StudentasMasyvas* studentas, int ndKiekis) {
+void generuotiRezultatus(StudentasMasyvas* studentas) {
     delete[] studentas->namuDarbuTarpiniaiRezultatai;
     studentas->namuDarbuTarpiniaiRezultatai = nullptr;
     studentas->namuDarbuKiekis = 0;
     studentas->namuDarbuTalpa = 0;
+    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
     uztikrintiNamuDarbuMasyvoTalpa(studentas->namuDarbuTarpiniaiRezultatai, studentas->namuDarbuTalpa, studentas->namuDarbuKiekis, ndKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
         studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikaSkaiciu(1, 10);
