@@ -72,20 +72,20 @@ double skaiciuotiGalutineMediana(const StudentasMasyvas& studentas, int pazymiuS
 }
 
 void parodytiRezultatuLentele(const vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
-    cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
+    cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     cout << string(56, '-') << "\n";
     for (const auto& studentas : studentuSarasas) {
-        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
+        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
         cout << format("{:<18} {:<18} {:<20.2f}\n", studentas.Vardas, studentas.Pavarde, galutinisRezultatas);
     }
 }
 
 void parodytiRezultatuLentele(StudentasMasyvas** studentuSarasas, int studentuSkaicius, char skaiciavimoMetodoPasirinkimas){
-    cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
+    cout << format("{:<18} {:<18} {:<20}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     cout << string(56, '-') << "\n";
     for (int i = 0; i < studentuSkaicius; i++) {
         int studentoNamuDarbuKiekis = studentuSarasas[i]->namuDarbuKiekis;
-        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V') ? skaiciuotiGalutiniVidurki(*studentuSarasas[i], studentoNamuDarbuKiekis) : skaiciuotiGalutineMediana(*studentuSarasas[i], studentoNamuDarbuKiekis);
+        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ) ? skaiciuotiGalutiniVidurki(*studentuSarasas[i], studentoNamuDarbuKiekis) : skaiciuotiGalutineMediana(*studentuSarasas[i], studentoNamuDarbuKiekis);
         cout << format("{:<18} {:<18} {:<20.2f}\n", studentuSarasas[i]->Vardas, studentuSarasas[i]->Pavarde, galutinisRezultatas);
     }
 }

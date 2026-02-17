@@ -24,7 +24,7 @@ double skaiciuotiNDMediana(std::vector<int> ndPazymiai);
 double skaiciuotiGalutineMediana(const StudentasVektorius& studentas);
 double skaiciuotiNDMediana(int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
 double skaiciuotiNDVidurki(const int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
-void parodytiRezultatuLentele(std::vector<StudentasVektorius> studentuSarasas, char pasirinkimas);
+void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 void generuotiRezultatus(StudentasVektorius& studentas);
 int generuotiSveikaSkaiciu(int nuo, int iki);
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
