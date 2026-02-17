@@ -12,7 +12,6 @@ using std::sort;
 using std::isspace;
 using std::mt19937;
 using std::uniform_int_distribution;
-using std::chrono::high_resolution_clock;
 
 bool tikrintiIvesti(const string& ivestis) {
     for (char simbolis : ivestis) {
@@ -115,13 +114,12 @@ void uztikrintiNamuDarbuMasyvoTalpa(int*& namuDarbuTarpiniaiRezultatai, int& tal
 }
 
 int generuotiSveikaSkaiciu(int nuo, int iki) {
-    static mt19937 gen(static_cast<unsigned>(high_resolution_clock::now().time_since_epoch().count()));
-    uniform_int_distribution<int> dist(nuo, iki);
+    static std::mt19937 gen(std::random_device{}());
+    std::uniform_int_distribution<int> dist(nuo, iki);
     return dist(gen);
 }
 
-void generuotiRezultatus(StudentasVektorius& studentas) {
-    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
+void generuotiRezultatus(StudentasVektorius& studentas, int ndKiekis) {
     studentas.namuDarbuTarpiniaiRezultatai.clear();
     studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
@@ -130,12 +128,11 @@ void generuotiRezultatus(StudentasVektorius& studentas) {
     studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }
 
-void generuotiRezultatus(StudentasMasyvas* studentas) {
+void generuotiRezultatus(StudentasMasyvas* studentas, int ndKiekis) {
     delete[] studentas->namuDarbuTarpiniaiRezultatai;
     studentas->namuDarbuTarpiniaiRezultatai = nullptr;
     studentas->namuDarbuKiekis = 0;
     studentas->namuDarbuTalpa = 0;
-    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
     uztikrintiNamuDarbuMasyvoTalpa(studentas->namuDarbuTarpiniaiRezultatai, studentas->namuDarbuTalpa, studentas->namuDarbuKiekis, ndKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
         studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikaSkaiciu(1, 10);
