@@ -6,8 +6,8 @@
 #include <chrono>
 #include <format>
 
-bool tikrintiIvesti(const std::string& ivestis) {
-    for (char simbolis : ivestis) {
+bool tikrintiIvesti(const std::string& ivestis){
+    for (char simbolis : ivestis){
         if (!isspace(static_cast<unsigned char>(simbolis))) return true;
     } return false;
 }
@@ -16,39 +16,58 @@ void tvarkytiVarda(std::string& ivestis){
     std::stringstream eilutesSrautas(ivestis);
     std::string pirmasZodis, antrasZodis;
     eilutesSrautas >> pirmasZodis >> antrasZodis;
-    if (!pirmasZodis.empty())
-        pirmasZodis[0] = toupper(pirmasZodis[0]);
-    if (!antrasZodis.empty())
-        antrasZodis[0] = toupper(antrasZodis[0]);
-    ivestis = pirmasZodis + " " + antrasZodis;
+    if (!pirmasZodis.empty()){
+        for (char& simbolis : pirmasZodis) {
+            simbolis = std::tolower(static_cast<unsigned char>(simbolis));
+        }
+        pirmasZodis[0] = std::toupper(static_cast<unsigned char>(pirmasZodis[0]));
+    }
+    if (!antrasZodis.empty()){
+        for (char& simbolis : antrasZodis) {
+            simbolis = std::tolower(static_cast<unsigned char>(simbolis));
+        }
+        antrasZodis[0] = std::toupper(static_cast<unsigned char>(antrasZodis[0]));
+    }
+    if (antrasZodis.empty()) ivestis = pirmasZodis;
+    else ivestis = pirmasZodis + " " + antrasZodis;
 }
 
 void tvarkytiPavarde(std::string& ivestis){
-    if (!ivestis.empty())
-        ivestis[0] = toupper(ivestis[0]);
+    std::stringstream eilutesSrautas(ivestis);
+    std::string pirmasZodis;
+    eilutesSrautas >> pirmasZodis;
+    bool kitaDidzioji = true;
+    for (char& simbolis : ivestis) {
+        simbolis = std::tolower(static_cast<unsigned char>(simbolis));
+        if (kitaDidzioji && std::isalpha(static_cast<unsigned char>(simbolis))) {
+            simbolis = std::toupper(static_cast<unsigned char>(simbolis));
+            kitaDidzioji = false;
+        }
+        if (simbolis == '-') kitaDidzioji = true;
+    }
 }
 
-int generuotiSveikaSkaiciu(int nuo, int iki) {
+int generuotiSveikaSkaiciu(int nuo, int iki){
     static std::mt19937 generatorius(std::random_device{}());
     std::uniform_int_distribution<int> distribucija(nuo, iki);
     return distribucija(generatorius);
 }
 
-bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme) {
+bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
     reiksme = 0;
     auto rezultatas = std::from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
     return rezultatas.ec == std::errc{} && rezultatas.ptr == ivestis.data() + ivestis.size();
 }
 
-int nuskaitytiMeniuPasirinkima() {
-    while (true) {
-        std::cout << std::string(56, '-') << "\n";
+int nuskaitytiMeniuPasirinkima(){
+    while (true){
+        std::cout << std::string(98, '-') << "\n";
         std::cout << "Galimi programos veikimo būdai:\n";
         std::cout << "1 - Įvesti duomenis ranka\n";
         std::cout << "2 - Generuoti tik pažymius\n";
         std::cout << "3 - Generuoti vardus, pavardes ir pažymius\n";
         std::cout << "4 - Baigti darbą\n";
-        std::cout << std::string(56, '-') << "\n";
+        std::cout << std::string(98, '-') << "\n";
         std::cout << "Pasirinkite programos eigą: ";
         std::string ivestis;
         if (!getline(std::cin, ivestis)) return 4;
@@ -58,12 +77,12 @@ int nuskaitytiMeniuPasirinkima() {
     }
 }
 
-char nuskaitytiSkaiciavimoMetoda() {
-    while (true) {
+char nuskaitytiSkaiciavimoMetoda(){
+    while (true){
         std::cout << "Pasirinkite galutinio pažymio skaičiavimo metodą: V - vidurkiu grįstas, M - mediana grįstas: ";
         std::string ivestis;
         if (!getline(std::cin, ivestis)) exit(0);
-        if (tikrintiIvesti(ivestis) && ivestis.size() == 1) {
+        if (tikrintiIvesti(ivestis) && ivestis.size() == 1){
             char raide = ivestis[0];
             if (raide == 'V' || raide == 'v' || raide == 'M' || raide == 'm') return raide;
         }
@@ -71,12 +90,12 @@ char nuskaitytiSkaiciavimoMetoda() {
     }
 }
 
-int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas) {
-    while (true) {
+int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas){
+    while (true){
         std::cout << pranesimas;
         std::string ivestis;
         if (!getline(std::cin, ivestis)) exit(0);
-        if (!tikrintiIvesti(ivestis)) {
+        if (!tikrintiIvesti(ivestis)){
             std::cout << "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau).\n";
             continue;
         }
@@ -86,8 +105,8 @@ int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas) {
     }
 }
 
-int nuskaitytiPazymiNuo1iki10(const char* pranesimas) {
-    while (true) {
+int nuskaitytiPazymiNuo1iki10(const char* pranesimas){
+    while (true){
         std::cout << pranesimas;
         std::string ivestis;
         if (!getline(std::cin, ivestis)) exit(0);

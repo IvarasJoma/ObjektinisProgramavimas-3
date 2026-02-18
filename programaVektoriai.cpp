@@ -26,9 +26,7 @@ int main() {
             continue;
         }
         int maksimalusNDKiekis = 0;
-        if (meniu == 2) {
-            maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
-        }
+        if (meniu == 1 || meniu == 2) maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
         while (true) {
             std::cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
             std::string ivestis;
@@ -62,10 +60,9 @@ int main() {
                 }
                 std::cout << "Studento pavardė negali likti tuščia.\n";
             }
-            if (meniu == 2) {
-                generuotiRezultatus(studentas, maksimalusNDKiekis);
-            } else {
-                nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai);
+            if (meniu == 2) generuotiRezultatus(studentas, maksimalusNDKiekis);
+            else {
+                nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai, maksimalusNDKiekis);
                 studentas.egzaminoRezultatas = nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): ");
             }
             studentuSarasas.push_back(std::move(studentas));

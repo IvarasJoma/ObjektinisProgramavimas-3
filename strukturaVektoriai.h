@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-struct StudentasVektorius {
+struct StudentasVektorius{
     std::string Vardas, Pavarde;
     std::vector<int> namuDarbuTarpiniaiRezultatai;
     int egzaminoRezultatas;
@@ -20,7 +20,7 @@ void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSar
 void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis);
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes);
-void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai);
+void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 
 #endif

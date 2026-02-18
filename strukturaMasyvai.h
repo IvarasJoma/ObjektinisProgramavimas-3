@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-struct StudentasMasyvas {
+struct StudentasMasyvas{
     std::string Vardas, Pavarde;
     int* namuDarbuTarpiniaiRezultatai = nullptr;
     int namuDarbuKiekis = 0;
