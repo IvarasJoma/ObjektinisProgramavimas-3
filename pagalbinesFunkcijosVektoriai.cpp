@@ -51,10 +51,7 @@ void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis) 
     studentas.namuDarbuTarpiniaiRezultatai.clear();
     studentas.namuDarbuTarpiniaiRezultatai.reserve(maksimalusNDKiekis);
     for (int i = 0; i < maksimalusNDKiekis; ++i) {
-        studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikaSkaiciu(1, 10));
-    }
-    for (int i = maksimalusNDKiekis; i < maksimalusNDKiekis; ++i){
-        studentas.namuDarbuTarpiniaiRezultatai.push_back(0);
+        studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikaSkaiciu(0, 10));
     }
     studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }

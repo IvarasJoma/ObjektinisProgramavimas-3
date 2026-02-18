@@ -73,11 +73,7 @@ void generuotiRezultatus(StudentasMasyvas* studentas, int maksimalusNDKiekis) {
     studentas->namuDarbuTalpa = 0;
     uztikrintiNamuDarbuMasyvoTalpa(studentas->namuDarbuTarpiniaiRezultatai, studentas->namuDarbuTalpa, studentas->namuDarbuKiekis, maksimalusNDKiekis);
     for (int i = 0; i < maksimalusNDKiekis; ++i) {
-        studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikaSkaiciu(1, 10);
-        studentas->namuDarbuKiekis++;
-    }
-    for (int i = maksimalusNDKiekis; i < maksimalusNDKiekis; ++i){
-        studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = 0;
+        studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikaSkaiciu(0, 10);
         studentas->namuDarbuKiekis++;
     }
     studentas->egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
