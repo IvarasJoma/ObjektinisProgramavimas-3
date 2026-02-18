@@ -39,7 +39,7 @@ void parodytiRezultatuLentele(StudentasMasyvas** studentuSarasas, int studentuSk
     for (int i = 0; i < studentuSkaicius; i++){
         int studentoNamuDarbuKiekis = studentuSarasas[i]->namuDarbuKiekis;
         double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ) ? skaiciuotiGalutiniVidurki(*studentuSarasas[i], studentoNamuDarbuKiekis) : skaiciuotiGalutineMediana(*studentuSarasas[i], studentoNamuDarbuKiekis);
-        std::cout << format("{:<40}{:<40}{:<18.2f}\n", studentuSarasas[i]->Vardas, studentuSarasas[i]->Pavarde, galutinisRezultatas);
+        std::cout << std::format("{:<40}{:<40}{:<18.2f}\n", studentuSarasas[i]->Vardas, studentuSarasas[i]->Pavarde, galutinisRezultatas);
     }
 }
 
