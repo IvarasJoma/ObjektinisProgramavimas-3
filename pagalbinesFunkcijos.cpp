@@ -19,6 +19,27 @@ bool tikrintiIvesti(const string& ivestis) {
     } return false;
 }
 
+void tvarkytiVarda(const string& ivestis){
+    std::stringstream eilutesSrautas(ivestis);
+    string pirmasZodis, antrasZodis;
+    eilutesSrautas >> pirmasZodis >> antrasZodis;
+    if (!pirmasZodis.empty()) {
+        pirmasZodis[0] = toupper(pirmasZodis[0]);
+    }
+    if (!antrasZodis.empty()) {
+        antrasZodis[0] = toupper(antrasZodis[0]);
+    }
+}
+
+void tvarkytiPavarde(const string& ivestis){
+    std::stringstream eilutesSrautas(ivestis);
+    string zodis;
+    eilutesSrautas >> zodis;
+    if (!zodis.empty()) {
+        zodis[0] = toupper(zodis[0]);
+    }
+}
+
 double skaiciuotiNDVidurki(const vector<int>& ndPazymiai) {
     if (ndPazymiai.empty()) return 0.0;
     double suma = 0;
@@ -119,25 +140,32 @@ int generuotiSveikaSkaiciu(int nuo, int iki) {
     return distribucija(generatorius);
 }
 
-void generuotiRezultatus(StudentasVektorius& studentas) {
-    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
+void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis) {
+    int ndKiekis = generuotiSveikaSkaiciu(0, maksimalusNDKiekis);
     studentas.namuDarbuTarpiniaiRezultatai.clear();
-    studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
+    studentas.namuDarbuTarpiniaiRezultatai.reserve(maksimalusNDKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
         studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikaSkaiciu(1, 10));
+    }
+    for (int i = ndKiekis; i < maksimalusNDKiekis; ++i){
+        studentas.namuDarbuTarpiniaiRezultatai.push_back(0);
     }
     studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }
 
-void generuotiRezultatus(StudentasMasyvas* studentas) {
+void generuotiRezultatus(StudentasMasyvas* studentas, int maksimalusNDKiekis) {
     delete[] studentas->namuDarbuTarpiniaiRezultatai;
     studentas->namuDarbuTarpiniaiRezultatai = nullptr;
     studentas->namuDarbuKiekis = 0;
     studentas->namuDarbuTalpa = 0;
-    int ndKiekis = generuotiSveikaSkaiciu(0, 20);
-    uztikrintiNamuDarbuMasyvoTalpa(studentas->namuDarbuTarpiniaiRezultatai, studentas->namuDarbuTalpa, studentas->namuDarbuKiekis, ndKiekis);
+    int ndKiekis = generuotiSveikaSkaiciu(0, maksimalusNDKiekis);
+    uztikrintiNamuDarbuMasyvoTalpa(studentas->namuDarbuTarpiniaiRezultatai, studentas->namuDarbuTalpa, studentas->namuDarbuKiekis, maksimalusNDKiekis);
     for (int i = 0; i < ndKiekis; ++i) {
         studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = generuotiSveikaSkaiciu(1, 10);
+        studentas->namuDarbuKiekis++;
+    }
+    for (int i = ndKiekis; i < maksimalusNDKiekis; ++i){
+        studentas->namuDarbuTarpiniaiRezultatai[studentas->namuDarbuKiekis] = 0;
         studentas->namuDarbuKiekis++;
     }
     studentas->egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);

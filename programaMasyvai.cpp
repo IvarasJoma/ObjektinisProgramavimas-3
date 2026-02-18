@@ -23,6 +23,8 @@ int main(){
     string* motPavardes = nullptr;
     int motPavardziuKiekis = nuskaitytiEilutesIsFailo("tekstiniaiFailai/Lietuviskos_moteru_pavardes.txt", motPavardes);
     int meniu = 0;
+    int maksimalusNDKiekis = 0;
+    int generuojamuStudentuKiekis = 0;
     while (true){
         cout << "Pasirinkite galutinio pažymio skaičiavimo metodą: V - vidurkiu grįstas, M - mediana grįstas: ";
         if (!getline(cin, ivestis)){
@@ -91,23 +93,61 @@ int main(){
         }
         StudentasMasyvas* s = studentuSarasas[studentuSkaicius - 1];
         if (meniu == 3) {
-            generuotiVardaPavarde(s->Vardas, s->Pavarde, vyrVardai, vyrVarduKiekis, vyrPavardes, vyrPavardziuKiekis, motVardai, motVarduKiekis, motPavardes, motPavardziuKiekis);
+            while (true) {
+                cout << "Įveskite norima generuoti studentų kiekį ir paspauskite ENTER: ";
+                if (!getline(cin, ivestis)) return 0;
+                if (!tikrintiIvesti(ivestis)) {
+                    cout << "Maksimalus galimas pažymių kiekis turi būti neneigiamas skaičius (t.y 0 ir daugiau).\n";
+                    continue;
+                }
+                int reiksme = 0;
+                auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+                if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 0){
+                    generuojamuStudentuKiekis = reiksme;
+                    break;
+                }
+                cout << "Generuojamas studentų kiekis turi būti neneigiamas skaičius (t.y 0 ir daugiau).\n";
+            }
+            for (int i = 0; i < generuojamuStudentuKiekis; i++){
+                generuotiVardaPavarde(s->Vardas, s->Pavarde, vyrVardai, vyrVarduKiekis, vyrPavardes, vyrPavardziuKiekis, motVardai, motVarduKiekis, motPavardes, motPavardziuKiekis);
+            }
         } else {
             while (true) {
                 cout << "Įveskite studento vardą: ";
                 if (!getline(cin, s->Vardas)) return 0;
-                if (tikrintiIvesti(s->Vardas)) break;
+                if (tikrintiIvesti(s->Vardas)){
+                    tvarkytiVarda(s->Vardas);
+                    break;
+                }
                 cout << "Studento vardas negali likti tuščias.\n";
             }
             while (true) {
                 cout << "Įveskite studento pavardę: ";
                 if (!getline(cin, s->Pavarde)) return 0;
-                if (tikrintiIvesti(s->Pavarde)) break;
+                if (tikrintiIvesti(s->Pavarde)){
+                    tvarkytiPavarde(s->Pavarde);
+                    break;
+                }
                 cout << "Studento pavardė negali likti tuščia.\n";
             }
         }
         if (meniu == 2 || meniu == 3) {
-            generuotiRezultatus(s);
+            while (true) {
+                cout << "Įveskite maksimalų galimą pažymių kiekį ir paspauskite ENTER: ";
+                if (!getline(cin, ivestis)) return 0;
+                if (!tikrintiIvesti(ivestis)) {
+                    cout << "Maksimalus galimas pažymių kiekis turi būti neneigiamas skaičius (t.y 0 ir daugiau).\n";
+                    continue;
+                }
+                int reiksme = 0;
+                auto rezultatas = from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
+                if (rezultatas.ec == errc{} && rezultatas.ptr == ivestis.data() + ivestis.size() && reiksme >= 0){
+                    maksimalusNDKiekis = reiksme;
+                    break;
+                }
+                cout << "Maksimalus galimas pažymių kiekis turi būti neneigiamas skaičius (t.y 0 ir daugiau).\n";
+            }
+            generuotiRezultatus(s, maksimalusNDKiekis);
         } else {
             while (true) {
                 cout << "Įveskite studento namų darbų pažymius (skalėje nuo 1 iki 10). Įvedus pažymį, paspauskite klavišą ENTER. Suvedus visus pažymius, tuščiame lauke paspauskite klavišą ENTER: ";
