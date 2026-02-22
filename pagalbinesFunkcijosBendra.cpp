@@ -67,7 +67,7 @@ int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes) {
         std::cout << std::string(98, '-') << "\n";
         std::cout << "Pasirinkite programos eigą: ";
         std::string ivestis;
-        if (!getline(std::cin, ivestis)) return eilutes.size()-1;
+        if (!getline(std::cin, ivestis)) exit(0);
         int meniu = 0;
         if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= eilutes.size()-1) return meniu;
         std::cout << "Įveskite TIK ";

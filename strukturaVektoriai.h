@@ -8,6 +8,8 @@ struct StudentasVektorius{
     std::string Vardas, Pavarde;
     std::vector<int> namuDarbuTarpiniaiRezultatai;
     int egzaminoRezultatas;
+    double galutinisRezultatasPagalVidurki = 0;
+    double galutinisRezultatasPagalMediana = 0;
 };
 
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai);
@@ -23,5 +25,7 @@ void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std:
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
+template<typename T, typename Member> auto lygintiElementusPagalReiksme(Member T::*member) { return [member](const T& a, const T& b) { return a.*member < b.*member; }; }
+void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSarasas);
 
 #endif

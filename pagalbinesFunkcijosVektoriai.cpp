@@ -69,6 +69,15 @@ void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSar
     }
 }
 
+void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSarasas){
+    std::cout << std::string(98, '-') << "\n";
+    std::cout << std::format("{:<30}{:<30}{:<19}{:<19}\n", "Vardas", "Pavardė", "Galutinis (Vid.)", "Galutinis (Med.)");
+    std::cout << std::string(98, '-') << "\n";
+    for (const auto& studentas : studentuSarasas){
+        std::cout << std::format("{:<30}{:<30}{:<19.2f}{:<19.2f}\n", studentas.Vardas, studentas.Pavarde, studentas.galutinisRezultatasPagalVidurki, studentas.galutinisRezultatasPagalMediana);
+    }
+}
+
 void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis){
     studentas.namuDarbuTarpiniaiRezultatai.clear();
     studentas.namuDarbuTarpiniaiRezultatai.reserve(maksimalusNDKiekis);

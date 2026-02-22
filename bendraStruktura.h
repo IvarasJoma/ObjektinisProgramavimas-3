@@ -7,7 +7,7 @@ bool tikrintiIvesti(const std::string& ivestis);
 void tvarkytiVarda(std::string& ivestis);
 void tvarkytiPavarde(std::string& ivestis);
 bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme);
-int nuskaitytiMeniuPasirinkima();
+int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes);
 char nuskaitytiSkaiciavimoMetoda();
 int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas);
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas);
