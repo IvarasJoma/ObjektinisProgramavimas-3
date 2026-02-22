@@ -9,6 +9,31 @@
 #include <sstream>
 #include <fstream>
 
+static inline void skip_ws(const char*& p) {
+    while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n') ++p;
+}
+
+static inline bool read_word(const char*& p, std::string& out) {
+    skip_ws(p);
+    if (!*p) return false;
+    const char* start = p;
+    while (*p && *p!=' ' && *p!='\t' && *p!='\r' && *p!='\n') ++p;
+    out.assign(start, static_cast<size_t>(p - start));
+    return true;
+}
+
+static inline bool read_int(const char*& p, int& x){
+    skip_ws(p);
+    if (!*p) return false;
+    int val = 0;
+    while (*p >= '0' && *p <= '9') {
+        val = val * 10 + (*p - '0');
+        ++p;
+    }
+    x = val;
+    return true;
+}
+
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai){
     if (ndPazymiai.empty()) return 0.0;
     double suma = 0;
@@ -99,4 +124,44 @@ void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksim
     }
     if (namuDarbuPazymiai.size() == maksimalusNDKiekis) std::cout << "Pasiektas maksimalus namų darbų pažymių kiekis.\n";
     while (namuDarbuPazymiai.size() < maksimalusNDKiekis) namuDarbuPazymiai.push_back(0);
+}
+
+std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas){
+    std::vector<StudentasVektorius> studentuSarasas;
+    studentuSarasas.reserve(1000000);
+    FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
+    if (!skaitomasFailas) return studentuSarasas;
+    static char ivestiesBuferis[1 << 20];
+    std::setvbuf(skaitomasFailas, ivestiesBuferis, _IOFBF, sizeof(ivestiesBuferis));
+    char aprasas[257];
+    if (!std::fgets(aprasas, sizeof(aprasas), skaitomasFailas)){
+        std::fclose(skaitomasFailas);
+        return studentuSarasas;
+    }
+    int namuDarbuKiekis = 0;
+    char laikinaEilute[257];
+    std::strncpy(laikinaEilute, aprasas, sizeof(laikinaEilute));
+    laikinaEilute[sizeof(laikinaEilute) - 1] = '\0';
+    char* stulpelis = std::strtok(laikinaEilute, " \t\r\n");
+    while (stulpelis){
+        if (stulpelis[0] == 'N' && stulpelis[1] == 'D') namuDarbuKiekis++;
+        stulpelis = std::strtok(nullptr, " \t\r\n");
+    }
+    char eilute[257];
+    while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)){
+        const char* rodykle = eilute;
+        StudentasVektorius studentas;
+        if (!read_word(rodykle, studentas.Vardas)) continue;
+        if (!read_word(rodykle, studentas.Pavarde)) continue;
+        studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis);
+        for (int i = 0; i < namuDarbuKiekis; i++){
+            int laikinasPazymys;
+            if (!read_int(rodykle, laikinasPazymys)) laikinasPazymys = 0;
+            studentas.namuDarbuTarpiniaiRezultatai.push_back(laikinasPazymys);
+        }
+        if (!read_int(rodykle, studentas.egzaminoRezultatas)) studentas.egzaminoRezultatas = 0;
+        studentuSarasas.push_back(std::move(studentas));
+    }
+    std::fclose(skaitomasFailas);
+    return studentuSarasas;
 }

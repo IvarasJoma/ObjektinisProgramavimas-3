@@ -1,17 +1,24 @@
 #include "strukturaVektoriai.h"
 #include "bendraStruktura.h"
 
-int main() {
+int main(){
     std::vector<std::string> vyrVardai = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviski_vyru_vardai.txt");
     std::vector<std::string> vyrPavardes = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviskos_vyru_pavardes.txt");
     std::vector<std::string> motVardai = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviski_moteru_vardai.txt");
     std::vector<std::string> motPavardes = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviskos_moteru_pavardes.txt");
+    std::string studentai10000 = "tekstiniaiFailai/studentai10000.txt";
+    std::string studentai100000 = "tekstiniaiFailai/studentai100000.txt";
+    std::string studentai1000000 = "tekstiniaiFailai/studentai1000000.txt";
+    std::string kursiokai = "tekstiniaiFailai/kursiokai.txt";
     while (true) {
         int meniu = nuskaitytiMeniuPasirinkima();
-        if (meniu == 4) break;
+        if (meniu == 5) break;
         char skaiciavimoMetodoPasirinkimas = nuskaitytiSkaiciavimoMetoda();
         std::vector<StudentasVektorius> studentuSarasas;
         studentuSarasas.clear();
+        if (meniu == 4){
+            nuskaitytiStudentuDuomenisIsFailo(kursiokai);
+        }
         if (meniu == 3) {
             int generuojamuStudentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norima generuoti studentų kiekį ir paspauskite ENTER: ");
             int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");

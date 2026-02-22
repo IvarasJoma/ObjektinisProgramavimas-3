@@ -66,14 +66,15 @@ int nuskaitytiMeniuPasirinkima(){
         std::cout << "1 - Įvesti duomenis ranka\n";
         std::cout << "2 - Generuoti tik pažymius\n";
         std::cout << "3 - Generuoti vardus, pavardes ir pažymius\n";
-        std::cout << "4 - Baigti darbą\n";
+        std::cout << "4 - Nuskaityti duomenis iš failo\n";
+        std::cout << "5 - Baigti darbą\n";
         std::cout << std::string(98, '-') << "\n";
         std::cout << "Pasirinkite programos eigą: ";
         std::string ivestis;
-        if (!getline(std::cin, ivestis)) return 4;
+        if (!getline(std::cin, ivestis)) return 5;
         int meniu = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= 4) return meniu;
-        std::cout << "Įveskite TIK 1, 2, 3 arba 4.\n";
+        if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= 5) return meniu;
+        std::cout << "Įveskite TIK 1, 2, 3, 4 arba 5.\n";
     }
 }
 

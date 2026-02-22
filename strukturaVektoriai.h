@@ -22,5 +22,6 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes);
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
+std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
 
 #endif
