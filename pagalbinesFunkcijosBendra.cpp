@@ -17,13 +17,13 @@ void tvarkytiVarda(std::string& ivestis){
     std::string pirmasZodis, antrasZodis;
     eilutesSrautas >> pirmasZodis >> antrasZodis;
     if (!pirmasZodis.empty()){
-        for (char& simbolis : pirmasZodis) {
+        for (char& simbolis : pirmasZodis){
             simbolis = std::tolower(static_cast<unsigned char>(simbolis));
         }
         pirmasZodis[0] = std::toupper(static_cast<unsigned char>(pirmasZodis[0]));
     }
     if (!antrasZodis.empty()){
-        for (char& simbolis : antrasZodis) {
+        for (char& simbolis : antrasZodis){
             simbolis = std::tolower(static_cast<unsigned char>(simbolis));
         }
         antrasZodis[0] = std::toupper(static_cast<unsigned char>(antrasZodis[0]));
@@ -37,9 +37,9 @@ void tvarkytiPavarde(std::string& ivestis){
     std::string pirmasZodis;
     eilutesSrautas >> pirmasZodis;
     bool kitaDidzioji = true;
-    for (char& simbolis : ivestis) {
+    for (char& simbolis : ivestis){
         simbolis = std::tolower(static_cast<unsigned char>(simbolis));
-        if (kitaDidzioji && std::isalpha(static_cast<unsigned char>(simbolis))) {
+        if (kitaDidzioji && std::isalpha(static_cast<unsigned char>(simbolis))){
             simbolis = std::toupper(static_cast<unsigned char>(simbolis));
             kitaDidzioji = false;
         }
@@ -59,7 +59,7 @@ bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
     return rezultatas.ec == std::errc{} && rezultatas.ptr == ivestis.data() + ivestis.size();
 }
 
-int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes) {
+int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes){
     while (true){
         std::cout << std::string(98, '-') << "\n";
         for (const auto& eilute : eilutes)
@@ -93,8 +93,8 @@ char nuskaitytiSkaiciavimoMetoda(){
     }
 }
 
-int nuskaitytiMinimaluSveikajiSkaiciu(const char* pranesimas, int minimaliReiksme) {
-    while (true) {
+int nuskaitytiMinimaluSveikajiSkaiciu(const char* pranesimas, int minimaliReiksme){
+    while (true){
         std::cout << pranesimas;
         std::string ivestis;
         if (!std::getline(std::cin, ivestis)) std::exit(0);
@@ -110,9 +110,9 @@ int nuskaitytiMinimaluSveikajiSkaiciu(const char* pranesimas, int minimaliReiksm
     }
 }
 
-int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas) { return nuskaitytiMinimaluSveikajiSkaiciu(pranesimas, 0);}
+int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas){ return nuskaitytiMinimaluSveikajiSkaiciu(pranesimas, 0);}
 
-int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas) { return nuskaitytiMinimaluSveikajiSkaiciu(pranesimas, 1); }
+int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas){ return nuskaitytiMinimaluSveikajiSkaiciu(pranesimas, 1); }
 
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas){
     while (true){

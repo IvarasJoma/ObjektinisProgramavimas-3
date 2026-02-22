@@ -9,11 +9,11 @@
 #include <sstream>
 #include <fstream>
 
-static inline void praleistiTarpaIsFailo(const char*& p) {
+static inline void praleistiTarpaIsFailo(const char*& p){
     while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n') ++p;
 }
 
-static inline bool nuskaitytiZodiIsFailo(const char*& p, std::string& out) {
+static inline bool nuskaitytiZodiIsFailo(const char*& p, std::string& out){
     praleistiTarpaIsFailo(p);
     if (!*p) return false;
     const char* start = p;
@@ -26,7 +26,7 @@ static inline bool nuskaitytiSveikaSkaiciuIsFailo(const char*& p, int& x){
     praleistiTarpaIsFailo(p);
     if (!*p) return false;
     int val = 0;
-    while (*p >= '0' && *p <= '9') {
+    while (*p >= '0' && *p <= '9'){
         val = val * 10 + (*p - '0');
         ++p;
     }
