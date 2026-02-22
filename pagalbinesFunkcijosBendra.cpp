@@ -108,6 +108,21 @@ int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas){
     }
 }
 
+int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas){
+    while (true){
+        std::cout << pranesimas;
+        std::string ivestis;
+        if (!getline(std::cin, ivestis)) exit(0);
+        if (!tikrintiIvesti(ivestis)){
+            std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
+            continue;
+        }
+        int reiksme = 0;
+        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 1) return reiksme;
+        std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
+    }
+}
+
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas){
     while (true){
         std::cout << pranesimas;

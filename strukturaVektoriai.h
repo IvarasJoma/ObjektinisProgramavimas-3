@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <chrono>
 
 struct StudentasVektorius{
     std::string Vardas, Pavarde;
@@ -27,5 +29,6 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
 template<typename T, typename Member> auto lygintiElementusPagalReiksme(Member T::*member) { return [member](const T& a, const T& b) { return a.*member < b.*member; }; }
 void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSarasas);
+double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chrono::steady_clock::time_point pabaiga);
 
 #endif

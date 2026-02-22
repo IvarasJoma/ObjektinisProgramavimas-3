@@ -12,5 +12,6 @@ char nuskaitytiSkaiciavimoMetoda();
 int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas);
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas);
 int generuotiSveikaSkaiciu(int nuo, int iki);
+int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas);
 
 #endif
