@@ -93,35 +93,26 @@ char nuskaitytiSkaiciavimoMetoda(){
     }
 }
 
-int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas){
-    while (true){
+int nuskaitytiMinimaluSveikajiSkaiciu(const char* pranesimas, int minimaliReiksme) {
+    while (true) {
         std::cout << pranesimas;
         std::string ivestis;
-        if (!getline(std::cin, ivestis)) exit(0);
+        if (!std::getline(std::cin, ivestis)) std::exit(0);
         if (!tikrintiIvesti(ivestis)){
-            std::cout << "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau).\n";
+            if (minimaliReiksme <= 0) std::cout << "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau).\n";
+            else std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
             continue;
         }
         int reiksme = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 0) return reiksme;
-        std::cout << "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau).\n";
+        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= minimaliReiksme) return reiksme;
+        if (minimaliReiksme <= 0) std::cout << "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau).\n";
+        else std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
     }
 }
 
-int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas){
-    while (true){
-        std::cout << pranesimas;
-        std::string ivestis;
-        if (!getline(std::cin, ivestis)) exit(0);
-        if (!tikrintiIvesti(ivestis)){
-            std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
-            continue;
-        }
-        int reiksme = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 1) return reiksme;
-        std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
-    }
-}
+int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas) { return nuskaitytiMinimaluSveikajiSkaiciu(pranesimas, 0);}
+
+int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas) { return nuskaitytiMinimaluSveikajiSkaiciu(pranesimas, 1); }
 
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas){
     while (true){
