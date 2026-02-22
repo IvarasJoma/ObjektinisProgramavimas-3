@@ -11,15 +11,23 @@ int main(){
     std::string studentai1000000 = "tekstiniaiFailai/studentai1000000.txt";
     std::string kursiokai = "tekstiniaiFailai/kursiokai.txt";
     while (true) {
-        int meniu = nuskaitytiMeniuPasirinkima();
-        if (meniu == 5) break;
+        std::vector<std::string> meniu = {"Galimi programos veikimo būdai:", "1 - Įvesti duomenis ranka", "2 - Generuoti tik pažymius", "3 - Generuoti vardus, pavardes ir pažymius", "4 - Nuskaityti duomenis iš failo", "5 - Baigti darbą"};
+        int pasirinkimas = nuskaitytiMeniuPasirinkima();
+        if (pasirinkimas == 5) break;
         char skaiciavimoMetodoPasirinkimas = nuskaitytiSkaiciavimoMetoda();
         std::vector<StudentasVektorius> studentuSarasas;
         studentuSarasas.clear();
-        if (meniu == 4){
-            nuskaitytiStudentuDuomenisIsFailo(kursiokai);
+        if (pasirinkimas == 4){
+            std::vector<std::string> meniu = {"Pasirinkite iš kurio failo norite nuskaityti studentų duomenis:", "1 - kursiokai.txt", "2 - studentai10000.txt", "3 - studentai100000.txt", "4 - studentai1000000.txt"};
+            int pasirinkimas = nuskaitytiMeniuPasirinkima();
+            if (pasirinkimas == 1) nuskaitytiStudentuDuomenisIsFailo(kursiokai);
+            if (pasirinkimas == 2) nuskaitytiStudentuDuomenisIsFailo(studentai10000);
+            if (pasirinkimas == 3) nuskaitytiStudentuDuomenisIsFailo(studentai100000);
+            if (pasirinkimas == 4) nuskaitytiStudentuDuomenisIsFailo(studentai1000000);
+            std::vector<std::string> meniu = {"Pasirinkite, pagal ką norite rūšiuoti studentus:", "1 - vardą", "2 - pavardę", "3 - namų darbų galutinį pažymį", "4 - egzamino pažymį"};
+            int pasirinkimas = nuskaitytiMeniuPasirinkima();
         }
-        if (meniu == 3) {
+        if (pasirinkimas == 3) {
             int generuojamuStudentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norima generuoti studentų kiekį ir paspauskite ENTER: ");
             int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
             studentuSarasas.reserve(generuojamuStudentuKiekis);
@@ -33,7 +41,7 @@ int main(){
             continue;
         }
         int maksimalusNDKiekis = 0;
-        if (meniu == 1 || meniu == 2) maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
+        if (pasirinkimas == 1 || pasirinkimas == 2) maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
         while (true) {
             std::cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
             std::string ivestis;
@@ -67,7 +75,7 @@ int main(){
                 }
                 std::cout << "Studento pavardė negali likti tuščia.\n";
             }
-            if (meniu == 2) generuotiRezultatus(studentas, maksimalusNDKiekis);
+            if (pasirinkimas == 2) generuotiRezultatus(studentas, maksimalusNDKiekis);
             else {
                 nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai, maksimalusNDKiekis);
                 studentas.egzaminoRezultatas = nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): ");

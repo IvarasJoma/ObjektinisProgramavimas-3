@@ -9,12 +9,12 @@
 #include <sstream>
 #include <fstream>
 
-static inline void skip_ws(const char*& p) {
+static inline void praleistiTarpaIsFailo(const char*& p) {
     while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n') ++p;
 }
 
-static inline bool read_word(const char*& p, std::string& out) {
-    skip_ws(p);
+static inline bool nuskaitytiZodiIsFailo(const char*& p, std::string& out) {
+    praleistiTarpaIsFailo(p);
     if (!*p) return false;
     const char* start = p;
     while (*p && *p!=' ' && *p!='\t' && *p!='\r' && *p!='\n') ++p;
@@ -22,8 +22,8 @@ static inline bool read_word(const char*& p, std::string& out) {
     return true;
 }
 
-static inline bool read_int(const char*& p, int& x){
-    skip_ws(p);
+static inline bool nuskaitytiSveikaSkaiciuIsFailo(const char*& p, int& x){
+    praleistiTarpaIsFailo(p);
     if (!*p) return false;
     int val = 0;
     while (*p >= '0' && *p <= '9') {
@@ -151,15 +151,15 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
     while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)){
         const char* rodykle = eilute;
         StudentasVektorius studentas;
-        if (!read_word(rodykle, studentas.Vardas)) continue;
-        if (!read_word(rodykle, studentas.Pavarde)) continue;
+        if (!nuskaitytiZodiIsFailo(rodykle, studentas.Vardas)) continue;
+        if (!nuskaitytiZodiIsFailo(rodykle, studentas.Pavarde)) continue;
         studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis);
         for (int i = 0; i < namuDarbuKiekis; i++){
             int laikinasPazymys;
-            if (!read_int(rodykle, laikinasPazymys)) laikinasPazymys = 0;
+            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) laikinasPazymys = 0;
             studentas.namuDarbuTarpiniaiRezultatai.push_back(laikinasPazymys);
         }
-        if (!read_int(rodykle, studentas.egzaminoRezultatas)) studentas.egzaminoRezultatas = 0;
+        if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, studentas.egzaminoRezultatas)) studentas.egzaminoRezultatas = 0;
         studentuSarasas.push_back(std::move(studentas));
     }
     std::fclose(skaitomasFailas);

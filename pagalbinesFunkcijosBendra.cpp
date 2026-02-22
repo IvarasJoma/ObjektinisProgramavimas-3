@@ -59,22 +59,24 @@ bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
     return rezultatas.ec == std::errc{} && rezultatas.ptr == ivestis.data() + ivestis.size();
 }
 
-int nuskaitytiMeniuPasirinkima(){
+int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes) {
     while (true){
         std::cout << std::string(98, '-') << "\n";
-        std::cout << "Galimi programos veikimo būdai:\n";
-        std::cout << "1 - Įvesti duomenis ranka\n";
-        std::cout << "2 - Generuoti tik pažymius\n";
-        std::cout << "3 - Generuoti vardus, pavardes ir pažymius\n";
-        std::cout << "4 - Nuskaityti duomenis iš failo\n";
-        std::cout << "5 - Baigti darbą\n";
+        for (const auto& eilute : eilutes)
+            std::cout << eilute << "\n";
         std::cout << std::string(98, '-') << "\n";
         std::cout << "Pasirinkite programos eigą: ";
         std::string ivestis;
-        if (!getline(std::cin, ivestis)) return 5;
+        if (!getline(std::cin, ivestis)) return eilutes.size()-1;
         int meniu = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= 5) return meniu;
-        std::cout << "Įveskite TIK 1, 2, 3, 4 arba 5.\n";
+        if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= eilutes.size()-1) return meniu;
+        std::cout << "Įveskite TIK ";
+        for (int i = 1; i <= eilutes.size()-1; ++i){
+            std::cout << i;
+            if (i < eilutes.size() - 2) std::cout << ", ";
+            else if (i == eilutes.size() - 2) std::cout << " arba ";
+        }
+        std::cout << ".\n";
     }
 }
 
