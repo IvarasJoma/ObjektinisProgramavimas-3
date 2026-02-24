@@ -25,16 +25,49 @@ double skaiciuotiNDMediana(int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaiciu
 double skaiciuotiNDVidurki(const int* namuDarbuTarpiniaiRezultatai, int pazymiuSkaicius);
 void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis);
-std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes);
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, int kiekis);
-template<typename T, typename Member> auto lygintiElementusPagalDidejanciaReiksme(Member T::*member) { return [member](const T& a, const T& b) { return a.*member < b.*member; }; }
-template<typename T, typename Member> auto lygintiElementusPagalMazejanciaReiksme(Member T::*member) { return [member](const T& a, const T& b) { return a.*member > b.*member; }; }
-template<typename T> auto lygintiVardaSuSkaiciaisDidejanciaTvarka(int T::*numMember, std::string T::*strMember) { return [numMember, strMember](const T& a, const T& b) { const int na = a.*numMember; const int nb = b.*numMember; const bool aTuriSkaiciu = na >= 0; const bool bTuriSkaiciu = nb >= 0; if (aTuriSkaiciu && bTuriSkaiciu) { if (na != nb) return na < nb; return (a.*strMember) < (b.*strMember);} return (a.*strMember) < (b.*strMember);};}
-template<typename T> auto lygintiVardaSuSkaiciaisMazejanciaTvarka(int T::*numMember, std::string T::*strMember) { return [numMember, strMember](const T& a, const T& b) { const int na = a.*numMember; const int nb = b.*numMember; const bool aTuriSkaiciu = na >= 0; const bool bTuriSkaiciu = nb >= 0; if (aTuriSkaiciu && bTuriSkaiciu) { if (na != nb) return na > nb; return (a.*strMember) > (b.*strMember);} return (a.*strMember) > (b.*strMember);};}
 void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas);
 double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chrono::steady_clock::time_point pabaiga);
+
+template<typename Tipas, typename LaukoTipas> auto lygintiElementusPagalDidejanciaReiksme(LaukoTipas Tipas::*laukoRodykle){ 
+    return [LaukoTipas](const Tipas& a, const Tipas& b){ 
+        return a.*laukoRodykle < b.*laukoRodykle; 
+    }; 
+}
+template<typename Tipas, typename LaukoTipas> auto lygintiElementusPagalMazejanciaReiksme(LaukoTipas Tipas::*laukoRodykle){
+    return [LaukoTipas](const Tipas& a, const Tipas& b){
+        return a.*laukoRodykle > b.*laukoRodykle;
+    };
+}
+template<typename Tipas> auto lygintiVardaSuSkaiciaisDidejanciaTvarka(int Tipas::*SkaiciausLaukas, std::string Tipas::*TekstoLaukas){
+    return [SkaiciausLaukas, TekstoLaukas](const Tipas& a, const Tipas& b){
+        const int pirmas = a.*SkaiciausLaukas;
+        const int antras = b.*SkaiciausLaukas;
+        const bool arPirmasTuriSkaiciu = pirmas >= 0;
+        const bool arAntrasTuriSkaiciu = antras >= 0;
+        if (arPirmasTuriSkaiciu && arAntrasTuriSkaiciu){
+            if (pirmas != antras) return pirmas < antras;
+            return (a.*TekstoLaukas) < (b.*TekstoLaukas);
+        } 
+        return (a.*TekstoLaukas) < (b.*TekstoLaukas);
+    };
+}
+
+template<typename Tipas> auto lygintiVardaSuSkaiciaisMazejanciaTvarka(int Tipas::*SkaiciausLaukas, std::string Tipas::*TekstoLaukas){
+    return [SkaiciausLaukas, TekstoLaukas](const Tipas& a, const Tipas& b){
+        const int pirmas = a.*SkaiciausLaukas;
+        const int antras = b.*SkaiciausLaukas;
+        const bool arPirmasTuriSkaiciu = pirmas >= 0;
+        const bool arAntrasTuriSkaiciu = antras >= 0;
+        if (arPirmasTuriSkaiciu && arAntrasTuriSkaiciu){
+            if (pirmas != antras) return pirmas > antras;
+            return (a.*TekstoLaukas) > (b.*TekstoLaukas);
+        }
+        return (a.*TekstoLaukas) > (b.*TekstoLaukas);
+    };
+}
 
 #endif
