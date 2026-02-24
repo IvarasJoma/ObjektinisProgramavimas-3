@@ -74,7 +74,7 @@ int main(){
             std::cout << "Duomenų nuskaitymas vidutiniškai užtruko: " << vidurkisNuskaitymo << "s.\n";
             std::cout << "Galutinių rezultatų skaičiavimas vidutiniškai užtruko: " << vidurkisSkaiciavimo << "s.\n";
             std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << vidurkisRikiavimo << "s.\n";
-            std::cout << "Studentų išvedimas vidutiniškai užtruko: " << vidurkisRikiavimo << "s.\n";
+            std::cout << "Studentų išvedimas vidutiniškai užtruko: " << vidurkisIsvedimo << "s.\n";
             std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << vidurkisNuskaitymo + vidurkisSkaiciavimo + vidurkisRikiavimo + vidurkisIsvedimo << "s.\n";
         }
         else if (pasirinkimas == 4){
