@@ -9,31 +9,6 @@
 #include <sstream>
 #include <fstream>
 
-static inline void praleistiTarpaIsFailo(const char*& p){
-    while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n') ++p;
-}
-
-static inline bool nuskaitytiZodiIsFailo(const char*& p, std::string& out){
-    praleistiTarpaIsFailo(p);
-    if (!*p) return false;
-    const char* start = p;
-    while (*p && *p!=' ' && *p!='\t' && *p!='\r' && *p!='\n') ++p;
-    out.assign(start, static_cast<size_t>(p - start));
-    return true;
-}
-
-static inline bool nuskaitytiSveikaSkaiciuIsFailo(const char*& p, int& x){
-    praleistiTarpaIsFailo(p);
-    if (!*p) return false;
-    int val = 0;
-    while (*p >= '0' && *p <= '9'){
-        val = val * 10 + (*p - '0');
-        ++p;
-    }
-    x = val;
-    return true;
-}
-
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai){
     if (ndPazymiai.empty()) return 0.0;
     double suma = 0;
@@ -69,12 +44,12 @@ void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSar
     }
 }
 
-void parodytiRezultatuLentele(const std::vector<StudentasVektorius>& studentuSarasas){
-    std::cout << std::string(98, '-') << "\n";
-    std::cout << std::format("{:<30}{:<30}{:<19}{:<19}\n", "Vardas", "Pavardė", "Galutinis (Vid.)", "Galutinis (Med.)");
-    std::cout << std::string(98, '-') << "\n";
+void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas){
+    out << std::string(98, '-') << "\n";
+    out << std::format("{:<30}{:<30}{:<19}{:<19}\n", "Vardas", "Pavardė", "Galutinis (Vid.)", "Galutinis (Med.)");
+    out << std::string(98, '-') << "\n";
     for (const auto& studentas : studentuSarasas){
-        std::cout << std::format("{:<30}{:<30}{:<19.2f}{:<19.2f}\n", studentas.Vardas, studentas.Pavarde, studentas.galutinisRezultatasPagalVidurki, studentas.galutinisRezultatasPagalMediana);
+        out << std::format("{:<30}{:<30}{:<19.2f}{:<19.2f}\n", studentas.Vardas, studentas.Pavarde, studentas.galutinisRezultatasPagalVidurki, studentas.galutinisRezultatasPagalMediana);
     }
 }
 
@@ -135,44 +110,89 @@ void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksim
     while (namuDarbuPazymiai.size() < maksimalusNDKiekis) namuDarbuPazymiai.push_back(0);
 }
 
-std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas){
+void praleistiTarpaIsFailo(const char*& rodykle){
+    while (*rodykle == ' ' || *rodykle == '\t' || *rodykle == '\r' || *rodykle == '\n') ++rodykle;
+}
+
+bool nuskaitytiZodiIsFailo(const char*& rodykle, std::string& isvestis){
+    praleistiTarpaIsFailo(rodykle);
+    if (!*rodykle) return false;
+    const char* pradzia = rodykle;
+    while (*rodykle && *rodykle!=' ' && *rodykle!='\t' && *rodykle!='\r' && *rodykle!='\n') ++rodykle;
+    isvestis.assign(pradzia, static_cast<size_t>(rodykle - pradzia));
+    return true;
+}
+
+bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
+    praleistiTarpaIsFailo(rodykle);
+    if (!*rodykle) return false;
+    int reiksme = 0;
+    while (*rodykle >= '0' && *rodykle <= '9'){
+        reiksme = reiksme * 10 + (*rodykle - '0');
+        ++rodykle;
+    }
+    x = reiksme;
+    return true;
+}
+
+void istrauktiSkaiciu(const std::string& eilute, int& skaicius) {
+    skaicius = -1;
+    int pradzia = -1;
+    for (int i = 0; i < (int)eilute.size(); i++) {
+        if (isdigit(eilute[i])) {
+            pradzia = i;
+            break;
+        }
+    }
+    if (pradzia != -1) skaicius = std::stoi(eilute.substr(pradzia));
+}
+
+std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, int kiekis){
     std::vector<StudentasVektorius> studentuSarasas;
-    studentuSarasas.reserve(1000000);
     FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
     if (!skaitomasFailas) return studentuSarasas;
-    static char ivestiesBuferis[1 << 20];
-    std::setvbuf(skaitomasFailas, ivestiesBuferis, _IOFBF, sizeof(ivestiesBuferis));
-    char aprasas[257];
-    if (!std::fgets(aprasas, sizeof(aprasas), skaitomasFailas)){
+    try{
+        studentuSarasas.reserve(kiekis);
+        static char ivestiesBuferis[1 << 20];
+        std::setvbuf(skaitomasFailas, ivestiesBuferis, _IOFBF, sizeof(ivestiesBuferis));
+        char aprasas[257];
+        if (!std::fgets(aprasas, sizeof(aprasas), skaitomasFailas)){
+            std::fclose(skaitomasFailas);
+            return studentuSarasas;
+        }
+        int namuDarbuKiekis = 0;
+        char laikinaEilute[257];
+        std::strncpy(laikinaEilute, aprasas, sizeof(laikinaEilute));
+        laikinaEilute[sizeof(laikinaEilute) - 1] = '\0';
+        char* stulpelis = std::strtok(laikinaEilute, " \t\r\n");
+        while (stulpelis){
+            if (stulpelis[0] == 'N' && stulpelis[1] == 'D') namuDarbuKiekis++;
+            stulpelis = std::strtok(nullptr, " \t\r\n");
+        }
+        char eilute[257];
+        while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)){
+            const char* rodykle = eilute;
+            StudentasVektorius studentas;
+            if (!nuskaitytiZodiIsFailo(rodykle, studentas.Vardas)) continue;
+            if (!nuskaitytiZodiIsFailo(rodykle, studentas.Pavarde)) continue;
+            istrauktiSkaiciu(studentas.Vardas, studentas.vardasNr);
+            istrauktiSkaiciu(studentas.Pavarde, studentas.pavardeNr);
+            studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis);
+            for (int i = 0; i < namuDarbuKiekis; i++){
+                int laikinasPazymys;
+                if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) laikinasPazymys = 0;
+                studentas.namuDarbuTarpiniaiRezultatai.push_back(laikinasPazymys);
+            }
+            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, studentas.egzaminoRezultatas)) studentas.egzaminoRezultatas = 0;
+            studentuSarasas.push_back(std::move(studentas));
+        }
         std::fclose(skaitomasFailas);
         return studentuSarasas;
+    } catch (const std::bad_alloc&) {
+        std::fclose(skaitomasFailas);
+        std::cerr << "Nepakanka atminties...\n";
+        return studentuSarasas;
     }
-    int namuDarbuKiekis = 0;
-    char laikinaEilute[257];
-    std::strncpy(laikinaEilute, aprasas, sizeof(laikinaEilute));
-    laikinaEilute[sizeof(laikinaEilute) - 1] = '\0';
-    char* stulpelis = std::strtok(laikinaEilute, " \t\r\n");
-    while (stulpelis){
-        if (stulpelis[0] == 'N' && stulpelis[1] == 'D') namuDarbuKiekis++;
-        stulpelis = std::strtok(nullptr, " \t\r\n");
-    }
-    char eilute[257];
-    while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)){
-        const char* rodykle = eilute;
-        StudentasVektorius studentas;
-        if (!nuskaitytiZodiIsFailo(rodykle, studentas.Vardas)) continue;
-        if (!nuskaitytiZodiIsFailo(rodykle, studentas.Pavarde)) continue;
-        studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis);
-        for (int i = 0; i < namuDarbuKiekis; i++){
-            int laikinasPazymys;
-            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) laikinasPazymys = 0;
-            studentas.namuDarbuTarpiniaiRezultatai.push_back(laikinasPazymys);
-        }
-        if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, studentas.egzaminoRezultatas)) studentas.egzaminoRezultatas = 0;
-        studentuSarasas.push_back(std::move(studentas));
-    }
-    std::fclose(skaitomasFailas);
-    return studentuSarasas;
 }
 
 double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chrono::steady_clock::time_point pabaiga){
