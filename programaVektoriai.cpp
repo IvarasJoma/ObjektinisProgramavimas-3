@@ -1,5 +1,13 @@
-#include "strukturaVektoriai.h"
-#include "bendraStruktura.h"
+#include "strukturaDarbasSuFailais.h"
+#include "strukturaGeneravimas.h"
+#include "strukturaIvestisIsvestis.h"
+#include "strukturaLaikoMatavimas.h"
+#include "strukturaSkaiciavimai.h"
+#include "strukturaStudentas.h"
+
+#include <iostream>
+#include <algorithm>
+#include <fstream>
 
 int main(){
     std::vector<std::string> vyrVardai = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviski_vyru_vardai.txt");
@@ -44,10 +52,10 @@ int main(){
                 }
                 auto skaiciavimuPabaiga = std::chrono::steady_clock::now();
                 auto rikiavimoStartas = std::chrono::steady_clock::now();
-                if (pasirinkimasRikiavimo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisDidejanciaTvarka(&StudentasVektorius::vardasNr, &StudentasVektorius::Vardas));
-                if (pasirinkimasRikiavimo == 2) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisMazejanciaTvarka(&StudentasVektorius::vardasNr, &StudentasVektorius::Vardas));
-                if (pasirinkimasRikiavimo == 3) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisDidejanciaTvarka(&StudentasVektorius::pavardeNr, &StudentasVektorius::Pavarde));
-                if (pasirinkimasRikiavimo == 4) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisMazejanciaTvarka(&StudentasVektorius::pavardeNr, &StudentasVektorius::Pavarde));
+                if (pasirinkimasRikiavimo == 1 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
+                if (pasirinkimasRikiavimo == 2 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
+                if (pasirinkimasRikiavimo == 3 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
+                if (pasirinkimasRikiavimo == 4 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
                 if (pasirinkimasRikiavimo == 5) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));
                 if (pasirinkimasRikiavimo == 6) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalMediana));
                 if (pasirinkimasRikiavimo == 7) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));
@@ -92,10 +100,10 @@ int main(){
             }
             std::vector<std::string> meniuRikiavimo = {"Pasirinkite, pagal ką norite rikiuoti studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį pagal vidurkį didėjančia tvarka (1-10)", "6 - galutinį pažymį pagal medianą didėjančia tvarka (1-10)", "7 - galutinį pažymį pagal vidurkį mažėjančia tvarka (10-1)", "8 - galutinį pažymį pagal medianą mažėjančia tvarka (10-1)"};
             int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(meniuRikiavimo);
-            if (pasirinkimasRikiavimo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisDidejanciaTvarka(&StudentasVektorius::vardasNr, &StudentasVektorius::Vardas));
-            if (pasirinkimasRikiavimo == 2) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisMazejanciaTvarka(&StudentasVektorius::vardasNr, &StudentasVektorius::Vardas));
-            if (pasirinkimasRikiavimo == 3) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisDidejanciaTvarka(&StudentasVektorius::pavardeNr, &StudentasVektorius::Pavarde));
-            if (pasirinkimasRikiavimo == 4) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiVardaSuSkaiciaisMazejanciaTvarka(&StudentasVektorius::pavardeNr, &StudentasVektorius::Pavarde));
+            if (pasirinkimasRikiavimo == 1 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
+            if (pasirinkimasRikiavimo == 2 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
+            if (pasirinkimasRikiavimo == 3 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
+            if (pasirinkimasRikiavimo == 4 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
             if (pasirinkimasRikiavimo == 5) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));
             if (pasirinkimasRikiavimo == 6) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalMediana));
             if (pasirinkimasRikiavimo == 7) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));

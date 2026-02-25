@@ -1,10 +1,33 @@
-#include "bendraStruktura.h"
-
+#include "strukturaIvestisIsvestis.h"
+#include "strukturaSkaiciavimai.h"
 #include <iostream>
 #include <charconv>
-#include <random>
-#include <chrono>
-#include <format>
+#include <sstream>
+
+void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+    out << std::string(98, '-') << "\n";
+    out << std::format("{:<40}{:<40}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
+    out << std::string(98, '-') << "\n";
+    for (const auto& studentas : studentuSarasas){
+        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
+        out << std::format("{:<40}{:<40}{:<18.2f}\n", studentas.Vardas, studentas.Pavarde, galutinisRezultatas);
+    }
+}
+
+void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis){
+    namuDarbuPazymiai.clear();
+    while (namuDarbuPazymiai.size() < maksimalusNDKiekis){
+        std::cout << "Įveskite studento namų darbų pažymius (1-10). Po kiekvieno įvesto pažymio paspauskite klavišą ENTER. Baigus tuščioje eilutėje paspauskite klavišą ENTER: ";
+        std::string ivestis;
+        if (!getline(std::cin, ivestis)) exit(0);
+        if (ivestis.empty()) break;
+        int reiksme = 0;
+        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 1 && reiksme <= 10) namuDarbuPazymiai.push_back(reiksme);
+        else std::cout << "Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
+    }
+    if (namuDarbuPazymiai.size() == maksimalusNDKiekis) std::cout << "Pasiektas maksimalus namų darbų pažymių kiekis.\n";
+    while (namuDarbuPazymiai.size() < maksimalusNDKiekis) namuDarbuPazymiai.push_back(0);
+}
 
 bool tikrintiIvesti(const std::string& ivestis){
     for (char simbolis : ivestis){
@@ -45,12 +68,6 @@ void tvarkytiPavarde(std::string& ivestis){
         }
         if (simbolis == '-') kitaDidzioji = true;
     }
-}
-
-int generuotiSveikaSkaiciu(int nuo, int iki){
-    static std::mt19937 generatorius(std::random_device{}());
-    std::uniform_int_distribution<int> distribucija(nuo, iki);
-    return distribucija(generatorius);
 }
 
 bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
