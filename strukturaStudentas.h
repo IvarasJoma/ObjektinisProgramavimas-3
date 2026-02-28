@@ -7,8 +7,7 @@ struct StudentasVektorius{
     std::string Vardas, Pavarde;
     std::vector<int> namuDarbuTarpiniaiRezultatai;
     int egzaminoRezultatas;
-    double galutinisRezultatasPagalVidurki = 0;
-    double galutinisRezultatasPagalMediana = 0;
+    double galutinisRezultatas = 0;
 };
 
 #endif

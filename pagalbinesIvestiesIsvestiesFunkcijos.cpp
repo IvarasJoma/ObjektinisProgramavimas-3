@@ -3,6 +3,7 @@
 #include <iostream>
 #include <charconv>
 #include <sstream>
+#include <fstream>
 
 void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     out << std::string(98, '-') << "\n";
@@ -139,5 +140,15 @@ int nuskaitytiPazymiNuo1iki10(const char* pranesimas){
         int reiksme = 0;
         if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 1 && reiksme <= 10) return reiksme;
         std::cout << "Įveskite sveiką skaičių intervale nuo 1 iki 10.\n";
+    }
+}
+
+void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+    if (pasirinkimasIsvedimo == 1) parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodoPasirinkimas);
+    if (pasirinkimasIsvedimo == 2){
+        std::ofstream isvedimoFailas("studentuRezultatai.txt");
+        parodytiRezultatuLentele(isvedimoFailas, studentuSarasas, skaiciavimoMetodoPasirinkimas);
+        isvedimoFailas.flush();
+        isvedimoFailas.close();
     }
 }

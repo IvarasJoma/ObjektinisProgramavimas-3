@@ -4,20 +4,14 @@
 #include "strukturaLaikoMatavimas.h"
 #include "strukturaSkaiciavimai.h"
 #include "strukturaStudentas.h"
-
+#include "strukturaRikiavimas.h"
+#include "Failai.h"
 #include <iostream>
 #include <algorithm>
 #include <fstream>
 
 int main(){
-    std::vector<std::string> vyrVardai = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviski_vyru_vardai.txt");
-    std::vector<std::string> vyrPavardes = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviskos_vyru_pavardes.txt");
-    std::vector<std::string> motVardai = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviski_moteru_vardai.txt");
-    std::vector<std::string> motPavardes = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviskos_moteru_pavardes.txt");
-    std::string studentai10000 = "tekstiniaiFailai/studentai10000.txt";
-    std::string studentai100000 = "tekstiniaiFailai/studentai100000.txt";
-    std::string studentai1000000 = "tekstiniaiFailai/studentai1000000.txt";
-    std::string kursiokai = "tekstiniaiFailai/kursiokai.txt";
+    Failai failai;
     while (true){
         std::vector<std::string> meniu = {"Galimi programos veikimo būdai:", "1 - Įvesti duomenis ranka", "2 - Generuoti tik pažymius", "3 - Generuoti vardus, pavardes ir pažymius", "4 - Nuskaityti duomenis iš failo", "5 - Testuoti programą", "6 - Baigti darbą"};
         int pasirinkimas = nuskaitytiMeniuPasirinkima(meniu);
@@ -29,8 +23,9 @@ int main(){
             double sumaSkaiciavimo = 0.0;
             double sumaRikiavimo = 0.0;
             double sumaIsvedimo = 0.0;
+            char skaiciavimoMetodoPasirinkimas = nuskaitytiSkaiciavimoMetoda();
             std::vector<std::string> meniuNuskaitymo = {"Pasirinkite iš kurio failo norite nuskaityti studentų duomenis:", "1 - kursiokai.txt", "2 - studentai10000.txt", "3 - studentai100000.txt", "4 - studentai1000000.txt"};
-            std::vector<std::string> meniuRikiavimo = {"Pasirinkite, pagal ką norite rikiuoti studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį pagal vidurkį didėjančia tvarka (1-10)", "6 - galutinį pažymį pagal medianą didėjančia tvarka (1-10)", "7 - galutinį pažymį pagal vidurkį mažėjančia tvarka (10-1)", "8 - galutinį pažymį pagal medianą mažėjančia tvarka (10-1)"};
+            std::vector<std::string> meniuRikiavimo = {"Pasirinkite, pagal ką norite rikiuoti studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį didėjančia tvarka (1-10)", "6 - galutinį pažymį mažėjančia tvarka (10-1)"};
             std::vector<std::string> meniuIsvedimo = {"Pasirinkite, kaip norite išvesti duomenis:", "1 - į terminalą", "2 - į failą"};
             int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
             int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(meniuNuskaitymo);
@@ -38,37 +33,18 @@ int main(){
             int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(meniuIsvedimo);
             for (int i = 0; i < kartai; ++i){
                 auto nuskaitymoStartas = std::chrono::steady_clock::now();
-                if (pasirinkimasNuskaitymo == 1) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(kursiokai, 3);
-                if (pasirinkimasNuskaitymo == 2) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(studentai10000, 10000);
-                if (pasirinkimasNuskaitymo == 3) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(studentai100000, 100000);
-                if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(studentai1000000, 1000000);
+                nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);
                 auto nuskaitymoPabaiga = std::chrono::steady_clock::now();
                 auto skaiciavimuStartas = std::chrono::steady_clock::now();
                 for (auto& studentas : studentuSarasas){
-                    double galutinisRezultatasPagalVidurki = skaiciuotiGalutiniVidurki(studentas);
-                    studentas.galutinisRezultatasPagalVidurki = galutinisRezultatasPagalVidurki;
-                    double galutinisRezultatasPagalMediana = skaiciuotiGalutineMediana(studentas);
-                    studentas.galutinisRezultatasPagalMediana = galutinisRezultatasPagalMediana;
+                    apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
                 }
                 auto skaiciavimuPabaiga = std::chrono::steady_clock::now();
                 auto rikiavimoStartas = std::chrono::steady_clock::now();
-                if (pasirinkimasRikiavimo == 1 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
-                if (pasirinkimasRikiavimo == 2 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
-                if (pasirinkimasRikiavimo == 3 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
-                if (pasirinkimasRikiavimo == 4 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
-                if (pasirinkimasRikiavimo == 5) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));
-                if (pasirinkimasRikiavimo == 6) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalMediana));
-                if (pasirinkimasRikiavimo == 7) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));
-                if (pasirinkimasRikiavimo == 8) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalMediana));
+                rikiuotiStudentus(pasirinkimasRikiavimo, pasirinkimasNuskaitymo, studentuSarasas);
                 auto rikiavimoPabaiga = std::chrono::steady_clock::now();
                 auto isvedimoStartas = std::chrono::steady_clock::now();
-                if (pasirinkimasIsvedimo == 1) parodytiRezultatuLentele(std::cout, studentuSarasas);
-                if (pasirinkimasIsvedimo == 2){
-                    std::ofstream isvedimoFailas("studentuRezultatai.txt");
-                    parodytiRezultatuLentele(isvedimoFailas, studentuSarasas);
-                    isvedimoFailas.flush();
-                    isvedimoFailas.close();
-                }  
+                isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);  
                 auto isvedimoPabaiga = std::chrono::steady_clock::now();
                 sumaNuskaitymo += apskaiciuotiLaika(nuskaitymoStartas, nuskaitymoPabaiga);
                 sumaSkaiciavimo += apskaiciuotiLaika(skaiciavimuStartas, skaiciavimuPabaiga);
@@ -86,37 +62,19 @@ int main(){
             std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << vidurkisNuskaitymo + vidurkisSkaiciavimo + vidurkisRikiavimo + vidurkisIsvedimo << "s.\n";
         }
         else if (pasirinkimas == 4){
+            char skaiciavimoMetodoPasirinkimas = nuskaitytiSkaiciavimoMetoda();
             std::vector<std::string> meniuNuskaitymo = {"Pasirinkite iš kurio failo norite nuskaityti studentų duomenis:", "1 - kursiokai.txt", "2 - studentai10000.txt", "3 - studentai100000.txt", "4 - studentai1000000.txt"};
             int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(meniuNuskaitymo);
-            if (pasirinkimasNuskaitymo == 1) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(kursiokai,3 );
-            if (pasirinkimasNuskaitymo == 2) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(studentai10000, 10000);
-            if (pasirinkimasNuskaitymo == 3) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(studentai100000, 100000);
-            if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(studentai1000000, 1000000);
+            nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);
             for (auto& studentas : studentuSarasas){
-                double galutinisRezultatasPagalVidurki = skaiciuotiGalutiniVidurki(studentas);
-                studentas.galutinisRezultatasPagalVidurki = galutinisRezultatasPagalVidurki;
-                double galutinisRezultatasPagalMediana = skaiciuotiGalutineMediana(studentas);
-                studentas.galutinisRezultatasPagalMediana = galutinisRezultatasPagalMediana;
+                apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
             }
-            std::vector<std::string> meniuRikiavimo = {"Pasirinkite, pagal ką norite rikiuoti studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį pagal vidurkį didėjančia tvarka (1-10)", "6 - galutinį pažymį pagal medianą didėjančia tvarka (1-10)", "7 - galutinį pažymį pagal vidurkį mažėjančia tvarka (10-1)", "8 - galutinį pažymį pagal medianą mažėjančia tvarka (10-1)"};
+            std::vector<std::string> meniuRikiavimo = {"Pasirinkite, pagal ką norite rikiuoti studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį didėjančia tvarka (1-10)", "6 - galutinį pažymį mažėjančia tvarka (10-1)"};
             int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(meniuRikiavimo);
-            if (pasirinkimasRikiavimo == 1 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
-            if (pasirinkimasRikiavimo == 2 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));
-            if (pasirinkimasRikiavimo == 3 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
-            if (pasirinkimasRikiavimo == 4 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Pavarde));
-            if (pasirinkimasRikiavimo == 5) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));
-            if (pasirinkimasRikiavimo == 6) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalMediana));
-            if (pasirinkimasRikiavimo == 7) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalVidurki));
-            if (pasirinkimasRikiavimo == 8) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&StudentasVektorius::galutinisRezultatasPagalMediana));
+            rikiuotiStudentus(pasirinkimasRikiavimo, pasirinkimasNuskaitymo, studentuSarasas);
             std::vector<std::string> meniuIsvedimo = {"Pasirinkite, kaip norite išvesti duomenis:", "1 - į terminalą", "2 - į failą"};
             int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(meniuIsvedimo);
-            if (pasirinkimasIsvedimo == 1) parodytiRezultatuLentele(std::cout, studentuSarasas);
-            if (pasirinkimasIsvedimo == 2){
-                std::ofstream isvedimoFailas("studentuRezultatai.txt");
-                parodytiRezultatuLentele(isvedimoFailas, studentuSarasas);
-                isvedimoFailas.flush();
-                isvedimoFailas.close();
-            }    
+            isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);    
         } else{
             char skaiciavimoMetodoPasirinkimas = nuskaitytiSkaiciavimoMetoda();
             if (pasirinkimas == 3){
@@ -125,11 +83,11 @@ int main(){
                 studentuSarasas.reserve(generuojamuStudentuKiekis);
                 for (int i = 0; i < generuojamuStudentuKiekis; i++){
                     StudentasVektorius studentas;
-                    generuotiVardaPavarde(studentas, vyrVardai, vyrPavardes, motVardai, motPavardes);
+                    generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
                     generuotiRezultatus(studentas, maksimalusNDKiekis);
                     studentuSarasas.push_back(std::move(studentas));
                 }
-                parodytiRezultatuLentele(studentuSarasas, skaiciavimoMetodoPasirinkimas);
+                parodytiRezultatuLentele(std::cout,studentuSarasas, skaiciavimoMetodoPasirinkimas);
                 continue;
             }
             int maksimalusNDKiekis = 0;
@@ -174,7 +132,7 @@ int main(){
                 }
                 studentuSarasas.push_back(std::move(studentas));
             }
-            parodytiRezultatuLentele(studentuSarasas, skaiciavimoMetodoPasirinkimas);
+            parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodoPasirinkimas);
         }
     }
     return 0;

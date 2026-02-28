@@ -1,4 +1,6 @@
 #include "strukturaDarbasSuFailais.h"
+#include "Failai.h"
+#include "strukturaStudentas.h"
 #include <iostream>
 #include <fstream>
 
@@ -85,4 +87,11 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
         if (!eilute.empty()) rezultatas.push_back(eilute);
     }
     return rezultatas;
+}
+
+void nuskaitytiDuomenis (int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas, Failai failai){
+    if (pasirinkimasNuskaitymo == 1) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.kursiokai, 3);
+    if (pasirinkimasNuskaitymo == 2) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai10000, 10000);
+    if (pasirinkimasNuskaitymo == 3) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai100000, 100000);
+    if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai1000000, 1000000);
 }

@@ -25,3 +25,13 @@ double skaiciuotiGalutineMediana(const StudentasVektorius& studentas){
     double ndMediana = skaiciuotiNDMediana(studentas.namuDarbuTarpiniaiRezultatai);
     return 0.4 * ndMediana + 0.6 * studentas.egzaminoRezultatas;
 }
+
+void apskaiciuotiGalutiniPazymi(StudentasVektorius& studentas, char skaiciavimoMetodoPasirinkimas){
+    if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v'){
+        double galutinisRezultatasPagalVidurki = skaiciuotiGalutiniVidurki(studentas);
+        studentas.galutinisRezultatas = galutinisRezultatasPagalVidurki;
+    } else {
+        double galutinisRezultatasPagalMediana = skaiciuotiGalutineMediana(studentas);
+        studentas.galutinisRezultatas = galutinisRezultatasPagalMediana;
+    }
+}
