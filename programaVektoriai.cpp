@@ -1,11 +1,4 @@
-#include "strukturaDarbasSuFailais.h"
-#include "strukturaGeneravimas.h"
-#include "strukturaIvestisIsvestis.h"
-#include "strukturaLaikoMatavimas.h"
-#include "strukturaSkaiciavimai.h"
-#include "strukturaStudentas.h"
-#include "strukturaRikiavimas.h"
-#include "Failai.h"
+#include "strukturaVisi.h"
 #include <iostream>
 #include <algorithm>
 #include <fstream>
