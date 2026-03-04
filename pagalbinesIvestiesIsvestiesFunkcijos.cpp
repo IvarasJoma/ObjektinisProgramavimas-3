@@ -152,3 +152,19 @@ void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<StudentasVekto
         isvedimoFailas.close();
     }
 }
+
+bool patvirtintiNaujoStudentoPridejima() {
+    while (true){
+        std::cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
+        std::string ivestis;
+        if (!std::getline(std::cin, ivestis)) std::exit(0);
+        if (!(tikrintiIvesti(ivestis) && ivestis.size() == 1)) {
+            std::cout << "Įveskite TIK vieną raidę: T arba N.\n";
+            continue;
+        }
+        char pasirinkimas = ivestis[0];
+        if (pasirinkimas == 'T' || pasirinkimas == 't') return true;
+        if (pasirinkimas == 'N' || pasirinkimas == 'n') return false;
+        std::cout << "Įveskite TIK vieną raidę: T arba N.\n";
+    }
+}

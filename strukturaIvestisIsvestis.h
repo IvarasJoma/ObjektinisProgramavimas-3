@@ -16,5 +16,6 @@ void tvarkytiPavarde(std::string& ivestis);
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas);
 bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme);
 void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
+bool patvirtintiNaujoStudentoPridejima();
 
 #endif
