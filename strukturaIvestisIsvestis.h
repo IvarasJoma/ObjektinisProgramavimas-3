@@ -7,6 +7,7 @@
 void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
 int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes);
+bool nuskaitytiPagrindinioMeniuPasirinkima(const std::vector<std::string>& eilutes, int& pasirinkimas);
 int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas);
 int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas);
 char nuskaitytiSkaiciavimoMetoda();

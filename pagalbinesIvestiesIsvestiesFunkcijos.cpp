@@ -98,6 +98,27 @@ int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes){
     }
 }
 
+bool nuskaitytiPagrindinioMeniuPasirinkima(const std::vector<std::string>& eilutes, int& pasirinkimas){
+    while (true){
+        std::cout << std::string(98, '-') << "\n";
+        for (const auto& eilute : eilutes)
+            std::cout << eilute << "\n";
+        std::cout << std::string(98, '-') << "\n";
+        std::cout << "Pasirinkite programos eigą: ";
+        std::string ivestis;
+        if (!getline(std::cin, ivestis)) exit(0);
+        int meniu = 0;
+        if (nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas) && pasirinkimas >= 1 && pasirinkimas <= eilutes.size()-1) return true;
+        std::cout << "Įveskite TIK ";
+        for (int i = 1; i <= eilutes.size()-1; ++i){
+            std::cout << i;
+            if (i < eilutes.size() - 2) std::cout << ", ";
+            else if (i == eilutes.size() - 2) std::cout << " arba ";
+        }
+        std::cout << ".\n";
+    }
+}
+
 char nuskaitytiSkaiciavimoMetoda(){
     while (true){
         std::cout << "Pasirinkite galutinio pažymio skaičiavimo metodą: V - vidurkiu grįstas, M - mediana grįstas: ";

@@ -12,9 +12,9 @@
 
 int main(){
     Failai failai;
-    while (true){
-        std::vector<std::string> meniu = {"Galimi programos veikimo būdai:", "1 - Įvesti duomenis ranka", "2 - Generuoti tik pažymius", "3 - Generuoti vardus, pavardes ir pažymius", "4 - Nuskaityti duomenis iš failo", "5 - Testuoti programą", "6 - Baigti darbą"};
-        int pasirinkimas = nuskaitytiMeniuPasirinkima(meniu);
+    std::vector<std::string> meniu = {"Galimi programos veikimo būdai:", "1 - Įvesti duomenis ranka", "2 - Generuoti tik pažymius", "3 - Generuoti vardus, pavardes ir pažymius", "4 - Nuskaityti duomenis iš failo", "5 - Testuoti programą", "6 - Baigti darbą"};
+    int pasirinkimas = 0;
+    while (nuskaitytiPagrindinioMeniuPasirinkima(meniu, pasirinkimas)){
         if (pasirinkimas == 6) break;
         std::vector<StudentasVektorius> studentuSarasas;
         studentuSarasas.clear();
