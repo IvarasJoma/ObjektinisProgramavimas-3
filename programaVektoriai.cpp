@@ -94,24 +94,8 @@ int main(){
             if (pasirinkimas == 1 || pasirinkimas == 2) maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
             while (patvirtintiNaujoStudentoPridejima()){
                 StudentasVektorius studentas;
-                while (true){
-                    std::cout << "Įveskite studento vardą: ";
-                    if (!getline(std::cin, studentas.Vardas)) return 0;
-                    if (tikrintiIvesti(studentas.Vardas)){
-                        tvarkytiVarda(studentas.Vardas);
-                        break;
-                    }
-                    std::cout << "Studento vardas negali likti tuščias.\n";
-                }
-                while (true){
-                    std::cout << "Įveskite studento pavardę: ";
-                    if (!getline(std::cin, studentas.Pavarde)) return 0;
-                    if (tikrintiIvesti(studentas.Pavarde)){
-                        tvarkytiPavarde(studentas.Pavarde);
-                        break;
-                    }
-                    std::cout << "Studento pavardė negali likti tuščia.\n";
-                }
+                studentas.Vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.\n");
+                studentas.Pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.\n");
                 if (pasirinkimas == 2) generuotiRezultatus(studentas, maksimalusNDKiekis);
                 else{
                     nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai, maksimalusNDKiekis);
