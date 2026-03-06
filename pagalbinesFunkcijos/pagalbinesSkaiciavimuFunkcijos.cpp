@@ -30,14 +30,14 @@ void apskaiciuotiGalutiniPazymi(StudentasVektorius& studentas, char skaiciavimoM
     if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v'){
         double galutinisRezultatasPagalVidurki = skaiciuotiGalutiniVidurki(studentas);
         studentas.galutinisRezultatas = galutinisRezultatasPagalVidurki;
-    } else {
+    } else{
         double galutinisRezultatasPagalMediana = skaiciuotiGalutineMediana(studentas);
         studentas.galutinisRezultatas = galutinisRezultatasPagalMediana;
     }
 }
 
-void apskaiciuotiGalutiniusPazymius(std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodoPasirinkimas) {
-    for (auto& studentas : studentai) {
+void apskaiciuotiGalutiniusPazymius(std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodoPasirinkimas){
+    for (auto& studentas : studentai){
         apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
     }
 }

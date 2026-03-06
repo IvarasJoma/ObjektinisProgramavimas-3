@@ -72,7 +72,7 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
         }
         std::fclose(skaitomasFailas);
         return studentuSarasas;
-    } catch (const std::bad_alloc&) {
+    } catch (const std::bad_alloc&){
         std::fclose(skaitomasFailas);
         std::cerr << "Nepakanka atminties...\n";
         return studentuSarasas;
@@ -100,7 +100,7 @@ void nuskaitytiDuomenis (int pasirinkimasNuskaitymo, std::vector<StudentasVektor
     if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai1000000, 1000000);
 }
 
-void vykdytiNuskaitymaIsFailo(Failai& failai) {
+void vykdytiNuskaitymaIsFailo(Failai& failai){
     std::vector<StudentasVektorius> studentai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(NUSKAITYMO_MENIU);

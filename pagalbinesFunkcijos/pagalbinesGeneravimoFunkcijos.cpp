@@ -37,10 +37,10 @@ int generuotiSveikaSkaiciu(int nuo, int iki){
     return distribucija(generatorius);
 }
 
-std::vector<StudentasVektorius> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai) {
+std::vector<StudentasVektorius> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai){
     std::vector<StudentasVektorius> studentai;
     studentai.reserve(static_cast<std::size_t>(studentuKiekis));
-    for (int i = 0; i < studentuKiekis; ++i) {
+    for (int i = 0; i < studentuKiekis; ++i){
         StudentasVektorius studentas;
         generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
         generuotiRezultatus(studentas, maksimalusNDKiekis);
