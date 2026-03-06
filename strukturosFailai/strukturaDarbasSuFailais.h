@@ -2,7 +2,7 @@
 #define STRUKTURADARBASSUFAILAIS_H
 
 #include <vector>
-#include "strukturaStudentas.h"
+#include "../strukturosFailai/strukturaStudentas.h"
 
 struct Failai;
 

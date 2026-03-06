@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "strukturaSkaiciavimai.h"
+#include "../strukturosFailai/strukturaSkaiciavimai.h"
 
 void rikiuotiStudentus(int pasirinkimasRikiavimo, int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas){              
     if (pasirinkimasRikiavimo == 1 && pasirinkimasNuskaitymo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&StudentasVektorius::Vardas));

@@ -1,6 +1,7 @@
-#ifndef STRUKTURALAIKOMATAVIMAS_H
-#define STRUKTURALAIKOMATAVIMAS_H
+#ifndef STRUKTURATESTAVIMAS_H
+#define STRUKTURATESTAVIMAS_H
 
+#include "../strukturosFailai/Failai.h"
 #include <chrono>
 
 struct TestoLaikai {
@@ -28,6 +29,6 @@ template <typename Func> double ismatuotiLaika(Func veiksmas) {
     return apskaiciuotiLaika(pradzia, pabaiga);
 }
 
-void spausdintiVidurkius(const TestoLaikai& laikai);
+void vykdytiTestavima(Failai& failai);
 
 #endif

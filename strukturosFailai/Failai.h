@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "strukturaDarbasSuFailais.h"
+#include "../strukturosFailai/strukturaDarbasSuFailais.h"
 
 struct Failai{
     std::vector<std::string> vyrVardai = nuskaitytiEilutesIVektoriu("tekstiniaiFailai/Lietuviski_vyru_vardai.txt");

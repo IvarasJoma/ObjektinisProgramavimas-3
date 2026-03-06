@@ -1,4 +1,4 @@
-#include "strukturaSkaiciavimai.h"
+#include "../strukturosFailai/strukturaSkaiciavimai.h"
 #include <algorithm>
 
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai){

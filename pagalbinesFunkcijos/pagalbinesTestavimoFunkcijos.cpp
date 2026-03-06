@@ -1,9 +1,11 @@
-#include "strukturaLaikoMatavimas.h"
-#include "Failai.h"
-#include "strukturaMeniu.h"
-#include "strukturaIvestisIsvestis.h"
-#include "strukturaRikiavimas.h"
-#include "strukturaSkaiciavimai.h"
+#include "../strukturosFailai/strukturaTestavimas.h"
+#include "../strukturosFailai/Failai.h"
+#include "../strukturosFailai/strukturaMeniu.h"
+#include "../strukturosFailai/strukturaIsvestis.h"
+#include "../strukturosFailai/strukturaIvestis.h"
+#include "../strukturosFailai/strukturaRikiavimas.h"
+#include "../strukturosFailai/strukturaSkaiciavimai.h"
+#include <chrono>
 
 void vykdytiTestavima(Failai& failai) {
     std::vector<StudentasVektorius> studentai;
@@ -22,4 +24,8 @@ void vykdytiTestavima(Failai& failai) {
     }
     laikai.padalintiIs(kartai);
     spausdintiVidurkius(laikai);
+}
+
+double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chrono::steady_clock::time_point pabaiga){
+    return std::chrono::duration<double>(pabaiga - startas).count();
 }

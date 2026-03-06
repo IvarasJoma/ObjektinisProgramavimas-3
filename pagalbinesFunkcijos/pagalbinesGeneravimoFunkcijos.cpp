@@ -1,5 +1,5 @@
-#include "strukturaGeneravimas.h"
-#include "Failai.h"
+#include "../strukturosFailai/strukturaGeneravimas.h"
+#include "../strukturosFailai/Failai.h"
 #include <random>
 
 void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis){

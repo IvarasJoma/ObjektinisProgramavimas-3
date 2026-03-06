@@ -2,7 +2,7 @@
 #define STRUKTURASKAICIAVIMAI_H
 
 #include <vector>
-#include "strukturaStudentas.h"
+#include "../strukturosFailai/strukturaStudentas.h"
 
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai);
 double skaiciuotiGalutiniVidurki(const StudentasVektorius& studentas);

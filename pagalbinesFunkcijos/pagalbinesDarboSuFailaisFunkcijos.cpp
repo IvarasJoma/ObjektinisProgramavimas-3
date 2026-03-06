@@ -1,8 +1,9 @@
-#include "strukturaDarbasSuFailais.h"
-#include "Failai.h"
-#include "strukturaStudentas.h"
-#include "strukturaIvestisIsvestis.h"
-#include "strukturaMeniu.h"
+#include "../strukturosFailai/strukturaDarbasSuFailais.h"
+#include "../strukturosFailai/Failai.h"
+#include "../strukturosFailai/strukturaStudentas.h"
+#include "../strukturosFailai/strukturaIvestis.h"
+#include "../strukturosFailai/strukturaIsvestis.h"
+#include "../strukturosFailai/strukturaMeniu.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>

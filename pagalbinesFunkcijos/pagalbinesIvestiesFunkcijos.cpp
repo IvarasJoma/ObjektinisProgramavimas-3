@@ -1,25 +1,13 @@
-#include "strukturaIvestisIsvestis.h"
-#include "strukturaSkaiciavimai.h"
-#include "strukturaLaikoMatavimas.h"
-#include "strukturaRikiavimas.h"
-#include "strukturaGeneravimas.h"
-#include "strukturaMeniu.h"
-#include "Failai.h"
+#include "../strukturosFailai/strukturaIvestis.h"
+#include "../strukturosFailai/strukturaIsvestis.h"
+#include "../strukturosFailai/strukturaRikiavimas.h"
+#include "../strukturosFailai/strukturaGeneravimas.h"
+#include "../strukturosFailai/strukturaSkaiciavimai.h"
+#include "../strukturosFailai/strukturaMeniu.h"
+#include "../strukturosFailai/Failai.h"
 #include <iostream>
 #include <charconv>
 #include <sstream>
-#include <fstream>
-#include <format>
-
-void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
-    out << std::string(98, '-') << "\n";
-    out << std::format("{:<40}{:<40}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
-    out << std::string(98, '-') << "\n";
-    for (const auto& studentas : studentuSarasas){
-        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
-        out << std::format("{:<40}{:<40}{:<18.2f}\n", studentas.Vardas, studentas.Pavarde, galutinisRezultatas);
-    }
-}
 
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis){
     namuDarbuPazymiai.clear();
@@ -172,16 +160,6 @@ int nuskaitytiPazymiNuo1iki10(const char* pranesimas){
     }
 }
 
-void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
-    if (pasirinkimasIsvedimo == 1) parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodoPasirinkimas);
-    if (pasirinkimasIsvedimo == 2){
-        std::ofstream isvedimoFailas("studentuRezultatai.txt");
-        parodytiRezultatuLentele(isvedimoFailas, studentuSarasas, skaiciavimoMetodoPasirinkimas);
-        isvedimoFailas.flush();
-        isvedimoFailas.close();
-    }
-}
-
 bool patvirtintiNaujoStudentoPridejima(){
     while (true){
         std::cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
@@ -209,14 +187,6 @@ std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvark
         }
         std::cout << klaidosPranesimas;
     }
-}
-
-void spausdintiVidurkius(const TestoLaikai& laikai) {
-    std::cout << "Duomenų nuskaitymas vidutiniškai užtruko: " << laikai.nuskaitymas << "s.\n";
-    std::cout << "Galutinių rezultatų skaičiavimas vidutiniškai užtruko: " << laikai.skaiciavimas << "s.\n";
-    std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << laikai.rikiavimas << "s.\n";
-    std::cout << "Studentų išvedimas vidutiniškai užtruko: " << laikai.isvedimas << "s.\n";
-    std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << laikai.bendras() << "s.\n";
 }
 
 void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas, int pasirinkimasNuskaitymo) {
@@ -250,10 +220,6 @@ void vykdytiStudentuIvedima(bool generuotiPazymius) {
     int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
     auto studentai = ivestiStudentus(generuotiPazymius, maksimalusNDKiekis);
     parodytiStudentus(studentai, skaiciavimoMetodas);
-}
-
-void parodytiStudentus(const std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodas) {
-    parodytiRezultatuLentele(std::cout, studentai, skaiciavimoMetodas);
 }
 
 void vykdytiPilnaGeneravima(Failai& failai) {
