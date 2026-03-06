@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <stdexcept>
 
 void praleistiTarpaIsFailo(const char*& rodykle){
     while (*rodykle == ' ' || *rodykle == '\t' || *rodykle == '\r' || *rodykle == '\n') ++rodykle;
@@ -82,9 +83,8 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     std::vector<std::string> rezultatas;
     std::ifstream fin(failas);
-    if (!fin){
-        std::cerr << "Nepavyko atidaryti failo: " << failas << "\n";
-        return rezultatas;
+    if (!fin.is_open()) {
+        throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
     }
     std::string eilute;
     while (getline(fin, eilute)){
