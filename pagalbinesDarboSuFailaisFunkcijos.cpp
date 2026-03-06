@@ -30,7 +30,7 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
     return true;
 }
 
-std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, int kiekis){
+std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, std::size_t kiekis){
     std::vector<StudentasVektorius> studentuSarasas;
     FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
     if (!skaitomasFailas) return studentuSarasas;
@@ -43,7 +43,7 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
             std::fclose(skaitomasFailas);
             return studentuSarasas;
         }
-        int namuDarbuKiekis = 0;
+        std::size_t namuDarbuKiekis = 0;
         char laikinaEilute[257];
         std::strncpy(laikinaEilute, aprasas, sizeof(laikinaEilute));
         laikinaEilute[sizeof(laikinaEilute) - 1] = '\0';
@@ -59,7 +59,7 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
             if (!nuskaitytiZodiIsFailo(rodykle, studentas.Vardas)) continue;
             if (!nuskaitytiZodiIsFailo(rodykle, studentas.Pavarde)) continue;
             studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis);
-            for (int i = 0; i < namuDarbuKiekis; i++){
+            for (std::size_t i = 0; i < namuDarbuKiekis; i++){
                 int laikinasPazymys;
                 if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) laikinasPazymys = 0;
                 studentas.namuDarbuTarpiniaiRezultatai.push_back(laikinasPazymys);

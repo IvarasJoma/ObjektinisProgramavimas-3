@@ -2,9 +2,10 @@
 #include <random>
 
 void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis){
+    const std::size_t ndKiekis = static_cast<std::size_t>(maksimalusNDKiekis);
     studentas.namuDarbuTarpiniaiRezultatai.clear();
-    studentas.namuDarbuTarpiniaiRezultatai.reserve(maksimalusNDKiekis);
-    for (int i = 0; i < maksimalusNDKiekis; ++i) studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikaSkaiciu(0, 10));
+    studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
+    for (std::size_t i = 0; i < ndKiekis; ++i) studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikaSkaiciu(0, 10));
     studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }
 
@@ -16,14 +17,14 @@ void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std:
     }
     int lytis = generuotiSveikaSkaiciu(0, 1);
     if (lytis == 0){
-        int vardoIndeksas = generuotiSveikaSkaiciu(0, (int)vyrVardai.size() - 1);
-        int pavardesIndeksas = generuotiSveikaSkaiciu(0, (int)vyrPavardes.size() - 1);
+        const auto vardoIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(vyrVardai.size()) - 1));
+        const auto pavardesIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(vyrPavardes.size()) - 1));
         studentas.Vardas = vyrVardai[vardoIndeksas];
         studentas.Pavarde = vyrPavardes[pavardesIndeksas];
     }
     else{
-        int vardoIndeksas = generuotiSveikaSkaiciu(0, (int)motVardai.size() - 1);
-        int pavardesIndeksas = generuotiSveikaSkaiciu(0, (int)motPavardes.size() - 1);
+        const auto vardoIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(motVardai.size()) - 1));
+        const auto pavardesIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(motPavardes.size()) - 1));
         studentas.Vardas = motVardai[vardoIndeksas];
         studentas.Pavarde = motPavardes[pavardesIndeksas];
     }

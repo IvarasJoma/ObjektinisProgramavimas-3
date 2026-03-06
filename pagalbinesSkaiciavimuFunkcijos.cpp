@@ -16,7 +16,7 @@ double skaiciuotiGalutiniVidurki(const StudentasVektorius& studentas){
 double skaiciuotiNDMediana(std::vector<int> ndPazymiai){
     if (ndPazymiai.empty()) return 0.0;
     std::sort(ndPazymiai.begin(), ndPazymiai.end());
-    int n = (int)ndPazymiai.size();
+    std::size_t n = ndPazymiai.size();
     if (n % 2 == 1) return ndPazymiai[n / 2];
     else return (ndPazymiai[n / 2 - 1] + ndPazymiai[n / 2]) / 2.0;
 }

@@ -18,7 +18,8 @@ void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVekt
 
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis){
     namuDarbuPazymiai.clear();
-    while (namuDarbuPazymiai.size() < maksimalusNDKiekis){
+    std::size_t ndKiekis = static_cast<std::size_t>(maksimalusNDKiekis);
+    while (namuDarbuPazymiai.size() < ndKiekis){
         std::cout << "Įveskite studento namų darbų pažymius (1-10). Po kiekvieno įvesto pažymio paspauskite klavišą ENTER. Baigus tuščioje eilutėje paspauskite klavišą ENTER: ";
         std::string ivestis;
         if (!getline(std::cin, ivestis)) exit(0);
@@ -27,8 +28,8 @@ void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksim
         if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 1 && reiksme <= 10) namuDarbuPazymiai.push_back(reiksme);
         else std::cout << "Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
     }
-    if (namuDarbuPazymiai.size() == maksimalusNDKiekis) std::cout << "Pasiektas maksimalus namų darbų pažymių kiekis.\n";
-    while (namuDarbuPazymiai.size() < maksimalusNDKiekis) namuDarbuPazymiai.push_back(0);
+    if (namuDarbuPazymiai.size() == ndKiekis) std::cout << "Pasiektas maksimalus namų darbų pažymių kiekis.\n";
+    while (namuDarbuPazymiai.size() < ndKiekis) namuDarbuPazymiai.push_back(0);
 }
 
 bool tikrintiIvesti(const std::string& ivestis){
@@ -43,15 +44,15 @@ void tvarkytiVarda(std::string& ivestis){
     eilutesSrautas >> pirmasZodis >> antrasZodis;
     if (!pirmasZodis.empty()){
         for (char& simbolis : pirmasZodis){
-            simbolis = std::tolower(static_cast<unsigned char>(simbolis));
+            simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
         }
-        pirmasZodis[0] = std::toupper(static_cast<unsigned char>(pirmasZodis[0]));
+        pirmasZodis[0] = static_cast<char>(std::toupper(static_cast<unsigned char>(pirmasZodis[0])));
     }
     if (!antrasZodis.empty()){
         for (char& simbolis : antrasZodis){
-            simbolis = std::tolower(static_cast<unsigned char>(simbolis));
+            simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
         }
-        antrasZodis[0] = std::toupper(static_cast<unsigned char>(antrasZodis[0]));
+        antrasZodis[0] = static_cast<char>(std::toupper(static_cast<unsigned char>(antrasZodis[0])));
     }
     if (antrasZodis.empty()) ivestis = pirmasZodis;
     else ivestis = pirmasZodis + " " + antrasZodis;
@@ -63,9 +64,9 @@ void tvarkytiPavarde(std::string& ivestis){
     eilutesSrautas >> pirmasZodis;
     bool kitaDidzioji = true;
     for (char& simbolis : ivestis){
-        simbolis = std::tolower(static_cast<unsigned char>(simbolis));
+        simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
         if (kitaDidzioji && std::isalpha(static_cast<unsigned char>(simbolis))){
-            simbolis = std::toupper(static_cast<unsigned char>(simbolis));
+            simbolis = static_cast<char>(std::toupper(static_cast<unsigned char>(simbolis)));
             kitaDidzioji = false;
         }
         if (simbolis == '-') kitaDidzioji = true;
@@ -88,12 +89,13 @@ int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes){
         std::string ivestis;
         if (!getline(std::cin, ivestis)) exit(0);
         int meniu = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= eilutes.size()-1) return meniu;
+        const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
+        if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= maxMeniu) return meniu;
         std::cout << "Įveskite TIK ";
-        for (int i = 1; i <= eilutes.size()-1; ++i){
+        for (int i = 1; i <= maxMeniu; ++i){
             std::cout << i;
-            if (i < eilutes.size() - 2) std::cout << ", ";
-            else if (i == eilutes.size() - 2) std::cout << " arba ";
+            if (i < maxMeniu - 1) std::cout << ", ";
+            else if (i == maxMeniu - 1) std::cout << " arba ";
         }
         std::cout << ".\n";
     }
@@ -108,13 +110,13 @@ bool nuskaitytiPagrindinioMeniuPasirinkima(const std::vector<std::string>& eilut
         std::cout << "Pasirinkite programos eigą: ";
         std::string ivestis;
         if (!getline(std::cin, ivestis)) exit(0);
-        int meniu = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas) && pasirinkimas >= 1 && pasirinkimas <= eilutes.size()-1) return true;
+        const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
+        if (nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas) && pasirinkimas >= 1 && pasirinkimas <= maxMeniu) return true;
         std::cout << "Įveskite TIK ";
-        for (int i = 1; i <= eilutes.size()-1; ++i){
+        for (int i = 1; i <= maxMeniu; ++i){
             std::cout << i;
-            if (i < eilutes.size() - 2) std::cout << ", ";
-            else if (i == eilutes.size() - 2) std::cout << " arba ";
+            if (i < maxMeniu - 1) std::cout << ", ";
+            else if (i == maxMeniu - 1) std::cout << " arba ";
         }
         std::cout << ".\n";
     }

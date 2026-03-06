@@ -73,7 +73,7 @@ int main(){
             if (pasirinkimas == 3){
                 int generuojamuStudentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norimą generuoti studentų kiekį ir paspauskite ENTER: ");
                 int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
-                studentuSarasas.reserve(generuojamuStudentuKiekis);
+                studentuSarasas.reserve(static_cast<std::size_t>(generuojamuStudentuKiekis));
                 for (int i = 0; i < generuojamuStudentuKiekis; i++){
                     StudentasVektorius studentas;
                     generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
