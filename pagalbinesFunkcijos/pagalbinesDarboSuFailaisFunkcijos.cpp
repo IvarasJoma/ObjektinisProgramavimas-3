@@ -34,10 +34,12 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
     return true;
 }
 
+#include <stdexcept>
+
 std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, std::size_t kiekis){
     std::vector<StudentasVektorius> studentuSarasas;
     FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
-    if (!skaitomasFailas) return studentuSarasas;
+    if (!skaitomasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
     try{
         studentuSarasas.reserve(kiekis);
         static char ivestiesBuferis[1 << 20];
@@ -83,9 +85,7 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     std::vector<std::string> rezultatas;
     std::ifstream fin(failas);
-    if (!fin.is_open()) {
-        throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
-    }
+    if (!fin.is_open()) throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
     std::string eilute;
     while (getline(fin, eilute)){
         if (!eilute.empty()) rezultatas.push_back(eilute);
@@ -93,11 +93,17 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     return rezultatas;
 }
 
-void nuskaitytiDuomenis (int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas, Failai failai){
-    if (pasirinkimasNuskaitymo == 1) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.kursiokai, 3);
-    if (pasirinkimasNuskaitymo == 2) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai10000, 10000);
-    if (pasirinkimasNuskaitymo == 3) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai100000, 100000);
-    if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai1000000, 1000000);
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas, Failai failai){
+    try {
+        if (pasirinkimasNuskaitymo == 1) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.kursiokai, 3);
+        else if (pasirinkimasNuskaitymo == 2) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai10000, 10000);
+        else if (pasirinkimasNuskaitymo == 3) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai100000, 100000);
+        else if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai1000000, 1000000);
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Klaida skaitant failą: " << e.what() << std::endl;
+        studentuSarasas.clear();
+    }
 }
 
 void vykdytiNuskaitymaIsFailo(Failai& failai){
