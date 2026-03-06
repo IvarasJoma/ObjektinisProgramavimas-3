@@ -3,6 +3,7 @@
 #include "strukturaStudentas.h"
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 void praleistiTarpaIsFailo(const char*& rodykle){
     while (*rodykle == ' ' || *rodykle == '\t' || *rodykle == '\r' || *rodykle == '\n') ++rodykle;

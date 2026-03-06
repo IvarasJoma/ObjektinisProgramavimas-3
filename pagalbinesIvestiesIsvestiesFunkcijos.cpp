@@ -4,6 +4,7 @@
 #include <charconv>
 #include <sstream>
 #include <fstream>
+#include <format>
 
 void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     out << std::string(98, '-') << "\n";
