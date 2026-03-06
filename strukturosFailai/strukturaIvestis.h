@@ -13,13 +13,14 @@ int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas);
 int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas);
 char nuskaitytiSkaiciavimoMetoda();
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas);
-bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme);
-bool tikrintiIvesti(const std::string& ivestis);
+void nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme);
+void tikrintiIvesti(const std::string& ivestis);
 std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvarkyti)(std::string&),const char* klaidosPranesimas);
 bool patvirtintiNaujoStudentoPridejima();
 void vykdytiStudentuIvedima(bool generuotiPazymius);
 void vykdytiPilnaGeneravima(Failai& failai);
 void tvarkytiVarda(std::string& ivestis);
 void tvarkytiPavarde(std::string& ivestis);
+std::string saugiaiNuskaitytiEilute();
 
 #endif

@@ -9,26 +9,38 @@
 #include <charconv>
 #include <sstream>
 
+std::string saugiaiNuskaitytiEilute(){
+    std::string ivestis;
+    if (!std::getline(std::cin, ivestis)) throw std::runtime_error("Nepavyko nuskaityti įvesties arba įvestis buvo netikėtai nutraukta.");
+    return ivestis;
+}
+
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis){
     namuDarbuPazymiai.clear();
     std::size_t ndKiekis = static_cast<std::size_t>(maksimalusNDKiekis);
     while (namuDarbuPazymiai.size() < ndKiekis){
-        std::cout << "Įveskite studento namų darbų pažymius (1-10). Po kiekvieno įvesto pažymio paspauskite klavišą ENTER. Baigus tuščioje eilutėje paspauskite klavišą ENTER: ";
-        std::string ivestis;
-        if (!getline(std::cin, ivestis)) exit(0);
-        if (ivestis.empty()) break;
-        int reiksme = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 1 && reiksme <= 10) namuDarbuPazymiai.push_back(reiksme);
-        else std::cout << "Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.\n";
+        try{
+            std::cout << "Įveskite studento namų darbų pažymius (1-10). Po kiekvieno įvesto pažymio paspauskite klavišą ENTER. Baigus tuščioje eilutėje paspauskite klavišą ENTER: ";
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            if (ivestis.empty()) break;
+            int reiksme = 0;
+            nuskaitytiSveikajiSkaiciu(ivestis, reiksme);
+            if (reiksme < 1 || reiksme > 10) throw std::out_of_range("Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.");
+            namuDarbuPazymiai.push_back(reiksme);
+        }
+        catch (const std::exception& e){
+            std::cout << "Klaida: " << e.what() << "\n";
+        }
     }
     if (namuDarbuPazymiai.size() == ndKiekis) std::cout << "Pasiektas maksimalus namų darbų pažymių kiekis.\n";
     while (namuDarbuPazymiai.size() < ndKiekis) namuDarbuPazymiai.push_back(0);
 }
 
-bool tikrintiIvesti(const std::string& ivestis){
+void tikrintiIvesti(const std::string& ivestis){
     for (char simbolis : ivestis){
-        if (!isspace(static_cast<unsigned char>(simbolis))) return true;
-    } return false;
+        if (!isspace(static_cast<unsigned char>(simbolis))) return;
+    }
+    throw std::invalid_argument("Įvestis negali būti tuščia arba sudaryta tik iš tarpų.");
 }
 
 void tvarkytiVarda(std::string& ivestis){
@@ -36,15 +48,11 @@ void tvarkytiVarda(std::string& ivestis){
     std::string pirmasZodis, antrasZodis;
     eilutesSrautas >> pirmasZodis >> antrasZodis;
     if (!pirmasZodis.empty()){
-        for (char& simbolis : pirmasZodis){
-            simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
-        }
+        for (char& simbolis : pirmasZodis) simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
         pirmasZodis[0] = static_cast<char>(std::toupper(static_cast<unsigned char>(pirmasZodis[0])));
     }
     if (!antrasZodis.empty()){
-        for (char& simbolis : antrasZodis){
-            simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
-        }
+        for (char& simbolis : antrasZodis) simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
         antrasZodis[0] = static_cast<char>(std::toupper(static_cast<unsigned char>(antrasZodis[0])));
     }
     if (antrasZodis.empty()) ivestis = pirmasZodis;
@@ -66,82 +74,83 @@ void tvarkytiPavarde(std::string& ivestis){
     }
 }
 
-bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
+void nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
     reiksme = 0;
     auto rezultatas = std::from_chars(ivestis.data(), ivestis.data() + ivestis.size(), reiksme);
-    return rezultatas.ec == std::errc{} && rezultatas.ptr == ivestis.data() + ivestis.size();
+    if (rezultatas.ec != std::errc{} || rezultatas.ptr != ivestis.data() + ivestis.size()) throw std::invalid_argument("Įvestis turi būti sveikasis skaičius.");
 }
 
 int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes){
     while (true){
-        std::cout << std::string(98, '-') << "\n";
-        for (const auto& eilute : eilutes)
-            std::cout << eilute << "\n";
-        std::cout << std::string(98, '-') << "\n";
-        std::cout << "Pasirinkite programos eigą: ";
-        std::string ivestis;
-        if (!getline(std::cin, ivestis)) exit(0);
-        int meniu = 0;
-        const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, meniu) && meniu >= 1 && meniu <= maxMeniu) return meniu;
-        std::cout << "Įveskite TIK ";
-        for (int i = 1; i <= maxMeniu; ++i){
-            std::cout << i;
-            if (i < maxMeniu - 1) std::cout << ", ";
-            else if (i == maxMeniu - 1) std::cout << " arba ";
+        try {
+            std::cout << std::string(98, '-') << "\n";
+            for (const auto& eilute : eilutes)
+                std::cout << eilute << "\n";
+            std::cout << std::string(98, '-') << "\n";
+            std::cout << "Pasirinkite programos eigą: ";
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            int meniu = 0;
+            const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
+            tikrintiIvesti(ivestis);
+            nuskaitytiSveikajiSkaiciu(ivestis, meniu);
+            if (meniu < 1 || meniu > maxMeniu) throw std::out_of_range("Pasirinkimas turi būti nuo 1 iki " + std::to_string(maxMeniu) + ".");
+            return meniu;
+        } catch (const std::exception& e){
+            std::cout << "Klaida: " << e.what() << "\n";
         }
-        std::cout << ".\n";
     }
 }
 
 bool nuskaitytiPagrindinioMeniuPasirinkima(const std::vector<std::string>& eilutes, int& pasirinkimas){
     while (true){
+        try{
         std::cout << std::string(98, '-') << "\n";
         for (const auto& eilute : eilutes)
             std::cout << eilute << "\n";
         std::cout << std::string(98, '-') << "\n";
         std::cout << "Pasirinkite programos eigą: ";
-        std::string ivestis;
-        if (!getline(std::cin, ivestis)) exit(0);
+        std::string ivestis = saugiaiNuskaitytiEilute();
         const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas) && pasirinkimas >= 1 && pasirinkimas <= maxMeniu) return true;
-        std::cout << "Įveskite TIK ";
-        for (int i = 1; i <= maxMeniu; ++i){
-            std::cout << i;
-            if (i < maxMeniu - 1) std::cout << ", ";
-            else if (i == maxMeniu - 1) std::cout << " arba ";
-        }
-        std::cout << ".\n";
+        tikrintiIvesti(ivestis);
+        nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas);
+        if (pasirinkimas < 1 || pasirinkimas > maxMeniu) throw std::out_of_range("Pasirinkimas turi būti nuo 1 iki " + std::to_string(maxMeniu) + ".");
+        return true;
+        } catch (const std::exception& e){
+        std::cout << "Klaida: " << e.what() << "\n";
+        } 
     }
 }
 
 char nuskaitytiSkaiciavimoMetoda(){
     while (true){
-        std::cout << "Pasirinkite galutinio pažymio skaičiavimo metodą: V - vidurkiu grįstas, M - mediana grįstas: ";
-        std::string ivestis;
-        if (!getline(std::cin, ivestis)) exit(0);
-        if (tikrintiIvesti(ivestis) && ivestis.size() == 1){
-            char raide = ivestis[0];
-            if (raide == 'V' || raide == 'v' || raide == 'M' || raide == 'm') return raide;
+        try{
+            std::cout << "Pasirinkite galutinio pažymio skaičiavimo metodą: V - vidurkiu grįstas, M - mediana grįstas: ";
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            tikrintiIvesti(ivestis);
+            if (ivestis.size() != 1 || !std::isalpha(static_cast<unsigned char>(ivestis[0])) || (ivestis[0] != 'V' && ivestis[0] != 'v' && ivestis[0] != 'M' && ivestis[0] != 'm')) throw std::invalid_argument("Įveskite tik vieną raidę: V arba M.");
+            return ivestis[0];
         }
-        std::cout << "Įveskite TIK vieną raidę: V arba M.\n";
+        catch (const std::exception& e){
+            std::cout << "Klaida: " << e.what() << "\n";
+        }
     }
 }
 
 int nuskaitytiMinimaluSveikajiSkaiciu(const char* pranesimas, int minimaliReiksme){
     while (true){
-        std::cout << pranesimas;
-        std::string ivestis;
-        if (!std::getline(std::cin, ivestis)) std::exit(0);
-        if (!tikrintiIvesti(ivestis)){
-            if (minimaliReiksme <= 0) std::cout << "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau).\n";
-            else std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
-            continue;
+        try{
+            std::cout << pranesimas;
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            int reiksme = 0;
+            tikrintiIvesti(ivestis);
+            nuskaitytiSveikajiSkaiciu(ivestis, reiksme);
+            if (reiksme < minimaliReiksme)
+                throw std::out_of_range(minimaliReiksme <= 0 ? "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau)." : "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).");
+            return reiksme;
         }
-        int reiksme = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= minimaliReiksme) return reiksme;
-        if (minimaliReiksme <= 0) std::cout << "Reikšmė turi būti neneigiamas skaičius (0 ir daugiau).\n";
-        else std::cout << "Reikšmė turi būti teigiamas skaičius (1 ir daugiau).\n";
+        catch (const std::exception& e){
+            std::cout << "Klaida: " << e.what() << "\n";
+        }
     }
 }
 
@@ -151,41 +160,55 @@ int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas){ return nuskaityti
 
 int nuskaitytiPazymiNuo1iki10(const char* pranesimas){
     while (true){
-        std::cout << pranesimas;
-        std::string ivestis;
-        if (!getline(std::cin, ivestis)) exit(0);
-        int reiksme = 0;
-        if (nuskaitytiSveikajiSkaiciu(ivestis, reiksme) && reiksme >= 1 && reiksme <= 10) return reiksme;
-        std::cout << "Įveskite sveiką skaičių intervale nuo 1 iki 10.\n";
+        try{
+            std::cout << pranesimas;
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            int reiksme = 0;
+            tikrintiIvesti(ivestis);
+            nuskaitytiSveikajiSkaiciu(ivestis, reiksme);
+            if (reiksme < 1 || reiksme > 10) throw std::out_of_range("Įveskite sveiką skaičių intervale nuo 1 iki 10.");
+            return reiksme;
+        }
+        catch (const std::exception& e){
+            std::cout << "Klaida: " << e.what() << "\n";
+        }
     }
 }
 
 bool patvirtintiNaujoStudentoPridejima(){
     while (true){
-        std::cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
-        std::string ivestis;
-        if (!std::getline(std::cin, ivestis)) std::exit(0);
-        if (!(tikrintiIvesti(ivestis) && ivestis.size() == 1)){
-            std::cout << "Įveskite TIK vieną raidę: T arba N.\n";
-            continue;
+        try{
+            std::cout << "Pasirinkite, ar norite įvesti studentą: T - norite, N - nenorite: ";
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            tikrintiIvesti(ivestis);
+            if (ivestis.size() != 1 || !std::isalpha(static_cast<unsigned char>(ivestis[0])) || (ivestis[0] != 'T' && ivestis[0] != 't' && ivestis[0] != 'N' && ivestis[0] != 'n')) throw std::invalid_argument("Įveskite tik vieną raidę: T arba N.");
+            return ivestis[0] == 'T' || ivestis[0] == 't';
         }
-        char pasirinkimas = ivestis[0];
-        if (pasirinkimas == 'T' || pasirinkimas == 't') return true;
-        if (pasirinkimas == 'N' || pasirinkimas == 'n') return false;
-        std::cout << "Įveskite TIK vieną raidę: T arba N.\n";
+        catch (const std::exception& e){
+            std::cout << "Klaida: " << e.what() << "\n";
+        }
     }
 }
 
 std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvarkyti)(std::string&), const char* klaidosPranesimas){
     while (true){
-        std::cout << ivestiesPranesimas;
-        std::string ivestis;
-        if (!std::getline(std::cin, ivestis)) std::exit(0);
-        if (tikrintiIvesti(ivestis)){
+        try{
+            std::cout << ivestiesPranesimas;
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            try{
+                tikrintiIvesti(ivestis);
+            } catch (const std::exception&){
+                throw std::invalid_argument(klaidosPranesimas);
+            }
+            for (char simbolis : ivestis){
+                if (!std::isalpha(static_cast<unsigned char>(simbolis)) && simbolis != ' ' && simbolis != '-' && static_cast<unsigned char>(simbolis) < 128) throw std::invalid_argument("Varde arba pavardėje gali būti tik raidės, tarpai ir brūkšneliai.");
+            }
             tvarkyti(ivestis);
             return ivestis;
         }
-        std::cout << klaidosPranesimas;
+        catch (const std::exception& e){
+            std::cout << "Klaida: " << e.what() << "\n";
+        }
     }
 }
 
@@ -199,8 +222,8 @@ void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas
 
 StudentasVektorius sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis){
     StudentasVektorius studentas;
-    studentas.Vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.\n");
-    studentas.Pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.\n");
+    studentas.Vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.");
+    studentas.Pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.");
     if (generuotiPazymius) generuotiRezultatus(studentas, maksimalusNDKiekis);
     else{
         nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai, maksimalusNDKiekis);
