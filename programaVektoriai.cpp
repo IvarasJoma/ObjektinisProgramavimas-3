@@ -12,10 +12,7 @@ int main(){
         std::vector<StudentasVektorius> studentuSarasas;
         studentuSarasas.clear();
         if (pasirinkimas == 5){
-            double sumaNuskaitymo = 0.0;
-            double sumaSkaiciavimo = 0.0;
-            double sumaRikiavimo = 0.0;
-            double sumaIsvedimo = 0.0;
+            TestoLaikai laikai;
             char skaiciavimoMetodoPasirinkimas = nuskaitytiSkaiciavimoMetoda();
             std::vector<std::string> meniuNuskaitymo = {"Pasirinkite iš kurio failo norite nuskaityti studentų duomenis:", "1 - kursiokai.txt", "2 - studentai10000.txt", "3 - studentai100000.txt", "4 - studentai1000000.txt"};
             std::vector<std::string> meniuRikiavimo = {"Pasirinkite, pagal ką norite rikiuoti studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį didėjančia tvarka (1-10)", "6 - galutinį pažymį mažėjančia tvarka (10-1)"};
@@ -25,34 +22,13 @@ int main(){
             int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(meniuRikiavimo);
             int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(meniuIsvedimo);
             for (int i = 0; i < kartai; ++i){
-                auto nuskaitymoStartas = std::chrono::steady_clock::now();
-                nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);
-                auto nuskaitymoPabaiga = std::chrono::steady_clock::now();
-                auto skaiciavimuStartas = std::chrono::steady_clock::now();
-                for (auto& studentas : studentuSarasas){
-                    apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
-                }
-                auto skaiciavimuPabaiga = std::chrono::steady_clock::now();
-                auto rikiavimoStartas = std::chrono::steady_clock::now();
-                rikiuotiStudentus(pasirinkimasRikiavimo, pasirinkimasNuskaitymo, studentuSarasas);
-                auto rikiavimoPabaiga = std::chrono::steady_clock::now();
-                auto isvedimoStartas = std::chrono::steady_clock::now();
-                isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);  
-                auto isvedimoPabaiga = std::chrono::steady_clock::now();
-                sumaNuskaitymo += apskaiciuotiLaika(nuskaitymoStartas, nuskaitymoPabaiga);
-                sumaSkaiciavimo += apskaiciuotiLaika(skaiciavimuStartas, skaiciavimuPabaiga);
-                sumaRikiavimo += apskaiciuotiLaika(rikiavimoStartas, rikiavimoPabaiga);
-                sumaIsvedimo += apskaiciuotiLaika(isvedimoStartas, isvedimoPabaiga);
+                laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);});
+                laikai.skaiciavimas += ismatuotiLaika([&]() {for (auto& studentas : studentuSarasas) {apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);}});
+                laikai.rikiavimas += ismatuotiLaika([&]() {rikiuotiStudentus(pasirinkimasRikiavimo, pasirinkimasNuskaitymo, studentuSarasas);});
+                laikai.isvedimas += ismatuotiLaika([&]() {isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);});
             }
-            double vidurkisNuskaitymo = sumaNuskaitymo / kartai;
-            double vidurkisSkaiciavimo = sumaSkaiciavimo / kartai;
-            double vidurkisRikiavimo = sumaRikiavimo / kartai;
-            double vidurkisIsvedimo = sumaIsvedimo / kartai;
-            std::cout << "Duomenų nuskaitymas vidutiniškai užtruko: " << vidurkisNuskaitymo << "s.\n";
-            std::cout << "Galutinių rezultatų skaičiavimas vidutiniškai užtruko: " << vidurkisSkaiciavimo << "s.\n";
-            std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << vidurkisRikiavimo << "s.\n";
-            std::cout << "Studentų išvedimas vidutiniškai užtruko: " << vidurkisIsvedimo << "s.\n";
-            std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << vidurkisNuskaitymo + vidurkisSkaiciavimo + vidurkisRikiavimo + vidurkisIsvedimo << "s.\n";
+            laikai.padalintiIs(kartai);
+            spausdintiVidurkius(laikai);
         }
         else if (pasirinkimas == 4){
             char skaiciavimoMetodoPasirinkimas = nuskaitytiSkaiciavimoMetoda();

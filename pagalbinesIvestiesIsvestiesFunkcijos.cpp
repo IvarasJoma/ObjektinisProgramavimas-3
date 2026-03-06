@@ -1,5 +1,6 @@
 #include "strukturaIvestisIsvestis.h"
 #include "strukturaSkaiciavimai.h"
+#include "strukturaLaikoMatavimas.h"
 #include <iostream>
 #include <charconv>
 #include <sstream>
@@ -204,4 +205,12 @@ std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvark
         }
         std::cout << klaidosPranesimas;
     }
+}
+
+void spausdintiVidurkius(const TestoLaikai& laikai) {
+    std::cout << "Duomenų nuskaitymas vidutiniškai užtruko: " << laikai.nuskaitymas << "s.\n";
+    std::cout << "Galutinių rezultatų skaičiavimas vidutiniškai užtruko: " << laikai.skaiciavimas << "s.\n";
+    std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << laikai.rikiavimas << "s.\n";
+    std::cout << "Studentų išvedimas vidutiniškai užtruko: " << laikai.isvedimas << "s.\n";
+    std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << laikai.bendras() << "s.\n";
 }
