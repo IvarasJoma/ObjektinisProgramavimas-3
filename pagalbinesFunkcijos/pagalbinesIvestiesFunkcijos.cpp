@@ -11,7 +11,13 @@
 
 std::string saugiaiNuskaitytiEilute(){
     std::string ivestis;
-    if (!std::getline(std::cin, ivestis)) throw std::runtime_error("Nepavyko nuskaityti įvesties arba įvestis buvo netikėtai nutraukta.");
+    if (!std::getline(std::cin, ivestis)){
+        if (std::cin.eof()){
+            std::cout << "\nĮvestis netikėtai nutraukta. Programa baigiama.\n";
+            std::exit(0);
+        }
+        throw std::runtime_error("Nepavyko nuskaityti įvesties.");
+    }
     return ivestis;
 }
 
