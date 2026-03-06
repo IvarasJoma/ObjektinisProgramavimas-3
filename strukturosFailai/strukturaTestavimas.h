@@ -11,20 +11,15 @@ struct TestoLaikai {
     double isvedimas = 0.0;
 };
 
-double bendras(const TestoLaikai& laikai);
-void padalintiIs(TestoLaikai& laikai, int kiekis);
-
-double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas,
-                         std::chrono::steady_clock::time_point pabaiga);
-
-template <typename Func>
-double ismatuotiLaika(Func veiksmas) {
+double apskaiciuotiBendraLaika(const TestoLaikai& laikai);
+void gautiVidurki(TestoLaikai& laikai, int kiekis);
+double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chrono::steady_clock::time_point pabaiga);
+template <typename Func> double ismatuotiLaika(Func veiksmas) {
     auto pradzia = std::chrono::steady_clock::now();
     veiksmas();
     auto pabaiga = std::chrono::steady_clock::now();
     return apskaiciuotiLaika(pradzia, pabaiga);
 }
-
 void vykdytiTestavima(Failai& failai);
 
 #endif

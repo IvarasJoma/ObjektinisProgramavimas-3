@@ -22,8 +22,18 @@ void vykdytiTestavima(Failai& failai) {
         laikai.rikiavimas += ismatuotiLaika([&]() {rikiuotiStudentus(pasirinkimasRikiavimo, pasirinkimasNuskaitymo, studentai);});
         laikai.isvedimas += ismatuotiLaika([&]() {isvestiStudentus(pasirinkimasIsvedimo, studentai, skaiciavimoMetodas);});
     }
-    laikai.padalintiIs(kartai);
+    gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
+}
+
+double apskaiciuotiBendraLaika(const TestoLaikai& laikai){ return laikai.nuskaitymas + laikai.skaiciavimas + laikai.rikiavimas + laikai.isvedimas;}
+
+void gautiVidurki(TestoLaikai& laikai, int kiekis){
+    if (kiekis <= 0) return;
+    laikai.nuskaitymas /= kiekis;
+    laikai.skaiciavimas /= kiekis;
+    laikai.rikiavimas /= kiekis;
+    laikai.isvedimas /= kiekis;
 }
 
 double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chrono::steady_clock::time_point pabaiga){

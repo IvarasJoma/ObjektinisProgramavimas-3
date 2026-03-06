@@ -31,7 +31,7 @@ void spausdintiVidurkius(const TestoLaikai& laikai) {
     std::cout << "Galutinių rezultatų skaičiavimas vidutiniškai užtruko: " << laikai.skaiciavimas << "s.\n";
     std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << laikai.rikiavimas << "s.\n";
     std::cout << "Studentų išvedimas vidutiniškai užtruko: " << laikai.isvedimas << "s.\n";
-    std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << laikai.bendras() << "s.\n";
+    std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << apskaiciuotiBendraLaika(laikai) << "s.\n";
 }
 
 void parodytiStudentus(const std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodas) {
