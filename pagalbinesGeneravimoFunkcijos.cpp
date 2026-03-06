@@ -1,4 +1,5 @@
 #include "strukturaGeneravimas.h"
+#include "Failai.h"
 #include <random>
 
 void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis){
@@ -34,4 +35,16 @@ int generuotiSveikaSkaiciu(int nuo, int iki){
     static std::mt19937 generatorius(std::random_device{}());
     std::uniform_int_distribution<int> distribucija(nuo, iki);
     return distribucija(generatorius);
+}
+
+std::vector<StudentasVektorius> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai) {
+    std::vector<StudentasVektorius> studentai;
+    studentai.reserve(static_cast<std::size_t>(studentuKiekis));
+    for (int i = 0; i < studentuKiekis; ++i) {
+        StudentasVektorius studentas;
+        generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
+        generuotiRezultatus(studentas, maksimalusNDKiekis);
+        studentai.push_back(std::move(studentas));
+    }
+    return studentai;
 }

@@ -1,6 +1,10 @@
 #include "strukturaIvestisIsvestis.h"
 #include "strukturaSkaiciavimai.h"
 #include "strukturaLaikoMatavimas.h"
+#include "strukturaRikiavimas.h"
+#include "strukturaGeneravimas.h"
+#include "strukturaMeniu.h"
+#include "Failai.h"
 #include <iostream>
 #include <charconv>
 #include <sstream>
@@ -213,4 +217,56 @@ void spausdintiVidurkius(const TestoLaikai& laikai) {
     std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << laikai.rikiavimas << "s.\n";
     std::cout << "Studentų išvedimas vidutiniškai užtruko: " << laikai.isvedimas << "s.\n";
     std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << laikai.bendras() << "s.\n";
+}
+
+void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas, int pasirinkimasNuskaitymo) {
+    apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodoPasirinkimas);
+    int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU);
+    rikiuotiStudentus(pasirinkimasRikiavimo, pasirinkimasNuskaitymo, studentuSarasas);
+    int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(ISVEDIMO_MENIU);
+    isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);
+}
+
+StudentasVektorius sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis) {
+    StudentasVektorius studentas;
+    studentas.Vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.\n");
+    studentas.Pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.\n");
+    if (generuotiPazymius) generuotiRezultatus(studentas, maksimalusNDKiekis);
+    else {
+        nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai, maksimalusNDKiekis);
+        studentas.egzaminoRezultatas = nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): ");
+    }
+    return studentas;
+}
+
+std::vector<StudentasVektorius> ivestiStudentus(bool generuotiPazymius, int maksimalusNDKiekis) {
+    std::vector<StudentasVektorius> studentai;
+    while (patvirtintiNaujoStudentoPridejima()) studentai.push_back(sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(generuotiPazymius, maksimalusNDKiekis));
+    return studentai;
+}
+
+void vykdytiStudentuIvedima(bool generuotiPazymius) {
+    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
+    int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
+    auto studentai = ivestiStudentus(generuotiPazymius, maksimalusNDKiekis);
+    parodytiStudentus(studentai, skaiciavimoMetodas);
+}
+
+void parodytiStudentus(const std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodas) {
+    parodytiRezultatuLentele(std::cout, studentai, skaiciavimoMetodas);
+}
+
+void vykdytiPilnaGeneravima(Failai& failai) {
+    std::vector<StudentasVektorius> studentai;
+    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
+    int studentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norimą generuoti studentų kiekį ir paspauskite ENTER: ");
+    int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
+    studentai.reserve(static_cast<std::size_t>(studentuKiekis));
+    for (int i = 0; i < studentuKiekis; ++i) {
+        StudentasVektorius studentas;
+        generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
+        generuotiRezultatus(studentas, maksimalusNDKiekis);
+        studentai.push_back(std::move(studentas));
+    }
+    parodytiRezultatuLentele(std::cout, studentai, skaiciavimoMetodas);
 }

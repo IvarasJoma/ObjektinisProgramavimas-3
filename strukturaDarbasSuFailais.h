@@ -9,5 +9,6 @@ struct Failai;
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, std::size_t kiekis);
 void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas, Failai failai);
+void vykdytiNuskaitymaIsFailo(Failai& failai);
 
 #endif

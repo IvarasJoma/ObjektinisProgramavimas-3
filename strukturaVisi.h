@@ -6,3 +6,5 @@
 #include "strukturaStudentas.h"
 #include "strukturaRikiavimas.h"
 #include "Failai.h"
+#include "strukturaMeniu.h"
+#include "strukturaTestavimas.h"

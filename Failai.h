@@ -1,3 +1,6 @@
+#ifndef FAILAI_H
+#define FAILAI_H
+
 #include <vector>
 #include <string>
 #include "strukturaDarbasSuFailais.h"
@@ -12,3 +15,5 @@ struct Failai{
     std::string studentai1000000 = "tekstiniaiFailai/studentai1000000.txt";
     std::string kursiokai = "tekstiniaiFailai/kursiokai.txt";
 };
+
+#endif

@@ -1,6 +1,8 @@
 #include "strukturaDarbasSuFailais.h"
 #include "Failai.h"
 #include "strukturaStudentas.h"
+#include "strukturaIvestisIsvestis.h"
+#include "strukturaMeniu.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -95,4 +97,12 @@ void nuskaitytiDuomenis (int pasirinkimasNuskaitymo, std::vector<StudentasVektor
     if (pasirinkimasNuskaitymo == 2) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai10000, 10000);
     if (pasirinkimasNuskaitymo == 3) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai100000, 100000);
     if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai1000000, 1000000);
+}
+
+void vykdytiNuskaitymaIsFailo(Failai& failai) {
+    std::vector<StudentasVektorius> studentai;
+    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
+    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(NUSKAITYMO_MENIU);
+    nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentai, failai);
+    apdorotiIrIsvestiStudentus(studentai, skaiciavimoMetodas, pasirinkimasNuskaitymo);
 }

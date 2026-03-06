@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "strukturaStudentas.h"
+#include "Failai.h"
 
 void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
@@ -19,5 +20,9 @@ bool nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme);
 void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 bool patvirtintiNaujoStudentoPridejima();
 std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvarkyti)(std::string&), const char* klaidosPranesimas);
+void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas, int pasirinkimasNuskaitymo);
+void vykdytiStudentuIvedima(bool generuotiPazymius);
+void vykdytiPilnaGeneravima(Failai& failai);
+void parodytiStudentus(const std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodas);
 
 #endif

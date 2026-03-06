@@ -35,3 +35,9 @@ void apskaiciuotiGalutiniPazymi(StudentasVektorius& studentas, char skaiciavimoM
         studentas.galutinisRezultatas = galutinisRezultatasPagalMediana;
     }
 }
+
+void apskaiciuotiGalutiniusPazymius(std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodoPasirinkimas) {
+    for (auto& studentas : studentai) {
+        apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
+    }
+}
