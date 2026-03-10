@@ -7,7 +7,11 @@
 #include "../strukturosFailai/strukturaSkaiciavimai.h"
 #include <chrono>
 
-void vykdytiTestavima(Failai& failai){
+void vykdytiIsvedimoTestavima(){
+    
+}
+
+void vykdytiIvedimoTestavima(Failai& failai){
     std::vector<StudentasVektorius> studentai;
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();

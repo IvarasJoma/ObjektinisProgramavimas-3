@@ -22,9 +22,14 @@ int main(){
                     vykdytiNuskaitymaIsFailo(failai);
                     break;
                 case 5:
-                    vykdytiTestavima(failai);
-                    break;
+                    vykdytiIrasymaIFaila();
                 case 6:
+                    vykdytiIvedimoTestavima(failai);
+                    break;
+                case 7:
+                    vykdytiIsvedimoTestavima();
+                    break;
+                case 8:
                     return 0;
                 default:
                     break;

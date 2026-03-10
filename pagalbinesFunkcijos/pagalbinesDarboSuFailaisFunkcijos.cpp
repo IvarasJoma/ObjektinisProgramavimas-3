@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cstring>
 #include <stdexcept>
+#include <sstream>
 
 void praleistiTarpaIsFailo(const char*& rodykle){
     while (*rodykle == ' ' || *rodykle == '\t' || *rodykle == '\r' || *rodykle == '\n') ++rodykle;
@@ -82,6 +83,18 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
     }
 }
 
+std::vector<StudentasVektorius> irasytiStudentuDuomenisIFaila(std::vector<StudentasVektorius>& studentuSarasas, int kiekis){
+    std::ostringstream oss;
+    oss << "studentai" << std::to_string(kiekis) << ".txt";
+    std::string failoPavadinimas = oss.str();
+    FILE* isvedamasFailas = std::fopen(failoPavadinimas.c_str(), "a");
+    if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
+    try{
+        static char isvestiesBuferis[1 << 20];
+        std::setvbuf(isvedamasFailas, isvestiesBuferis, _IOFBF, sizeof(isvestiesBuferis));
+    }
+}
+
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     std::vector<std::string> rezultatas;
     std::ifstream fin(failas);
@@ -107,9 +120,13 @@ void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektori
 }
 
 void vykdytiNuskaitymaIsFailo(Failai& failai){
-    std::vector<StudentasVektorius> studentai;
+    std::vector<StudentasVektorius> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(NUSKAITYMO_MENIU);
-    nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentai, failai);
-    apdorotiIrIsvestiStudentus(studentai, skaiciavimoMetodas, pasirinkimasNuskaitymo);
+    nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);
+    apdorotiIrIsvestiStudentus(studentuSarasas, skaiciavimoMetodas, pasirinkimasNuskaitymo);
+}
+
+void vykdytiIrasymaIFaila(){
+
 }
