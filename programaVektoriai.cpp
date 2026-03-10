@@ -22,7 +22,7 @@ int main(){
                     vykdytiNuskaitymaIsFailo(failai);
                     break;
                 case 5:
-                    vykdytiIrasymaIFaila();
+                    vykdytiIrasymaIFaila(failai);
                 case 6:
                     vykdytiIvedimoTestavima(failai);
                     break;

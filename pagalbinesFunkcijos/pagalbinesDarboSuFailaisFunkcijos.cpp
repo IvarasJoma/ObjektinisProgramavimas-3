@@ -4,6 +4,7 @@
 #include "../strukturosFailai/strukturaIvestis.h"
 #include "../strukturosFailai/strukturaIsvestis.h"
 #include "../strukturosFailai/strukturaMeniu.h"
+#include "../strukturosFailai/strukturaGeneravimas.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -34,8 +35,6 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
     x = reiksme;
     return true;
 }
-
-#include <stdexcept>
 
 std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, std::size_t kiekis){
     std::vector<StudentasVektorius> studentuSarasas;
@@ -83,15 +82,26 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
     }
 }
 
-std::vector<StudentasVektorius> irasytiStudentuDuomenisIFaila(std::vector<StudentasVektorius>& studentuSarasas, int kiekis){
+std::vector<StudentasVektorius> irasytiStudentuDuomenisIFaila(std::vector<StudentasVektorius>& studentuSarasas, int maksimalusNDKiekis, int studentuKiekis){
     std::ostringstream oss;
-    oss << "studentai" << std::to_string(kiekis) << ".txt";
+    std::string ND = "ND";
+    oss << "studentai" << std::to_string(studentuKiekis) << ".txt";
     std::string failoPavadinimas = oss.str();
-    FILE* isvedamasFailas = std::fopen(failoPavadinimas.c_str(), "a");
+    FILE* isvedamasFailas = std::fopen(failoPavadinimas.c_str(), "w");
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
     try{
         static char isvestiesBuferis[1 << 20];
         std::setvbuf(isvedamasFailas, isvestiesBuferis, _IOFBF, sizeof(isvestiesBuferis));
+        fprintf(isvedamasFailas, "%18s", "Vardas", "%18s", "Pavardė");
+        for (int i = 1; i < maksimalusNDKiekis; ++i){
+            fprintf(isvedamasFailas, "%10s", ND.append(std::to_string(i)));
+        }
+        fprintf(isvedamasFailas, "%10s", "Egz.");
+        std::fclose(isvedamasFailas);
+    } catch (const std::bad_alloc&){
+        std::fclose(isvedamasFailas);
+        std::cerr << "Nepakanka atminties...\n";
+        return studentuSarasas;
     }
 }
 
@@ -119,6 +129,21 @@ void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektori
     }
 }
 
+void irasytiDuomenis(int pasirinkimasIrasymo, std::vector<StudentasVektorius>& studentuSarasas, int maksimalusNDKiekis, int studentuKiekis){
+    try {
+        if (pasirinkimasIrasymo == 1) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
+        else if (pasirinkimasIrasymo == 2) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
+        else if (pasirinkimasIrasymo == 3) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
+        else if (pasirinkimasIrasymo == 4) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
+        else if (pasirinkimasIrasymo == 5) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Klaida rašant į failą: " << e.what() << std::endl;
+        studentuSarasas.clear();
+    }
+}
+
+
 void vykdytiNuskaitymaIsFailo(Failai& failai){
     std::vector<StudentasVektorius> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
@@ -127,6 +152,15 @@ void vykdytiNuskaitymaIsFailo(Failai& failai){
     apdorotiIrIsvestiStudentus(studentuSarasas, skaiciavimoMetodas, pasirinkimasNuskaitymo);
 }
 
-void vykdytiIrasymaIFaila(){
-
+void vykdytiIrasymaIFaila(Failai& failai){
+    int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
+    int pasirinkimasIrasymo = nuskaitytiMeniuPasirinkima(ISVEDIMO_I_FAILA_MENIU);
+    int studentuKiekis = 0;
+    if (pasirinkimasIrasymo == 1) studentuKiekis = 1000;
+    if (pasirinkimasIrasymo == 2) studentuKiekis = 10000;
+    if (pasirinkimasIrasymo == 3) studentuKiekis = 100000;
+    if (pasirinkimasIrasymo == 4) studentuKiekis = 1000000;
+    if (pasirinkimasIrasymo == 5) studentuKiekis = 10000000;
+    std::vector<StudentasVektorius> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
+    irasytiDuomenis(pasirinkimasIrasymo, studentuSarasas, maksimalusNDKiekis, studentuKiekis);
 }

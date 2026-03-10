@@ -252,16 +252,9 @@ void vykdytiStudentuIvedima(bool generuotiPazymius){
 }
 
 void vykdytiPilnaGeneravima(Failai& failai){
-    std::vector<StudentasVektorius> studentai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int studentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norimą generuoti studentų kiekį ir paspauskite ENTER: ");
     int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
-    studentai.reserve(static_cast<std::size_t>(studentuKiekis));
-    for (int i = 0; i < studentuKiekis; ++i){
-        StudentasVektorius studentas;
-        generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
-        generuotiRezultatus(studentas, maksimalusNDKiekis);
-        studentai.push_back(std::move(studentas));
-    }
-    parodytiRezultatuLentele(std::cout, studentai, skaiciavimoMetodas);
+    std::vector<StudentasVektorius> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
+    parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodas);
 }

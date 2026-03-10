@@ -38,13 +38,13 @@ int generuotiSveikaSkaiciu(int nuo, int iki){
 }
 
 std::vector<StudentasVektorius> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai){
-    std::vector<StudentasVektorius> studentai;
-    studentai.reserve(static_cast<std::size_t>(studentuKiekis));
+    std::vector<StudentasVektorius> studentuSarasas;
+    studentuSarasas.reserve(static_cast<std::size_t>(studentuKiekis));
     for (int i = 0; i < studentuKiekis; ++i){
         StudentasVektorius studentas;
         generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
         generuotiRezultatus(studentas, maksimalusNDKiekis);
-        studentai.push_back(std::move(studentas));
+        studentuSarasas.push_back(std::move(studentas));
     }
-    return studentai;
+    return studentuSarasas;
 }
