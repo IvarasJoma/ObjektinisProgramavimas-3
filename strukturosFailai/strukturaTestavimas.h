@@ -22,5 +22,6 @@ template <typename Func> double ismatuotiLaika(Func veiksmas){
 }
 void vykdytiIvedimoTestavima(Failai& failai);
 void vykdytiIsvedimoTestavima(Failai& failai);
+void vykdytiDuomenuApdorojimoTestavima(Failai& failai);
 
 #endif

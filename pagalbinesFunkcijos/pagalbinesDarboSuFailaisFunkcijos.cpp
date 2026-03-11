@@ -85,7 +85,7 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
 }
 
 void irasytiStudentuDuomenisIFaila(const std::vector<StudentasVektorius>& studentuSarasas, std::string failoPavadinimas) {
-    std::ofstream isvedamasFailas(failoPavadinimas);
+    std::ofstream isvedamasFailas("tekstiniaiFailai/" + failoPavadinimas);
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
     std::size_t ndKiekis = 0;
     if (!studentuSarasas.empty()) ndKiekis = studentuSarasas.front().namuDarbuTarpiniaiRezultatai.size();
@@ -140,7 +140,7 @@ void irasytiDuomenis(std::vector<StudentasVektorius>& studentuSarasas){
 void vykdytiNuskaitymaIsFailo(Failai& failai){
     std::vector<StudentasVektorius> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
-    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(NUSKAITYMO_MENIU);
+    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu("tekstiniaiFailai"));
     nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);
     apdorotiIrIsvestiStudentus(studentuSarasas, skaiciavimoMetodas);
 }
@@ -175,4 +175,17 @@ void vykdytiSkirstymaIFailus(std::vector<StudentasVektorius>& studentuSarasas){
 void irasytiSuskirstytusStudentusIFailus(const std::vector<StudentasVektorius>& pazangiuSarasas, const std::vector<StudentasVektorius>& silpnuSarasas){
     irasytiStudentuDuomenisIFaila(pazangiuSarasas, "pazangusStudentai.txt");
     irasytiStudentuDuomenisIFaila(silpnuSarasas, "silpniStudentai.txt");
+}
+
+std::vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas){
+    std::vector<std::string> meniu;
+    meniu.push_back("Pasirinkite iš kurio failo norite nuskaityti studentų duomenis:");
+    int index = 1;
+    for (const auto& entry : std::filesystem::directory_iterator(katalogas)){
+        if (entry.path().extension() == ".txt"){
+            meniu.push_back(std::to_string(index) + " - " + entry.path().filename().string());
+            index++;
+        }
+    }
+    return meniu;
 }

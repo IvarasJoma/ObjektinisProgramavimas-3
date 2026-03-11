@@ -5,7 +5,6 @@
 
 int main(){
     try {
-        std::setlocale(LC_ALL, "");
         Failai failai;
         int pasirinkimas = 0;
         while (nuskaitytiPagrindinioMeniuPasirinkima(PAGRINDINIS_MENIU, pasirinkimas)) {
@@ -32,6 +31,8 @@ int main(){
                     vykdytiIsvedimoTestavima(failai);
                     break;
                 case 8:
+                    vykdytiDuomenuApdorojimoTestavima(failai);
+                case 9:
                     return 0;
                 default:
                     break;

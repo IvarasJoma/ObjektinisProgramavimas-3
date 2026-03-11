@@ -15,7 +15,7 @@ void vykdytiIvedimoTestavima(Failai& failai){
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
-    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(NUSKAITYMO_MENIU);
+    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu("tekstiniaiFailai"));
     int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU);
     int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(ISVEDIMO_MENIU);
     for (int i = 0; i < kartai; ++i){
@@ -33,7 +33,7 @@ void vykdytiDuomenuApdorojimoTestavima(Failai& failai){
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
-    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(NUSKAITYMO_MENIU);
+    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu("tekstiniaiFailai"));
     int pasirinkimasRikiavimoPazangiu = 0;
     int pasirinkimasRikiavimoSilpnu = 0;
     parinktiRikiavimoBudus(pasirinkimasRikiavimoPazangiu, pasirinkimasRikiavimoSilpnu);
@@ -52,7 +52,7 @@ void vykdytiDuomenuApdorojimoTestavima(Failai& failai){
     spausdintiVidurkius(laikai);
 }
 
-void vykdytiFailuKurimoTestavima(Failai& failai){
+void vykdytiIsvedimoTestavima(Failai& failai){
     TestoLaikai laikai;
     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
     int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
@@ -66,7 +66,7 @@ void vykdytiFailuKurimoTestavima(Failai& failai){
     for (int i = 0; i < kartai; ++i){
         laikai.isvedimas += ismatuotiLaika([&]() {
             std::string failoPavadinimas = "studentai" + std::to_string(studentuKiekis) + ".txt";
-            std::ofstream failas(failoPavadinimas);
+            std::ofstream failas("tekstiniaiFailai/" + failoPavadinimas);
             if (!failas) {
                 throw std::runtime_error("Nepavyko sukurti failo: " + failoPavadinimas);
             }
