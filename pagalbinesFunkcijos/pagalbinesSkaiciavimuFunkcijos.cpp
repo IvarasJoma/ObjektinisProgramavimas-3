@@ -37,9 +37,7 @@ void apskaiciuotiGalutiniPazymi(StudentasVektorius& studentas, char skaiciavimoM
 }
 
 void apskaiciuotiGalutiniusPazymius(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
-    for (auto& studentas : studentuSarasas){
-        apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
-    }
+    for (auto& studentas : studentuSarasas) apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
 }
 
 void suskirstytiStudentus(const std::vector<StudentasVektorius>& studentuSarasas, std::vector<StudentasVektorius>& pazangiuSarasas, std::vector<StudentasVektorius>& silpnuSarasas){
