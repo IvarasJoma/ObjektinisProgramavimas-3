@@ -38,12 +38,11 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
     return true;
 }
 
-std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas, std::size_t kiekis){
+std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas){
     std::vector<StudentasVektorius> studentuSarasas;
     FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
     if (!skaitomasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
     try{
-        studentuSarasas.reserve(kiekis);
         static char ivestiesBuferis[1 << 20];
         std::setvbuf(skaitomasFailas, ivestiesBuferis, _IOFBF, sizeof(ivestiesBuferis));
         char aprasas[257];
@@ -111,12 +110,14 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     return rezultatas;
 }
 
-void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas, Failai failai){
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas) {
     try {
-        if (pasirinkimasNuskaitymo == 1) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.kursiokai, 3);
-        else if (pasirinkimasNuskaitymo == 2) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai10000, 10000);
-        else if (pasirinkimasNuskaitymo == 3) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai100000, 100000);
-        else if (pasirinkimasNuskaitymo == 4) studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failai.studentai1000000, 1000000);
+        auto failai = gautiTekstiniusFailus("tekstiniaiFailai");
+        if (failai.empty()) throw std::runtime_error("Kataloge 'tekstiniaiFailai' nerasta .txt failų.");
+        if (pasirinkimasNuskaitymo < 1 || static_cast<std::size_t>(pasirinkimasNuskaitymo) > failai.size()) throw std::runtime_error("Neteisingas failo pasirinkimas.");
+        const std::size_t indeksas = static_cast<std::size_t>(pasirinkimasNuskaitymo - 1);
+        const std::string failoKelias = failai[indeksas].string();
+        studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failoKelias);
     }
     catch (const std::exception& e) {
         std::cerr << "Klaida skaitant failą: " << e.what() << std::endl;
@@ -137,11 +138,11 @@ void irasytiDuomenis(std::vector<StudentasVektorius>& studentuSarasas){
     }
 }
 
-void vykdytiNuskaitymaIsFailo(Failai& failai){
+void vykdytiNuskaitymaIsFailo(){
     std::vector<StudentasVektorius> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu("tekstiniaiFailai"));
-    nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);
+    nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas);
     apdorotiIrIsvestiStudentus(studentuSarasas, skaiciavimoMetodas);
 }
 
@@ -188,4 +189,10 @@ std::vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas){
         }
     }
     return meniu;
+}
+
+std::vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas){
+    std::vector<std::filesystem::path> failai;
+    for (const auto& failas : std::filesystem::directory_iterator(katalogas)) if (failas.is_regular_file() && failas.path().extension() == ".txt") failai.push_back(failas.path());
+    return failai;
 }

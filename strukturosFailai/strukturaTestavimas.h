@@ -20,8 +20,8 @@ template <typename Func> double ismatuotiLaika(Func veiksmas){
     auto pabaiga = std::chrono::steady_clock::now();
     return apskaiciuotiLaika(pradzia, pabaiga);
 }
-void vykdytiIvedimoTestavima(Failai& failai);
+void vykdytiIvedimoTestavima();
 void vykdytiIsvedimoTestavima(Failai& failai);
-void vykdytiDuomenuApdorojimoTestavima(Failai& failai);
+void vykdytiDuomenuApdorojimoTestavima();
 
 #endif

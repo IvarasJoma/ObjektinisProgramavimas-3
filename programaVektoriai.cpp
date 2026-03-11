@@ -19,19 +19,20 @@ int main(){
                     vykdytiPilnaGeneravima(failai);
                     break;
                 case 4:
-                    vykdytiNuskaitymaIsFailo(failai);
+                    vykdytiNuskaitymaIsFailo();
                     break;
                 case 5:
                     vykdytiIrasymaIFaila(failai);
                     break;
                 case 6:
-                    vykdytiIvedimoTestavima(failai);
+                    vykdytiIvedimoTestavima();
                     break;
                 case 7:
                     vykdytiIsvedimoTestavima(failai);
                     break;
                 case 8:
-                    vykdytiDuomenuApdorojimoTestavima(failai);
+                    vykdytiDuomenuApdorojimoTestavima();
+                    break;
                 case 9:
                     return 0;
                 default:

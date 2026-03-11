@@ -10,7 +10,7 @@
 #include <iostream>
 #include <chrono>
 
-void vykdytiIvedimoTestavima(Failai& failai){
+void vykdytiIvedimoTestavima(){
     std::vector<StudentasVektorius> studentuSarasas;
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
@@ -20,7 +20,7 @@ void vykdytiIvedimoTestavima(Failai& failai){
     int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(ISVEDIMO_MENIU);
     for (int i = 0; i < kartai; ++i){
         studentuSarasas.clear();
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
         laikai.isvedimas += ismatuotiLaika([&](){isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodas);});
@@ -29,7 +29,7 @@ void vykdytiIvedimoTestavima(Failai& failai){
     spausdintiVidurkius(laikai);
 }
 
-void vykdytiDuomenuApdorojimoTestavima(Failai& failai){
+void vykdytiDuomenuApdorojimoTestavima(){
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
@@ -41,7 +41,7 @@ void vykdytiDuomenuApdorojimoTestavima(Failai& failai){
         std::vector<StudentasVektorius> studentuSarasas;
         std::vector<StudentasVektorius> pazangiuSarasas;
         std::vector<StudentasVektorius> silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){
             apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);
             suskirstytiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
