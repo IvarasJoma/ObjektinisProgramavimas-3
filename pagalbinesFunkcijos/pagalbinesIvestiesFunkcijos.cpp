@@ -218,10 +218,10 @@ std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvark
     }
 }
 
-void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas, int pasirinkimasNuskaitymo){
+void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodoPasirinkimas);
     int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU);
-    rikiuotiStudentus(pasirinkimasRikiavimo, pasirinkimasNuskaitymo, studentuSarasas);
+    rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);
     int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(ISVEDIMO_MENIU);
     isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);
 }
@@ -257,4 +257,9 @@ void vykdytiPilnaGeneravima(Failai& failai){
     int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
     std::vector<StudentasVektorius> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
     parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodas);
+}
+
+void parinktiRikiavimoBudus(int& pasirinkimasRikiavimoPazangiu, int& pasirinkimasRikiavimoSilpnu){
+    pasirinkimasRikiavimoPazangiu = nuskaitytiMeniuPasirinkima(PAZANGIU_RIKIAVIMO_MENIU);
+    pasirinkimasRikiavimoSilpnu = nuskaitytiMeniuPasirinkima(SILPNU_RIKIAVIMO_MENIU);
 }

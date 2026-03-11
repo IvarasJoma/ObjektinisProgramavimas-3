@@ -5,6 +5,8 @@
 #include "../strukturosFailai/strukturaIsvestis.h"
 #include "../strukturosFailai/strukturaMeniu.h"
 #include "../strukturosFailai/strukturaGeneravimas.h"
+#include "../strukturosFailai/strukturaSkaiciavimai.h"
+#include "../strukturosFailai/strukturaRikiavimas.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -82,27 +84,20 @@ std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::str
     }
 }
 
-std::vector<StudentasVektorius> irasytiStudentuDuomenisIFaila(std::vector<StudentasVektorius>& studentuSarasas, int maksimalusNDKiekis, int studentuKiekis){
-    std::ostringstream oss;
-    std::string ND = "ND";
-    oss << "studentai" << std::to_string(studentuKiekis) << ".txt";
-    std::string failoPavadinimas = oss.str();
-    FILE* isvedamasFailas = std::fopen(failoPavadinimas.c_str(), "w");
+void irasytiStudentuDuomenisIFaila(const std::vector<StudentasVektorius>& studentuSarasas, std::string failoPavadinimas) {
+    std::ofstream isvedamasFailas(failoPavadinimas);
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
-    try{
-        static char isvestiesBuferis[1 << 20];
-        std::setvbuf(isvedamasFailas, isvestiesBuferis, _IOFBF, sizeof(isvestiesBuferis));
-        fprintf(isvedamasFailas, "%18s", "Vardas", "%18s", "Pavardė");
-        for (int i = 1; i < maksimalusNDKiekis; ++i){
-            fprintf(isvedamasFailas, "%10s", ND.append(std::to_string(i)));
-        }
-        fprintf(isvedamasFailas, "%10s", "Egz.");
-        std::fclose(isvedamasFailas);
-    } catch (const std::bad_alloc&){
-        std::fclose(isvedamasFailas);
-        std::cerr << "Nepakanka atminties...\n";
-        return studentuSarasas;
+    std::size_t ndKiekis = 0;
+    if (!studentuSarasas.empty()) ndKiekis = studentuSarasas.front().namuDarbuTarpiniaiRezultatai.size();
+    isvedamasFailas << std::format("{:<18}{:<18}", "Vardas", "Pavardė");
+    for (std::size_t i = 1; i <= ndKiekis; ++i) isvedamasFailas << std::format("{:<10}", "ND" + std::to_string(i));
+    isvedamasFailas << std::format("{:<10}\n", "Egz.");
+    for (const auto& studentas : studentuSarasas) {
+        isvedamasFailas << std::format("{:<18}{:<18}", studentas.Vardas, studentas.Pavarde);
+        for (const auto pazymys : studentas.namuDarbuTarpiniaiRezultatai) isvedamasFailas << std::format("{:<10}", pazymys);
+        isvedamasFailas << std::format("{:<10}\n", studentas.egzaminoRezultatas);
     }
+    if (!isvedamasFailas) throw std::runtime_error("Nepavyko įrašyti į failą: " + failoPavadinimas);
 }
 
 std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
@@ -129,13 +124,12 @@ void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektori
     }
 }
 
-void irasytiDuomenis(int pasirinkimasIrasymo, std::vector<StudentasVektorius>& studentuSarasas, int maksimalusNDKiekis, int studentuKiekis){
+void irasytiDuomenis(std::vector<StudentasVektorius>& studentuSarasas){
     try {
-        if (pasirinkimasIrasymo == 1) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
-        else if (pasirinkimasIrasymo == 2) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
-        else if (pasirinkimasIrasymo == 3) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
-        else if (pasirinkimasIrasymo == 4) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
-        else if (pasirinkimasIrasymo == 5) irasytiStudentuDuomenisIFaila(studentuSarasas, maksimalusNDKiekis, studentuKiekis);
+        std::ostringstream oss;
+        oss << "studentai" << studentuSarasas.size() << ".txt";
+        const std::string failoPavadinimas = oss.str();
+        irasytiStudentuDuomenisIFaila(studentuSarasas, failoPavadinimas);
     }
     catch (const std::exception& e) {
         std::cerr << "Klaida rašant į failą: " << e.what() << std::endl;
@@ -143,17 +137,16 @@ void irasytiDuomenis(int pasirinkimasIrasymo, std::vector<StudentasVektorius>& s
     }
 }
 
-
 void vykdytiNuskaitymaIsFailo(Failai& failai){
     std::vector<StudentasVektorius> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(NUSKAITYMO_MENIU);
     nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, failai);
-    apdorotiIrIsvestiStudentus(studentuSarasas, skaiciavimoMetodas, pasirinkimasNuskaitymo);
+    apdorotiIrIsvestiStudentus(studentuSarasas, skaiciavimoMetodas);
 }
 
 void vykdytiIrasymaIFaila(Failai& failai){
-    int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
+    int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų darbų pažymių kiekį ir paspauskite ENTER: ");
     int pasirinkimasIrasymo = nuskaitytiMeniuPasirinkima(ISVEDIMO_I_FAILA_MENIU);
     int studentuKiekis = 0;
     if (pasirinkimasIrasymo == 1) studentuKiekis = 1000;
@@ -162,5 +155,24 @@ void vykdytiIrasymaIFaila(Failai& failai){
     if (pasirinkimasIrasymo == 4) studentuKiekis = 1000000;
     if (pasirinkimasIrasymo == 5) studentuKiekis = 10000000;
     std::vector<StudentasVektorius> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
-    irasytiDuomenis(pasirinkimasIrasymo, studentuSarasas, maksimalusNDKiekis, studentuKiekis);
+    irasytiDuomenis(studentuSarasas);
+    vykdytiSkirstymaIFailus(studentuSarasas);
+}
+
+void vykdytiSkirstymaIFailus(std::vector<StudentasVektorius>& studentuSarasas){
+    std::vector<StudentasVektorius> pazangiuSarasas;
+    std::vector<StudentasVektorius> silpnuSarasas;
+    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
+    apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);
+    suskirstytiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);
+    int pasirinkimasRikiavimoPazangiu = 0;
+    int pasirinkimasRikiavimoSilpnu = 0;
+    parinktiRikiavimoBudus(pasirinkimasRikiavimoPazangiu, pasirinkimasRikiavimoSilpnu);
+    rikiuotiSuskirstytusStudentus(pazangiuSarasas, silpnuSarasas, pasirinkimasRikiavimoPazangiu, pasirinkimasRikiavimoSilpnu);
+    irasytiSuskirstytusStudentusIFailus(pazangiuSarasas, silpnuSarasas);
+}
+
+void irasytiSuskirstytusStudentusIFailus(const std::vector<StudentasVektorius>& pazangiuSarasas, const std::vector<StudentasVektorius>& silpnuSarasas){
+    irasytiStudentuDuomenisIFaila(pazangiuSarasas, "pazangusStudentai.txt");
+    irasytiStudentuDuomenisIFaila(silpnuSarasas, "silpniStudentai.txt");
 }

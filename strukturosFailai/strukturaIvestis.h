@@ -22,5 +22,6 @@ void vykdytiPilnaGeneravima(Failai& failai);
 void tvarkytiVarda(std::string& ivestis);
 void tvarkytiPavarde(std::string& ivestis);
 std::string saugiaiNuskaitytiEilute();
+void parinktiRikiavimoBudus(int& pasirinkimasRikiavimoPazangiu, int& pasirinkimasRikiavimoSilpnu);
 
 #endif

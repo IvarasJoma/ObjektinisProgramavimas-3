@@ -36,8 +36,19 @@ void apskaiciuotiGalutiniPazymi(StudentasVektorius& studentas, char skaiciavimoM
     }
 }
 
-void apskaiciuotiGalutiniusPazymius(std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodoPasirinkimas){
-    for (auto& studentas : studentai){
+void apskaiciuotiGalutiniusPazymius(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+    for (auto& studentas : studentuSarasas){
         apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
+    }
+}
+
+void suskirstytiStudentus(const std::vector<StudentasVektorius>& studentuSarasas, std::vector<StudentasVektorius>& pazangiuSarasas, std::vector<StudentasVektorius>& silpnuSarasas){
+    pazangiuSarasas.clear();
+    silpnuSarasas.clear();
+    pazangiuSarasas.reserve(studentuSarasas.size() / 2);
+    silpnuSarasas.reserve(studentuSarasas.size() / 2);
+    for (auto& studentas : studentuSarasas) {
+        if (studentas.galutinisRezultatas < 5) silpnuSarasas.push_back(std::move(studentas));
+        else pazangiuSarasas.push_back(std::move(studentas));
     }
 }
