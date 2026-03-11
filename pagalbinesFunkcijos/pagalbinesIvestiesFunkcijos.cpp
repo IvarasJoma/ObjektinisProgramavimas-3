@@ -67,8 +67,6 @@ void tvarkytiVarda(std::string& ivestis){
 
 void tvarkytiPavarde(std::string& ivestis){
     std::stringstream eilutesSrautas(ivestis);
-    std::string pirmasZodis;
-    eilutesSrautas >> pirmasZodis;
     bool kitaDidzioji = true;
     for (char& simbolis : ivestis){
         simbolis = static_cast<char>(std::tolower(static_cast<unsigned char>(simbolis)));
