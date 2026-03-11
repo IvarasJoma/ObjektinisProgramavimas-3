@@ -108,17 +108,17 @@ int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes){
 bool nuskaitytiPagrindinioMeniuPasirinkima(const std::vector<std::string>& eilutes, int& pasirinkimas){
     while (true){
         try{
-        std::cout << std::string(98, '-') << "\n";
-        for (const auto& eilute : eilutes)
-            std::cout << eilute << "\n";
-        std::cout << std::string(98, '-') << "\n";
-        std::cout << "Pasirinkite programos eigą: ";
-        std::string ivestis = saugiaiNuskaitytiEilute();
-        const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
-        tikrintiIvesti(ivestis);
-        nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas);
-        if (pasirinkimas < 1 || pasirinkimas > maxMeniu) throw std::out_of_range("Pasirinkimas turi būti nuo 1 iki " + std::to_string(maxMeniu) + ".");
-        return true;
+            std::cout << std::string(98, '-') << "\n";
+            for (const auto& eilute : eilutes)
+                std::cout << eilute << "\n";
+            std::cout << std::string(98, '-') << "\n";
+            std::cout << "Pasirinkite programos eigą: ";
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
+            tikrintiIvesti(ivestis);
+            nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas);
+            if (pasirinkimas < 1 || pasirinkimas > maxMeniu) throw std::out_of_range("Pasirinkimas turi būti nuo 1 iki " + std::to_string(maxMeniu) + ".");
+            return true;
         } catch (const std::exception& e){
         std::cout << "Klaida: " << e.what() << "\n";
         } 
