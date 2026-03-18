@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "../strukturosFailai/strukturaStudentas.h"
+#include "../strukturosFailai/VektoriuStudentoStruktura.h"
 #include "../strukturosFailai/Failai.h"
 
 void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);

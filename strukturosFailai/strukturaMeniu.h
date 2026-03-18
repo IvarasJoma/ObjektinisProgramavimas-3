@@ -1,15 +1,62 @@
 #ifndef STRUKTURAMENIU_H
 #define STRUKTURAMENIU_H
 
-#include <vector>
-#include <string>
+#include <array>
+#include <string_view>
 
-const std::vector<std::string> PAGRINDINIS_MENIU = {"Galimi programos veikimo būdai:", "1 - Įvesti duomenis ranka", "2 - Generuoti tik pažymius", "3 - Generuoti vardus, pavardes ir pažymius", "4 - Nuskaityti duomenis iš failo", "5 - Įrašyti duomenis į failą", "6 - Testuoti duomenų įvedimą į programą", "7 - Testuoti duomenų išvedimą", "8 - Testuoti duomenų apdorojimą", "9 - Baigti darbą"};
+using MeniuEilute = std::string_view;
+
+extern const std::array<MeniuEilute, 10> PAGRINDINIS_MENIU;
+extern const std::array<MeniuEilute, 7> RIKIAVIMO_MENIU;
+extern const std::array<MeniuEilute, 4> RIKIAVIMO_MENIU_TIK_DIDEJANCIAI;
+extern const std::array<MeniuEilute, 7> PAZANGIU_RIKIAVIMO_MENIU;
+extern const std::array<MeniuEilute, 7> SILPNU_RIKIAVIMO_MENIU;
+extern const std::array<MeniuEilute, 3> ISVEDIMO_MENIU;
+extern const std::array<MeniuEilute, 6> ISVEDIMO_I_FAILA_MENIU;
+
+template <std::size_t N>
+int nuskaitytiMeniuPasirinkima(const std::array<std::string_view, N>& eilutes) {
+    while (true) {
+        try {
+            std::cout << std::string(98, '-') << "\n";
+            for (const auto& eilute : eilutes) std::cout << eilute << "\n";
+            std::cout << std::string(98, '-') << "\n";
+            std::cout << "Pasirinkite programos eigą: ";
+            std::string ivestis = saugiaiNuskaitytiEilute();
+            int meniu = 0;
+            const int maxMeniu = static_cast<int>(eilutes.size()) - 1;
+            tikrintiIvesti(ivestis);
+            nuskaitytiSveikajiSkaiciu(ivestis, meniu);
+            if (meniu < 1 || meniu > maxMeniu) throw std::out_of_range("Pasirinkimas turi būti nuo 1 iki " + std::to_string(maxMeniu) + ".");
+            return meniu;
+        } catch (const std::exception& e) {
+            std::cout << "Klaida: " << e.what() << "\n";
+        }
+    }
+}
+
 std::vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas);
-const std::vector<std::string> RIKIAVIMO_MENIU = {"Pasirinkite, pagal ką norite rikiuoti studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį didėjančia tvarka (1-10)", "6 - galutinį pažymį mažėjančia tvarka (10-1)"};
-const std::vector<std::string> PAZANGIU_RIKIAVIMO_MENIU = {"Pasirinkite, pagal ką norite rikiuoti pažangius studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį didėjančia tvarka (1-10)", "6 - galutinį pažymį mažėjančia tvarka (10-1)"};
-const std::vector<std::string> SILPNU_RIKIAVIMO_MENIU = {"Pasirinkite, pagal ką norite rikiuoti silpnus studentus:", "1 - vardą didėjančia tvarka (A-Ž)", "2 - vardą mažėjančia tvarka (Ž-A)", "3 - pavardę didėjančia tvarka (A-Ž)", "4 - pavardę mažėjančia tvarka (Ž-A)", "5 - galutinį pažymį didėjančia tvarka (1-10)", "6 - galutinį pažymį mažėjančia tvarka (10-1)"};
-const std::vector<std::string> ISVEDIMO_MENIU = {"Pasirinkite, kaip norite išvesti duomenis:", "1 - į terminalą", "2 - į failą"};
-const std::vector<std::string> ISVEDIMO_I_FAILA_MENIU = {"Pasirinkite, kiek studentų norite sugeneruoti:", "1 - 1000", "2 - 10000", "3 - 100000", "4 - 1000000", "5 - 10000000"};
+
+template <std::size_t N>
+bool nuskaitytiPagrindinioMeniuPasirinkima(const std::array<std::string_view, N>& eilutes, int& pasirinkimas) {
+    const int didziausiasPasirinkimas = static_cast<int>(N) - 1;
+    while (true) {
+        try {
+            std::cout << std::string(98, '-') << '\n';
+            for (const auto& eilute : eilutes) {
+                std::cout << eilute << '\n';
+            }
+            std::cout << std::string(98, '-') << '\n';
+            std::cout << "Pasirinkite programos eigą: ";
+            const std::string ivestis = saugiaiNuskaitytiEilute();
+            tikrintiIvesti(ivestis);
+            nuskaitytiSveikajiSkaiciu(ivestis, pasirinkimas);
+            if (pasirinkimas < 1 || pasirinkimas > didziausiasPasirinkimas) throw std::out_of_range( "Pasirinkimas turi būti nuo 1 iki " + std::to_string(didziausiasPasirinkimas) + ".");
+            return true;
+        } catch (const std::exception& klaida) {
+            std::cout << "Klaida: " << klaida.what() << '\n';
+        }
+    }
+}
 
 #endif

@@ -3,7 +3,7 @@
 
 #include <string>
 
-template <typename Container>
+template <typename StudentuKonteineris>
 struct Studentas {
     std::string Vardas, Pavarde;
     Container namuDarbuTarpiniaiRezultatai;

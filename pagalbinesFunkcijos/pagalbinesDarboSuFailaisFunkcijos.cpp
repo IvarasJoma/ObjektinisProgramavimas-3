@@ -1,6 +1,6 @@
 #include "../strukturosFailai/strukturaDarbasSuFailais.h"
 #include "../strukturosFailai/Failai.h"
-#include "../strukturosFailai/strukturaStudentas.h"
+#include "../strukturosFailai/VektoriuStudentoStruktura.h"
 #include "../strukturosFailai/strukturaIvestis.h"
 #include "../strukturosFailai/strukturaIsvestis.h"
 #include "../strukturosFailai/strukturaMeniu.h"

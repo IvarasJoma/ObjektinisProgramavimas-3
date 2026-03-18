@@ -7,6 +7,7 @@
 #include "../strukturosFailai/strukturaIsvestis.h"
 #include "../strukturosFailai/strukturaSkaiciavimai.h"
 #include "../strukturosFailai/strukturaStudentas.h"
+#include "../strukturosFailai/VektoriuStudentoStruktura.h"
 #include "../strukturosFailai/strukturaRikiavimas.h"
 #include "../strukturosFailai/Failai.h"
 #include "../strukturosFailai/strukturaMeniu.h"

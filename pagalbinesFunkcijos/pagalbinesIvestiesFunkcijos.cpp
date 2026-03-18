@@ -84,7 +84,7 @@ void nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
     if (rezultatas.ec != std::errc{} || rezultatas.ptr != ivestis.data() + ivestis.size()) throw std::invalid_argument("Įvestis turi būti sveikasis skaičius.");
 }
 
-int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes){
+int nuskaitytiMeniuPasirinkima(const std::array<std::string_view, int N>&  eilutes){
     while (true){
         try {
             std::cout << std::string(98, '-') << "\n";

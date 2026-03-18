@@ -2,7 +2,7 @@
 #define STRUKTURARIKIAVIMAS_H
 
 #include <vector>
-#include "../strukturosFailai/strukturaStudentas.h"
+#include "../strukturosFailai/VektoriuStudentoStruktura.h"
 
 void rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector<StudentasVektorius>& studentuSarasas);
 void rikiuotiSuskirstytusStudentus(std::vector<StudentasVektorius>& pazangiuSarasas, std::vector<StudentasVektorius>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu);
