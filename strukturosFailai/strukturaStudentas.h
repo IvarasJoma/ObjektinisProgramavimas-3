@@ -1,12 +1,12 @@
 #ifndef STRUKTURASTUDENTAS_H
 #define STRUKTURASTUDENTAS_H
 
-#include <vector>
 #include <string>
 
-struct StudentasVektorius{
+template <typename Container>
+struct Studentas {
     std::string Vardas, Pavarde;
-    std::vector<int> namuDarbuTarpiniaiRezultatai;
+    Container namuDarbuTarpiniaiRezultatai;
     int egzaminoRezultatas;
     double galutinisRezultatas = 0;
 };
