@@ -36,19 +36,15 @@ int main(){
                 case 9:
                     vykdytiNulintajaKonteineriuTestavimoStrategija();
                     break;
-                    /*Labai svarbu, kadangi tiek failų kūrimas, tiek ir surūšiuotų rezultatų išvedimas į failus nepriklauso nuo naudojamo konteinerio, todėl šioje užduotyje reiktų matuoti tik šiuos programoje atliekamus žingsnius:
-
-    duomenų nuskaitymą iš failų į atitinkamą konteinerį (Failai visiems tyrimams turi būti tie patys, tyrimo patikimumui); 
-    studentų rūšiavimą didėjimo tvarką konteineryje (funkcija sort);
-    studentų skirstymo  į dvi grupes/kategorijas (naujų konteinerių su skirtingais studentais kūrimas);
-
-Testavimas atliekamas su tais pačiais failais iš 1000, 10000, 100000, 1000000, 10000000 įrašų. Visi rezultatai turi būti apdoroti ir aprašyti readme.md faile, pateikiant testavimo sistemos parametrus (CPU, RAM, HDD (magnetinis, SSD)). */
                 case 10:
                     vykdytiPirmajaKonteineriuTestavimoStrategija();
+                    break;
                 case 11:
                     vykdytiAntrajaKonteineriuTestavimoStrategija();
+                    break;
                 case 12:
                     vykdytiTreciajaKonteineriuTestavimoStrategija();
+                    break;
                 case 13:
                     return 0;
                 default:
