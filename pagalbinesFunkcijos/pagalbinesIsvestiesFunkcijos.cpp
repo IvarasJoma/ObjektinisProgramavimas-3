@@ -27,11 +27,12 @@ void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<StudentasVekto
 }
 
 void spausdintiVidurkius(const TestoLaikai& laikai){
-    std::cout << "Duomenų nuskaitymas vidutiniškai užtruko: " << laikai.nuskaitymas << "s.\n";
-    std::cout << "Galutinių rezultatų skaičiavimas vidutiniškai užtruko: " << laikai.skaiciavimas << "s.\n";
-    std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << laikai.rikiavimas << "s.\n";
-    std::cout << "Studentų išvedimas vidutiniškai užtruko: " << laikai.isvedimas << "s.\n";
-    std::cout << "Bendras programos veikimas vidutiniškai užtruko: " << apskaiciuotiBendraLaika(laikai) << "s.\n";
+    if (laikai.nuskaitymas > 0) std::cout << "Duomenų nuskaitymas vidutiniškai užtruko: " << laikai.nuskaitymas << "s.\n";
+    if (laikai.skaiciavimas > 0) std::cout << "Galutinių rezultatų skaičiavimas vidutiniškai užtruko: " << laikai.skaiciavimas << "s.\n";
+    if (laikai.rikiavimas > 0) std::cout << "Studentų rikiavimas vidutiniškai užtruko: " << laikai.rikiavimas << "s.\n";
+    if (laikai.skirstymas > 0) std::cout << "Studentų skirstymas vidutiniškai užtruko: " << laikai.skirstymas << "s.\n";
+    if (laikai.isvedimas > 0) std::cout << "Studentų išvedimas vidutiniškai užtruko: " << laikai.isvedimas << "s.\n";
+    if (apskaiciuotiBendraLaika(laikai) > 0) std::cout << "Bendras programos veikimas vidutiniškai užtruko: "<< apskaiciuotiBendraLaika(laikai) << "s.\n";
 }
 
 void parodytiStudentus(const std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodas){

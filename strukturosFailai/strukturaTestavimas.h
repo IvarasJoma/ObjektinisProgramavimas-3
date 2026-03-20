@@ -8,6 +8,7 @@ struct TestoLaikai{
     double nuskaitymas = 0.0;
     double skaiciavimas = 0.0;
     double rikiavimas = 0.0;
+    double skirstymas = 0.0;
     double isvedimas = 0.0;
 };
 
@@ -23,5 +24,9 @@ template <typename Func> double ismatuotiLaika(Func veiksmas){
 void vykdytiIvedimoTestavima();
 void vykdytiIsvedimoTestavima(Failai& failai);
 void vykdytiDuomenuApdorojimoTestavima();
+void vykdytiNulintajaKonteineriuTestavimoStrategija();
+void vykdytiPirmajaKonteineriuTestavimoStrategija();
+void vykdytiAntrajaKonteineriuTestavimoStrategija();
+void vykdytiTreciajaKonteineriuTestavimoStrategija();
 
 #endif

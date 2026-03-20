@@ -1,45 +1,31 @@
 ## Testavimo aplinka
 
-Testavimas buvo vykdytas per Macbook M3 Pro nešiojamąjį kompiuterį, pasižymintį šiomis specifikacijomis:
+Testavimas buvo vykdytas šioje sisteminėje aplinkoje:
 
-| Branduolių skaičius | 11 |
+| Kompiuteris |  Macbook M3 Pro |
 |---------------------|------|
-| **Atminties talpa** | 18 GB LPDDR5-6400 |
+| Procesorius | M3 Pro |
+| Branduolių skaičius | 11 |
+| Operatyvios atminties talpa | 18 GB LPDDR5-6400 |
+| SSD talpa ir greitis | 512GB, 6200 MB/s Write, 4310 MB/s Read |
 
-## Testavimo rezultatų analizė
+## Konteinerių našumo palyginimas
 
-Programa buvo testuojama naudojant du režimus: naudojant **duomenų sukūrimo testavimo režimą** ir naudojant **duomenų apdorojimo testavimo režimą**.  
-Kiekvienas testas buvo vykdomas **3 kartus**, o maksimalus namų darbų pažymių skaičius vienam studentui buvo **10**.
+| Įrašų kiekis | Konteineris | Nuskaitymas (s) | Skaičiavimas (s) | Rikiavimas (s) | Skirstymas (s) | Bendras (s) |
+| ------------ | ----------- | --------------- | ---------------- | -------------- | -------------- | ----------- |
+| 10000000     | Vector      | 1.39814         | 0.740288         | 0.253174       | 0.158143       | 2.54975     |
+| 10000000     | List        | 1.33599         | 0.914766         | 6.3699         | 1.14471        | 9.76536     |
+| 10000000     | Deque       | 1.25554         | 0.697531         | 0.27545        | 0.0914853      | 2.32        |
+| 1000000      | Vector      | 0.141607        | 0.0716041        | 0.0261129      | 0.00840414     | 0.247728    |
+| 1000000      | List        | 0.127081        | 0.0702059        | 0.304474       | 0.101547       | 0.603307    |
+| 1000000      | Deque       | 0.122995        | 0.0696637        | 0.0283185      | 0.0049964      | 0.225973    |
+| 100000       | Vector      | 0.0363819       | 0.0071691        | 0.00265189     | 0.000758291    | 0.0469612   |
+| 100000       | List        | 0.0127768       | 0.00691454       | 0.0089005      | 0.00145046     | 0.0300423   |
+| 100000       | Deque       | 0.012558        | 0.00694849       | 0.00280854     | 0.000526708    | 0.0228417   |
+| 10000        | Vector      | 0.0223484       | 0.000888153      | 0.000314902    | 8.34723e-05    | 0.0236349   |
+| 10000        | List        | 0.00155997      | 0.000803097      | 0.000668486    | 0.000120305    | 0.00315186  |
+| 10000        | Deque       | 0.00142519      | 0.000754861      | 0.000309542    | 6.90277e-05    | 0.00255862  |
+| 1000         | Vector      | 0.00108529      | 0.000202847      | 8.3986e-05     | 3.0375e-05     | 0.0014025   |
+| 1000         | List        | 0.000478903     | 0.000162708      | 7.62917e-05    | 3.26947e-05    | 0.000750597 |
+| 1000         | Deque       | 0.000455111     | 0.000148487      | 7.32363e-05    | 3.93337e-05    | 0.000716168 |
 
-Žemiau pateikta lentelė rodo **vidutinį failo kūrimo ir uždarymo laiką** skirtingiems sugeneruotų studentų kiekiams.
-
-| Studentų skaičius | Vidutinis laikas (s) |
-|-------------------|---------------------|
-| 1 000             | 0.00391939          |
-| 10 000            | 0.0186724           |
-| 100 000           | 0.0982586           |
-| 1 000 000         | 0.888124            |
-| 10 000 000        | 9.48033             |
-
-Tuo tarpu ši lentelė rodo **vidutinį failo apdorojimo laiką** skirtingiems sugeneruotų studentų kiekiams
-
-| Studentų skaičius | Nuskaitymas (s) | Skaičiavimas (s) | Rikiavimas (s) | Išvedimas (s) | Bendras laikas (s) |
-|---|---|---|---|---|---|
-| 1 000 | 0.00076 | 0.00021 | 0.00012 | 0.00305 | 0.00417 |
-| 10 000 | 0.00357 | 0.00203 | 0.00214 | 0.01405 | 0.02182 |
-| 100 000 | 0.02138 | 0.01158 | 0.00994 | 0.07227 | 0.11517 |
-| 1 000 000 | 0.14831 | 0.10334 | 0.08742 | 0.79912 | 1.13819 |
-| 10 000 000 | 1.44072 | 1.05946 | 0.88395 | 8.26054 | 11.64470 |
-
-## Testavimo nuotraukos
-
-<img width="702" height="771" alt="Screenshot 2026-03-11 at 15 20 34" src="https://github.com/user-attachments/assets/8d4863d2-655b-4638-9948-753ec8839f88" />
-<img width="702" height="771" alt="Screenshot 2026-03-11 at 15 19 35" src="https://github.com/user-attachments/assets/ae4a753f-cc25-44b7-91cb-8a8765914991" />
-<img width="702" height="771" alt="Screenshot 2026-03-11 at 15 19 07" src="https://github.com/user-attachments/assets/10d73f90-89b6-4086-b244-e3c2400a65b4" />
-<img width="702" height="771" alt="Screenshot 2026-03-11 at 15 18 39" src="https://github.com/user-attachments/assets/33339b64-9bd1-4b34-bdd9-ee426bd0fc5b" />
-<img width="702" height="351" alt="Screenshot 2026-03-11 at 14 34 45" src="https://github.com/user-attachments/assets/774f963f-255b-4978-9087-36bef5324aa8" />
-<img width="702" height="351" alt="Screenshot 2026-03-11 at 14 34 04" src="https://github.com/user-attachments/assets/31b01bee-9e36-4011-9bfd-bb23fbe18827" />
-<img width="702" height="351" alt="Screenshot 2026-03-11 at 14 33 40" src="https://github.com/user-attachments/assets/a1fdde53-f928-4e4c-af29-2b50407cd11e" />
-<img width="702" height="351" alt="Screenshot 2026-03-11 at 14 33 29" src="https://github.com/user-attachments/assets/6ed756cf-5678-4788-be7d-3585107abbda" />
-<img width="702" height="744" alt="Screenshot 2026-03-11 at 15 18 06" src="https://github.com/user-attachments/assets/e72a650c-404b-47ff-9a8b-2760d0ed8a38" />
-<img width="702" height="376" alt="Screenshot 2026-03-11 at 14 32 52" src="https://github.com/user-attachments/assets/0971281e-58a3-4315-ab35-69255646c60a" />

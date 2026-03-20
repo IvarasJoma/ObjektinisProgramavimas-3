@@ -3,10 +3,9 @@
 
 #include <string>
 
-template <typename StudentuKonteineris>
 struct Studentas {
     std::string Vardas, Pavarde;
-    Container namuDarbuTarpiniaiRezultatai;
+    std::vector<int> namuDarbuTarpiniaiRezultatai;
     int egzaminoRezultatas;
     double galutinisRezultatas = 0;
 };

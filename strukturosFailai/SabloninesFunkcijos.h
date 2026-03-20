@@ -1,4 +1,12 @@
+#ifndef SABLONINESFUNKCIJOS_H
+#define SABLONINESFUNKCIJOS_H
+
 #include <string>
+#include <algorithm>
+#include <numeric>
+#include <iostream>
+#include "../strukturosFailai/strukturaDarbasSuFailais.h"
+#include <fstream>
 
 template <typename StudentuKonteineris>
 StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
@@ -86,12 +94,8 @@ double skaiciuotiGalutiniPazymi(const Studentas& studentas, char pasirinkimas) {
 }
 
 template <typename T>
-void apskaiciuotiGalutiniPazymi(T& duomenys, char metodas) {
-    if constexpr (requires { duomenys.begin(); duomenys.end(); }) for (auto& studentas : duomenys) apskaiciuotiGalutiniPazymi(studentas, metodas);
-    else {
-        const double namuDarbuRezultatas = (metodas == 'V' || metodas == 'v') ? skaiciuotiNDVidurki(duomenys.namuDarbuTarpiniaiRezultatai) : skaiciuotiNDMediana(duomenys.namuDarbuTarpiniaiRezultatai);
-        duomenys.galutinisRezultatas = 0.4 * namuDarbuRezultatas + 0.6 * duomenys.egzaminoRezultatas;
-    }
+void apskaiciuotiGalutiniusPazymius(T& duomenys, char metodas) {
+    for (auto& studentas : duomenys) studentas.galutinisRezultatas = skaiciuotiGalutiniPazymi(studentas, metodas);
 }
 
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
@@ -105,3 +109,66 @@ void suskirstytiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& 
         else pazangusStudentai.push_back(std::move(studentas));
     }
 }
+
+template <typename StudentuKonteineris>
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas) {
+    try {
+        auto failai = gautiTekstiniusFailus("tekstiniaiFailai");
+        if (failai.empty()) throw std::runtime_error("Kataloge 'tekstiniaiFailai' nerasta .txt failų.");
+        if (pasirinkimasNuskaitymo < 1 || static_cast<std::size_t>(pasirinkimasNuskaitymo) > failai.size()) throw std::runtime_error("Neteisingas failo pasirinkimas.");
+        const std::size_t indeksas = static_cast<std::size_t>(pasirinkimasNuskaitymo - 1);
+        const std::string failoKelias = failai[indeksas].string();
+        studentuSarasas = nuskaitytiStudentuDuomenisIsFailo<StudentuKonteineris>(failoKelias);
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Klaida skaitant failą: " << e.what() << std::endl;
+        studentuSarasas.clear();
+    }
+}
+
+template <typename StudentuKonteineris>
+void rikiuotiSuskirstytusStudentus(StudentuKonteineris& pazangiuSarasas, StudentuKonteineris& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu){
+    rikiuotiStudentus(pasirinkimasRikiavimoPazangiu, pazangiuSarasas);
+    rikiuotiStudentus(pasirinkimasRikiavimoSilpnu, silpnuSarasas);
+}
+
+template <typename StudentuKonteineris>
+void irasytiSuskirstytusStudentusIFailus(const StudentuKonteineris& pazangiuSarasas, const StudentuKonteineris& silpnuSarasas){
+    irasytiStudentuDuomenisIFaila(pazangiuSarasas, "pazangusStudentai.txt");
+    irasytiStudentuDuomenisIFaila(silpnuSarasas, "silpniStudentai.txt");
+}
+
+template <typename StudentuKonteineris>
+void irasytiStudentuDuomenisIFaila(const StudentuKonteineris& studentuSarasas, const std::string& failoPavadinimas) {
+    std::ofstream isvedamasFailas("tekstiniaiFailai/" + failoPavadinimas, std::ios::binary);
+    if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
+    static char failoBuferis[1 << 22]; // sukuriamas 4MB failo burferis
+    isvedamasFailas.rdbuf()->pubsetbuf(failoBuferis, sizeof(failoBuferis)); // isakoma naudoti didesni buferi
+    std::size_t ndKiekis = 0;
+    if (!studentuSarasas.empty()) ndKiekis = studentuSarasas.front().namuDarbuTarpiniaiRezultatai.size();
+    std::string buferis;
+    buferis.reserve(1 << 22);
+    std::format_to(std::back_inserter(buferis), "{:<18}{:<18}", "Vardas", "Pavardė");
+    for (std::size_t i = 1; i <= ndKiekis; ++i) std::format_to(std::back_inserter(buferis), "{:<10}", "ND" + std::to_string(i));
+    std::format_to(std::back_inserter(buferis), "{:<10}\n", "Egz.");
+    for (const auto& studentas : studentuSarasas) {
+        std::format_to(std::back_inserter(buferis), "{:<18}{:<18}", studentas.Vardas, studentas.Pavarde);
+        for (const auto& pazymys : studentas.namuDarbuTarpiniaiRezultatai) std::format_to(std::back_inserter(buferis), "{:<10}", pazymys);
+        std::format_to(std::back_inserter(buferis), "{:<10}\n", studentas.egzaminoRezultatas);
+        if (buferis.size() >= (1 << 22)) { // jei buferis arti savo talpos
+            if (!buferis.empty()) {
+                isvedamasFailas.write(buferis.data(), static_cast<std::streamsize>(buferis.size())); // issiunciam info is buferio
+                buferis.clear(); // isvalom buferi
+            }
+        }
+    }
+    if (!buferis.empty()) {
+        isvedamasFailas.write(buferis.data(), static_cast<std::streamsize>(buferis.size())); // issiunciam info is buferio
+        buferis.clear(); // isvalom buferi
+    }
+    if (!isvedamasFailas) {
+        throw std::runtime_error("Nepavyko įrašyti į failą: " + failoPavadinimas);
+    }
+}
+
+#endif
