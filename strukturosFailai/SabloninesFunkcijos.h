@@ -99,7 +99,7 @@ void apskaiciuotiGalutiniusPazymius(T& duomenys, char metodas) {
 }
 
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
-void suskirstytiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& pazangusStudentai, RezultatoKonteineris& silpniStudentai) {
+void perkeltiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& pazangusStudentai, RezultatoKonteineris& silpniStudentai) {
     pazangusStudentai.clear();
     silpniStudentai.clear();
     if constexpr (requires { pazangusStudentai.reserve(studentai.size() / 2); }) pazangusStudentai.reserve(studentai.size() / 2);
@@ -107,6 +107,18 @@ void suskirstytiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& 
     for (auto& studentas : studentai) {
         if (studentas.galutinisRezultatas < 5) silpniStudentai.push_back(std::move(studentas));
         else pazangusStudentai.push_back(std::move(studentas));
+    }
+}
+
+template <typename SaltinioKonteineris, typename RezultatoKonteineris>
+void kopijuotiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& pazangusStudentai, RezultatoKonteineris& silpniStudentai) {
+    pazangusStudentai.clear();
+    silpniStudentai.clear();
+    if constexpr (requires { pazangusStudentai.reserve(studentai.size() / 2); }) pazangusStudentai.reserve(studentai.size() / 2);
+    if constexpr (requires { silpniStudentai.reserve(studentai.size() / 2); }) silpniStudentai.reserve(studentai.size() / 2);
+    for (auto& studentas : studentai) {
+        if (studentas.galutinisRezultatas < 5) silpniStudentai.push_back(studentas);
+        else pazangusStudentai.push_back(studentas);
     }
 }
 
