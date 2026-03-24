@@ -7,6 +7,9 @@
 #include <iostream>
 #include "../strukturosFailai/strukturaDarbasSuFailais.h"
 #include <fstream>
+#include <list>
+#include <type_traits>
+#include <utility>
 
 template <typename StudentuKonteineris>
 StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
