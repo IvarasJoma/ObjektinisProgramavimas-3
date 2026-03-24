@@ -48,3 +48,23 @@ Testavimas buvo vykdytas šioje sisteminėje aplinkoje:
 | 1000     | Vector      | 0.00123278     |
 | 1000     | List      | 0.00101369     |
 | 1000     | Deque      | 0.000924639     |
+
+## Antros strategijos tyrimo rezultatai
+
+| Įrašų kiekis | Konteineris | Bendras (s) |
+| ------------ | ----------- | ----------- |
+| 10000000     | Vector      | 2.62363     |
+| 10000000     | List      | 9.84241     |
+| 10000000     | Deque      | 2.43347     |
+| 1000000     | Vector      | 0.249288     |
+| 1000000     | List      | 0.604816     |
+| 1000000     | Deque      | 0.237476     |
+| 100000     | Vector      | 0.0419464     |
+| 100000     | List      | 0.03074     |
+| 100000     | Deque      | 0.0237164     |
+| 10000     | Vector      | 0.02218     |
+| 10000     | List      | 0.00334639     |
+| 10000     | Deque      | 0.00272092     |
+| 1000     | Vector      | 0.00139165     |
+| 1000     | List      | 0.00076532     |
+| 1000     | Deque      | 0.000718876     |
