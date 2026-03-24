@@ -158,23 +158,14 @@ template <typename SaltinioKonteineris, typename RezultatoKonteineris>
 void skirstytiIstrinantStudentusEfektyviau(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai)
 {
     silpniStudentai.clear();
-    if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) silpniStudentai.reserve(studentai.size());
-    if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value){
-        auto it = studentai.begin();
-        while (it != studentai.end()) {
-            if (it->galutinisRezultatas < 5) {
-                auto current = it++;
-                silpniStudentai.splice(silpniStudentai.end(), studentai, current);
-            } else {
-                ++it;
-            }
-        }
+    if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value) {
+        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) { return s.galutinisRezultatas >= 5; });
+        silpniStudentai.splice(silpniStudentai.end(), studentai, studentai.begin(), boundary);
     }
-    else{
-        auto boundary = std::lower_bound(studentai.begin(), studentai.end(), 5.0, [](const auto& s, double riba) { return s.galutinisRezultatas < riba;});
-        silpniStudentai.clear();
-        silpniStudentai.reserve(std::distance(studentai.begin(), boundary));
-        silpniStudentai.insert(silpniStudentai.end(), std::make_move_iterator(studentai.begin()), std::make_move_iterator(boundary));
+    else {
+        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) {return s.galutinisRezultatas >= 5;});
+        if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) { silpniStudentai.reserve(static_cast<typename RezultatoKonteineris::size_type>(std::distance(studentai.begin(), boundary)));}
+        std::copy(std::make_move_iterator(studentai.begin()), std::make_move_iterator(boundary), std::back_inserter(silpniStudentai));
         studentai.erase(studentai.begin(), boundary);
     }
 }
