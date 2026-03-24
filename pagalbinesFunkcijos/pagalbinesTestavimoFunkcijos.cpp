@@ -176,7 +176,7 @@ void vykdytiPirmajaKonteineriuTestavimoStrategija(){
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
-    std::string katalogas = "tekstiniaiFailai";
+    std::string katalogas = "KonteineriuTyrimuiSkirtiFailai";
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu(katalogas));
     int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU_TIK_DIDEJANCIAI);
     std::cout << "VEKTORIU TESTAS:\n";
