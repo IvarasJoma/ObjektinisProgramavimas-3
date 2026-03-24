@@ -132,22 +132,25 @@ template <typename T, typename Alloc>
 struct is_std_list<std::list<T, Alloc>> : std::true_type {};
 
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
-void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai) {
+void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai)
+{
     silpniStudentai.clear();
     if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) silpniStudentai.reserve(studentai.size());
-    auto it = studentai.begin();
-    while (it != studentai.end()) {
-        if (it->galutinisRezultatas < 5) {
-            if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value) {
+    if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value){
+        auto it = studentai.begin();
+        while (it != studentai.end()) {
+            if (it->galutinisRezultatas < 5) {
                 auto current = it++;
                 silpniStudentai.splice(silpniStudentai.end(), studentai, current);
             } else {
-                silpniStudentai.push_back(std::move(*it));
-                it = studentai.erase(it);
+                ++it;
             }
-        } else {
-            ++it;
         }
+    }
+    else{
+        auto middle = std::stable_partition(studentai.begin(), studentai.end(), [](const auto& s){ return s.galutinisRezultatas >= 5; });
+        std::move(middle, studentai.end(), std::back_inserter(silpniStudentai));
+        studentai.erase(middle, studentai.end());
     }
 }
 
