@@ -68,3 +68,5 @@ Testavimas buvo vykdytas šioje sisteminėje aplinkoje:
 | 1000     | Vector      | 0.00139165     |
 | 1000     | List      | 0.00076532     |
 | 1000     | Deque      | 0.000718876     |
+
+## Trečios strategijos tyrimo rezultatai
