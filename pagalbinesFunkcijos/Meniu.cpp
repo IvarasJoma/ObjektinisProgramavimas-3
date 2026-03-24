@@ -1,6 +1,6 @@
 #include "../strukturosFailai/strukturaMeniu.h"
 
-const std::array<MeniuEilute, 13> PAGRINDINIS_MENIU = {{
+const std::array<MeniuEilute, 14> PAGRINDINIS_MENIU = {{
     "Galimi programos veikimo būdai:",
     "1 - Įvesti duomenis ranka",
     "2 - Generuoti tik pažymius",
@@ -11,9 +11,10 @@ const std::array<MeniuEilute, 13> PAGRINDINIS_MENIU = {{
     "7 - Testuoti duomenų išvedimą",
     "8 - Testuoti duomenų apdorojimą",
     "9 - Vykdyti nulintąją konteinerių testavimo strategiją",
-    "10 -  Vykdyti pirmąją konteinerių testavimo strategiją",
+    "10 - Vykdyti pirmąją konteinerių testavimo strategiją",
     "11 - Vykdyti antrąją konteinerių testavimo strategiją",
-    "12 - Baigti darbą"
+    "12 - Vykdyti trečiąją konteinerių testavimo strategiją",
+    "13 - Baigti darbą"
 }};
 
 const std::array<MeniuEilute, 7> RIKIAVIMO_MENIU = {{
