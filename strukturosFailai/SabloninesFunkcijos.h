@@ -123,10 +123,10 @@ void kopijuotiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& pa
 }
 
 template <typename StudentuKonteineris>
-void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas) {
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas, std::string& katalogas) {
     try {
-        auto failai = gautiTekstiniusFailus("tekstiniaiFailai");
-        if (failai.empty()) throw std::runtime_error("Kataloge 'tekstiniaiFailai' nerasta .txt failų.");
+        auto failai = gautiTekstiniusFailus(katalogas);
+        if (failai.empty()) throw std::runtime_error("Kataloge" + katalogas + "nerasta .txt failų.");
         if (pasirinkimasNuskaitymo < 1 || static_cast<std::size_t>(pasirinkimasNuskaitymo) > failai.size()) throw std::runtime_error("Neteisingas failo pasirinkimas.");
         const std::size_t indeksas = static_cast<std::size_t>(pasirinkimasNuskaitymo - 1);
         const std::string failoKelias = failai[indeksas].string();

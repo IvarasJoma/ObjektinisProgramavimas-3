@@ -110,10 +110,10 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     return rezultatas;
 }
 
-void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas) {
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas, const std::string& katalogas) {
     try {
-        auto failai = gautiTekstiniusFailus("tekstiniaiFailai");
-        if (failai.empty()) throw std::runtime_error("Kataloge 'tekstiniaiFailai' nerasta .txt failų.");
+        auto failai = gautiTekstiniusFailus(katalogas);
+        if (failai.empty()) throw std::runtime_error("Kataloge nerasta .txt failų.");
         if (pasirinkimasNuskaitymo < 1 || static_cast<std::size_t>(pasirinkimasNuskaitymo) > failai.size()) throw std::runtime_error("Neteisingas failo pasirinkimas.");
         const std::size_t indeksas = static_cast<std::size_t>(pasirinkimasNuskaitymo - 1);
         const std::string failoKelias = failai[indeksas].string();
@@ -142,7 +142,7 @@ void vykdytiNuskaitymaIsFailo(){
     std::vector<StudentasVektorius> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu("tekstiniaiFailai"));
-    nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas);
+    nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, "tekstiniaiFailai");
     apdorotiIrIsvestiStudentus(studentuSarasas, skaiciavimoMetodas);
 }
 
@@ -170,12 +170,24 @@ void vykdytiSkirstymaIFailus(std::vector<StudentasVektorius>& studentuSarasas){
     int pasirinkimasRikiavimoSilpnu = 0;
     parinktiRikiavimoBudus(pasirinkimasRikiavimoPazangiu, pasirinkimasRikiavimoSilpnu);
     rikiuotiSuskirstytusStudentus(pazangiuSarasas, silpnuSarasas, pasirinkimasRikiavimoPazangiu, pasirinkimasRikiavimoSilpnu);
-    irasytiSuskirstytusStudentusIFailus(pazangiuSarasas, silpnuSarasas);
+    irasytiSuskirstytusStudentusIFailus(pazangiuSarasas, silpnuSarasas, skaiciavimoMetodas);
 }
 
-void irasytiSuskirstytusStudentusIFailus(const std::vector<StudentasVektorius>& pazangiuSarasas, const std::vector<StudentasVektorius>& silpnuSarasas){
-    irasytiStudentuDuomenisIFaila(pazangiuSarasas, "pazangusStudentai.txt");
-    irasytiStudentuDuomenisIFaila(silpnuSarasas, "silpniStudentai.txt");
+void irasytiSuskirstytusStudentusIFailus(const std::vector<StudentasVektorius>& pazangiuSarasas, const std::vector<StudentasVektorius>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas){
+    std::ofstream pazangiuFailas("ApdorojimoTyrimuiSkirtiFailai/PazangusStudentai.txt");
+    if (!pazangiuFailas) throw std::runtime_error("Nepavyko atidaryti failo: PazangusStudentai.txt");
+    pazangiuFailas << std::format("{:<18}{:<18}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
+    for (const auto& studentas : pazangiuSarasas) {
+        pazangiuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.Vardas, studentas.Pavarde, studentas.galutinisRezultatas);
+    }
+    if (!pazangiuFailas) throw std::runtime_error("Nepavyko įrašyti į failą: PazangusStudentai.txt");
+    std::ofstream silpnuFailas("ApdorojimoTyrimuiSkirtiFailai/SilpniStudentai.txt");
+    if (!silpnuFailas) throw std::runtime_error("Nepavyko atidaryti failo: SilpniStudentai.txt");
+    silpnuFailas << std::format("{:<18}{:<18}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
+    for (const auto& studentas : silpnuSarasas) {
+        silpnuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.Vardas, studentas.Pavarde, studentas.galutinisRezultatas);
+    }
+    if (!silpnuFailas) throw std::runtime_error("Nepavyko įrašyti į failą: SilpniStudentai.txt");
 }
 
 std::vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas){
