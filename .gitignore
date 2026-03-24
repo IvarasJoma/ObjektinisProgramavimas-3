@@ -40,5 +40,5 @@
 # debug information files
 *.dwo
 main
-.txt
 *.txt
+.DS_STORE
