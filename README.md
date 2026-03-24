@@ -1,4 +1,32 @@
-## Testavimo aplinka
+<h2>Programos aprašymas</h2>
+Programa yra skirta studentų (jų akademinių pasiekimų) duomenų įvedimui, apdorojimui ir išvedimui.
+<h4><b> Programos funkcijos: </b> </h4>
+<ol>
+    <li>Įvesti visus studentų duomenis ranka</li>
+    <li>Įvesti studentų vardus, pavardes, atsitiktine tvarka generuoti pažymius</li>
+    <li>Atsitiktinai generuoti studentų vardus, pavardes ir pažymius</li>
+    <li>Nuskaityti duomenis iš failo</li>
+    <li>Generuoti pasirinktino ilgio failą su atsitiktinai sugeneruotais studentų duomenimis</li>
+</ol>
+
+<p>Idant būtų galima išmatuoti programos veikimo laiko priklausomybę nuo naudojamų konteinerių (<b>vector, list, deque</b>) skirstant studentus į pažangius ir nepažangius, buvo pasitelktos trys strategijos:</p>
+<ol>
+    <li> Bendro studentų konteinerio (<b>vector, list ir deque tipų</b>) išskaidymas į du naujai sukurtus to paties tipo konteinerius: pažangius ir nepažangius.</li>
+    <li> Bendro studentų konteinerio (<b>vector, list ir deque</b>) išskaidymas panaudojant tik nepažangių mokinių konteinerį (jei studentas nepažangus, jis perkeliamas į naują konteinerį, iš senojo ištrinamas).</li>
+    <li>Bendro studentų konteinerio (<b>vector, list ir deque</b>) išskaidant optimizuojant antrąją strategiją.</li>
+</ol>
+
+<h2>Naudojimosi instrukcija</h2>
+<ol>
+    <li>Parsisiųsti ir įsirašyti <a href="https://gnuwin32.sourceforge.net/packages/make.htm">make</a> programinį paketą (tik jei naudojate Windows OS).</li>
+    <li>Atsidaryti savo OS terminalą</li>
+    <li>Klonuoti programos repozitoriją</li>
+    git clone https://github.com/IvarasJoma/ObjektinisProgramavimas.git
+ <li>Terminale rašyti žemiau esančią komandą, norint paleisti programą
+ <pre><code>make run</code></pre>
+</ol>
+
+<h2>Testavimo apžvalga</h2>
 
 Testavimas buvo vykdytas šioje sisteminėje aplinkoje:
 
