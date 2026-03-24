@@ -122,6 +122,32 @@ void kopijuotiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& pa
     }
 }
 
+template <typename T>
+struct is_std_list : std::false_type {};
+
+template <typename T, typename Alloc>
+struct is_std_list<std::list<T, Alloc>> : std::true_type {};
+
+template <typename SaltinioKonteineris, typename RezultatoKonteineris>
+void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai) {
+    silpniStudentai.clear();
+    if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) silpniStudentai.reserve(studentai.size());
+    auto it = studentai.begin();
+    while (it != studentai.end()) {
+        if (it->galutinisRezultatas < 5) {
+            if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value) {
+                auto current = it++;
+                silpniStudentai.splice(silpniStudentai.end(), studentai, current);
+            } else {
+                silpniStudentai.push_back(std::move(*it));
+                it = studentai.erase(it);
+            }
+        } else {
+            ++it;
+        }
+    }
+}
+
 template <typename StudentuKonteineris>
 void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas, std::string& katalogas) {
     try {
