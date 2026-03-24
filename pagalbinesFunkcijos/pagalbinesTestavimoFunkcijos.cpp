@@ -287,7 +287,7 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
@@ -300,7 +300,7 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
@@ -313,7 +313,7 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
