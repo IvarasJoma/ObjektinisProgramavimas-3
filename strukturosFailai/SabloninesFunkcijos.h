@@ -154,6 +154,31 @@ void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai, RezultatoKontei
     }
 }
 
+template <typename SaltinioKonteineris, typename RezultatoKonteineris>
+void skirstytiIstrinantStudentusEfektyviau(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai)
+{
+    silpniStudentai.clear();
+    if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) silpniStudentai.reserve(studentai.size());
+    if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value){
+        auto it = studentai.begin();
+        while (it != studentai.end()) {
+            if (it->galutinisRezultatas < 5) {
+                auto current = it++;
+                silpniStudentai.splice(silpniStudentai.end(), studentai, current);
+            } else {
+                ++it;
+            }
+        }
+    }
+    else{
+        auto boundary = std::lower_bound(studentai.begin(), studentai.end(), 5.0, [](const auto& s, double riba) { return s.galutinisRezultatas < riba;});
+        silpniStudentai.clear();
+        silpniStudentai.reserve(std::distance(studentai.begin(), boundary));
+        silpniStudentai.insert(silpniStudentai.end(), std::make_move_iterator(studentai.begin()), std::make_move_iterator(boundary));
+        studentai.erase(studentai.begin(), boundary);
+    }
+}
+
 template <typename StudentuKonteineris>
 void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas, std::string& katalogas) {
     try {
