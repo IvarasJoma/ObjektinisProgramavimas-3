@@ -4,7 +4,7 @@
 #include <vector>
 #include "../strukturosFailai/VektoriuStudentoStruktura.h"
 
-void rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector<StudentasVektorius>& studentuSarasas);
-void rikiuotiSuskirstytusStudentus(std::vector<StudentasVektorius>& pazangiuSarasas, std::vector<StudentasVektorius>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu);
+void rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector<Studentas>& studentuSarasas);
+void rikiuotiSuskirstytusStudentus(std::vector<Studentas>& pazangiuSarasas, std::vector<Studentas>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu);
 
 #endif
