@@ -8,7 +8,7 @@ double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai){
     return suma / ndPazymiai.size();
 }
 
-double skaiciuotiGalutiniVidurki(const StudentasVektorius& studentas){
+double skaiciuotiGalutiniVidurki(const Studentas& studentas){
     double ndVidurkis = skaiciuotiNDVidurki(studentas.namuDarbuTarpiniaiRezultatai);
     return 0.4 * ndVidurkis + 0.6 * studentas.egzaminoRezultatas;
 }
@@ -21,12 +21,12 @@ double skaiciuotiNDMediana(std::vector<int> ndPazymiai){
     else return (ndPazymiai[n / 2 - 1] + ndPazymiai[n / 2]) / 2.0;
 }
 
-double skaiciuotiGalutineMediana(const StudentasVektorius& studentas){
+double skaiciuotiGalutineMediana(const Studentas& studentas){
     double ndMediana = skaiciuotiNDMediana(studentas.namuDarbuTarpiniaiRezultatai);
     return 0.4 * ndMediana + 0.6 * studentas.egzaminoRezultatas;
 }
 
-void apskaiciuotiGalutiniPazymi(StudentasVektorius& studentas, char skaiciavimoMetodoPasirinkimas){
+void apskaiciuotiGalutiniPazymi(Studentas& studentas, char skaiciavimoMetodoPasirinkimas){
     if (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v'){
         double galutinisRezultatasPagalVidurki = skaiciuotiGalutiniVidurki(studentas);
         studentas.galutinisRezultatas = galutinisRezultatasPagalVidurki;
@@ -36,11 +36,11 @@ void apskaiciuotiGalutiniPazymi(StudentasVektorius& studentas, char skaiciavimoM
     }
 }
 
-void apskaiciuotiGalutiniusPazymius(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void apskaiciuotiGalutiniusPazymius(std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     for (auto& studentas : studentuSarasas) apskaiciuotiGalutiniPazymi(studentas, skaiciavimoMetodoPasirinkimas);
 }
 
-void suskirstytiStudentus(const std::vector<StudentasVektorius>& studentuSarasas, std::vector<StudentasVektorius>& pazangiuSarasas, std::vector<StudentasVektorius>& silpnuSarasas){
+void suskirstytiStudentus(const std::vector<Studentas>& studentuSarasas, std::vector<Studentas>& pazangiuSarasas, std::vector<Studentas>& silpnuSarasas){
     pazangiuSarasas.clear();
     silpnuSarasas.clear();
     pazangiuSarasas.reserve(studentuSarasas.size() / 2);

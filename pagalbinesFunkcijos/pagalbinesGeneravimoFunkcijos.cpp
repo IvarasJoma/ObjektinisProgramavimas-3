@@ -2,7 +2,7 @@
 #include "../strukturosFailai/Failai.h"
 #include <random>
 
-void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis){
+void generuotiRezultatus(Studentas& studentas, int maksimalusNDKiekis){
     const std::size_t ndKiekis = static_cast<std::size_t>(maksimalusNDKiekis);
     studentas.namuDarbuTarpiniaiRezultatai.clear();
     studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
@@ -10,7 +10,7 @@ void generuotiRezultatus(StudentasVektorius& studentas, int maksimalusNDKiekis){
     studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
 }
 
-void generuotiVardaPavarde(StudentasVektorius& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){
+void generuotiVardaPavarde(Studentas& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){
     if (vyrVardai.empty() || vyrPavardes.empty() || motVardai.empty() || motPavardes.empty()){
         studentas.Vardas = "Vardenis";
         studentas.Pavarde = "Pavardenis";
@@ -37,11 +37,11 @@ int generuotiSveikaSkaiciu(int nuo, int iki){
     return distribucija(generatorius);
 }
 
-std::vector<StudentasVektorius> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai){
-    std::vector<StudentasVektorius> studentuSarasas;
+std::vector<Studentas> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai){
+    std::vector<Studentas> studentuSarasas;
     studentuSarasas.reserve(static_cast<std::size_t>(studentuKiekis));
     for (int i = 0; i < studentuKiekis; ++i){
-        StudentasVektorius studentas;
+        Studentas studentas;
         generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
         generuotiRezultatus(studentas, maksimalusNDKiekis);
         studentuSarasas.push_back(std::move(studentas));

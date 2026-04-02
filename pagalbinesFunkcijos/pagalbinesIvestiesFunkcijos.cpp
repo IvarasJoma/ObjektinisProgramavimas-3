@@ -195,7 +195,7 @@ std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvark
     }
 }
 
-void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void apdorotiIrIsvestiStudentus(std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodoPasirinkimas);
     int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU);
     rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);
@@ -203,8 +203,8 @@ void apdorotiIrIsvestiStudentus(std::vector<StudentasVektorius>& studentuSarasas
     isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);
 }
 
-StudentasVektorius sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis){
-    StudentasVektorius studentas;
+Studentas sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis){
+    Studentas studentas;
     studentas.Vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.");
     studentas.Pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.");
     if (generuotiPazymius) generuotiRezultatus(studentas, maksimalusNDKiekis);
@@ -215,8 +215,8 @@ StudentasVektorius sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuoti
     return studentas;
 }
 
-std::vector<StudentasVektorius> ivestiStudentus(bool generuotiPazymius, int maksimalusNDKiekis){
-    std::vector<StudentasVektorius> studentai;
+std::vector<Studentas> ivestiStudentus(bool generuotiPazymius, int maksimalusNDKiekis){
+    std::vector<Studentas> studentai;
     while (patvirtintiNaujoStudentoPridejima()) studentai.push_back(sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(generuotiPazymius, maksimalusNDKiekis));
     return studentai;
 }
@@ -232,7 +232,7 @@ void vykdytiPilnaGeneravima(Failai& failai){
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int studentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norimą generuoti studentų kiekį ir paspauskite ENTER: ");
     int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
-    std::vector<StudentasVektorius> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
+    std::vector<Studentas> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
     parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodas);
 }
 

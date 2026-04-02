@@ -38,52 +38,74 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
     return true;
 }
 
-std::vector<StudentasVektorius> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas){
-    std::vector<StudentasVektorius> studentuSarasas;
+#include <vector>
+#include <string>
+#include <cstdio>
+#include <cstring>
+#include <stdexcept>
+#include <iostream>
+#include <new>
+
+std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
+    std::vector<Studentas> studentuSarasas;
     FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
-    if (!skaitomasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
-    try{
+    if (!skaitomasFailas) {
+        throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
+    }
+    try {
         static char ivestiesBuferis[1 << 20];
         std::setvbuf(skaitomasFailas, ivestiesBuferis, _IOFBF, sizeof(ivestiesBuferis));
-        char aprasas[257];
-        if (!std::fgets(aprasas, sizeof(aprasas), skaitomasFailas)){
+        char aprasas[1024];
+        if (!std::fgets(aprasas, sizeof(aprasas), skaitomasFailas)) {
             std::fclose(skaitomasFailas);
             return studentuSarasas;
         }
         std::size_t namuDarbuKiekis = 0;
-        char laikinaEilute[257];
+        char laikinaEilute[1024];
         std::strncpy(laikinaEilute, aprasas, sizeof(laikinaEilute));
         laikinaEilute[sizeof(laikinaEilute) - 1] = '\0';
         char* stulpelis = std::strtok(laikinaEilute, " \t\r\n");
-        while (stulpelis){
-            if (stulpelis[0] == 'N' && stulpelis[1] == 'D') namuDarbuKiekis++;
+        while (stulpelis) {
+            if (stulpelis[0] == 'N' && stulpelis[1] == 'D') {
+                namuDarbuKiekis++;
+            }
             stulpelis = std::strtok(nullptr, " \t\r\n");
         }
-        char eilute[257];
-        while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)){
+        char eilute[1024];
+        while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)) {
             const char* rodykle = eilute;
-            StudentasVektorius studentas;
-            if (!nuskaitytiZodiIsFailo(rodykle, studentas.Vardas)) continue;
-            if (!nuskaitytiZodiIsFailo(rodykle, studentas.Pavarde)) continue;
-            studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis);
-            for (std::size_t i = 0; i < namuDarbuKiekis; i++){
+            Studentas studentas;
+            std::string vardas;
+            std::string pavarde;
+            if (!nuskaitytiZodiIsFailo(rodykle, vardas)) continue;
+            if (!nuskaitytiZodiIsFailo(rodykle, pavarde)) continue;
+            studentas.setName(vardas);
+            studentas.setSurname(pavarde);
+            for (std::size_t i = 0; i < namuDarbuKiekis; i++) {
                 int laikinasPazymys;
-                if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) laikinasPazymys = 0;
-                studentas.namuDarbuTarpiniaiRezultatai.push_back(laikinasPazymys);
+                if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) {
+                    laikinasPazymys = 0;
+                }
+                studentas.addHomeworkGrade(static_cast<double>(laikinasPazymys));
             }
-            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, studentas.egzaminoRezultatas)) studentas.egzaminoRezultatas = 0;
+            int egzaminoRezultatas;
+            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, egzaminoRezultatas)) {
+                egzaminoRezultatas = 0;
+            }
+            studentas.setExamGrade(static_cast<double>(egzaminoRezultatas));
             studentuSarasas.push_back(std::move(studentas));
         }
         std::fclose(skaitomasFailas);
         return studentuSarasas;
-    } catch (const std::bad_alloc&){
+    }
+    catch (const std::bad_alloc&) {
         std::fclose(skaitomasFailas);
         std::cerr << "Nepakanka atminties...\n";
         return studentuSarasas;
     }
 }
 
-void irasytiStudentuDuomenisIFaila(const std::vector<StudentasVektorius>& studentuSarasas, std::string failoPavadinimas) {
+void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas, std::string failoPavadinimas) {
     std::ofstream isvedamasFailas("tekstiniaiFailai/" + failoPavadinimas);
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
     std::size_t ndKiekis = 0;
@@ -110,7 +132,7 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     return rezultatas;
 }
 
-void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektorius>& studentuSarasas, const std::string& katalogas) {
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<Studentas>& studentuSarasas, const std::string& katalogas) {
     try {
         auto failai = gautiTekstiniusFailus(katalogas);
         if (failai.empty()) throw std::runtime_error("Kataloge nerasta .txt failų.");
@@ -125,7 +147,7 @@ void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<StudentasVektori
     }
 }
 
-void irasytiDuomenis(std::vector<StudentasVektorius>& studentuSarasas){
+void irasytiDuomenis(std::vector<Studentas>& studentuSarasas){
     try {
         std::ostringstream oss;
         oss << "studentai" << studentuSarasas.size() << ".txt";
@@ -139,7 +161,7 @@ void irasytiDuomenis(std::vector<StudentasVektorius>& studentuSarasas){
 }
 
 void vykdytiNuskaitymaIsFailo(){
-    std::vector<StudentasVektorius> studentuSarasas;
+    std::vector<Studentas> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu("tekstiniaiFailai"));
     nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, "tekstiniaiFailai");
@@ -155,14 +177,14 @@ void vykdytiIrasymaIFaila(Failai& failai){
     if (pasirinkimasIrasymo == 3) studentuKiekis = 100000;
     if (pasirinkimasIrasymo == 4) studentuKiekis = 1000000;
     if (pasirinkimasIrasymo == 5) studentuKiekis = 10000000;
-    std::vector<StudentasVektorius> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
+    std::vector<Studentas> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
     irasytiDuomenis(studentuSarasas);
     vykdytiSkirstymaIFailus(studentuSarasas);
 }
 
-void vykdytiSkirstymaIFailus(std::vector<StudentasVektorius>& studentuSarasas){
-    std::vector<StudentasVektorius> pazangiuSarasas;
-    std::vector<StudentasVektorius> silpnuSarasas;
+void vykdytiSkirstymaIFailus(std::vector<Studentas>& studentuSarasas){
+    std::vector<Studentas> pazangiuSarasas;
+    std::vector<Studentas> silpnuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);
     suskirstytiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);
@@ -173,7 +195,7 @@ void vykdytiSkirstymaIFailus(std::vector<StudentasVektorius>& studentuSarasas){
     irasytiSuskirstytusStudentusIFailus(pazangiuSarasas, silpnuSarasas, skaiciavimoMetodas);
 }
 
-void irasytiSuskirstytusStudentusIFailus(const std::vector<StudentasVektorius>& pazangiuSarasas, const std::vector<StudentasVektorius>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas){
+void irasytiSuskirstytusStudentusIFailus(const std::vector<Studentas>& pazangiuSarasas, const std::vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas){
     std::ofstream pazangiuFailas("ApdorojimoTyrimuiSkirtiFailai/PazangusStudentai.txt");
     if (!pazangiuFailas) throw std::runtime_error("Nepavyko atidaryti failo: PazangusStudentai.txt");
     pazangiuFailas << std::format("{:<18}{:<18}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));

@@ -14,7 +14,7 @@
 #include <list>
 
 void vykdytiIvedimoTestavima(){
-    std::vector<StudentasVektorius> studentuSarasas;
+    std::vector<Studentas> studentuSarasas;
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
@@ -46,9 +46,9 @@ void vykdytiDuomenuApdorojimoTestavima(){
     int pasirinkimasRikiavimoSilpnu = 0;
     parinktiRikiavimoBudus(pasirinkimasRikiavimoPazangiu, pasirinkimasRikiavimoSilpnu);
     for (int i = 0; i < kartai; ++i) {
-        std::vector<StudentasVektorius> studentuSarasas;
-        std::vector<StudentasVektorius> pazangiuSarasas;
-        std::vector<StudentasVektorius> silpnuSarasas;
+        std::vector<Studentas> studentuSarasas;
+        std::vector<Studentas> pazangiuSarasas;
+        std::vector<Studentas> silpnuSarasas;
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, "ApdorojimoTyrimuiSkirtiFailai");});
         laikai.skaiciavimas += ismatuotiLaika([&](){
             apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);
@@ -85,7 +85,7 @@ void vykdytiIsvedimoTestavima(Failai& failai){
             }
             failas << std::format("{:<10}\n", "Egz.");
             for (int j = 0; j < studentuKiekis; ++j) {
-                StudentasVektorius studentas;
+                Studentas studentas;
                 generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
                 generuotiRezultatus(studentas, maksimalusNDKiekis);
                 failas << std::format("{:<18}{:<18}", studentas.Vardas, studentas.Pavarde);

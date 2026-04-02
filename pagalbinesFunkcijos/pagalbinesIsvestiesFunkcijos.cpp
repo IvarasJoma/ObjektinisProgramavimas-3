@@ -6,7 +6,7 @@
 #include <format>
 
 
-void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     out << std::string(98, '-') << "\n";
     out << std::format("{:<40}{:<40}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     out << std::string(98, '-') << "\n";
@@ -16,7 +16,7 @@ void parodytiRezultatuLentele(std::ostream& out, const std::vector<StudentasVekt
     }
 }
 
-void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<StudentasVektorius>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     if (pasirinkimasIsvedimo == 1) parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodoPasirinkimas);
     if (pasirinkimasIsvedimo == 2){
         std::ofstream isvedimoFailas("studentuRezultatai.txt");
@@ -35,6 +35,6 @@ void spausdintiVidurkius(const TestoLaikai& laikai){
     if (apskaiciuotiBendraLaika(laikai) > 0) std::cout << "Bendras programos veikimas vidutiniškai užtruko: "<< apskaiciuotiBendraLaika(laikai) << "s.\n";
 }
 
-void parodytiStudentus(const std::vector<StudentasVektorius>& studentai, char skaiciavimoMetodas){
+void parodytiStudentus(const std::vector<Studentas>& studentai, char skaiciavimoMetodas){
     parodytiRezultatuLentele(std::cout, studentai, skaiciavimoMetodas);
 }
