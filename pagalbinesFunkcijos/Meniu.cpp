@@ -1,4 +1,4 @@
-#include "MeniuApibrezimai.h"
+#include "../strukturosFailai/strukturaMeniu.h"
 
 const std::array<MeniuEilute, 14> PAGRINDINIS_MENIU = {{
     "Galimi programos veikimo būdai:",
