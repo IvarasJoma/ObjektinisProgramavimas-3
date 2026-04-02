@@ -6,8 +6,8 @@ void generuotiRezultatus(Studentas& studentas, int maksimalusNDKiekis){
     const std::size_t ndKiekis = static_cast<std::size_t>(maksimalusNDKiekis);
     studentas.namuDarbuTarpiniaiRezultatai.clear();
     studentas.namuDarbuTarpiniaiRezultatai.reserve(ndKiekis);
-    for (std::size_t i = 0; i < ndKiekis; ++i) studentas.namuDarbuTarpiniaiRezultatai.push_back(generuotiSveikaSkaiciu(0, 10));
-    studentas.egzaminoRezultatas = generuotiSveikaSkaiciu(1, 10);
+    for (std::size_t i = 0; i < ndKiekis; ++i) studentas.addHomeworkGrade(generuotiSveikaSkaiciu(0, 10));
+    studentas.setExamGrade() = generuotiSveikaSkaiciu(1, 10);
 }
 
 void generuotiVardaPavarde(Studentas& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){

@@ -205,12 +205,12 @@ void apdorotiIrIsvestiStudentus(std::vector<Studentas>& studentuSarasas, char sk
 
 Studentas sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis){
     Studentas studentas;
-    studentas.Vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.");
-    studentas.Pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.");
+    studentas.setName(nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.");
+    studentas.setSurname(nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė."));
     if (generuotiPazymius) generuotiRezultatus(studentas, maksimalusNDKiekis);
     else{
         nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai, maksimalusNDKiekis);
-        studentas.egzaminoRezultatas = nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): ");
+        studentas.setExamGrade(nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): "));
     }
     return studentas;
 }

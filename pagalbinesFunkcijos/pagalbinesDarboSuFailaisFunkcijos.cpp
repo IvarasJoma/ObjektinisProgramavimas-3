@@ -114,9 +114,9 @@ void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas
     for (std::size_t i = 1; i <= ndKiekis; ++i) isvedamasFailas << std::format("{:<10}", "ND" + std::to_string(i));
     isvedamasFailas << std::format("{:<10}\n", "Egz.");
     for (const auto& studentas : studentuSarasas) {
-        isvedamasFailas << std::format("{:<18}{:<18}", studentas.Vardas, studentas.Pavarde);
+        isvedamasFailas << std::format("{:<18}{:<18}", studentas.getName(), studentas.getSurname());
         for (const auto pazymys : studentas.namuDarbuTarpiniaiRezultatai) isvedamasFailas << std::format("{:<10}", pazymys);
-        isvedamasFailas << std::format("{:<10}\n", studentas.egzaminoRezultatas);
+        isvedamasFailas << std::format("{:<10}\n", studentas.getExamGrade());
     }
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko įrašyti į failą: " + failoPavadinimas);
 }
@@ -200,14 +200,14 @@ void irasytiSuskirstytusStudentusIFailus(const std::vector<Studentas>& pazangiuS
     if (!pazangiuFailas) throw std::runtime_error("Nepavyko atidaryti failo: PazangusStudentai.txt");
     pazangiuFailas << std::format("{:<18}{:<18}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     for (const auto& studentas : pazangiuSarasas) {
-        pazangiuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.Vardas, studentas.Pavarde, studentas.galutinisRezultatas);
+        pazangiuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.getName(), studentas.getSurname(), studentas.calculateFinalGrade());
     }
     if (!pazangiuFailas) throw std::runtime_error("Nepavyko įrašyti į failą: PazangusStudentai.txt");
     std::ofstream silpnuFailas("ApdorojimoTyrimuiSkirtiFailai/SilpniStudentai.txt");
     if (!silpnuFailas) throw std::runtime_error("Nepavyko atidaryti failo: SilpniStudentai.txt");
     silpnuFailas << std::format("{:<18}{:<18}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     for (const auto& studentas : silpnuSarasas) {
-        silpnuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.Vardas, studentas.Pavarde, studentas.galutinisRezultatas);
+        silpnuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.getName(), studentas.getSurname(), studentas.calculateFinalGrade());
     }
     if (!silpnuFailas) throw std::runtime_error("Nepavyko įrašyti į failą: SilpniStudentai.txt");
 }

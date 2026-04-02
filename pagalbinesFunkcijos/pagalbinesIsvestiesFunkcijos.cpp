@@ -12,7 +12,7 @@ void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& s
     out << std::string(98, '-') << "\n";
     for (const auto& studentas : studentuSarasas){
         double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
-        out << std::format("{:<40}{:<40}{:<18.2f}\n", studentas.Vardas, studentas.Pavarde, galutinisRezultatas);
+        out << std::format("{:<40}{:<40}{:<18.2f}\n", studentas.getName(), studentas.getSurname(), studentas.calculateFinalGrade());
     }
 }
 
