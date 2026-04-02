@@ -10,7 +10,7 @@ private:
     std::vector<int> homeworkGrades_;
 
 public:
-    Studentas() : examGrade_(0.0) {}
+    Studentas() : examGrade_(0) {}
     Studentas(const std::string& name,
               const std::string& surname,
               int examGrade,
@@ -19,7 +19,8 @@ public:
           surname_(surname),
           examGrade_(examGrade),
           homeworkGrades_(homeworkGrades) {}
-    Studentas(std::istream& is);
+    Studentas(const char* eilute, std::size_t namuDarbuKiekis);
+    Studentas(bool generuotiPazymius, int ndKiekis);
     ~Studentas() {
         name_.clear();
         surname_.clear();
@@ -31,10 +32,11 @@ public:
     inline int getExamGrade() const { return examGrade_; }
     inline std::vector<int> getHomeworkGrades() const { return homeworkGrades_; }
     double calculateFinalGrade(double (*calcFunc)(const std::vector<int>&)) const;
-    std::istream& readStudent(std::istream&);
     void setName(const std::string& name) { name_ = name; }
     void setSurname(const std::string& surname) { surname_ = surname; }
     void setExamGrade(int examGrade) { examGrade_ = examGrade; }
     void setHomeworkGrades(const std::vector<int>& homeworkGrades) {homeworkGrades_ = homeworkGrades;}
     void addHomeworkGrade(int grade) {homeworkGrades_.push_back(grade);}
+    void clearHomeworkGrades() {homeworkGrades_.clear();}
+    void reserveHomeworkGrades(std::size_t n) {homeworkGrades_.reserve(n);}
 };

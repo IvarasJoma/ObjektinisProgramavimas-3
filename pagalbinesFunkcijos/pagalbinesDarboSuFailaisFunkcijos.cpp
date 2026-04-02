@@ -38,20 +38,10 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
     return true;
 }
 
-#include <vector>
-#include <string>
-#include <cstdio>
-#include <cstring>
-#include <stdexcept>
-#include <iostream>
-#include <new>
-
 std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
     std::vector<Studentas> studentuSarasas;
     FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
-    if (!skaitomasFailas) {
-        throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
-    }
+    if (!skaitomasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
     try {
         static char ivestiesBuferis[1 << 20];
         std::setvbuf(skaitomasFailas, ivestiesBuferis, _IOFBF, sizeof(ivestiesBuferis));
@@ -66,35 +56,11 @@ std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& fail
         laikinaEilute[sizeof(laikinaEilute) - 1] = '\0';
         char* stulpelis = std::strtok(laikinaEilute, " \t\r\n");
         while (stulpelis) {
-            if (stulpelis[0] == 'N' && stulpelis[1] == 'D') {
-                namuDarbuKiekis++;
-            }
+            if (stulpelis[0] == 'N' && stulpelis[1] == 'D') namuDarbuKiekis++;
             stulpelis = std::strtok(nullptr, " \t\r\n");
         }
         char eilute[1024];
-        while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)) {
-            const char* rodykle = eilute;
-            Studentas studentas;
-            std::string vardas;
-            std::string pavarde;
-            if (!nuskaitytiZodiIsFailo(rodykle, vardas)) continue;
-            if (!nuskaitytiZodiIsFailo(rodykle, pavarde)) continue;
-            studentas.setName(vardas);
-            studentas.setSurname(pavarde);
-            for (std::size_t i = 0; i < namuDarbuKiekis; i++) {
-                int laikinasPazymys;
-                if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) {
-                    laikinasPazymys = 0;
-                }
-                studentas.addHomeworkGrade(static_cast<double>(laikinasPazymys));
-            }
-            int egzaminoRezultatas;
-            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, egzaminoRezultatas)) {
-                egzaminoRezultatas = 0;
-            }
-            studentas.setExamGrade(static_cast<double>(egzaminoRezultatas));
-            studentuSarasas.push_back(std::move(studentas));
-        }
+        while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)) studentuSarasas.push_back(Studentas(eilute, namuDarbuKiekis));
         std::fclose(skaitomasFailas);
         return studentuSarasas;
     }
@@ -109,7 +75,7 @@ void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas
     std::ofstream isvedamasFailas("tekstiniaiFailai/" + failoPavadinimas);
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
     std::size_t ndKiekis = 0;
-    if (!studentuSarasas.empty()) ndKiekis = studentuSarasas.front().namuDarbuTarpiniaiRezultatai.size();
+    if (!studentuSarasas.empty()) ndKiekis = studentuSarasas.front().getHomeworkGrades().size();
     isvedamasFailas << std::format("{:<18}{:<18}", "Vardas", "Pavardė");
     for (std::size_t i = 1; i <= ndKiekis; ++i) isvedamasFailas << std::format("{:<10}", "ND" + std::to_string(i));
     isvedamasFailas << std::format("{:<10}\n", "Egz.");
