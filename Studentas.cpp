@@ -6,7 +6,7 @@
 
 
 Studentas::Studentas(const char* eilute, std::size_t namuDarbuKiekis) : examGrade_(0) {
-    const char* rodykle = eilute;
+    const char* pointer = eilute;
     std::string name;
     std::string surname;
     if (!nuskaitytiZodiIsFailo(pointer, name)) throw std::runtime_error("Nepavyko nuskaityti studento vardo");
