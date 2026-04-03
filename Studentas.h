@@ -14,7 +14,7 @@ private:
     double finalGrade_;
 
 public:
-    Studentas() : examGrade_(0) {}
+    Studentas() : examGrade_(0), finalGrade_(0) {}
     Studentas(const std::string& name,
               const std::string& surname,
               int examGrade,
@@ -37,7 +37,7 @@ public:
     inline std::string getSurname() const { return surname_; }
     inline double getFinalGrade() const { return finalGrade_; }
     inline int getExamGrade() const { return examGrade_; }
-    inline std::vector<int> getHomeworkGrades() const { return homeworkGrades_; }
+    inline const std::vector<int>& getHomeworkGrades() const { return homeworkGrades_; }
     double calculateFinalGrade(char method) const;
     void setName(const std::string& name) { name_ = name; }
     void setSurname(const std::string& surname) { surname_ = surname; }

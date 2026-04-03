@@ -7,6 +7,7 @@
 #include "../strukturosFailai/strukturaSkaiciavimai.h"
 #include "../strukturosFailai/strukturaGeneravimas.h"
 #include "../strukturosFailai/SabloninesFunkcijos.h"
+#include "../strukturosFailai/strukturaStudentas.h"
 #include <fstream>
 #include <iostream>
 #include <chrono>
@@ -119,108 +120,7 @@ double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chr
     return std::chrono::duration<double>(pabaiga - startas).count();
 }
 
-void vykdytiNulintajaKonteineriuTestavimoStrategija(){/*
-    using VectorKonteineris = std::vector<Studentas>;
-    using ListKonteineris = std::list<Studentas>;
-    using DequeKonteineris = std::deque<Studentas>;
-    TestoLaikai laikai;
-    std::string katalogas = "KonteineriuTyrimuiSkirtiFailai";
-    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
-    int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
-    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu(katalogas));
-    int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU_TIK_DIDEJANCIAI);
-    std::cout << "VEKTORIU TESTAS:\n";
-    for (int i = 0; i < kartai; ++i) {
-        VectorKonteineris studentuSarasas;
-        VectorKonteineris pazangiuSarasas;
-        VectorKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
-        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){perkeltiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
-    }
-    gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
-    laikai = TestoLaikai{};
-    std::cout << "LIST TESTAS:\n";
-    for (int i = 0; i < kartai; ++i) {
-        ListKonteineris studentuSarasas;
-        ListKonteineris pazangiuSarasas;
-        ListKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
-        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){perkeltiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
-    }
-    gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
-    laikai = TestoLaikai{};
-    std::cout << "DEQUE TESTAS:\n";
-    for (int i = 0; i < kartai; ++i) {
-        DequeKonteineris studentuSarasas;
-        DequeKonteineris pazangiuSarasas;
-        DequeKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
-        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){perkeltiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
-    }
-    gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
-    */
-}
-
 void vykdytiPirmajaKonteineriuTestavimoStrategija(){
-    /*using VectorKonteineris = std::vector<Studentas>;
-    using ListKonteineris = std::list<Studentas>;
-    using DequeKonteineris = std::deque<Studentas>;
-    TestoLaikai laikai;
-    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
-    int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
-    std::string katalogas = "KonteineriuTyrimuiSkirtiFailai";
-    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu(katalogas));
-    int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU_TIK_DIDEJANCIAI);
-    std::cout << "VEKTORIU TESTAS:\n";
-    for (int i = 0; i < kartai; ++i) {
-        VectorKonteineris studentuSarasas;
-        VectorKonteineris pazangiuSarasas;
-        VectorKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
-        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){kopijuotiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
-    }
-    gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
-    laikai = TestoLaikai{};
-    std::cout << "LIST TESTAS:\n";
-    for (int i = 0; i < kartai; ++i) {
-        ListKonteineris studentuSarasas;
-        ListKonteineris pazangiuSarasas;
-        ListKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
-        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){kopijuotiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
-    }
-    gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
-    laikai = TestoLaikai{};
-    std::cout << "DEQUE TESTAS:\n";
-    for (int i = 0; i < kartai; ++i) {
-        DequeKonteineris studentuSarasas;
-        DequeKonteineris pazangiuSarasas;
-        DequeKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
-        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){kopijuotiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
-    }
-    gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);*/
-};
-
-void vykdytiAntrajaKonteineriuTestavimoStrategija(){/*
     using VectorKonteineris = std::vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
@@ -235,10 +135,10 @@ void vykdytiAntrajaKonteineriuTestavimoStrategija(){/*
         VectorKonteineris studentuSarasas;
         VectorKonteineris pazangiuSarasas;
         VectorKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){perkeltiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
@@ -248,10 +148,10 @@ void vykdytiAntrajaKonteineriuTestavimoStrategija(){/*
         ListKonteineris studentuSarasas;
         ListKonteineris pazangiuSarasas;
         ListKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){perkeltiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
@@ -261,16 +161,16 @@ void vykdytiAntrajaKonteineriuTestavimoStrategija(){/*
         DequeKonteineris studentuSarasas;
         DequeKonteineris pazangiuSarasas;
         DequeKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){perkeltiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);*/
+    spausdintiVidurkius(laikai);
 };
 
-void vykdytiTreciajaKonteineriuTestavimoStrategija(){/*
+void vykdytiAntrajaKonteineriuTestavimoStrategija(){
     using VectorKonteineris = std::vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
@@ -285,7 +185,57 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){/*
         VectorKonteineris studentuSarasas;
         VectorKonteineris pazangiuSarasas;
         VectorKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
+        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+    }
+    gautiVidurki(laikai, kartai);
+    spausdintiVidurkius(laikai);
+    laikai = TestoLaikai{};
+    std::cout << "LIST TESTAS:\n";
+    for (int i = 0; i < kartai; ++i) {
+        ListKonteineris studentuSarasas;
+        ListKonteineris pazangiuSarasas;
+        ListKonteineris silpnuSarasas;
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
+        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+    }
+    gautiVidurki(laikai, kartai);
+    spausdintiVidurkius(laikai);
+    laikai = TestoLaikai{};
+    std::cout << "DEQUE TESTAS:\n";
+    for (int i = 0; i < kartai; ++i) {
+        DequeKonteineris studentuSarasas;
+        DequeKonteineris pazangiuSarasas;
+        DequeKonteineris silpnuSarasas;
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
+        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+    }
+    gautiVidurki(laikai, kartai);
+    spausdintiVidurkius(laikai);
+};
+
+void vykdytiTreciajaKonteineriuTestavimoStrategija(){
+    using VectorKonteineris = std::vector<Studentas>;
+    using ListKonteineris = std::list<Studentas>;
+    using DequeKonteineris = std::deque<Studentas>;
+    TestoLaikai laikai;
+    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
+    int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
+    std::string katalogas = "KonteineriuTyrimuiSkirtiFailai";
+    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu(katalogas));
+    int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU_TIK_DIDEJANCIAI);
+    std::cout << "VEKTORIU TESTAS:\n";
+    for (int i = 0; i < kartai; ++i) {
+        VectorKonteineris studentuSarasas;
+        VectorKonteineris pazangiuSarasas;
+        VectorKonteineris silpnuSarasas;
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
         laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
@@ -298,7 +248,7 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){/*
         ListKonteineris studentuSarasas;
         ListKonteineris pazangiuSarasas;
         ListKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
         laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
@@ -311,12 +261,11 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){/*
         DequeKonteineris studentuSarasas;
         DequeKonteineris pazangiuSarasas;
         DequeKonteineris silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenisGeneric(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
         laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
-    */
 };

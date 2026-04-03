@@ -34,18 +34,15 @@ int main(){
                     vykdytiDuomenuApdorojimoTestavima();
                     break;
                 case 9:
-                    vykdytiNulintajaKonteineriuTestavimoStrategija();
-                    break;
-                case 10:
                     vykdytiPirmajaKonteineriuTestavimoStrategija();
                     break;
-                case 11:
+                case 10:
                     vykdytiAntrajaKonteineriuTestavimoStrategija();
                     break;
-                case 12:
+                case 11:
                     vykdytiTreciajaKonteineriuTestavimoStrategija();
                     break;
-                case 13: {
+                case 12: {
                     TestoLaikai laikai;
                     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
                     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");

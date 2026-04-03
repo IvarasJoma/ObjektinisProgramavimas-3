@@ -2,6 +2,7 @@
 #define STRUKTURASTUDENTAS_H
 
 #include <string>
+#include <vector>
 
 struct StudentasOld {
     std::string Vardas, Pavarde;
