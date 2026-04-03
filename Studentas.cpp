@@ -7,21 +7,21 @@
 
 Studentas::Studentas(const char* eilute, std::size_t namuDarbuKiekis) : examGrade_(0) {
     const char* rodykle = eilute;
-    std::string vardas;
-    std::string pavarde;
-    if (!nuskaitytiZodiIsFailo(rodykle, vardas)) throw std::runtime_error("Nepavyko nuskaityti studento vardo");
-    if (!nuskaitytiZodiIsFailo(rodykle, pavarde)) throw std::runtime_error("Nepavyko nuskaityti studento pavardes");
-    name_ = std::move(vardas);
-    surname_ = std::move(pavarde);
+    std::string name;
+    std::string surname;
+    if (!nuskaitytiZodiIsFailo(pointer, name)) throw std::runtime_error("Nepavyko nuskaityti studento vardo");
+    if (!nuskaitytiZodiIsFailo(pointer, surname)) throw std::runtime_error("Nepavyko nuskaityti studento pavardes");
+    name_ = std::move(name);
+    surname_ = std::move(surname);
     homeworkGrades_.reserve(namuDarbuKiekis);
     for (std::size_t i = 0; i < namuDarbuKiekis; i++) {
         int laikinasPazymys = 0;
-        if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) laikinasPazymys = 0;
-        homeworkGrades_.push_back(laikinasPazymys);
+        if (!nuskaitytiSveikaSkaiciuIsFailo(pointer, tempGrade)) tempGrade = 0;
+        homeworkGrades_.push_back(tempGrade);
     }
-    int egzaminoRezultatas = 0;
-    if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, egzaminoRezultatas)) egzaminoRezultatas = 0;
-    examGrade_ = egzaminoRezultatas;
+    int examGrade = 0;
+    if (!nuskaitytiSveikaSkaiciuIsFailo(pointer, examGrade)) examGrade = 0;
+    examGrade_ = examGrade;
 }
 
 Studentas::Studentas(bool generuotiPazymius, int ndKiekis) : examGrade_(0) {
