@@ -119,7 +119,7 @@ double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chr
     return std::chrono::duration<double>(pabaiga - startas).count();
 }
 
-/*void vykdytiNulintajaKonteineriuTestavimoStrategija(){
+void vykdytiNulintajaKonteineriuTestavimoStrategija(){/*
     using VectorKonteineris = std::vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
@@ -167,10 +167,11 @@ double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chr
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
+    */
 }
 
 void vykdytiPirmajaKonteineriuTestavimoStrategija(){
-    using VectorKonteineris = std::vector<Studentas>;
+    /*using VectorKonteineris = std::vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
     TestoLaikai laikai;
@@ -216,10 +217,10 @@ void vykdytiPirmajaKonteineriuTestavimoStrategija(){
         laikai.skirstymas += ismatuotiLaika([&](){kopijuotiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
+    spausdintiVidurkius(laikai);*/
 };
 
-void vykdytiAntrajaKonteineriuTestavimoStrategija(){
+void vykdytiAntrajaKonteineriuTestavimoStrategija(){/*
     using VectorKonteineris = std::vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
@@ -266,10 +267,10 @@ void vykdytiAntrajaKonteineriuTestavimoStrategija(){
         laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
     }
     gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
+    spausdintiVidurkius(laikai);*/
 };
 
-void vykdytiTreciajaKonteineriuTestavimoStrategija(){
+void vykdytiTreciajaKonteineriuTestavimoStrategija(){/*
     using VectorKonteineris = std::vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
@@ -317,23 +318,5 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
+    */
 };
-
-void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
-    TestoLaikai laikai;
-    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
-    int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
-    std::string katalogas = "KonteineriuTyrimuiSkirtiFailai";
-    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu(katalogas));
-    int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU_TIK_DIDEJANCIAI);
-    for (int i = 0; i < kartai; ++i) {
-        std::vector<Studentas> studentuSarasas;
-        std::vector<Studentas> silpnuSarasas;
-        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
-        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
-    }
-    gautiVidurki(laikai, kartai);
-    spausdintiVidurkius(laikai);
-}*/

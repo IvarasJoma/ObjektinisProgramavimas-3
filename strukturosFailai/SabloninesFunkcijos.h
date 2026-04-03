@@ -11,7 +11,7 @@
 #include <type_traits>
 #include <utility>
 
-/*template <typename StudentuKonteineris>
+template <typename StudentuKonteineris>
 StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
     using StudentasTipas = typename StudentuKonteineris::value_type;
     StudentuKonteineris studentuSarasas;
@@ -65,7 +65,7 @@ StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas)
         std::cerr << "Nepakanka atminties...\n";
         return studentuSarasas;
     }
-}*/
+}
 
 template <typename StudentuKonteineris>
 void rikiuotiStudentus(int pasirinkimasRikiavimo, StudentuKonteineris& studentuSarasas) {
@@ -134,7 +134,7 @@ void skirstytiIstrinantStudentusEfektyviau(SaltinioKonteineris& studentai, Rezul
     studentai.erase(it, studentai.end());
 }
 
-/*template <typename StudentuKonteineris>
+template <typename StudentuKonteineris>
 void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas, std::string& katalogas) {
     try {
         auto failai = gautiTekstiniusFailus(katalogas);
@@ -148,7 +148,7 @@ void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& student
         std::cerr << "Klaida skaitant failą: " << e.what() << std::endl;
         studentuSarasas.clear();
     }
-}*/
+}
 
 template <typename StudentuKonteineris>
 void rikiuotiSuskirstytusStudentus(StudentuKonteineris& pazangiuSarasas, StudentuKonteineris& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu){

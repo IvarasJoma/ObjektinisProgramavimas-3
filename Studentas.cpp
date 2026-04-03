@@ -15,7 +15,7 @@ Studentas::Studentas(const char* eilute, std::size_t namuDarbuKiekis) : examGrad
     surname_ = std::move(surname);
     homeworkGrades_.reserve(namuDarbuKiekis);
     for (std::size_t i = 0; i < namuDarbuKiekis; i++) {
-        int laikinasPazymys = 0;
+        int tempGrade;
         if (!nuskaitytiSveikaSkaiciuIsFailo(pointer, tempGrade)) tempGrade = 0;
         homeworkGrades_.push_back(tempGrade);
     }

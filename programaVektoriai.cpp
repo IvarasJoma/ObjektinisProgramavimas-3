@@ -33,7 +33,7 @@ int main(){
                 case 8:
                     vykdytiDuomenuApdorojimoTestavima();
                     break;
-                /*case 9:
+                case 9:
                     vykdytiNulintajaKonteineriuTestavimoStrategija();
                     break;
                 case 10:
@@ -44,7 +44,7 @@ int main(){
                     break;
                 case 12:
                     vykdytiTreciajaKonteineriuTestavimoStrategija();
-                    break;*/
+                    break;
                 case 13: {
                     TestoLaikai laikai;
                     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
