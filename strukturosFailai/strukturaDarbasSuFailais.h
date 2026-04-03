@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <filesystem>
-#include "../strukturosFailai/VektoriuStudentoStruktura.h"
+#include "../Studentas.h"
 
 struct Failai;
 

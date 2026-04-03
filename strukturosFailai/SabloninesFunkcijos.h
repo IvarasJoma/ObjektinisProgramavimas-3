@@ -11,7 +11,7 @@
 #include <type_traits>
 #include <utility>
 
-template <typename StudentuKonteineris>
+/*template <typename StudentuKonteineris>
 StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
     using StudentasTipas = typename StudentuKonteineris::value_type;
     StudentuKonteineris studentuSarasas;
@@ -38,17 +38,23 @@ StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas)
         while (std::fgets(eilute, sizeof(eilute), skaitomasFailas)) {
             const char* rodykle = eilute;
             StudentasTipas studentas;
-            if (!nuskaitytiZodiIsFailo(rodykle, studentas.Vardas)) continue;
-            if (!nuskaitytiZodiIsFailo(rodykle, studentas.Pavarde)) continue;
-            if constexpr (requires { studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis); }) { // if constexpr patikrina if salyga kompliavimo metu, requires paziuri ar metodas (siuo atveju reserve) egzistuoja tokiam konteineriui
-                studentas.namuDarbuTarpiniaiRezultatai.reserve(namuDarbuKiekis);
+            std::string name;
+            std::string surname;
+            int examGrade;
+            if (!nuskaitytiZodiIsFailo(rodykle, name)) continue;
+            if (!nuskaitytiZodiIsFailo(rodykle, surname)) continue;
+            if constexpr (requires { studentas.reserveHomeworkGrades(namuDarbuKiekis); }) { // if constexpr patikrina if salyga kompliavimo metu, requires paziuri ar metodas (siuo atveju reserve) egzistuoja tokiam konteineriui
+                studentas.reserveHomeworkGrades(namuDarbuKiekis);
             }
             for (std::size_t i = 0; i < namuDarbuKiekis; ++i) {
                 int laikinasPazymys;
                 if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, laikinasPazymys)) laikinasPazymys = 0;
-                studentas.namuDarbuTarpiniaiRezultatai.push_back(laikinasPazymys);
+                studentas.addHomeworkGrade(laikinasPazymys);
             }
-            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, studentas.egzaminoRezultatas)) studentas.egzaminoRezultatas = 0;
+            if (!nuskaitytiSveikaSkaiciuIsFailo(rodykle, examGrade)) examGrade = 0;
+            studentas.setName(name);
+            studentas.setSurname(surname);
+            studentas.setExamGrade(examGrade);
             studentuSarasas.push_back(std::move(studentas));
         }
         std::fclose(skaitomasFailas);
@@ -59,7 +65,7 @@ StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas)
         std::cerr << "Nepakanka atminties...\n";
         return studentuSarasas;
     }
-}
+}*/
 
 template <typename StudentuKonteineris>
 void rikiuotiStudentus(int pasirinkimasRikiavimo, StudentuKonteineris& studentuSarasas) {
@@ -68,9 +74,14 @@ void rikiuotiStudentus(int pasirinkimasRikiavimo, StudentuKonteineris& studentuS
         if constexpr (requires { studentuSarasas.sort(comparator); }) studentuSarasas.sort(comparator);
         else std::sort(studentuSarasas.begin(), studentuSarasas.end(), comparator);
     };
-    if (pasirinkimasRikiavimo == 1) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::name_));
-    else if (pasirinkimasRikiavimo == 2) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::surname_));
-    else if (pasirinkimasRikiavimo == 3) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::calculateFinalGrade()));
+    if (pasirinkimasRikiavimo == 1) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::getName));
+    else if (pasirinkimasRikiavimo == 2) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::getSurname));
+    else if (pasirinkimasRikiavimo == 3) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::getFinalGrade));
+}
+
+template <typename T>
+void apskaiciuotiGalutiniusPazymius(T& duomenys, char metodas) {
+    for (auto& studentas : duomenys) studentas.setFinalGrade(studentas.calculateFinalGrade(metodas));
 }
 
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
@@ -80,7 +91,7 @@ void perkeltiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& paz
     if constexpr (requires { pazangusStudentai.reserve(studentai.size() / 2); }) pazangusStudentai.reserve(studentai.size() / 2);
     if constexpr (requires { silpniStudentai.reserve(studentai.size() / 2); }) silpniStudentai.reserve(studentai.size() / 2);
     for (auto& studentas : studentai) {
-        if (s.calculateFinalGrade() < 5) silpniStudentai.push_back(std::move(studentas));
+        if (studentas.getFinalGrade() < 5) silpniStudentai.push_back(std::move(studentas));
         else pazangusStudentai.push_back(std::move(studentas));
     }
 }
@@ -92,7 +103,7 @@ void kopijuotiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& pa
     if constexpr (requires { pazangusStudentai.reserve(studentai.size()); }) pazangusStudentai.reserve(studentai.size());
     if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) silpniStudentai.reserve(studentai.size());
     for (auto& studentas : studentai) {
-        if (s.calculateFinalGrade() < 5) silpniStudentai.push_back(studentas);
+        if (studentas.getFinalGrade() < 5) silpniStudentai.push_back(studentas);
         else pazangusStudentai.push_back(studentas);
     }
 }
@@ -107,42 +118,23 @@ template <typename SaltinioKonteineris, typename RezultatoKonteineris>
 void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai)
 {
     silpniStudentai.clear();
-    if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) silpniStudentai.reserve(studentai.size());
-    if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value){
-        auto it = studentai.begin();
-        while (it != studentai.end()) {
-            if (it->s.calculateFinalGrade() < 5) {
-                auto current = it++;
-                silpniStudentai.splice(silpniStudentai.end(), studentai, current);
-            } else {
-                ++it;
-            }
-        }
-    }
-    else{
-        auto middle = std::stable_partition(studentai.begin(), studentai.end(), [](const auto& s){ return s.calculateFinalGrade() >= 5; });
-        std::move(middle, studentai.end(), std::back_inserter(silpniStudentai));
-        studentai.erase(middle, studentai.end());
-    }
+    if constexpr (requires { silpniStudentai.reserve(studentai.size() / 2); }) silpniStudentai.reserve(studentai.size() / 2);
+    auto it = std::partition_point(studentai.begin(), studentai.end(), [](const auto& studentas) { return studentas.getFinalGrade() < 5;});
+    silpniStudentai.insert(silpniStudentai.end(), std::make_move_iterator(studentai.begin()), std::make_move_iterator(it));
+    studentai.erase(studentai.begin(), it);
 }
 
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
 void skirstytiIstrinantStudentusEfektyviau(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai)
 {
     silpniStudentai.clear();
-    if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value) {
-        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) { return s.calculateFinalGrade()>= 5; });
-        silpniStudentai.splice(silpniStudentai.end(), studentai, studentai.begin(), boundary);
-    }
-    else {
-        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) {return s.calculateFinalGrade()>= 5;});
-        if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) { silpniStudentai.reserve(static_cast<typename RezultatoKonteineris::size_type>(std::distance(studentai.begin(), boundary)));}
-        std::copy(std::make_move_iterator(studentai.begin()), std::make_move_iterator(boundary), std::back_inserter(silpniStudentai));
-        studentai.erase(studentai.begin(), boundary);
-    }
+    if constexpr (requires { silpniStudentai.reserve(studentai.size() / 2); }) silpniStudentai.reserve(studentai.size() / 2);
+    auto it = std::remove_if(studentai.begin(), studentai.end(), [](const auto& studentas) { return studentas.getFinalGrade() < 5;});
+    std::move(it, studentai.end(), std::back_inserter(silpniStudentai));
+    studentai.erase(it, studentai.end());
 }
 
-template <typename StudentuKonteineris>
+/*template <typename StudentuKonteineris>
 void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas, std::string& katalogas) {
     try {
         auto failai = gautiTekstiniusFailus(katalogas);
@@ -150,13 +142,13 @@ void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, StudentuKonteineris& student
         if (pasirinkimasNuskaitymo < 1 || static_cast<std::size_t>(pasirinkimasNuskaitymo) > failai.size()) throw std::runtime_error("Neteisingas failo pasirinkimas.");
         const std::size_t indeksas = static_cast<std::size_t>(pasirinkimasNuskaitymo - 1);
         const std::string failoKelias = failai[indeksas].string();
-        studentuSarasas = nuskaitytiStudentuDuomenisIsFailo<StudentuKonteineris>(failoKelias);
+        studentuSarasas = nuskaitytiStudentuDuomenisIsFailo(failoKelias);
     }
     catch (const std::exception& e) {
         std::cerr << "Klaida skaitant failą: " << e.what() << std::endl;
         studentuSarasas.clear();
     }
-}
+}*/
 
 template <typename StudentuKonteineris>
 void rikiuotiSuskirstytusStudentus(StudentuKonteineris& pazangiuSarasas, StudentuKonteineris& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu){
@@ -185,7 +177,7 @@ void irasytiStudentuDuomenisIFaila(const StudentuKonteineris& studentuSarasas, c
     std::format_to(std::back_inserter(buferis), "{:<10}\n", "Egz.");
     for (const auto& studentas : studentuSarasas) {
         std::format_to(std::back_inserter(buferis), "{:<18}{:<18}", studentas.Vardas, studentas.Pavarde);
-        for (const auto& pazymys : studentas.namuDarbuTarpiniaiRezultatai) std::format_to(std::back_inserter(buferis), "{:<10}", pazymys);
+        for (const auto& pazymys : studentas.getHomeworkGrades()) std::format_to(std::back_inserter(buferis), "{:<10}", pazymys);
         std::format_to(std::back_inserter(buferis), "{:<10}\n", studentas.egzaminoRezultatas);
         if (buferis.size() >= (1 << 22)) { // jei buferis arti savo talpos
             if (!buferis.empty()) {

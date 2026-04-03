@@ -2,7 +2,7 @@
 #define STRUKTURAGENERAVIMAS_H
 
 #include <vector>
-#include "../strukturosFailai/strukturaStudentas.h"
+#include "../Studentas.h"
 #include "../strukturosFailai/Failai.h"
 
 void generuotiRezultatus(Studentas& studentas, int maksimalusNDKiekis);

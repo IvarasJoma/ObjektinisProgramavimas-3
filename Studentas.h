@@ -1,3 +1,6 @@
+#ifndef STUDENTAS_H
+#define STUDENTAS_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,17 +11,20 @@ private:
     std::string surname_;
     int examGrade_;
     std::vector<int> homeworkGrades_;
+    double finalGrade_;
 
 public:
     Studentas() : examGrade_(0) {}
     Studentas(const std::string& name,
               const std::string& surname,
               int examGrade,
-              const std::vector<int>& homeworkGrades)
+              const std::vector<int>& homeworkGrades,
+              double finalGrade)
         : name_(name),
           surname_(surname),
           examGrade_(examGrade),
-          homeworkGrades_(homeworkGrades) {}
+          homeworkGrades_(homeworkGrades),
+          finalGrade_(finalGrade) {}
     Studentas(const char* eilute, std::size_t namuDarbuKiekis);
     Studentas(bool generuotiPazymius, int ndKiekis);
     ~Studentas() {
@@ -29,14 +35,18 @@ public:
     }
     inline std::string getName() const { return name_; }
     inline std::string getSurname() const { return surname_; }
+    inline double getFinalGrade() const { return finalGrade_; }
     inline int getExamGrade() const { return examGrade_; }
     inline std::vector<int> getHomeworkGrades() const { return homeworkGrades_; }
-    double calculateFinalGrade(double (*calcFunc)(const std::vector<int>&)) const;
+    double calculateFinalGrade(char method) const;
     void setName(const std::string& name) { name_ = name; }
     void setSurname(const std::string& surname) { surname_ = surname; }
     void setExamGrade(int examGrade) { examGrade_ = examGrade; }
+    void setFinalGrade(double finalGrade) { finalGrade_ = finalGrade; }
     void setHomeworkGrades(const std::vector<int>& homeworkGrades) {homeworkGrades_ = homeworkGrades;}
     void addHomeworkGrade(int grade) {homeworkGrades_.push_back(grade);}
     void clearHomeworkGrades() {homeworkGrades_.clear();}
     void reserveHomeworkGrades(std::size_t n) {homeworkGrades_.reserve(n);}
 };
+
+#endif

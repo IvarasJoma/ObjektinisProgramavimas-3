@@ -21,10 +21,10 @@ std::string saugiaiNuskaitytiEilute(){
     return ivestis;
 }
 
-void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis){
-    namuDarbuPazymiai.clear();
+void nuskaitytiNamuDarbuPazymius(Studentas& studentas, int maksimalusNDKiekis){
+    studentas.clearHomeworkGrades();
     std::size_t ndKiekis = static_cast<std::size_t>(maksimalusNDKiekis);
-    while (namuDarbuPazymiai.size() < ndKiekis){
+    while (studentas.getHomeworkGrades().size() < ndKiekis){
         try{
             std::cout << "Įveskite studento namų darbų pažymius (1-10). Po kiekvieno įvesto pažymio paspauskite klavišą ENTER. Baigus tuščioje eilutėje paspauskite klavišą ENTER: ";
             std::string ivestis = saugiaiNuskaitytiEilute();
@@ -32,14 +32,14 @@ void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksim
             int reiksme = 0;
             nuskaitytiSveikajiSkaiciu(ivestis, reiksme);
             if (reiksme < 1 || reiksme > 10) throw std::out_of_range("Studento namų darbų pažymys turi būti sveikasis skaičius intervale nuo 1 iki 10.");
-            namuDarbuPazymiai.push_back(reiksme);
+            studentas.addHomeworkGrade(reiksme);
         }
         catch (const std::exception& e){
             std::cout << "Klaida: " << e.what() << "\n";
         }
     }
-    if (namuDarbuPazymiai.size() == ndKiekis) std::cout << "Pasiektas maksimalus namų darbų pažymių kiekis.\n";
-    while (namuDarbuPazymiai.size() < ndKiekis) namuDarbuPazymiai.push_back(0);
+    if (studentas.getHomeworkGrades().size() == ndKiekis) std::cout << "Pasiektas maksimalus namų darbų pažymių kiekis.\n";
+    while (studentas.getHomeworkGrades().size() < ndKiekis) studentas.addHomeworkGrade(0);
 }
 
 void tikrintiIvesti(const std::string& ivestis){
@@ -205,11 +205,11 @@ void apdorotiIrIsvestiStudentus(std::vector<Studentas>& studentuSarasas, char sk
 
 Studentas sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis){
     Studentas studentas;
-    studentas.setName(nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.");
+    studentas.setName(nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė."));
     studentas.setSurname(nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė."));
     if (generuotiPazymius) generuotiRezultatus(studentas, maksimalusNDKiekis);
     else{
-        nuskaitytiNamuDarbuPazymius(studentas.namuDarbuTarpiniaiRezultatai, maksimalusNDKiekis);
+        nuskaitytiNamuDarbuPazymius(studentas, maksimalusNDKiekis);
         studentas.setExamGrade(nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): "));
     }
     return studentas;

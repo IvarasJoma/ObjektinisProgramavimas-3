@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <ostream>
-#include "../strukturosFailai/strukturaStudentas.h"
+#include "../Studentas.h"
 #include "../strukturosFailai/strukturaTestavimas.h"
 
 void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);

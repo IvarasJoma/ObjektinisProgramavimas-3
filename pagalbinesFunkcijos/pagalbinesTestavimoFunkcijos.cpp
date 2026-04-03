@@ -88,9 +88,9 @@ void vykdytiIsvedimoTestavima(Failai& failai){
                 Studentas studentas;
                 generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
                 generuotiRezultatus(studentas, maksimalusNDKiekis);
-                failas << std::format("{:<18}{:<18}", studentas.Vardas, studentas.Pavarde);
-                for (const auto pazymys : studentas.namuDarbuTarpiniaiRezultatai) failas << std::format("{:<10}", pazymys);
-                failas << std::format("{:<10}\n", studentas.egzaminoRezultatas);
+                failas << std::format("{:<18}{:<18}", studentas.getName(), studentas.getSurname());
+                for (const auto pazymys : studentas.getHomeworkGrades()) failas << std::format("{:<10}", pazymys);
+                failas << std::format("{:<10}\n", studentas.getExamGrade());
             }
             if (!failas) {
                 throw std::runtime_error("Nepavyko įrašyti į failą: " + failoPavadinimas);
@@ -119,7 +119,7 @@ double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chr
     return std::chrono::duration<double>(pabaiga - startas).count();
 }
 
-void vykdytiNulintajaKonteineriuTestavimoStrategija(){
+/*void vykdytiNulintajaKonteineriuTestavimoStrategija(){
     using VectorKonteineris = std::vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
@@ -336,4 +336,4 @@ void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
-}
+}*/

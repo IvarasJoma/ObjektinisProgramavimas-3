@@ -7,7 +7,7 @@ void generuotiRezultatus(Studentas& studentas, int maksimalusNDKiekis){
     studentas.clearHomeworkGrades();
     studentas.reserveHomeworkGrades(ndKiekis);
     for (std::size_t i = 0; i < ndKiekis; ++i) studentas.addHomeworkGrade(generuotiSveikaSkaiciu(0, 10));
-    studentas.setExamGrade() = generuotiSveikaSkaiciu(1, 10);
+    studentas.setExamGrade(generuotiSveikaSkaiciu(1, 10));
 }
 
 void generuotiVardaPavarde(Studentas& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){

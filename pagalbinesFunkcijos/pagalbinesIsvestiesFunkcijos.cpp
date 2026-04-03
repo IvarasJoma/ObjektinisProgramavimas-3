@@ -11,8 +11,7 @@ void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& s
     out << std::format("{:<40}{:<40}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     out << std::string(98, '-') << "\n";
     for (const auto& studentas : studentuSarasas){
-        double galutinisRezultatas = (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v') ? skaiciuotiGalutiniVidurki(studentas) : skaiciuotiGalutineMediana(studentas);
-        out << std::format("{:<40}{:<40}{:<18.2f}\n", studentas.getName(), studentas.getSurname(), studentas.calculateFinalGrade());
+        out << std::format("{:<40}{:<40}{:<18.2f}\n", studentas.getName(), studentas.getSurname(), studentas.calculateFinalGrade(skaiciavimoMetodoPasirinkimas));
     }
 }
 
