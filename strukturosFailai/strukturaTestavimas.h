@@ -28,5 +28,6 @@ void vykdytiNulintajaKonteineriuTestavimoStrategija();
 void vykdytiPirmajaKonteineriuTestavimoStrategija();
 void vykdytiAntrajaKonteineriuTestavimoStrategija();
 void vykdytiTreciajaKonteineriuTestavimoStrategija();
+void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais();
 
 #endif

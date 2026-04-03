@@ -7,7 +7,6 @@
 #include "../strukturosFailai/strukturaSkaiciavimai.h"
 #include "../strukturosFailai/strukturaGeneravimas.h"
 #include "../strukturosFailai/SabloninesFunkcijos.h"
-#include "../strukturosFailai/strukturaStudentas.h"
 #include <fstream>
 #include <iostream>
 #include <chrono>
@@ -100,9 +99,6 @@ void vykdytiIsvedimoTestavima(Failai& failai){
     }
     gautiVidurki(laikai, kartai);
     std::cout << "Vidutinis failo kūrimo ir uždarymo laikas: " << laikai.isvedimas << " s\n";
-    if (std::filesystem::exists(pilnasKelias)) {
-        std::filesystem::remove(pilnasKelias);
-    }
 }
 
 double apskaiciuotiBendraLaika(const TestoLaikai& laikai){ return laikai.nuskaitymas + laikai.skaiciavimas + laikai.rikiavimas + laikai.isvedimas + laikai.skirstymas;}

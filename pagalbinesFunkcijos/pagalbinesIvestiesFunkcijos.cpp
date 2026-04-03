@@ -233,7 +233,8 @@ void vykdytiPilnaGeneravima(Failai& failai){
     int studentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norimą generuoti studentų kiekį ir paspauskite ENTER: ");
     int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
     std::vector<Studentas> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
-    parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodas);
+    int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(ISVEDIMO_MENIU);
+    isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodas);
 }
 
 void parinktiRikiavimoBudus(int& pasirinkimasRikiavimoPazangiu, int& pasirinkimasRikiavimoSilpnu){
