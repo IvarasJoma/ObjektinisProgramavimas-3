@@ -128,11 +128,11 @@ Testavimas buvo vykdytas šioje sisteminėje aplinkoje:
 | class   | O2                   | 0.0330411      | 0.290745    | 213              |
 | class   | O3                   | 0.0322129      | 0.289138    | 228              |
 
-<h2>Struktūrų ir objektų spartos palyginimo rezultatai</hč>
-Pateikti rezultatai rodo, kad šioje programoje struct realizacija buvo spartesnė už class visais testuotais optimizavimo lygiais – tiek su 100 tūkst., tiek su 1 mln. įrašų ji demonstravo mažesnį vykdymo laiką, o didžiausias našumas pasiektas naudojant O3 optimizaciją; tuo tarpu class versija taip pat pagerėjo didinant optimizaciją, tačiau išliko lėtesnė. Tai leidžia daryti išvadą, kad struct šiuo atveju yra efektyvesnis sprendimas laiko atžvilgiu, tikėtina dėl paprastesnės struktūros ir mažesnės abstrakcijos kainos, nors skirtumai nėra kritiniai, todėl praktikoje pasirinkimas turėtų priklausyti ir nuo kodo organizavimo bei aiškumo aspektų. Kita vertus, pastebėta, kad class realizacija generuoja mažesnio dydžio vykdomuosius failus (pvz., su O2: 213 KB prieš 301 KB), todėl ji gali būti palankesnė, kai svarbus programos kompaktiškumas.
+<h2>Struktūrų ir objektų spartos palyginimo rezultatai</h2>
+<p>Pateikti rezultatai rodo, kad šioje programoje struct realizacija buvo spartesnė už class visais testuotais optimizavimo lygiais – tiek su 100 tūkst., tiek su 1 mln. įrašų ji demonstravo mažesnį vykdymo laiką, o didžiausias našumas pasiektas naudojant O3 optimizaciją; tuo tarpu class versija taip pat pagerėjo didinant optimizaciją, tačiau išliko lėtesnė. Tai leidžia daryti išvadą, kad struct šiuo atveju yra efektyvesnis sprendimas laiko atžvilgiu, tikėtina dėl paprastesnės struktūros ir mažesnės abstrakcijos kainos, nors skirtumai nėra kritiniai, todėl praktikoje pasirinkimas turėtų priklausyti ir nuo kodo organizavimo bei aiškumo aspektų. Kita vertus, pastebėta, kad class realizacija generuoja mažesnio dydžio vykdomuosius failus (pvz., su O2: 213 KB prieš 301 KB), todėl ji gali būti palankesnė, kai svarbus programos kompaktiškumas.</p>
 
 
-<h3>Programos testavimo nuotraukos</h3>
+<h2>Programos testavimo nuotraukos</h2>
 <img width="695" height="1259" alt="image" src="https://github.com/user-attachments/assets/2821790d-aef5-4263-aa79-571a808f9db3" />
 <img width="695" height="1348" alt="image" src="https://github.com/user-attachments/assets/08e49c65-879d-47d0-9b17-cde5ab35d04b" />
 <img width="695" height="1348" alt="image" src="https://github.com/user-attachments/assets/1604353b-4e80-429e-ab38-ababd5650b09" />
