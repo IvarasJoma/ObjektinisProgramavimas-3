@@ -68,37 +68,9 @@ void rikiuotiStudentus(int pasirinkimasRikiavimo, StudentuKonteineris& studentuS
         if constexpr (requires { studentuSarasas.sort(comparator); }) studentuSarasas.sort(comparator);
         else std::sort(studentuSarasas.begin(), studentuSarasas.end(), comparator);
     };
-    if (pasirinkimasRikiavimo == 1) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::Vardas));
-    else if (pasirinkimasRikiavimo == 2) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::Pavarde));
-    else if (pasirinkimasRikiavimo == 3) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::galutinisRezultatas));
-}
-
-template <typename PazymiuKonteineris>
-double skaiciuotiNDVidurki(const PazymiuKonteineris& ndPazymiai) {
-    if (ndPazymiai.empty()) return 0.0;
-    const double suma = std::accumulate(ndPazymiai.begin(), ndPazymiai.end(), 0.0);
-    return suma / ndPazymiai.size();
-}
-
-template <typename PazymiuKonteineris>
-double skaiciuotiNDMediana(PazymiuKonteineris ndPazymiai) {
-    if (ndPazymiai.empty()) return 0.0;
-    if constexpr (requires { ndPazymiai.sort(); }) ndPazymiai.sort();
-    else std::sort(ndPazymiai.begin(), ndPazymiai.end());
-    auto vidurinisElementas = std::next(ndPazymiai.begin(), ndPazymiai.size() / 2);
-    if (ndPazymiai.size() % 2) return *vidurinisElementas;
-    return (*std::prev(vidurinisElementas) + *vidurinisElementas) / 2.0;
-}
-
-template <typename Studentas>
-double skaiciuotiGalutiniPazymi(const Studentas& studentas, char pasirinkimas) {
-    const double ndRezultatas = (pasirinkimas == 'V' || pasirinkimas == 'v') ? skaiciuotiNDVidurki(studentas.namuDarbuTarpiniaiRezultatai) : skaiciuotiNDMediana(studentas.namuDarbuTarpiniaiRezultatai);
-    return 0.4 * ndRezultatas + 0.6 * studentas.egzaminoRezultatas;
-}
-
-template <typename T>
-void apskaiciuotiGalutiniusPazymius(T& duomenys, char metodas) {
-    for (auto& studentas : duomenys) studentas.galutinisRezultatas = skaiciuotiGalutiniPazymi(studentas, metodas);
+    if (pasirinkimasRikiavimo == 1) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::name_));
+    else if (pasirinkimasRikiavimo == 2) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::surname_));
+    else if (pasirinkimasRikiavimo == 3) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::calculateFinalGrade()));
 }
 
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
@@ -108,7 +80,7 @@ void perkeltiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& paz
     if constexpr (requires { pazangusStudentai.reserve(studentai.size() / 2); }) pazangusStudentai.reserve(studentai.size() / 2);
     if constexpr (requires { silpniStudentai.reserve(studentai.size() / 2); }) silpniStudentai.reserve(studentai.size() / 2);
     for (auto& studentas : studentai) {
-        if (studentas.galutinisRezultatas < 5) silpniStudentai.push_back(std::move(studentas));
+        if (s.calculateFinalGrade() < 5) silpniStudentai.push_back(std::move(studentas));
         else pazangusStudentai.push_back(std::move(studentas));
     }
 }
@@ -120,7 +92,7 @@ void kopijuotiStudentus(SaltinioKonteineris& studentai, RezultatoKonteineris& pa
     if constexpr (requires { pazangusStudentai.reserve(studentai.size()); }) pazangusStudentai.reserve(studentai.size());
     if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) silpniStudentai.reserve(studentai.size());
     for (auto& studentas : studentai) {
-        if (studentas.galutinisRezultatas < 5) silpniStudentai.push_back(studentas);
+        if (s.calculateFinalGrade() < 5) silpniStudentai.push_back(studentas);
         else pazangusStudentai.push_back(studentas);
     }
 }
@@ -139,7 +111,7 @@ void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai, RezultatoKontei
     if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value){
         auto it = studentai.begin();
         while (it != studentai.end()) {
-            if (it->galutinisRezultatas < 5) {
+            if (it->s.calculateFinalGrade() < 5) {
                 auto current = it++;
                 silpniStudentai.splice(silpniStudentai.end(), studentai, current);
             } else {
@@ -148,7 +120,7 @@ void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai, RezultatoKontei
         }
     }
     else{
-        auto middle = std::stable_partition(studentai.begin(), studentai.end(), [](const auto& s){ return s.galutinisRezultatas >= 5; });
+        auto middle = std::stable_partition(studentai.begin(), studentai.end(), [](const auto& s){ return s.calculateFinalGrade() >= 5; });
         std::move(middle, studentai.end(), std::back_inserter(silpniStudentai));
         studentai.erase(middle, studentai.end());
     }
@@ -159,11 +131,11 @@ void skirstytiIstrinantStudentusEfektyviau(SaltinioKonteineris& studentai, Rezul
 {
     silpniStudentai.clear();
     if constexpr (is_std_list<SaltinioKonteineris>::value && is_std_list<RezultatoKonteineris>::value) {
-        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) { return s.galutinisRezultatas >= 5; });
+        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) { return s.calculateFinalGrade()>= 5; });
         silpniStudentai.splice(silpniStudentai.end(), studentai, studentai.begin(), boundary);
     }
     else {
-        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) {return s.galutinisRezultatas >= 5;});
+        auto boundary = std::find_if(studentai.begin(), studentai.end(), [](const auto& s) {return s.calculateFinalGrade()>= 5;});
         if constexpr (requires { silpniStudentai.reserve(studentai.size()); }) { silpniStudentai.reserve(static_cast<typename RezultatoKonteineris::size_type>(std::distance(studentai.begin(), boundary)));}
         std::copy(std::make_move_iterator(studentai.begin()), std::make_move_iterator(boundary), std::back_inserter(silpniStudentai));
         studentai.erase(studentai.begin(), boundary);

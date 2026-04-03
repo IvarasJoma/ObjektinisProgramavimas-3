@@ -12,8 +12,8 @@ void generuotiRezultatus(Studentas& studentas, int maksimalusNDKiekis){
 
 void generuotiVardaPavarde(Studentas& studentas, const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){
     if (vyrVardai.empty() || vyrPavardes.empty() || motVardai.empty() || motPavardes.empty()){
-        studentas.Vardas = "Vardenis";
-        studentas.Pavarde = "Pavardenis";
+        studentas.setName("Vardenis");
+        studentas.setSurname("Pavardenis");
         return;
     }
     int lytis = generuotiSveikaSkaiciu(0, 1);
