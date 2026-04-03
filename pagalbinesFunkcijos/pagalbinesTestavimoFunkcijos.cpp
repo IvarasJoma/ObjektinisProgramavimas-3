@@ -269,3 +269,19 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
 };
+void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
+    TestoLaikai laikai;
+    char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
+    int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
+    std::string katalogas = "KonteineriuTyrimuiSkirtiFailai";
+    int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu(katalogas));
+    for (int i = 0; i < kartai; ++i) {
+        std::vector<Studentas> studentuSarasas;
+        std::vector<Studentas> silpnuSarasas;
+        laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
+        laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
+    }
+    gautiVidurki(laikai, kartai);
+    spausdintiVidurkius(laikai);
+}                    

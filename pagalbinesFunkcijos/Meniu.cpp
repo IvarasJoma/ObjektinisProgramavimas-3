@@ -13,7 +13,7 @@ const std::array<MeniuEilute, 14> PAGRINDINIS_MENIU = {{
     "9 - Vykdyti pirmąją konteinerių testavimo strategiją",
     "10 - Vykdyti antrąją konteinerių testavimo strategiją",
     "11 - Vykdyti trečiąją konteinerių testavimo strategiją",
-    "12 - Vykdyti trečiąją konteinerių testavimo strategiją tik su vektoriais (OOP test)",
+    "12 - Vykdyti trečiąją konteinerių testavimo strategiją tik su vektoriais",
     "13 - Baigti darbą"
 }};
 
