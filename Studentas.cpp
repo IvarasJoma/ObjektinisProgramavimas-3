@@ -109,3 +109,21 @@ Studentas& Studentas::operator=(Studentas&& other) noexcept {
     }
     return *this;
 }
+
+Studentas::Studentas(const Studentas& other)
+    : name_(other.name_),
+      surname_(other.surname_),
+      examGrade_(other.examGrade_),
+      homeworkGrades_(other.homeworkGrades_),
+      finalGrade_(other.finalGrade_) {}
+
+Studentas& Studentas::operator=(const Studentas& other) {
+    if (this != &other) {
+        name_ = other.name_;
+        surname_ = other.surname_;
+        examGrade_ = other.examGrade_;
+        homeworkGrades_ = other.homeworkGrades_;
+        finalGrade_ = other.finalGrade_;
+    }
+    return *this;
+}
