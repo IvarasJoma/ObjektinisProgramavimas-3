@@ -4,6 +4,7 @@
 #include "Studentas.h"
 #include "../strukturosFailai/strukturaVisi.h"
 
+bool Studentas::arSpausdintiDestruktoriu = false;
 
 Studentas::Studentas(const char* eilute, std::size_t namuDarbuKiekis) : examGrade_(0) {
     const char* pointer = eilute;
@@ -52,9 +53,9 @@ double Studentas::calculateFinalGrade(char method) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Studentas& s) {
-    os << s.name_ << ' ' << s.surname_ << ' ' << s.homeworkGrades_.size();
-    for (const int homeworkGrade : s.homeworkGrades_) os << ' ' << homeworkGrade;
-    os << ' ' << s.examGrade_;
+    os << std::format("{:<18}{:<18}", s.getName(), s.getSurname());
+    for (const int homeworkGrade : s.getHomeworkGrades()) os << std::format("{:<10}", homeworkGrade); 
+    os << std::format("{:<10}", s.getExamGrade());
     return os;
 }
 

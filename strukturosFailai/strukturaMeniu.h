@@ -11,7 +11,7 @@
 
 using MeniuEilute = std::string_view;
 
-extern const std::array<MeniuEilute, 14> PAGRINDINIS_MENIU;
+extern const std::array<MeniuEilute, 15> PAGRINDINIS_MENIU;
 extern const std::array<MeniuEilute, 7> RIKIAVIMO_MENIU;
 extern const std::array<MeniuEilute, 4> RIKIAVIMO_MENIU_TIK_DIDEJANCIAI;
 extern const std::array<MeniuEilute, 7> PAZANGIU_RIKIAVIMO_MENIU;

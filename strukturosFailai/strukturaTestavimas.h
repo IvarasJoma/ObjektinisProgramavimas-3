@@ -29,5 +29,6 @@ void vykdytiPirmajaKonteineriuTestavimoStrategija();
 void vykdytiAntrajaKonteineriuTestavimoStrategija();
 void vykdytiTreciajaKonteineriuTestavimoStrategija();
 void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais();
+void testuotiStudenta();
 
 #endif

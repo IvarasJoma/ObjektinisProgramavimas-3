@@ -46,6 +46,9 @@ int main(){
                     vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais();
                     break;
                 case 13:
+                    testuotiStudenta();
+                    break;
+                case 14:
                     return 0;
                 default:
                     break;
