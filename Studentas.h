@@ -48,6 +48,7 @@ public:
     void clearHomeworkGrades() {homeworkGrades_.clear();}
     void reserveHomeworkGrades(std::size_t n) {homeworkGrades_.reserve(n);}
     friend std::ostream& operator<<(std::ostream& os, const Studentas& s);
+    friend std::istream& operator>>(std::istream& is, Studentas& s);
 };
 
 #endif

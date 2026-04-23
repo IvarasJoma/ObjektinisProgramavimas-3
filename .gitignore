@@ -42,3 +42,4 @@
 main
 *.txt
 .DS_STORE
+.vscode/c_cpp_properties.json

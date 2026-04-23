@@ -57,3 +57,31 @@ std::ostream& operator<<(std::ostream& os, const Studentas& s) {
     os << ' ' << s.examGrade_;
     return os;
 }
+
+std::istream& operator>>(std::istream& is, Studentas& s) {
+    std::string name;
+    std::string surname;
+    std::size_t ndKiekis = 0;
+    if (!(is >> name >> surname >> homeworkSize)) return is;
+    std::vector<int> homeworkGrades;
+    nd.reserve(ndKiekis);
+    for (std::size_t i = 0; i < ndKiekis; ++i) {
+        int homeworkGrade = 0;
+        if (!(is >> homeworkGrade)) {
+            is.setstate(std::ios::failbit);
+            return is;
+        }
+        nd.push_back(homeworkGrade);
+    }
+    int exam = 0;
+    if (!(is >> exam)) {
+        is.setstate(std::ios::failbit);
+        return is;
+    }
+    s.name_ = std::move(name);
+    s.surname_ = std::move(surname);
+    s.homeworkGrades_ = std::move(homeworkGrades);
+    s.examGrade_ = exam;
+    s.finalGrade_ = s.calculateFinalGrade('v');
+    return is;
+}
