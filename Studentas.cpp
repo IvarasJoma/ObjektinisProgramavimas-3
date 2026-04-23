@@ -50,3 +50,10 @@ double Studentas::calculateFinalGrade(char method) const {
     }
     return 0.4 * finalHomeworkGrade + 0.6 * examGrade_;
 }
+
+std::ostream& operator<<(std::ostream& os, const Studentas& s) {
+    os << s.name_ << ' ' << s.surname_ << ' ' << s.homeworkGrades_.size();
+    for (const int homeworkGrade : s.homeworkGrades_) os << ' ' << homeworkGrade;
+    os << ' ' << s.examGrade_;
+    return os;
+}
