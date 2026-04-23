@@ -58,20 +58,25 @@ std::ostream& operator<<(std::ostream& os, const Studentas& s) {
     return os;
 }
 
+std::ostream& operator<<(std::ostream& os, const StudentasLentelei& s) {
+    os << std::format("{:<40}{:<40}{:<18.2f}", s.s.getName(), s.s.getSurname(), s.s.getFinalGrade()); 
+    return os;
+}
+
 std::istream& operator>>(std::istream& is, Studentas& s) {
     std::string name;
     std::string surname;
-    std::size_t ndKiekis = 0;
+    std::size_t homeworkSize = 0;
     if (!(is >> name >> surname >> homeworkSize)) return is;
     std::vector<int> homeworkGrades;
-    nd.reserve(ndKiekis);
-    for (std::size_t i = 0; i < ndKiekis; ++i) {
+    homeworkGrades.reserve(homeworkSize);
+    for (std::size_t i = 0; i < homeworkSize; ++i) {
         int homeworkGrade = 0;
         if (!(is >> homeworkGrade)) {
             is.setstate(std::ios::failbit);
             return is;
         }
-        nd.push_back(homeworkGrade);
+        homeworkGrades.push_back(homeworkGrade);
     }
     int exam = 0;
     if (!(is >> exam)) {

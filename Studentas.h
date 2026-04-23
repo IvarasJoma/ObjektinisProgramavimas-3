@@ -55,4 +55,10 @@ public:
     friend std::istream& operator>>(std::istream& is, Studentas& s);
 };
 
+struct StudentasLentelei {
+    const Studentas& s;
+};
+
+std::ostream& operator<<(std::ostream& os, const StudentasLentelei& s);
+
 #endif

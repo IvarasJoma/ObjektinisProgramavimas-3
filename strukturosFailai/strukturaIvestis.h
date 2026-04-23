@@ -23,5 +23,7 @@ void tvarkytiVarda(std::string& ivestis);
 void tvarkytiPavarde(std::string& ivestis);
 std::string saugiaiNuskaitytiEilute();
 void parinktiRikiavimoBudus(int& pasirinkimasRikiavimoPazangiu, int& pasirinkimasRikiavimoSilpnu);
+std::string suformuotiStudentoIvestiesEilute(const std::string& vardas, const std::string& pavarde, const std::vector<int>& namuDarbai, int egzaminoPazymys);
+Studentas sukurtiStudentaIsEilutesPerOperatoriu(const std::string& eilute);
 
 #endif

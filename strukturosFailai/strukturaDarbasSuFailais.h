@@ -11,7 +11,7 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
 void vykdytiNuskaitymaIsFailo();
 void irasytiDuomenis(std::vector<Studentas>& studentuSarasas);
-void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas, std::string failoPavadinimas);
+void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas);
 void vykdytiSkirstymaIFailus(std::vector<Studentas>& studentuSarasas);
 void irasytiSuskirstytusStudentusIFailus(const std::vector<Studentas>& pazangiuSarasas, const std::vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas);
 std::vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas);

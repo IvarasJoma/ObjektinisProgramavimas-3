@@ -73,7 +73,7 @@ std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& fail
     }
 }
 
-void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas, std::string failoPavadinimas) {
+void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas) {
     std::ofstream isvedamasFailas("tekstiniaiFailai/" + failoPavadinimas);
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
     std::size_t ndKiekis = 0;
@@ -81,11 +81,7 @@ void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas
     isvedamasFailas << std::format("{:<18}{:<18}", "Vardas", "Pavardė");
     for (std::size_t i = 1; i <= ndKiekis; ++i) isvedamasFailas << std::format("{:<10}", "ND" + std::to_string(i));
     isvedamasFailas << std::format("{:<10}\n", "Egz.");
-    for (const auto& studentas : studentuSarasas) {
-        isvedamasFailas << std::format("{:<18}{:<18}", studentas.getName(), studentas.getSurname());
-        for (const auto pazymys : studentas.getHomeworkGrades()) isvedamasFailas << std::format("{:<10}", pazymys);
-        isvedamasFailas << std::format("{:<10}\n", studentas.getExamGrade());
-    }
+    for (const auto& studentas : studentuSarasas) isvedamasFailas << studentas << '\n';
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko įrašyti į failą: " + failoPavadinimas);
 }
 
@@ -167,16 +163,12 @@ void irasytiSuskirstytusStudentusIFailus(const std::vector<Studentas>& pazangiuS
     std::ofstream pazangiuFailas("ApdorojimoTyrimuiSkirtiFailai/PazangusStudentai.txt");
     if (!pazangiuFailas) throw std::runtime_error("Nepavyko atidaryti failo: PazangusStudentai.txt");
     pazangiuFailas << std::format("{:<18}{:<18}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
-    for (const auto& studentas : pazangiuSarasas) {
-        pazangiuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.getName(), studentas.getSurname(), studentas.calculateFinalGrade(skaiciavimoMetodoPasirinkimas));
-    }
+    for (const auto& studentas : pazangiuSarasas) pazangiuFailas << StudentasLentelei{studentas} << "\n";
     if (!pazangiuFailas) throw std::runtime_error("Nepavyko įrašyti į failą: PazangusStudentai.txt");
     std::ofstream silpnuFailas("ApdorojimoTyrimuiSkirtiFailai/SilpniStudentai.txt");
     if (!silpnuFailas) throw std::runtime_error("Nepavyko atidaryti failo: SilpniStudentai.txt");
     silpnuFailas << std::format("{:<18}{:<18}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
-    for (const auto& studentas : silpnuSarasas) {
-        silpnuFailas << std::format("{:<18}{:<18}{:<18.2f}\n", studentas.getName(), studentas.getSurname(), studentas.calculateFinalGrade(skaiciavimoMetodoPasirinkimas));
-    }
+    for (const auto& studentas : silpnuSarasas) silpnuFailas << StudentasLentelei{studentas} << "\n";
     if (!silpnuFailas) throw std::runtime_error("Nepavyko įrašyti į failą: SilpniStudentai.txt");
 }
 

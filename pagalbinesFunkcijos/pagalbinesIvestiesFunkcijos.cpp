@@ -203,16 +203,25 @@ void apdorotiIrIsvestiStudentus(std::vector<Studentas>& studentuSarasas, char sk
     isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodoPasirinkimas);
 }
 
-Studentas sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis){
-    Studentas studentas;
-    studentas.setName(nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė."));
-    studentas.setSurname(nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė."));
-    if (generuotiPazymius) generuotiRezultatus(studentas, maksimalusNDKiekis);
-    else{
-        nuskaitytiNamuDarbuPazymius(studentas, maksimalusNDKiekis);
-        studentas.setExamGrade(nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): "));
+Studentas sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius, int maksimalusNDKiekis) {
+    Studentas laikinas;
+
+    const std::string vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.");
+    const std::string pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.");
+
+    std::vector<int> namuDarbai;
+    int egzaminoPazymys;
+
+    if (generuotiPazymius) {
+        std::tie(namuDarbai, egzaminoPazymys) = generuotiRezultatus(maksimalusNDKiekis);
+    } else {
+        nuskaitytiNamuDarbuPazymius(laikinas, maksimalusNDKiekis);
+        namuDarbai = laikinas.getHomeworkGrades();
+        egzaminoPazymys = nuskaitytiPazymiNuo1iki10("Įveskite studento egzamino pažymį (1-10): ");
     }
-    return studentas;
+
+    const std::string eilute = suformuotiStudentoIvestiesEilute(vardas, pavarde, namuDarbai, egzaminoPazymys);
+    return sukurtiStudentaIsEilutesPerOperatoriu(eilute);
 }
 
 std::vector<Studentas> ivestiStudentus(bool generuotiPazymius, int maksimalusNDKiekis){
@@ -240,4 +249,20 @@ void vykdytiPilnaGeneravima(Failai& failai){
 void parinktiRikiavimoBudus(int& pasirinkimasRikiavimoPazangiu, int& pasirinkimasRikiavimoSilpnu){
     pasirinkimasRikiavimoPazangiu = nuskaitytiMeniuPasirinkima(PAZANGIU_RIKIAVIMO_MENIU);
     pasirinkimasRikiavimoSilpnu = nuskaitytiMeniuPasirinkima(SILPNU_RIKIAVIMO_MENIU);
+}
+
+std::string suformuotiStudentoIvestiesEilute(const std::string& vardas, const std::string& pavarde, const std::vector<int>& namuDarbai, int egzaminoPazymys) {
+    std::ostringstream out;
+    out << vardas << ' ' << pavarde << ' ' << namuDarbai.size();
+    for (const int pazymys : namuDarbai) out << ' ' << pazymys;
+    out << ' ' << egzaminoPazymys;
+    return out.str();
+}
+
+Studentas sukurtiStudentaIsEilutesPerOperatoriu(const std::string& eilute) {
+    std::istringstream in(eilute);
+    Studentas studentas;
+    in >> studentas;
+    if (!in) throw std::runtime_error("Nepavyko sukurti Studentas objekto per operator>>");
+    return studentas;
 }

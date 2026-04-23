@@ -86,8 +86,7 @@ void vykdytiIsvedimoTestavima(Failai& failai){
             failas << std::format("{:<10}\n", "Egz.");
             for (int j = 0; j < studentuKiekis; ++j) {
                 Studentas studentas;
-                generuotiVardaPavarde(studentas, failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
-                generuotiRezultatus(studentas, maksimalusNDKiekis);
+                generuotiVardaPavarde(failai.vyrVardai, failai.vyrPavardes, failai.motVardai, failai.motPavardes);
                 failas << std::format("{:<18}{:<18}", studentas.getName(), studentas.getSurname());
                 for (const auto pazymys : studentas.getHomeworkGrades()) failas << std::format("{:<10}", pazymys);
                 failas << std::format("{:<10}\n", studentas.getExamGrade());
@@ -265,6 +264,7 @@ void vykdytiTreciajaKonteineriuTestavimoStrategija(){
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
 };
+
 void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
@@ -281,3 +281,54 @@ void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
 }                    
+
+/*void testuotiStudenta() {
+    std::cout << "Pradedami Studentas klases testai...\n";
+    Studentas s1;
+    s1.setName("Jonas");
+    s1.setSurname("Jonaitis");
+    s1.addHomeworkGrade(8);
+    s1.addHomeworkGrade(9);
+    s1.addHomeworkGrade(10);
+    s1.setExamGrade(7);
+    s1.setFinalGrade(s1.calculateFinalGrade('v'));
+    assert(s1.getName() == "Jonas");
+    assert(s1.getSurname() == "Jonaitis");
+    assert(s1.getExamGrade() == 7);
+    assert(s1.getHomeworkGrades().size() == 3);
+    Studentas s2(s1);
+    assert(s2.getName() == s1.getName());
+    assert(s2.getSurname() == s1.getSurname());
+    assert(s2.getExamGrade() == s1.getExamGrade());
+    assert(s2.getHomeworkGrades() == s1.getHomeworkGrades());
+    Studentas s3;
+    s3 = s1;
+    assert(s3.getName() == s1.getName());
+    assert(s3.getSurname() == s1.getSurname());
+    assert(s3.getExamGrade() == s1.getExamGrade());
+    assert(s3.getHomeworkGrades() == s1.getHomeworkGrades());
+    Studentas laikinas("Petras", "Petraitis", 9, {10, 9, 8}, 0.0);
+    Studentas s4(std::move(laikinas));
+    assert(s4.getName() == "Petras");
+    assert(s4.getSurname() == "Petraitis");
+    assert(s4.getExamGrade() == 9);
+    assert(s4.getHomeworkGrades().size() == 3);
+    Studentas s5;
+    s5 = std::move(s4);
+    assert(s5.getName() == "Petras");
+    assert(s5.getSurname() == "Petraitis");
+    assert(s5.getExamGrade() == 9);
+    assert(s5.getHomeworkGrades().size() == 3);
+    std::ostringstream out;
+    out << s1;
+    std::string tekstas = out.str();
+    assert(!tekstas.empty());
+    std::istringstream in("Ona Onaite 4 10 9 8 7 6");
+    Studentas s6;
+    in >> s6;
+    assert(s6.getName() == "Ona");
+    assert(s6.getSurname() == "Onaite");
+    assert(s6.getHomeworkGrades().size() == 4);
+    assert(s6.getExamGrade() == 6);
+    std::cout << "Visi Studentas klases testai sekmingi.\n";
+}*/
