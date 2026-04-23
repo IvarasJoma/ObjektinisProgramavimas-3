@@ -85,3 +85,27 @@ std::istream& operator>>(std::istream& is, Studentas& s) {
     s.finalGrade_ = s.calculateFinalGrade('v');
     return is;
 }
+
+Studentas::Studentas(Studentas&& other) noexcept
+    : name_(std::move(other.name_)),
+      surname_(std::move(other.surname_)),
+      examGrade_(other.examGrade_),
+      homeworkGrades_(std::move(other.homeworkGrades_)),
+      finalGrade_(other.finalGrade_) {
+    other.examGrade_ = 0;
+    other.finalGrade_ = 0.0;
+}
+
+Studentas& Studentas::operator=(Studentas&& other) noexcept {
+    if (this != &other) {
+        name_ = std::move(other.name_);
+        surname_ = std::move(other.surname_);
+        examGrade_ = other.examGrade_;
+        homeworkGrades_ = std::move(other.homeworkGrades_);
+        finalGrade_ = other.finalGrade_;
+
+        other.examGrade_ = 0;
+        other.finalGrade_ = 0.0;
+    }
+    return *this;
+}

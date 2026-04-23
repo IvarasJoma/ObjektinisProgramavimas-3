@@ -33,6 +33,8 @@ public:
         homeworkGrades_.clear();
         examGrade_ = 0.0;
     }
+    Studentas(Studentas&& other) noexcept;
+    Studentas& operator=(Studentas&& other) noexcept;
     inline std::string getName() const { return name_; }
     inline std::string getSurname() const { return surname_; }
     inline double getFinalGrade() const { return finalGrade_; }
