@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class Studentas {
+class Studentas : public Zmogus {
 private:
     std::string name_;
     std::string surname_;
@@ -15,14 +15,13 @@ private:
 
 public:
     static bool arSpausdintiDestruktoriu;
-    Studentas() : examGrade_(0), finalGrade_(0) {}
+    Studentas() : Zmogus(), examGrade_(0), finalGrade_(0) {}
     Studentas(const std::string& name,
               const std::string& surname,
               int examGrade,
               const std::vector<int>& homeworkGrades,
               double finalGrade)
-        : name_(name),
-          surname_(surname),
+        : Zmogus(name, surname),
           examGrade_(examGrade),
           homeworkGrades_(homeworkGrades),
           finalGrade_(finalGrade) {}
