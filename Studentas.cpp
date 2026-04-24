@@ -91,7 +91,7 @@ std::istream& operator>>(std::istream& is, Studentas& s) {
 }
 
 Studentas::Studentas(Studentas&& other) noexcept
-    : name_(std::move(other.name_)),
+    : Zmogus(std::move(other.name_), std::move(other.surname_)),
       surname_(std::move(other.surname_)),
       examGrade_(other.examGrade_),
       homeworkGrades_(std::move(other.homeworkGrades_)),
