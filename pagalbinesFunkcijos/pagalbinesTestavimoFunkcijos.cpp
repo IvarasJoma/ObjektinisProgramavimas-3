@@ -13,6 +13,7 @@
 #include <deque>
 #include <list>
 #include <cassert>
+#include <type_traits>
 
 void vykdytiIvedimoTestavima(){
     std::vector<Studentas> studentuSarasas;
@@ -458,6 +459,14 @@ void testuotiStudenta() {
 
     std::cout << "   Jei auksciau pasirode [DTOR] eilute, destruktorius veikia.\n";
     testas("destruktorius vizualiai iskviestas", true);
+
+    std::cout << "9. Testuojama paveldimumo struktura\n";
+    bool abstrakti = std::is_abstract<Zmogus>::value;
+    bool derived   = std::is_base_of<Zmogus, Studentas>::value;
+    std::cout << "   Zmogus abstrakti klase: " << (abstrakti ? "TAIP" : "NE") << '\n';
+    std::cout << "   Studentas isvestine klase: " << (derived ? "TAIP" : "NE") << "\n\n";
+    testas("Zmogus yra abstrakti klase", abstrakti);
+    testas("Studentas paveldi is Zmogus", derived);
 
     std::cout << "\n========================================\n";
     std::cout << "Testu santrauka: " << kiekPraejo << " / " << kiekViso << " praejo\n";
