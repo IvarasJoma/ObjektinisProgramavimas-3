@@ -6,23 +6,24 @@
 
 bool Studentas::arSpausdintiDestruktoriu = false;
 
-Studentas::Studentas(const char* eilute, std::size_t namuDarbuKiekis) : examGrade_(0) {
-    const char* pointer = eilute;
-    std::string name;
-    std::string surname;
-    if (!nuskaitytiZodiIsFailo(pointer, name)) throw std::runtime_error("Nepavyko nuskaityti studento vardo");
-    if (!nuskaitytiZodiIsFailo(pointer, surname)) throw std::runtime_error("Nepavyko nuskaityti studento pavardes");
-    name_ = std::move(name);
-    surname_ = std::move(surname);
-    homeworkGrades_.reserve(namuDarbuKiekis);
-    for (std::size_t i = 0; i < namuDarbuKiekis; i++) {
-        int tempGrade;
-        if (!nuskaitytiSveikaSkaiciuIsFailo(pointer, tempGrade)) tempGrade = 0;
-        homeworkGrades_.push_back(tempGrade);
+Studentas::Studentas(const char* eilute, std::size_t namuDarbuKiekis) : Studentas(){
+    if (eilute == nullptr) throw std::runtime_error("Gauta tuscia eilute");
+    std::istringstream originaliEilute(eilute);
+    std::ostringstream suOperatoriausFormatu;
+    std::string vardas;
+    std::string pavarde;
+    if (!(originaliEilute >> vardas >> pavarde)) throw std::runtime_error("Nepavyko nuskaityti studento vardo arba pavardes");
+    suOperatoriausFormatu << vardas << ' ' << pavarde << ' ' << namuDarbuKiekis;
+    for (std::size_t i = 0; i < namuDarbuKiekis; ++i) {
+        int pazymys = 0;
+        if (!(originaliEilute >> pazymys)) pazymys = 0;
+        suOperatoriausFormatu << ' ' << pazymys;
     }
-    int examGrade = 0;
-    if (!nuskaitytiSveikaSkaiciuIsFailo(pointer, examGrade)) examGrade = 0;
-    examGrade_ = examGrade;
+    int egzaminas = 0;
+    if (!(originaliEilute >> egzaminas)) egzaminas = 0;
+    suOperatoriausFormatu << ' ' << egzaminas;
+    std::istringstream in(suOperatoriausFormatu.str());
+    if (!(in >> *this)) throw std::runtime_error("Nepavyko sukurti Studentas objekto per operator>>");
 }
 
 Studentas::Studentas(bool generuotiPazymius, int ndKiekis) : examGrade_(0) {
@@ -43,11 +44,8 @@ double Studentas::calculateFinalGrade(char method) const {
         std::vector<int> temp = homeworkGrades_;
         std::sort(temp.begin(), temp.end());
         std::size_t n = temp.size();
-        if (n % 2 == 0) {
-            finalHomeworkGrade = (temp[n / 2 - 1] + temp[n / 2]) / 2.0;
-        } else {
-            finalHomeworkGrade = temp[n / 2];
-        }
+        if (n % 2 == 0) finalHomeworkGrade = (temp[n / 2 - 1] + temp[n / 2]) / 2.0;
+        else finalHomeworkGrade = temp[n / 2];
     }
     return 0.4 * finalHomeworkGrade + 0.6 * examGrade_;
 }

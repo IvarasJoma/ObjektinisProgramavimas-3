@@ -7,9 +7,7 @@
 
 
 void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
-    out << std::string(98, '-') << "\n";
     out << std::format("{:<40}{:<40}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
-    out << std::string(98, '-') << "\n";
     for (const auto& studentas : studentuSarasas) out << StudentasLentelei{studentas} << "\n";
 }
 
