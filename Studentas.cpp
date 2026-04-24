@@ -115,7 +115,7 @@ Studentas& Studentas::operator=(Studentas&& other) noexcept {
 }
 
 Studentas::Studentas(const Studentas& other)
-    : name_(other.name_),
+    : Zmogus(other.name_, other.surname_),
       surname_(other.surname_),
       examGrade_(other.examGrade_),
       homeworkGrades_(other.homeworkGrades_),
