@@ -7,8 +7,6 @@
 
 class Studentas : public Zmogus {
 private:
-    std::string name_;
-    std::string surname_;
     int examGrade_;
     std::vector<int> homeworkGrades_;
     double finalGrade_;
