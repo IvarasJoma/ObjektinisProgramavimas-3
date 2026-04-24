@@ -131,3 +131,12 @@ Studentas& Studentas::operator=(const Studentas& other) {
     }
     return *this;
 }
+
+Studentas::~Studentas() {
+    if (arSpausdintiDestruktoriu) std::cout << "[DTOR] Naikinamas studentas: " << name_ << ' ' << surname_ << '\n';
+    name_.clear();
+    surname_.clear();
+    homeworkGrades_.clear();
+    examGrade_ = 0;
+    finalGrade_ = 0.0;
+}

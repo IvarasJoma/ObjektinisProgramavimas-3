@@ -25,14 +25,7 @@ public:
           finalGrade_(finalGrade) {}
     Studentas(const char* eilute, std::size_t namuDarbuKiekis);
     Studentas(bool generuotiPazymius, int ndKiekis);
-    ~Studentas() {
-        if (arSpausdintiDestruktoriu) std::cout << "[DTOR] Naikinamas studentas: " << name_ << ' ' << surname_ << '\n';
-        name_.clear();
-        surname_.clear();
-        homeworkGrades_.clear();
-        examGrade_ = 0;
-        finalGrade_ = 0.0;
-    }
+    ~Studentas();
     Studentas(const Studentas& other);
     Studentas& operator=(const Studentas& other);
     Studentas(Studentas&& other) noexcept;
