@@ -16,6 +16,39 @@ Programa yra skirta studentų (jų akademinių pasiekimų) duomenų įvedimui, a
     <li>Bendro studentų konteinerio (<b>vector, list ir deque</b>) išskaidant optimizuojant antrąją strategiją.</li>
 </ol>
 
+# v1.2 pakeitimai:
+  Realizuota "Rule of Five":
+  <ol>
+    <li> Destruktorius </li>
+    <li> Copy konstruktorius </li>
+    <li> Copy assignment operatorius </li>
+    <li> Move konstruktorius </li>
+    <li> Move assignment operatorius </li>
+   </ol>
+  Realizuotas įvesties ir išvesties operatorių perdengimas bei sukurti testai visiems studento klasės metodams.
+
+### Įvesties operatoriaus naudojimas:
+Naudojant `operator>>`, pažymių kiekis
+nustatomas rankiniu būdu: pirmas skaičiuspo vardo ir pavardės
+nusako namų darbų pažymių kiekį, o pats paskutinis yra priskiriamas egzamino pažymiui.
+
+    Studentas studentas;
+    std::istringstream tekstoSrautas("Vardenis Pavardenis 2 3 4 10");
+    tekstoSrautas >> studentas;
+    
+### Išvesties operatoriaus naudojimas:
+Naudojant `operator<<`, įmanomi du išvedimo būdai: tik su visais išvestais pažymiais bei tik su išvestu galutiniu balu. Pastarajam variantui naudojamas papildomas struct wrapper StudentasLentelei:
+
+    Studentas studentas;
+    std::cout << studentas;
+    std::cout << StudentasLentelei{studentas};
+    std::ostringstream tekstoSrautas;
+    tekstoSrautas << studentas;
+    tekstoSrautas << StudentasLentelei{studentas};
+    std::ofstream failoSrautas("testavimas.txt");
+    failoSrautas << studentas;
+    failoSrautas << StudentasLentelei{studentas};
+
 <h2>Naudojimosi instrukcija</h2>
 <ol>
     <li>Parsisiųsti ir įsirašyti <a href="https://gnuwin32.sourceforge.net/packages/make.htm">make</a> programinį paketą (tik jei naudojate Windows OS).</li>
