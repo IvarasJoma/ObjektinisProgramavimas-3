@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Zmogus.h"
 
 class Studentas : public Zmogus {
 private:
