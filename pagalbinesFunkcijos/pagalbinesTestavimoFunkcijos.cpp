@@ -374,7 +374,7 @@ void testuotiStudenta() {
     testas("namu darbu kiekis", s1.getHomeworkGrades().size() == 3);
 
     const double tiketinasVidurkis = 0.4 * 9.0 + 0.6 * 7.0;
-    testas("galutinio balo skaiciavimas (vidurkis)", std::fabs(s1.getFinalGrade() - tiketinasVidurkis) < 1e-9);
+    testas("galutinio balo skaiciavimas (vidurkis)", s1.getFinalGrade() == tiketinasVidurkis);
 
     std::cout << "\n2. Testuojamas copy konstruktorius\n";
     Studentas s2(s1);
