@@ -19,13 +19,13 @@ Programa yra skirta studentų (jų akademinių pasiekimų) duomenų įvedimui, a
 # v1.2 pakeitimai:
   Realizuota "Rule of Five":
   <ol>
-    <li> Destruktorius </li>
     <li> Copy konstruktorius </li>
-    <li> Copy assignment operatorius </li>
     <li> Move konstruktorius </li>
+    <li> Copy assignment operatorius </li>
     <li> Move assignment operatorius </li>
+    <li> Destruktorius </li>
    </ol>
-  Realizuotas įvesties ir išvesties operatorių perdengimas bei sukurti testai visiems studento klasės metodams.
+  Realizuotas įvesties ir išvesties operatorių perdengimas bei sukurti testai visiems studento klasės metodams bei konstruktoriams.
 
 ### Įvesties operatoriaus naudojimas:
 Naudojant `operator>>`, pažymių kiekis
