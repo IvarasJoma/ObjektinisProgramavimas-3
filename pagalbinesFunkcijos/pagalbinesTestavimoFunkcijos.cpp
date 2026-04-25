@@ -309,48 +309,46 @@ void testuotiStudenta() {
 
     Studentas numatytasis;
     std::cout << "   Default konstruktorius sukure objekta.\n";
-    testas("default ctor vardas tuscias", numatytasis.getName().empty());
-    testas("default ctor pavarde tuscia", numatytasis.getSurname().empty());
-    testas("default ctor egzamino pazymys = 0", numatytasis.getExamGrade() == 0);
-    testas("default ctor nd tuscias", numatytasis.getHomeworkGrades().empty());
-    testas("default ctor galutinis = 0", std::fabs(numatytasis.getFinalGrade()) < 1e-9);
+    testas("default konstruktorius vardas tuscias", numatytasis.getName().empty());
+    testas("default konstruktorius pavarde tuscia", numatytasis.getSurname().empty());
+    testas("default konstruktorius egzaminas = 0", numatytasis.getExamGrade() == 0);
+    testas("default konstruktorius nd tuscias", numatytasis.getHomeworkGrades().empty());
+    testas("default konstruktorius galutinis = 0", std::fabs(numatytasis.getFinalGrade()) < 1e-9);
 
     Studentas parametrinis("Asta", "Astiene", 8, {9, 10, 8}, 8.4);
     std::cout << "   Parametrinis konstruktorius sukure: "
               << parametrinis.getName() << ' ' << parametrinis.getSurname() << '\n';
-    testas("param ctor vardas", parametrinis.getName() == "Asta");
-    testas("param ctor pavarde", parametrinis.getSurname() == "Astiene");
-    testas("param ctor egzaminas", parametrinis.getExamGrade() == 8);
-    testas("param ctor nd kiekis", parametrinis.getHomeworkGrades().size() == 3);
-    testas("param ctor galutinis", std::fabs(parametrinis.getFinalGrade() - 8.4) < 1e-9);
+    testas("parametrinis konstruktorius vardas", parametrinis.getName() == "Asta");
+    testas("parametrinis konstruktorius pavarde", parametrinis.getSurname() == "Astiene");
+    testas("parametrinis konstruktorius egzaminas", parametrinis.getExamGrade() == 8);
+    testas("parametrinis konstruktorius nd kiekis", parametrinis.getHomeworkGrades().size() == 3);
+    testas("parametrinis konstruktorius galutinis", std::fabs(parametrinis.getFinalGrade() - 8.4) < 1e-9);
 
     const char* eilute = "Ona Onaite 10 9 8 7 6";
     Studentas isEilutes(eilute, static_cast<std::size_t>(4));
     std::cout << "   Konstruktorius is eilutes sukure: "
               << isEilutes.getName() << ' ' << isEilutes.getSurname() << '\n';
-    testas("char* ctor vardas", isEilutes.getName() == "Ona");
-    testas("char* ctor pavarde", isEilutes.getSurname() == "Onaite");
-    testas("char* ctor nd kiekis", isEilutes.getHomeworkGrades().size() == 4);
-    testas("char* ctor pirmas nd", !isEilutes.getHomeworkGrades().empty() && isEilutes.getHomeworkGrades()[0] == 10);
-    testas("char* ctor egzaminas", isEilutes.getExamGrade() == 6);
+    testas("eilutes konstruktorius vardas", isEilutes.getName() == "Ona");
+    testas("eilutes konstruktorius pavarde", isEilutes.getSurname() == "Onaite");
+    testas("eilutes konstruktorius nd kiekis", isEilutes.getHomeworkGrades().size() == 4);
+    testas("eilutes konstruktorius pirmas nd", !isEilutes.getHomeworkGrades().empty() && isEilutes.getHomeworkGrades()[0] == 10);
+    testas("eilutes konstruktorius egzaminas", isEilutes.getExamGrade() == 6);
 
-    std::cout << "\n   Rankinis interaktyvaus konstruktoriaus testas\n";
+    std::cout << "\n   Rankinio konstruktoriaus testas\n";
     std::cout << "   Dabar bus kvieciamas Studentas(bool generuotiPazymius, int ndKiekis).\n";
     std::cout << "   Iveskite duomenis pagal pateikiamus klausimus.\n";
-
-    Studentas::arSpausdintiDestruktoriu = false;
     Studentas interaktyvus(false, 2);
 
-    std::cout << "   Sukurtas interaktyvus studentas:\n";
+    std::cout << "   Rankiniu budu sukurtas studentas:\n";
     std::cout << "   Vardas: " << interaktyvus.getName() << '\n';
     std::cout << "   Pavarde: " << interaktyvus.getSurname() << '\n';
     std::cout << "   Egzaminas: " << interaktyvus.getExamGrade() << '\n';
     std::cout << "   ND kiekis: " << interaktyvus.getHomeworkGrades().size() << '\n';
 
-    testas("interactive ctor vardas netuscias", !interaktyvus.getName().empty());
-    testas("interactive ctor pavarde netuscia", !interaktyvus.getSurname().empty());
-    testas("interactive ctor nd kiekis = 2", interaktyvus.getHomeworkGrades().size() == 2);
-    testas("interactive ctor egzaminas intervale [1,10]",
+    testas("rankinio konstruktoriaus vardas netuscias", !interaktyvus.getName().empty());
+    testas("rankinio konstruktoriaus pavarde netuscia", !interaktyvus.getSurname().empty());
+    testas("rankinio konstruktoriaus nd kiekis = 2", interaktyvus.getHomeworkGrades().size() == 2);
+    testas("rankinio konstruktoriaus egzaminas intervale [1,10]",
            interaktyvus.getExamGrade() >= 1 && interaktyvus.getExamGrade() <= 10);
 
     std::cout << "\n1. Kuriamas pradinis objektas\n";
@@ -381,40 +379,40 @@ void testuotiStudenta() {
     Studentas s2(s1);
     std::cout << "   Nukopijuotas studentas: " << s2.getName() << ' ' << s2.getSurname() << "\n\n";
 
-    testas("copy ctor vardas", s2.getName() == s1.getName());
-    testas("copy ctor pavarde", s2.getSurname() == s1.getSurname());
-    testas("copy ctor egzaminas", s2.getExamGrade() == s1.getExamGrade());
-    testas("copy ctor nd", s2.getHomeworkGrades() == s1.getHomeworkGrades());
+    testas("copy konstruktorius vardas", s2.getName() == s1.getName());
+    testas("copy konstruktorius  pavarde", s2.getSurname() == s1.getSurname());
+    testas("copy konstruktorius  egzaminas", s2.getExamGrade() == s1.getExamGrade());
+    testas("copy konstruktorius nd", s2.getHomeworkGrades() == s1.getHomeworkGrades());
 
     std::cout << "\n3. Testuojamas copy priskyrimo operatorius\n";
     Studentas s3;
     s3 = s1;
     std::cout << "   Priskirtas studentas: " << s3.getName() << ' ' << s3.getSurname() << "\n\n";
 
-    testas("copy assign vardas", s3.getName() == s1.getName());
-    testas("copy assign pavarde", s3.getSurname() == s1.getSurname());
-    testas("copy assign egzaminas", s3.getExamGrade() == s1.getExamGrade());
-    testas("copy assign nd", s3.getHomeworkGrades() == s1.getHomeworkGrades());
+    testas("copy priskyrimo operatorius vardas", s3.getName() == s1.getName());
+    testas("copy priskyrimo operatorius pavarde", s3.getSurname() == s1.getSurname());
+    testas("copy priskyrimo operatorius egzaminas", s3.getExamGrade() == s1.getExamGrade());
+    testas("copy priskyrimo operatorius nd", s3.getHomeworkGrades() == s1.getHomeworkGrades());
 
     std::cout << "\n4. Testuojamas move konstruktorius\n";
     Studentas laikinas("Petras", "Petraitis", 9, {10, 9, 8}, 0.0);
     Studentas s4(std::move(laikinas));
     std::cout << "   Perkeltas studentas: " << s4.getName() << ' ' << s4.getSurname() << "\n\n";
 
-    testas("move ctor vardas", s4.getName() == "Petras");
-    testas("move ctor pavarde", s4.getSurname() == "Petraitis");
-    testas("move ctor egzaminas", s4.getExamGrade() == 9);
-    testas("move ctor nd kiekis", s4.getHomeworkGrades().size() == 3);
+    testas("move konstruktorius vardas", s4.getName() == "Petras");
+    testas("move konstruktorius pavarde", s4.getSurname() == "Petraitis");
+    testas("move konstruktorius egzaminas", s4.getExamGrade() == 9);
+    testas("move konstruktorius nd kiekis", s4.getHomeworkGrades().size() == 3);
 
     std::cout << "\n5. Testuojamas move priskyrimo operatorius\n";
     Studentas s5;
     s5 = std::move(s4);
     std::cout << "   Perimtas studentas: " << s5.getName() << ' ' << s5.getSurname() << "\n\n";
 
-    testas("move assign vardas", s5.getName() == "Petras");
-    testas("move assign pavarde", s5.getSurname() == "Petraitis");
-    testas("move assign egzaminas", s5.getExamGrade() == 9);
-    testas("move assign nd kiekis", s5.getHomeworkGrades().size() == 3);
+    testas("move priskyrimo operatorius vardas", s5.getName() == "Petras");
+    testas("move priskyrimo operatorius pavarde", s5.getSurname() == "Petraitis");
+    testas("move priskyrimo operatorius egzaminas", s5.getExamGrade() == 9);
+    testas("move priskyrimo operatorius nd kiekis", s5.getHomeworkGrades().size() == 3);
 
     std::cout << "\n6. Testuojamas operator<<\n";
     std::ostringstream out;
@@ -441,7 +439,7 @@ void testuotiStudenta() {
     testas("operator>> egzamino pazymys", s6.getExamGrade() == 6);
 
     std::cout << "\n8. Testuojamas destruktorius\n";
-    std::cout << "   Kuriamas lokalus objektas vidiniame scope...\n";
+    std::cout << "   Kuriamas lokalus objektas...\n";
 
     Studentas::arSpausdintiDestruktoriu = true;
     {
