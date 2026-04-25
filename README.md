@@ -17,7 +17,8 @@ Programa yra skirta studentų (jų akademinių pasiekimų) duomenų įvedimui, a
 </ol>
 
 # v1.2 pakeitimai:
-  Realizuota "Rule of Five":
+  Realizuotas įvesties ir išvesties operatorių perdengimas bei sukurti testai visiems studento klasės metodams bei konstruktoriams.
+  Realizuota penkių metodų taisyklė:
   <ol>
     <li> Copy konstruktorius </li>
     <li> Move konstruktorius </li>
@@ -25,17 +26,7 @@ Programa yra skirta studentų (jų akademinių pasiekimų) duomenų įvedimui, a
     <li> Move assignment operatorius </li>
     <li> Destruktorius </li>
    </ol>
-  Realizuotas įvesties ir išvesties operatorių perdengimas bei sukurti testai visiems studento klasės metodams bei konstruktoriams.
 
-### Įvesties operatoriaus naudojimas:
-Naudojant `operator>>`, pažymių kiekis
-nustatomas rankiniu būdu: pirmas skaičiuspo vardo ir pavardės
-nusako namų darbų pažymių kiekį, o pats paskutinis yra priskiriamas egzamino pažymiui.
-
-    Studentas studentas;
-    std::istringstream tekstoSrautas("Vardenis Pavardenis 2 3 4 10");
-    tekstoSrautas >> studentas;
-    
 ### Išvesties operatoriaus naudojimas:
 Naudojant `operator<<`, įmanomi du išvedimo būdai: tik su visais išvestais pažymiais bei tik su išvestu galutiniu balu. Pastarajam variantui naudojamas papildomas struct wrapper StudentasLentelei:
 
@@ -48,6 +39,15 @@ Naudojant `operator<<`, įmanomi du išvedimo būdai: tik su visais išvestais p
     std::ofstream failoSrautas("testavimas.txt");
     failoSrautas << studentas;
     failoSrautas << StudentasLentelei{studentas};
+
+### Įvesties operatoriaus naudojimas:
+Naudojant `operator>>`, pažymių kiekis
+nustatomas rankiniu būdu: pirmas skaičiuspo vardo ir pavardės
+nusako namų darbų pažymių kiekį, o pats paskutinis yra priskiriamas egzamino pažymiui.
+
+    Studentas studentas;
+    std::istringstream tekstoSrautas("Vardenis Pavardenis 2 3 4 10");
+    tekstoSrautas >> studentas;
 
 ## Studento klasės metodų testavimo nuotraukos:
 <img width="686" height="525" alt="image" src="https://github.com/user-attachments/assets/7b77ac56-2c40-420c-8346-adfb9b08a9a3" />
