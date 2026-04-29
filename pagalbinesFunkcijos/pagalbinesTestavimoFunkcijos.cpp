@@ -279,6 +279,7 @@ void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
+        irasytiSuskirstytusStudentusIFailus(studentuSarasas, silpnuSarasas, skaiciavimoMetodas);
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
