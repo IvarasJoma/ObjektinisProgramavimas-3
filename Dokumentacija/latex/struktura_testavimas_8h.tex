@@ -1,0 +1,206 @@
+\doxysection{strukturos\+Failai/\+struktura\+Testavimas.h Failo Nuoroda}
+\hypertarget{struktura_testavimas_8h}{}\label{struktura_testavimas_8h}\index{strukturosFailai/strukturaTestavimas.h@{strukturosFailai/strukturaTestavimas.h}}
+
+
+Programos veikimo greičio, konteinerių strategijų ir Studentas klasės testavimo funkcijos.  
+
+
+{\ttfamily \+\#include "{}../\+strukturos\+Failai/\+\+Failai.\+h"{}}\newline
+{\ttfamily \+\#include $<$chrono$>$}\newline
+\doxysubsubsection*{Klasės}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_testo_laikai}{Testo\+Laikai}}
+\begin{DoxyCompactList}\small\item\em Saugo atskirų programos etapų vykdymo laikus. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcijos}
+\begin{DoxyCompactItemize}
+\item 
+double \doxymbox{\hyperlink{struktura_testavimas_8h_abc34889bbe93562f9bcce86221555f4e}{apskaiciuoti\+Bendra\+Laika}} (const \doxymbox{\hyperlink{struct_testo_laikai}{Testo\+Laikai}} \&laikai)
+\begin{DoxyCompactList}\small\item\em Apskaičiuoja bendrą testavimo laiką. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_testavimas_8h_a0bf767a4d1e73bc1d01550ba7a720ef6}{gauti\+Vidurki}} (\doxymbox{\hyperlink{struct_testo_laikai}{Testo\+Laikai}} \&laikai, int kiekis)
+\begin{DoxyCompactList}\small\item\em Apskaičiuoja vidutinius laikus pagal atliktų testų kiekį. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{struktura_testavimas_8h_aca1dce17aec4954c793bb90f87a788e7}{apskaiciuoti\+Laika}} (std::\+chrono::\+steady\+\_\+clock::\+time\+\_\+point startas, std::\+chrono::\+steady\+\_\+clock::\+time\+\_\+point pabaiga)
+\begin{DoxyCompactList}\small\item\em Apskaičiuoja laiko skirtumą tarp dviejų momentų. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func$>$ }\\double \doxymbox{\hyperlink{struktura_testavimas_8h_a178be1b12367349c13d2a6d4828b1901}{ismatuoti\+Laika}} (Func veiksmas)
+\begin{DoxyCompactList}\small\item\em Išmatuoja perduotos funkcijos arba veiksmo vykdymo laiką. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a0f3a50e06a879a6a5f00a7809f4066fb}\label{struktura_testavimas_8h_a0f3a50e06a879a6a5f00a7809f4066fb} 
+void {\bfseries vykdyti\+Ivedimo\+Testavima} ()
+\begin{DoxyCompactList}\small\item\em Vykdo studentų įvedimo testavimą. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_testavimas_8h_abe7eaf9df46ff87e74ad140fdbc8a4a6}{vykdyti\+Isvedimo\+Testavima}} (\doxymbox{\hyperlink{struct_failai}{Failai}} \&failai)
+\begin{DoxyCompactList}\small\item\em Vykdo studentų išvedimo testavimą. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_ac938eee83905061a8d0184c4231b819c}\label{struktura_testavimas_8h_ac938eee83905061a8d0184c4231b819c} 
+void {\bfseries vykdyti\+Duomenu\+Apdorojimo\+Testavima} ()
+\begin{DoxyCompactList}\small\item\em Vykdo bendrą duomenų apdorojimo testavimą. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_aec3d72db97b842c3e7ef7e6b79cd94c5}\label{struktura_testavimas_8h_aec3d72db97b842c3e7ef7e6b79cd94c5} 
+void {\bfseries vykdyti\+Nulintaja\+Konteineriu\+Testavimo\+Strategija} ()
+\begin{DoxyCompactList}\small\item\em Vykdo nulinę konteinerių testavimo strategiją. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a70ad9ce1434446367a5b90e78e2ca121}\label{struktura_testavimas_8h_a70ad9ce1434446367a5b90e78e2ca121} 
+void {\bfseries vykdyti\+Pirmaja\+Konteineriu\+Testavimo\+Strategija} ()
+\begin{DoxyCompactList}\small\item\em Vykdo pirmąją konteinerių testavimo strategiją. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a37023fcdd0ca6ffb0e8da3b6d37ce3ea}\label{struktura_testavimas_8h_a37023fcdd0ca6ffb0e8da3b6d37ce3ea} 
+void {\bfseries vykdyti\+Antraja\+Konteineriu\+Testavimo\+Strategija} ()
+\begin{DoxyCompactList}\small\item\em Vykdo antrąją konteinerių testavimo strategiją. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a28466a85efc66fd5fc0eabf20ae30a53}\label{struktura_testavimas_8h_a28466a85efc66fd5fc0eabf20ae30a53} 
+void {\bfseries vykdyti\+Treciaja\+Konteineriu\+Testavimo\+Strategija} ()
+\begin{DoxyCompactList}\small\item\em Vykdo trečiąją konteinerių testavimo strategiją. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a0884fee05d655560f6fa7a2cc87749ab}\label{struktura_testavimas_8h_a0884fee05d655560f6fa7a2cc87749ab} 
+void {\bfseries vykdyti\+Treciaja\+Konteineriu\+Testavimo\+Strategija\+Tik\+Su\+Vektoriais} ()
+\begin{DoxyCompactList}\small\item\em Vykdo trečiąją konteinerių testavimo strategiją tik su {\ttfamily std::\+vector}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Studentas klasės Google Test pagalbinės funkcijos}\par
+{\em Atskiros funkcijos, kurias kviečia Google Test {\ttfamily TEST(...)} blokai.
+
+Šios funkcijos naudoja Google Test makrokomandas savo {\ttfamily .cpp} faile. Į šį {\ttfamily .h} failą {\ttfamily \#include \texorpdfstring{$<$}{<}gtest/\+gtest.\+h\texorpdfstring{$>$}{>}} dėti nereikia. }\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struktura_testavimas_8h_ad44e1a9928fe9fc331dd7827a101c801}\label{struktura_testavimas_8h_ad44e1a9928fe9fc331dd7827a101c801} 
+void {\bfseries testuoti\+Default\+Konstruktoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja numatytąjį {\ttfamily Studentas} konstruktorių. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a037828c5873838ec219f50aea7c2d7d8}\label{struktura_testavimas_8h_a037828c5873838ec219f50aea7c2d7d8} 
+void {\bfseries testuoti\+Parametrini\+Konstruktoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja parametrinį {\ttfamily Studentas} konstruktorių. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_ad5f5b78ccdc58ab5b85eac70ec167cf8}\label{struktura_testavimas_8h_ad5f5b78ccdc58ab5b85eac70ec167cf8} 
+void {\bfseries testuoti\+Konstruktoriu\+Is\+Eilutes} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} konstruktorių, kuris sukuria objektą iš tekstinės eilutės. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_ac01825648a2e34d732afca2688e48051}\label{struktura_testavimas_8h_ac01825648a2e34d732afca2688e48051} 
+void {\bfseries testuoti\+Setterius\+Ir\+Getterius} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} setterius ir getterius. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a4bb8c59e2f389d6c4219c1c2f60a965c}\label{struktura_testavimas_8h_a4bb8c59e2f389d6c4219c1c2f60a965c} 
+void {\bfseries testuoti\+Namu\+Darbu\+Pazymiu\+Valdyma} ()
+\begin{DoxyCompactList}\small\item\em Testuoja namų darbų pažymių pridėjimą, rezervavimą ir išvalymą. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a068190c82482ff519cc6cdeeec2627ff}\label{struktura_testavimas_8h_a068190c82482ff519cc6cdeeec2627ff} 
+void {\bfseries testuoti\+Galutinio\+Pazymio\+Skaiciavima\+Pagal\+Vidurki} ()
+\begin{DoxyCompactList}\small\item\em Testuoja galutinio pažymio skaičiavimą pagal namų darbų vidurkį. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a463809cbb7a5afcb3e47f4076e779749}\label{struktura_testavimas_8h_a463809cbb7a5afcb3e47f4076e779749} 
+void {\bfseries testuoti\+Copy\+Konstruktoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} kopijavimo konstruktorių. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a402fe31e2395c7f7b4126918f1ffd080}\label{struktura_testavimas_8h_a402fe31e2395c7f7b4126918f1ffd080} 
+void {\bfseries testuoti\+Copy\+Priskyrimo\+Operatoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} kopijavimo priskyrimo operatorių. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a00853257801a5ffed6b1f00b55e477ff}\label{struktura_testavimas_8h_a00853257801a5ffed6b1f00b55e477ff} 
+void {\bfseries testuoti\+Self\+Copy\+Assignment} ()
+\begin{DoxyCompactList}\small\item\em Testuoja savęs priskyrimo atvejį naudojant kopijavimo priskyrimo operatorių. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a402be6c9c0d86353356cb45593cee923}\label{struktura_testavimas_8h_a402be6c9c0d86353356cb45593cee923} 
+void {\bfseries testuoti\+Move\+Konstruktoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} perkėlimo konstruktorių. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_af344a111527a6911bebeb98900e48e5e}\label{struktura_testavimas_8h_af344a111527a6911bebeb98900e48e5e} 
+void {\bfseries testuoti\+Move\+Priskyrimo\+Operatoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} perkėlimo priskyrimo operatorių. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a4b98a6e38ef91a2f6c6e1be5fce71c85}\label{struktura_testavimas_8h_a4b98a6e38ef91a2f6c6e1be5fce71c85} 
+void {\bfseries testuoti\+Isvesties\+Operatoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} išvesties operatorių {\ttfamily operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}}. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a75793516cfba4ef17b097c18d582f789}\label{struktura_testavimas_8h_a75793516cfba4ef17b097c18d582f789} 
+void {\bfseries testuoti\+Ivesties\+Operatoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas} įvesties operatorių {\ttfamily operator\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}}. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a7c1a9c04ee6b41de5ace3cf21ac473d3}\label{struktura_testavimas_8h_a7c1a9c04ee6b41de5ace3cf21ac473d3} 
+void {\bfseries testuoti\+Studentas\+Lentelei\+Isvesties\+Operatoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja {\ttfamily Studentas\+Lentelei} išvesties operatorių {\ttfamily operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}}. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_adef5020e20de9afda0858bbda08a3007}\label{struktura_testavimas_8h_adef5020e20de9afda0858bbda08a3007} 
+void {\bfseries testuoti\+Paveldimumo\+Struktura} ()
+\begin{DoxyCompactList}\small\item\em Testuoja paveldėjimo ryšį tarp {\ttfamily Zmogus} ir {\ttfamily Studentas}. \end{DoxyCompactList}\item 
+\Hypertarget{struktura_testavimas_8h_a08dffffaa352966c123e41c1936e17d8}\label{struktura_testavimas_8h_a08dffffaa352966c123e41c1936e17d8} 
+void {\bfseries testuoti\+Destruktoriu} ()
+\begin{DoxyCompactList}\small\item\em Testuoja, ar {\ttfamily Studentas} destruktorius iškviečiamas ir sukuria tikėtiną šalutinį efektą. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Smulkus aprašymas}
+Programos veikimo greičio, konteinerių strategijų ir Studentas klasės testavimo funkcijos. 
+
+
+
+\label{struktura_testavimas_8h_doc-func-members}
+\Hypertarget{struktura_testavimas_8h_doc-func-members}
+\doxysubsection{Funkcijos Dokumentacija}
+\Hypertarget{struktura_testavimas_8h_abc34889bbe93562f9bcce86221555f4e}\index{strukturaTestavimas.h@{strukturaTestavimas.h}!apskaiciuotiBendraLaika@{apskaiciuotiBendraLaika}}
+\index{apskaiciuotiBendraLaika@{apskaiciuotiBendraLaika}!strukturaTestavimas.h@{strukturaTestavimas.h}}
+\doxysubsubsection{\texorpdfstring{apskaiciuotiBendraLaika()}{apskaiciuotiBendraLaika()}}
+{\footnotesize\ttfamily \label{struktura_testavimas_8h_abc34889bbe93562f9bcce86221555f4e} 
+double apskaiciuoti\+Bendra\+Laika (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_testo_laikai}{Testo\+Laikai}} \&}]{laikai}{}\end{DoxyParamCaption})}
+
+
+
+Apskaičiuoja bendrą testavimo laiką. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em laikai} & Struktūra su atskirų etapų laikais. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Bendras laikas sekundėmis. 
+\end{DoxyReturn}
+\Hypertarget{struktura_testavimas_8h_aca1dce17aec4954c793bb90f87a788e7}\index{strukturaTestavimas.h@{strukturaTestavimas.h}!apskaiciuotiLaika@{apskaiciuotiLaika}}
+\index{apskaiciuotiLaika@{apskaiciuotiLaika}!strukturaTestavimas.h@{strukturaTestavimas.h}}
+\doxysubsubsection{\texorpdfstring{apskaiciuotiLaika()}{apskaiciuotiLaika()}}
+{\footnotesize\ttfamily \label{struktura_testavimas_8h_aca1dce17aec4954c793bb90f87a788e7} 
+double apskaiciuoti\+Laika (\begin{DoxyParamCaption}\item[{std::\+chrono::\+steady\+\_\+clock::\+time\+\_\+point}]{startas}{, }\item[{std::\+chrono::\+steady\+\_\+clock::\+time\+\_\+point}]{pabaiga}{}\end{DoxyParamCaption})}
+
+
+
+Apskaičiuoja laiko skirtumą tarp dviejų momentų. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em startas} & Pradžios laiko momentas. \\
+\hline
+{\em pabaiga} & Pabaigos laiko momentas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Laiko skirtumas sekundėmis. 
+\end{DoxyReturn}
+\Hypertarget{struktura_testavimas_8h_a0bf767a4d1e73bc1d01550ba7a720ef6}\index{strukturaTestavimas.h@{strukturaTestavimas.h}!gautiVidurki@{gautiVidurki}}
+\index{gautiVidurki@{gautiVidurki}!strukturaTestavimas.h@{strukturaTestavimas.h}}
+\doxysubsubsection{\texorpdfstring{gautiVidurki()}{gautiVidurki()}}
+{\footnotesize\ttfamily \label{struktura_testavimas_8h_a0bf767a4d1e73bc1d01550ba7a720ef6} 
+void gauti\+Vidurki (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_testo_laikai}{Testo\+Laikai}} \&}]{laikai}{, }\item[{int}]{kiekis}{}\end{DoxyParamCaption})}
+
+
+
+Apskaičiuoja vidutinius laikus pagal atliktų testų kiekį. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em laikai} & Laikų struktūra, kurios reikšmės bus padalintos iš testų kiekio. \\
+\hline
+{\em kiekis} & Testų kiekis. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_testavimas_8h_a178be1b12367349c13d2a6d4828b1901}\index{strukturaTestavimas.h@{strukturaTestavimas.h}!ismatuotiLaika@{ismatuotiLaika}}
+\index{ismatuotiLaika@{ismatuotiLaika}!strukturaTestavimas.h@{strukturaTestavimas.h}}
+\doxysubsubsection{\texorpdfstring{ismatuotiLaika()}{ismatuotiLaika()}}
+{\footnotesize\ttfamily \label{struktura_testavimas_8h_a178be1b12367349c13d2a6d4828b1901} 
+template$<$typename Func$>$ \\
+double ismatuoti\+Laika (\begin{DoxyParamCaption}\item[{Func}]{veiksmas}{}\end{DoxyParamCaption})}
+
+
+
+Išmatuoja perduotos funkcijos arba veiksmo vykdymo laiką. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Funkcijos arba lambda tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em veiksmas} & Veiksmas, kurio vykdymo laikas matuojamas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Vykdymo laikas sekundėmis. 
+\end{DoxyReturn}
+\Hypertarget{struktura_testavimas_8h_abe7eaf9df46ff87e74ad140fdbc8a4a6}\index{strukturaTestavimas.h@{strukturaTestavimas.h}!vykdytiIsvedimoTestavima@{vykdytiIsvedimoTestavima}}
+\index{vykdytiIsvedimoTestavima@{vykdytiIsvedimoTestavima}!strukturaTestavimas.h@{strukturaTestavimas.h}}
+\doxysubsubsection{\texorpdfstring{vykdytiIsvedimoTestavima()}{vykdytiIsvedimoTestavima()}}
+{\footnotesize\ttfamily \label{struktura_testavimas_8h_abe7eaf9df46ff87e74ad140fdbc8a4a6} 
+void vykdyti\+Isvedimo\+Testavima (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_failai}{Failai}} \&}]{failai}{}\end{DoxyParamCaption})}
+
+
+
+Vykdo studentų išvedimo testavimą. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em failai} & Vardų ir pavardžių failų duomenys. \\
+\hline
+\end{DoxyParams}

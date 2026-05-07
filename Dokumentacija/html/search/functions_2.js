@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['getexamgrade_0',['getExamGrade',['../class_studentas.html#a46a5ec0fe33ef04ea7918c999aa2ae11',1,'Studentas']]],
-  ['getfinalgrade_1',['getFinalGrade',['../class_studentas.html#aba83d97095d23a9781c84cb390f62cc1',1,'Studentas']]],
-  ['gethomeworkgrades_2',['getHomeworkGrades',['../class_studentas.html#acfef54ae695430c93281164e001e018c',1,'Studentas']]],
-  ['getname_3',['getName',['../class_studentas.html#aedbf85a5ca5b70585d32245bc3dcd1e6',1,'Studentas::getName()'],['../class_zmogus.html#a1edd5080449d2b2ed385d7dc5292a8bd',1,'Zmogus::getName()']]],
-  ['getsurname_4',['getSurname',['../class_studentas.html#a7761e6d92ac02b72a008a73170ad340c',1,'Studentas::getSurname()'],['../class_zmogus.html#ad8e3cb14fe4df70965f52a8432aa9399',1,'Zmogus::getSurname()']]]
+  ['irasytiduomenis_0',['irasytiDuomenis',['../struktura_darbas_su_failais_8h.html#a34dd856e15df627f61ab9819f703819e',1,'strukturaDarbasSuFailais.h']]],
+  ['irasytistudentuduomenisifaila_1',['irasytiStudentuDuomenisIFaila',['../struktura_darbas_su_failais_8h.html#a185551ed9b9296aece65dd5b1870f712',1,'irasytiStudentuDuomenisIFaila(const std::vector&lt; Studentas &gt; &amp;studentuSarasas, const std::string &amp;failoPavadinimas):&#160;strukturaDarbasSuFailais.h'],['../struktura_isvestis_8h.html#af44473ecb34d1a1ddf49f63183bd7f9b',1,'irasytiStudentuDuomenisIFaila(std::vector&lt; Studentas &gt; &amp;studentuSarasas, int maksimalusNDKiekis, int studentuKiekis, Failai &amp;failai):&#160;strukturaIsvestis.h']]],
+  ['irasytisuskirstytusstudentusifailus_2',['irasytiSuskirstytusStudentusIFailus',['../struktura_darbas_su_failais_8h.html#ab0f6aaabf3f1ac4568fa7f431471a849',1,'strukturaDarbasSuFailais.h']]],
+  ['ismatuotilaika_3',['ismatuotiLaika',['../struktura_testavimas_8h.html#a178be1b12367349c13d2a6d4828b1901',1,'strukturaTestavimas.h']]],
+  ['isvestistudentus_4',['isvestiStudentus',['../struktura_isvestis_8h.html#a30e18828d2b52f3ea1d87720bb5ce675',1,'strukturaIsvestis.h']]]
 ];

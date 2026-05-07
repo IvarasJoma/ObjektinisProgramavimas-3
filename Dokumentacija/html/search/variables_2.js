@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['s_0',['s',['../struct_studentas_lentelei.html#a6d388f5467b74a27eacaeac2fcaa606b',1,'StudentasLentelei']]],
-  ['surname_5f_1',['surname_',['../class_zmogus.html#a22e00c35f73d01cf37750851ed944dd9',1,'Zmogus']]]
+  ['pagrindinis_5fmeniu_0',['PAGRINDINIS_MENIU',['../struktura_meniu_8h.html#a9259e43924a05aee5f6dc8114731f19c',1,'strukturaMeniu.h']]],
+  ['pazangiu_5frikiavimo_5fmeniu_1',['PAZANGIU_RIKIAVIMO_MENIU',['../struktura_meniu_8h.html#afdeb8a06bca4c954d873971cc75caf6d',1,'strukturaMeniu.h']]]
 ];

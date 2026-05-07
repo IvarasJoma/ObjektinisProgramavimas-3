@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="lt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ObjektinisProgramavimas-2: strukturosFailai/strukturaTestavimas.h Failo Nuoroda</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">ObjektinisProgramavimas-2<span id="projectnumber">&#160;2.0</span>
+   </div>
+   <div id="projectbrief">Studentų rezultatų apdorojimo programa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Sugeneruota Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Paieška" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('struktura_testavimas_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">strukturaTestavimas.h Failo Nuoroda</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Programos veikimo greičio, konteinerių strategijų ir Studentas klasės testavimo funkcijos.  
+<a href="#details">Daugiau...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="_failai_8h_source.html">../strukturosFailai/Failai.h</a>&quot;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
+</div>
+<p><a href="struktura_testavimas_8h_source.html">Eiti į šio failo programos kodą.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Klasės</h2></td></tr>
+<tr class="memitem:TestoLaikai" id="r_TestoLaikai"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_testo_laikai.html">TestoLaikai</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saugo atskirų programos etapų vykdymo laikus.  <a href="struct_testo_laikai.html#details">Daugiau...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcijos</h2></td></tr>
+<tr class="memitem:abc34889bbe93562f9bcce86221555f4e" id="r_abc34889bbe93562f9bcce86221555f4e"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#abc34889bbe93562f9bcce86221555f4e">apskaiciuotiBendraLaika</a> (const <a class="el" href="struct_testo_laikai.html">TestoLaikai</a> &amp;laikai)</td></tr>
+<tr class="memdesc:abc34889bbe93562f9bcce86221555f4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja bendrą testavimo laiką.  <br /></td></tr>
+<tr class="memitem:a0bf767a4d1e73bc1d01550ba7a720ef6" id="r_a0bf767a4d1e73bc1d01550ba7a720ef6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0bf767a4d1e73bc1d01550ba7a720ef6">gautiVidurki</a> (<a class="el" href="struct_testo_laikai.html">TestoLaikai</a> &amp;laikai, int kiekis)</td></tr>
+<tr class="memdesc:a0bf767a4d1e73bc1d01550ba7a720ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja vidutinius laikus pagal atliktų testų kiekį.  <br /></td></tr>
+<tr class="memitem:aca1dce17aec4954c793bb90f87a788e7" id="r_aca1dce17aec4954c793bb90f87a788e7"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aca1dce17aec4954c793bb90f87a788e7">apskaiciuotiLaika</a> (std::chrono::steady_clock::time_point startas, std::chrono::steady_clock::time_point pabaiga)</td></tr>
+<tr class="memdesc:aca1dce17aec4954c793bb90f87a788e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja laiko skirtumą tarp dviejų momentų.  <br /></td></tr>
+<tr class="memitem:a178be1b12367349c13d2a6d4828b1901" id="r_a178be1b12367349c13d2a6d4828b1901"><td class="memTemplParams" colspan="2">template&lt;typename Func&gt; </td></tr>
+<tr class="memitem:a178be1b12367349c13d2a6d4828b1901 template"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a178be1b12367349c13d2a6d4828b1901">ismatuotiLaika</a> (Func veiksmas)</td></tr>
+<tr class="memdesc:a178be1b12367349c13d2a6d4828b1901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Išmatuoja perduotos funkcijos arba veiksmo vykdymo laiką.  <br /></td></tr>
+<tr class="memitem:a0f3a50e06a879a6a5f00a7809f4066fb" id="r_a0f3a50e06a879a6a5f00a7809f4066fb"><td class="memItemLeft"><a id="a0f3a50e06a879a6a5f00a7809f4066fb" name="a0f3a50e06a879a6a5f00a7809f4066fb"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiIvedimoTestavima</b> ()</td></tr>
+<tr class="memdesc:a0f3a50e06a879a6a5f00a7809f4066fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo studentų įvedimo testavimą. <br /></td></tr>
+<tr class="memitem:abe7eaf9df46ff87e74ad140fdbc8a4a6" id="r_abe7eaf9df46ff87e74ad140fdbc8a4a6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abe7eaf9df46ff87e74ad140fdbc8a4a6">vykdytiIsvedimoTestavima</a> (<a class="el" href="struct_failai.html">Failai</a> &amp;failai)</td></tr>
+<tr class="memdesc:abe7eaf9df46ff87e74ad140fdbc8a4a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo studentų išvedimo testavimą.  <br /></td></tr>
+<tr class="memitem:ac938eee83905061a8d0184c4231b819c" id="r_ac938eee83905061a8d0184c4231b819c"><td class="memItemLeft"><a id="ac938eee83905061a8d0184c4231b819c" name="ac938eee83905061a8d0184c4231b819c"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiDuomenuApdorojimoTestavima</b> ()</td></tr>
+<tr class="memdesc:ac938eee83905061a8d0184c4231b819c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo bendrą duomenų apdorojimo testavimą. <br /></td></tr>
+<tr class="memitem:aec3d72db97b842c3e7ef7e6b79cd94c5" id="r_aec3d72db97b842c3e7ef7e6b79cd94c5"><td class="memItemLeft"><a id="aec3d72db97b842c3e7ef7e6b79cd94c5" name="aec3d72db97b842c3e7ef7e6b79cd94c5"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiNulintajaKonteineriuTestavimoStrategija</b> ()</td></tr>
+<tr class="memdesc:aec3d72db97b842c3e7ef7e6b79cd94c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo nulinę konteinerių testavimo strategiją. <br /></td></tr>
+<tr class="memitem:a70ad9ce1434446367a5b90e78e2ca121" id="r_a70ad9ce1434446367a5b90e78e2ca121"><td class="memItemLeft"><a id="a70ad9ce1434446367a5b90e78e2ca121" name="a70ad9ce1434446367a5b90e78e2ca121"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiPirmajaKonteineriuTestavimoStrategija</b> ()</td></tr>
+<tr class="memdesc:a70ad9ce1434446367a5b90e78e2ca121"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo pirmąją konteinerių testavimo strategiją. <br /></td></tr>
+<tr class="memitem:a37023fcdd0ca6ffb0e8da3b6d37ce3ea" id="r_a37023fcdd0ca6ffb0e8da3b6d37ce3ea"><td class="memItemLeft"><a id="a37023fcdd0ca6ffb0e8da3b6d37ce3ea" name="a37023fcdd0ca6ffb0e8da3b6d37ce3ea"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiAntrajaKonteineriuTestavimoStrategija</b> ()</td></tr>
+<tr class="memdesc:a37023fcdd0ca6ffb0e8da3b6d37ce3ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo antrąją konteinerių testavimo strategiją. <br /></td></tr>
+<tr class="memitem:a28466a85efc66fd5fc0eabf20ae30a53" id="r_a28466a85efc66fd5fc0eabf20ae30a53"><td class="memItemLeft"><a id="a28466a85efc66fd5fc0eabf20ae30a53" name="a28466a85efc66fd5fc0eabf20ae30a53"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiTreciajaKonteineriuTestavimoStrategija</b> ()</td></tr>
+<tr class="memdesc:a28466a85efc66fd5fc0eabf20ae30a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo trečiąją konteinerių testavimo strategiją. <br /></td></tr>
+<tr class="memitem:a0884fee05d655560f6fa7a2cc87749ab" id="r_a0884fee05d655560f6fa7a2cc87749ab"><td class="memItemLeft"><a id="a0884fee05d655560f6fa7a2cc87749ab" name="a0884fee05d655560f6fa7a2cc87749ab"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais</b> ()</td></tr>
+<tr class="memdesc:a0884fee05d655560f6fa7a2cc87749ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo trečiąją konteinerių testavimo strategiją tik su <span class="tt">std::vector</span>. <br /></td></tr>
+<tr id="func-members-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Studentas klasės Google Test pagalbinės funkcijos</div></td></tr>
+<tr><td colspan="2" class="ititle"><div class="groupText"><p>Atskiros funkcijos, kurias kviečia Google Test <span class="tt">TEST(...)</span> blokai.</p>
+<p>Šios funkcijos naudoja Google Test makrokomandas savo <span class="tt">.cpp</span> faile. Į šį <span class="tt">.h</span> failą <span class="tt">#include &lt;gtest/gtest.h&gt;</span> dėti nereikia. </p>
+</div></td></tr>
+<tr class="memitem:ad44e1a9928fe9fc331dd7827a101c801" id="r_ad44e1a9928fe9fc331dd7827a101c801"><td class="memItemLeft"><a id="ad44e1a9928fe9fc331dd7827a101c801" name="ad44e1a9928fe9fc331dd7827a101c801"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiDefaultKonstruktoriu</b> ()</td></tr>
+<tr class="memdesc:ad44e1a9928fe9fc331dd7827a101c801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja numatytąjį <span class="tt">Studentas</span> konstruktorių. <br /></td></tr>
+<tr class="memitem:a037828c5873838ec219f50aea7c2d7d8" id="r_a037828c5873838ec219f50aea7c2d7d8"><td class="memItemLeft"><a id="a037828c5873838ec219f50aea7c2d7d8" name="a037828c5873838ec219f50aea7c2d7d8"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiParametriniKonstruktoriu</b> ()</td></tr>
+<tr class="memdesc:a037828c5873838ec219f50aea7c2d7d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja parametrinį <span class="tt">Studentas</span> konstruktorių. <br /></td></tr>
+<tr class="memitem:ad5f5b78ccdc58ab5b85eac70ec167cf8" id="r_ad5f5b78ccdc58ab5b85eac70ec167cf8"><td class="memItemLeft"><a id="ad5f5b78ccdc58ab5b85eac70ec167cf8" name="ad5f5b78ccdc58ab5b85eac70ec167cf8"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiKonstruktoriuIsEilutes</b> ()</td></tr>
+<tr class="memdesc:ad5f5b78ccdc58ab5b85eac70ec167cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> konstruktorių, kuris sukuria objektą iš tekstinės eilutės. <br /></td></tr>
+<tr class="memitem:ac01825648a2e34d732afca2688e48051" id="r_ac01825648a2e34d732afca2688e48051"><td class="memItemLeft"><a id="ac01825648a2e34d732afca2688e48051" name="ac01825648a2e34d732afca2688e48051"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiSetteriusIrGetterius</b> ()</td></tr>
+<tr class="memdesc:ac01825648a2e34d732afca2688e48051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> setterius ir getterius. <br /></td></tr>
+<tr class="memitem:a4bb8c59e2f389d6c4219c1c2f60a965c" id="r_a4bb8c59e2f389d6c4219c1c2f60a965c"><td class="memItemLeft"><a id="a4bb8c59e2f389d6c4219c1c2f60a965c" name="a4bb8c59e2f389d6c4219c1c2f60a965c"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiNamuDarbuPazymiuValdyma</b> ()</td></tr>
+<tr class="memdesc:a4bb8c59e2f389d6c4219c1c2f60a965c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja namų darbų pažymių pridėjimą, rezervavimą ir išvalymą. <br /></td></tr>
+<tr class="memitem:a068190c82482ff519cc6cdeeec2627ff" id="r_a068190c82482ff519cc6cdeeec2627ff"><td class="memItemLeft"><a id="a068190c82482ff519cc6cdeeec2627ff" name="a068190c82482ff519cc6cdeeec2627ff"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiGalutinioPazymioSkaiciavimaPagalVidurki</b> ()</td></tr>
+<tr class="memdesc:a068190c82482ff519cc6cdeeec2627ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja galutinio pažymio skaičiavimą pagal namų darbų vidurkį. <br /></td></tr>
+<tr class="memitem:a463809cbb7a5afcb3e47f4076e779749" id="r_a463809cbb7a5afcb3e47f4076e779749"><td class="memItemLeft"><a id="a463809cbb7a5afcb3e47f4076e779749" name="a463809cbb7a5afcb3e47f4076e779749"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiCopyKonstruktoriu</b> ()</td></tr>
+<tr class="memdesc:a463809cbb7a5afcb3e47f4076e779749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> kopijavimo konstruktorių. <br /></td></tr>
+<tr class="memitem:a402fe31e2395c7f7b4126918f1ffd080" id="r_a402fe31e2395c7f7b4126918f1ffd080"><td class="memItemLeft"><a id="a402fe31e2395c7f7b4126918f1ffd080" name="a402fe31e2395c7f7b4126918f1ffd080"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiCopyPriskyrimoOperatoriu</b> ()</td></tr>
+<tr class="memdesc:a402fe31e2395c7f7b4126918f1ffd080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> kopijavimo priskyrimo operatorių. <br /></td></tr>
+<tr class="memitem:a00853257801a5ffed6b1f00b55e477ff" id="r_a00853257801a5ffed6b1f00b55e477ff"><td class="memItemLeft"><a id="a00853257801a5ffed6b1f00b55e477ff" name="a00853257801a5ffed6b1f00b55e477ff"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiSelfCopyAssignment</b> ()</td></tr>
+<tr class="memdesc:a00853257801a5ffed6b1f00b55e477ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja savęs priskyrimo atvejį naudojant kopijavimo priskyrimo operatorių. <br /></td></tr>
+<tr class="memitem:a402be6c9c0d86353356cb45593cee923" id="r_a402be6c9c0d86353356cb45593cee923"><td class="memItemLeft"><a id="a402be6c9c0d86353356cb45593cee923" name="a402be6c9c0d86353356cb45593cee923"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiMoveKonstruktoriu</b> ()</td></tr>
+<tr class="memdesc:a402be6c9c0d86353356cb45593cee923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> perkėlimo konstruktorių. <br /></td></tr>
+<tr class="memitem:af344a111527a6911bebeb98900e48e5e" id="r_af344a111527a6911bebeb98900e48e5e"><td class="memItemLeft"><a id="af344a111527a6911bebeb98900e48e5e" name="af344a111527a6911bebeb98900e48e5e"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiMovePriskyrimoOperatoriu</b> ()</td></tr>
+<tr class="memdesc:af344a111527a6911bebeb98900e48e5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> perkėlimo priskyrimo operatorių. <br /></td></tr>
+<tr class="memitem:a4b98a6e38ef91a2f6c6e1be5fce71c85" id="r_a4b98a6e38ef91a2f6c6e1be5fce71c85"><td class="memItemLeft"><a id="a4b98a6e38ef91a2f6c6e1be5fce71c85" name="a4b98a6e38ef91a2f6c6e1be5fce71c85"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiIsvestiesOperatoriu</b> ()</td></tr>
+<tr class="memdesc:a4b98a6e38ef91a2f6c6e1be5fce71c85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> išvesties operatorių <span class="tt">operator&lt;&lt;</span>. <br /></td></tr>
+<tr class="memitem:a75793516cfba4ef17b097c18d582f789" id="r_a75793516cfba4ef17b097c18d582f789"><td class="memItemLeft"><a id="a75793516cfba4ef17b097c18d582f789" name="a75793516cfba4ef17b097c18d582f789"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiIvestiesOperatoriu</b> ()</td></tr>
+<tr class="memdesc:a75793516cfba4ef17b097c18d582f789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">Studentas</span> įvesties operatorių <span class="tt">operator&gt;&gt;</span>. <br /></td></tr>
+<tr class="memitem:a7c1a9c04ee6b41de5ace3cf21ac473d3" id="r_a7c1a9c04ee6b41de5ace3cf21ac473d3"><td class="memItemLeft"><a id="a7c1a9c04ee6b41de5ace3cf21ac473d3" name="a7c1a9c04ee6b41de5ace3cf21ac473d3"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiStudentasLenteleiIsvestiesOperatoriu</b> ()</td></tr>
+<tr class="memdesc:a7c1a9c04ee6b41de5ace3cf21ac473d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja <span class="tt">StudentasLentelei</span> išvesties operatorių <span class="tt">operator&lt;&lt;</span>. <br /></td></tr>
+<tr class="memitem:adef5020e20de9afda0858bbda08a3007" id="r_adef5020e20de9afda0858bbda08a3007"><td class="memItemLeft"><a id="adef5020e20de9afda0858bbda08a3007" name="adef5020e20de9afda0858bbda08a3007"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiPaveldimumoStruktura</b> ()</td></tr>
+<tr class="memdesc:adef5020e20de9afda0858bbda08a3007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja paveldėjimo ryšį tarp <span class="tt">Zmogus</span> ir <span class="tt">Studentas</span>. <br /></td></tr>
+<tr class="memitem:a08dffffaa352966c123e41c1936e17d8" id="r_a08dffffaa352966c123e41c1936e17d8"><td class="memItemLeft"><a id="a08dffffaa352966c123e41c1936e17d8" name="a08dffffaa352966c123e41c1936e17d8"></a>
+void&#160;</td><td class="memItemRight"><b>testuotiDestruktoriu</b> ()</td></tr>
+<tr class="memdesc:a08dffffaa352966c123e41c1936e17d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testuoja, ar <span class="tt">Studentas</span> destruktorius iškviečiamas ir sukuria tikėtiną šalutinį efektą. <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Smulkus aprašymas</h2>
+<div class="textblock"><p>Programos veikimo greičio, konteinerių strategijų ir Studentas klasės testavimo funkcijos. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Funkcijos Dokumentacija</h2>
+<a id="abc34889bbe93562f9bcce86221555f4e" name="abc34889bbe93562f9bcce86221555f4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc34889bbe93562f9bcce86221555f4e">&#9670;&#160;</a></span>apskaiciuotiBendraLaika()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apskaiciuotiBendraLaika </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_testo_laikai.html">TestoLaikai</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>laikai</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja bendrą testavimo laiką. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">laikai</td><td>Struktūra su atskirų etapų laikais. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Bendras laikas sekundėmis. </dd></dl>
+
+</div>
+</div>
+<a id="aca1dce17aec4954c793bb90f87a788e7" name="aca1dce17aec4954c793bb90f87a788e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca1dce17aec4954c793bb90f87a788e7">&#9670;&#160;</a></span>apskaiciuotiLaika()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double apskaiciuotiLaika </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::steady_clock::time_point</td>          <td class="paramname"><span class="paramname"><em>startas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::steady_clock::time_point</td>          <td class="paramname"><span class="paramname"><em>pabaiga</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja laiko skirtumą tarp dviejų momentų. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">startas</td><td>Pradžios laiko momentas. </td></tr>
+    <tr><td class="paramname">pabaiga</td><td>Pabaigos laiko momentas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Laiko skirtumas sekundėmis. </dd></dl>
+
+</div>
+</div>
+<a id="a0bf767a4d1e73bc1d01550ba7a720ef6" name="a0bf767a4d1e73bc1d01550ba7a720ef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bf767a4d1e73bc1d01550ba7a720ef6">&#9670;&#160;</a></span>gautiVidurki()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gautiVidurki </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_testo_laikai.html">TestoLaikai</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>laikai</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>kiekis</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja vidutinius laikus pagal atliktų testų kiekį. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">laikai</td><td>Laikų struktūra, kurios reikšmės bus padalintos iš testų kiekio. </td></tr>
+    <tr><td class="paramname">kiekis</td><td>Testų kiekis. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a178be1b12367349c13d2a6d4828b1901" name="a178be1b12367349c13d2a6d4828b1901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a178be1b12367349c13d2a6d4828b1901">&#9670;&#160;</a></span>ismatuotiLaika()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double ismatuotiLaika </td>
+          <td>(</td>
+          <td class="paramtype">Func</td>          <td class="paramname"><span class="paramname"><em>veiksmas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Išmatuoja perduotos funkcijos arba veiksmo vykdymo laiką. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>Funkcijos arba lambda tipas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">veiksmas</td><td>Veiksmas, kurio vykdymo laikas matuojamas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Vykdymo laikas sekundėmis. </dd></dl>
+
+</div>
+</div>
+<a id="abe7eaf9df46ff87e74ad140fdbc8a4a6" name="abe7eaf9df46ff87e74ad140fdbc8a4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7eaf9df46ff87e74ad140fdbc8a4a6">&#9670;&#160;</a></span>vykdytiIsvedimoTestavima()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vykdytiIsvedimoTestavima </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_failai.html">Failai</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>failai</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vykdo studentų išvedimo testavimą. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">failai</td><td>Vardų ir pavardžių failų duomenys. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>strukturosFailai</b></li><li class="navelem"><a href="struktura_testavimas_8h.html">strukturaTestavimas.h</a></li>
+    <li class="footer">Sugeneruota <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

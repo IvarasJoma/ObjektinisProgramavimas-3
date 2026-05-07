@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['studentas_2eh_0',['Studentas.h',['../_studentas_8h.html',1,'']]]
+  ['failai_2eh_0',['Failai.h',['../_failai_8h.html',1,'']]]
 ];

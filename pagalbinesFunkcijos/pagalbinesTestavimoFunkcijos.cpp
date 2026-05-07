@@ -301,6 +301,7 @@ Studentas sukurtiTestiniStudenta() {
     s.setFinalGrade(s.calculateFinalGrade('v'));
     return s;
 }
+}
 
 void testuotiDefaultKonstruktoriu() {
     SCOPED_TRACE("0. Default konstruktorius");
@@ -442,23 +443,47 @@ void testuotiSelfCopyAssignment() {
 }
 
 void testuotiMoveKonstruktoriu() {
-    SCOPED_TRACE("9. Move konstruktorius");
+    SCOPED_TRACE("9. Move konstruktorius - deep move check");
 
-    Studentas laikinas("Pavardenis", "Vardenis", 9, {10, 9, 8}, 0.0);
+    Studentas laikinas("Pavardenis", "Vardenis", 9, {10, 9, 8}, 7.5);
+
+    const int* pradinisNdBuferis = laikinas.getHomeworkGrades().data();
+    const std::size_t pradinisNdKiekis = laikinas.getHomeworkGrades().size();
+    const std::size_t pradineNdTalpa = laikinas.getHomeworkGrades().capacity();
+
+    ASSERT_NE(pradinisNdBuferis, nullptr);
+    EXPECT_EQ(pradinisNdKiekis, static_cast<std::size_t>(3));
+    EXPECT_GE(pradineNdTalpa, pradinisNdKiekis);
+
     Studentas perkeltas(std::move(laikinas));
 
     EXPECT_EQ(perkeltas.getName(), "Pavardenis");
     EXPECT_EQ(perkeltas.getSurname(), "Vardenis");
     EXPECT_EQ(perkeltas.getExamGrade(), 9);
     EXPECT_EQ(perkeltas.getHomeworkGrades(), std::vector<int>({10, 9, 8}));
-    EXPECT_DOUBLE_EQ(perkeltas.getFinalGrade(), 0.0);
+    EXPECT_DOUBLE_EQ(perkeltas.getFinalGrade(), 7.5);
+    EXPECT_EQ(perkeltas.getHomeworkGrades().size(), pradinisNdKiekis);
+    EXPECT_GE(perkeltas.getHomeworkGrades().capacity(), pradinisNdKiekis);
+    EXPECT_EQ(perkeltas.getHomeworkGrades().data(), pradinisNdBuferis);
+    EXPECT_TRUE(laikinas.getName().empty());
+    EXPECT_TRUE(laikinas.getSurname().empty());
+    EXPECT_EQ(laikinas.getExamGrade(), 0);
+    EXPECT_TRUE(laikinas.getHomeworkGrades().empty());
+    EXPECT_DOUBLE_EQ(laikinas.getFinalGrade(), 0.0);
 }
 
 void testuotiMovePriskyrimoOperatoriu() {
     SCOPED_TRACE("10. Move priskyrimo operatorius");
 
-    Studentas saltinis("Pavardenis", "Vardenis", 9, {10, 9, 8}, 0.0);
-    Studentas tikslas;
+    Studentas saltinis("Pavardenis", "Vardenis", 9, {10, 9, 8}, 7.5);
+    Studentas tikslas("Senas", "Studentas", 1, {1, 2, 3, 4, 5}, 1.0);
+
+    const int* saltinioNdBuferis = saltinis.getHomeworkGrades().data();
+    const std::size_t saltinioNdKiekis = saltinis.getHomeworkGrades().size();
+    const int* senasTiksloNdBuferis = tikslas.getHomeworkGrades().data();
+
+    ASSERT_NE(saltinioNdBuferis, nullptr);
+    ASSERT_NE(senasTiksloNdBuferis, nullptr);
 
     tikslas = std::move(saltinis);
 
@@ -466,7 +491,16 @@ void testuotiMovePriskyrimoOperatoriu() {
     EXPECT_EQ(tikslas.getSurname(), "Vardenis");
     EXPECT_EQ(tikslas.getExamGrade(), 9);
     EXPECT_EQ(tikslas.getHomeworkGrades(), std::vector<int>({10, 9, 8}));
-    EXPECT_DOUBLE_EQ(tikslas.getFinalGrade(), 0.0);
+    EXPECT_DOUBLE_EQ(tikslas.getFinalGrade(), 7.5);
+
+    EXPECT_EQ(tikslas.getHomeworkGrades().size(), saltinioNdKiekis);
+    EXPECT_EQ(tikslas.getHomeworkGrades().data(), saltinioNdBuferis);
+    EXPECT_NE(tikslas.getHomeworkGrades().data(), senasTiksloNdBuferis);
+    EXPECT_TRUE(saltinis.getName().empty());
+    EXPECT_TRUE(saltinis.getSurname().empty());
+    EXPECT_EQ(saltinis.getExamGrade(), 0);
+    EXPECT_TRUE(saltinis.getHomeworkGrades().empty());
+    EXPECT_DOUBLE_EQ(saltinis.getFinalGrade(), 0.0);
 }
 
 void testuotiIsvestiesOperatoriu() {
@@ -552,8 +586,6 @@ void testuotiDestruktoriu() {
         teksteYra(tekstas, "destruktorius") ||
         teksteYra(tekstas, "destrukt")
     );
-}
-
 }
 
 TEST(StudentasGoogleTest, DefaultKonstruktorius) {

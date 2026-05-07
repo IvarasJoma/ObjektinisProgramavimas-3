@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="lt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ObjektinisProgramavimas-2: strukturosFailai/strukturaSkaiciavimai.h Failo Nuoroda</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">ObjektinisProgramavimas-2<span id="projectnumber">&#160;2.0</span>
+   </div>
+   <div id="projectbrief">Studentų rezultatų apdorojimo programa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Sugeneruota Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Paieška" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('struktura_skaiciavimai_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">strukturaSkaiciavimai.h Failo Nuoroda</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Funkcijos studentų pažymių skaičiavimui ir skirstymui.  
+<a href="#details">Daugiau...</a></p>
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;../Studentas.h&quot;</code><br />
+</div>
+<p><a href="struktura_skaiciavimai_8h_source.html">Eiti į šio failo programos kodą.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcijos</h2></td></tr>
+<tr class="memitem:ac8f927c97416854a108779ec5dad0f6d" id="r_ac8f927c97416854a108779ec5dad0f6d"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ac8f927c97416854a108779ec5dad0f6d">skaiciuotiNDVidurki</a> (const std::vector&lt; int &gt; &amp;ndPazymiai)</td></tr>
+<tr class="memdesc:ac8f927c97416854a108779ec5dad0f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja namų darbų pažymių vidurkį.  <br /></td></tr>
+<tr class="memitem:aacc265d91dc6a49bcc01b79e0536ceb1" id="r_aacc265d91dc6a49bcc01b79e0536ceb1"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aacc265d91dc6a49bcc01b79e0536ceb1">skaiciuotiGalutiniVidurki</a> (const Studentas &amp;studentas)</td></tr>
+<tr class="memdesc:aacc265d91dc6a49bcc01b79e0536ceb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja galutinį pažymį pagal namų darbų vidurkį.  <br /></td></tr>
+<tr class="memitem:a9e4f8618d547baa3b13ca788d3b5e9c9" id="r_a9e4f8618d547baa3b13ca788d3b5e9c9"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a9e4f8618d547baa3b13ca788d3b5e9c9">skaiciuotiNDMediana</a> (std::vector&lt; int &gt; ndPazymiai)</td></tr>
+<tr class="memdesc:a9e4f8618d547baa3b13ca788d3b5e9c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja namų darbų pažymių medianą.  <br /></td></tr>
+<tr class="memitem:ae99728d04af15330779919983304c14c" id="r_ae99728d04af15330779919983304c14c"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#ae99728d04af15330779919983304c14c">skaiciuotiGalutineMediana</a> (const Studentas &amp;studentas)</td></tr>
+<tr class="memdesc:ae99728d04af15330779919983304c14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja galutinį pažymį pagal namų darbų medianą.  <br /></td></tr>
+<tr class="memitem:a43a62cd63fe0a62ece3d3ae6f2099ae2" id="r_a43a62cd63fe0a62ece3d3ae6f2099ae2"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Ret&gt; </td></tr>
+<tr class="memitem:a43a62cd63fe0a62ece3d3ae6f2099ae2 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a43a62cd63fe0a62ece3d3ae6f2099ae2">lygintiElementusPagalDidejanciaReiksme</a> (Ret(T::*getter)() const)</td></tr>
+<tr class="memdesc:a43a62cd63fe0a62ece3d3ae6f2099ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sukuria palyginimo funkciją rikiavimui didėjančia tvarka.  <br /></td></tr>
+<tr class="memitem:ad1981b78751754058b3f2e36beb9f60a" id="r_ad1981b78751754058b3f2e36beb9f60a"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Ret&gt; </td></tr>
+<tr class="memitem:ad1981b78751754058b3f2e36beb9f60a template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ad1981b78751754058b3f2e36beb9f60a">lygintiElementusPagalMazejanciaReiksme</a> (Ret(T::*getter)() const)</td></tr>
+<tr class="memdesc:ad1981b78751754058b3f2e36beb9f60a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sukuria palyginimo funkciją rikiavimui mažėjančia tvarka.  <br /></td></tr>
+<tr class="memitem:af67ca8beb094fdf915af4b1e63bc5600" id="r_af67ca8beb094fdf915af4b1e63bc5600"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af67ca8beb094fdf915af4b1e63bc5600">apskaiciuotiGalutiniPazymi</a> (Studentas &amp;studentas, char skaiciavimoMetodoPasirinkimas)</td></tr>
+<tr class="memdesc:af67ca8beb094fdf915af4b1e63bc5600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja ir nustato vieno studento galutinį pažymį.  <br /></td></tr>
+<tr class="memitem:a300b8caa14c3ed60a9fac185ca3d1bd0" id="r_a300b8caa14c3ed60a9fac185ca3d1bd0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a300b8caa14c3ed60a9fac185ca3d1bd0">apskaiciuotiGalutiniusPazymius</a> (std::vector&lt; Studentas &gt; &amp;studentuSarasas, char skaiciavimoMetodoPasirinkimas)</td></tr>
+<tr class="memdesc:a300b8caa14c3ed60a9fac185ca3d1bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apskaičiuoja ir nustato galutinius pažymius visiems studentams.  <br /></td></tr>
+<tr class="memitem:af843b95f1e12ee983568d705da9871d3" id="r_af843b95f1e12ee983568d705da9871d3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af843b95f1e12ee983568d705da9871d3">suskirstytiStudentus</a> (const std::vector&lt; Studentas &gt; &amp;studentuSarasas, std::vector&lt; Studentas &gt; &amp;pazangiuSarasas, std::vector&lt; Studentas &gt; &amp;silpnuSarasas)</td></tr>
+<tr class="memdesc:af843b95f1e12ee983568d705da9871d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Suskirsto studentus į pažangius ir silpnus pagal galutinį pažymį.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Smulkus aprašymas</h2>
+<div class="textblock"><p>Funkcijos studentų pažymių skaičiavimui ir skirstymui. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Funkcijos Dokumentacija</h2>
+<a id="af67ca8beb094fdf915af4b1e63bc5600" name="af67ca8beb094fdf915af4b1e63bc5600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67ca8beb094fdf915af4b1e63bc5600">&#9670;&#160;</a></span>apskaiciuotiGalutiniPazymi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apskaiciuotiGalutiniPazymi </td>
+          <td>(</td>
+          <td class="paramtype">Studentas &amp;</td>          <td class="paramname"><span class="paramname"><em>studentas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>skaiciavimoMetodoPasirinkimas</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja ir nustato vieno studento galutinį pažymį. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentas</td><td>Studentas, kurio pažymys skaičiuojamas. </td></tr>
+    <tr><td class="paramname">skaiciavimoMetodoPasirinkimas</td><td>Skaičiavimo metodo pasirinkimas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a300b8caa14c3ed60a9fac185ca3d1bd0" name="a300b8caa14c3ed60a9fac185ca3d1bd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a300b8caa14c3ed60a9fac185ca3d1bd0">&#9670;&#160;</a></span>apskaiciuotiGalutiniusPazymius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apskaiciuotiGalutiniusPazymius </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>studentuSarasas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>skaiciavimoMetodoPasirinkimas</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja ir nustato galutinius pažymius visiems studentams. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentuSarasas</td><td>Studentų sąrašas. </td></tr>
+    <tr><td class="paramname">skaiciavimoMetodoPasirinkimas</td><td>Skaičiavimo metodo pasirinkimas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a43a62cd63fe0a62ece3d3ae6f2099ae2" name="a43a62cd63fe0a62ece3d3ae6f2099ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a62cd63fe0a62ece3d3ae6f2099ae2">&#9670;&#160;</a></span>lygintiElementusPagalDidejanciaReiksme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Ret&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto lygintiElementusPagalDidejanciaReiksme </td>
+          <td>(</td>
+          <td class="paramtype">Ret(T::*</td>          <td class="paramname"><span class="paramname"><em>getter&#160;</em></span>)() const</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sukuria palyginimo funkciją rikiavimui didėjančia tvarka. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Objekto tipas. </td></tr>
+    <tr><td class="paramname">Ret</td><td>Getter funkcijos grąžinamas tipas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">getter</td><td>Klasės getter metodo rodyklė. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Lambda funkcija, tinkama rikiavimui didėjančia tvarka. </dd></dl>
+
+</div>
+</div>
+<a id="ad1981b78751754058b3f2e36beb9f60a" name="ad1981b78751754058b3f2e36beb9f60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1981b78751754058b3f2e36beb9f60a">&#9670;&#160;</a></span>lygintiElementusPagalMazejanciaReiksme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Ret&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto lygintiElementusPagalMazejanciaReiksme </td>
+          <td>(</td>
+          <td class="paramtype">Ret(T::*</td>          <td class="paramname"><span class="paramname"><em>getter&#160;</em></span>)() const</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sukuria palyginimo funkciją rikiavimui mažėjančia tvarka. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Objekto tipas. </td></tr>
+    <tr><td class="paramname">Ret</td><td>Getter funkcijos grąžinamas tipas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">getter</td><td>Klasės getter metodo rodyklė. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Lambda funkcija, tinkama rikiavimui mažėjančia tvarka. </dd></dl>
+
+</div>
+</div>
+<a id="ae99728d04af15330779919983304c14c" name="ae99728d04af15330779919983304c14c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae99728d04af15330779919983304c14c">&#9670;&#160;</a></span>skaiciuotiGalutineMediana()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double skaiciuotiGalutineMediana </td>
+          <td>(</td>
+          <td class="paramtype">const Studentas &amp;</td>          <td class="paramname"><span class="paramname"><em>studentas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja galutinį pažymį pagal namų darbų medianą. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentas</td><td>Studentas, kurio pažymys skaičiuojamas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Galutinis pažymys pagal medianą. </dd></dl>
+
+</div>
+</div>
+<a id="aacc265d91dc6a49bcc01b79e0536ceb1" name="aacc265d91dc6a49bcc01b79e0536ceb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc265d91dc6a49bcc01b79e0536ceb1">&#9670;&#160;</a></span>skaiciuotiGalutiniVidurki()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double skaiciuotiGalutiniVidurki </td>
+          <td>(</td>
+          <td class="paramtype">const Studentas &amp;</td>          <td class="paramname"><span class="paramname"><em>studentas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja galutinį pažymį pagal namų darbų vidurkį. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentas</td><td>Studentas, kurio pažymys skaičiuojamas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Galutinis pažymys pagal vidurkį. </dd></dl>
+
+</div>
+</div>
+<a id="a9e4f8618d547baa3b13ca788d3b5e9c9" name="a9e4f8618d547baa3b13ca788d3b5e9c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4f8618d547baa3b13ca788d3b5e9c9">&#9670;&#160;</a></span>skaiciuotiNDMediana()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double skaiciuotiNDMediana </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>ndPazymiai</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja namų darbų pažymių medianą. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ndPazymiai</td><td>Namų darbų pažymių vektorius. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Namų darbų pažymių mediana. </dd></dl>
+
+</div>
+</div>
+<a id="ac8f927c97416854a108779ec5dad0f6d" name="ac8f927c97416854a108779ec5dad0f6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8f927c97416854a108779ec5dad0f6d">&#9670;&#160;</a></span>skaiciuotiNDVidurki()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double skaiciuotiNDVidurki </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>ndPazymiai</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apskaičiuoja namų darbų pažymių vidurkį. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ndPazymiai</td><td>Namų darbų pažymių vektorius. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Namų darbų pažymių vidurkis. </dd></dl>
+
+</div>
+</div>
+<a id="af843b95f1e12ee983568d705da9871d3" name="af843b95f1e12ee983568d705da9871d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af843b95f1e12ee983568d705da9871d3">&#9670;&#160;</a></span>suskirstytiStudentus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void suskirstytiStudentus </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>studentuSarasas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>pazangiuSarasas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>silpnuSarasas</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Suskirsto studentus į pažangius ir silpnus pagal galutinį pažymį. </p>
+<p>Studentai, kurių galutinis pažymys mažesnis nei <span class="tt">5.0</span>, priskiriami silpniems. Likę studentai priskiriami pažangiems.</p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentuSarasas</td><td>Pradinis studentų sąrašas. </td></tr>
+    <tr><td class="paramname">pazangiuSarasas</td><td>Pažangių studentų sąrašas. </td></tr>
+    <tr><td class="paramname">silpnuSarasas</td><td>Silpnų studentų sąrašas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>strukturosFailai</b></li><li class="navelem"><a href="struktura_skaiciavimai_8h.html">strukturaSkaiciavimai.h</a></li>
+    <li class="footer">Sugeneruota <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

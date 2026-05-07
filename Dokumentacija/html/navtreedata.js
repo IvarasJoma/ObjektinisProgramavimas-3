@@ -25,34 +25,21 @@
 var NAVTREE =
 [
   [ "ObjektinisProgramavimas-2", "index.html", [
-    [ "README", "md__r_e_a_d_m_e.html", [
-      [ "v1.2 pakeitimai:", "md__r_e_a_d_m_e.html#autotoc_md0", [
-        [ "Studento klasės metodų testavimo nuotraukos:", "md__r_e_a_d_m_e.html#autotoc_md3", null ]
-      ] ],
-      [ "v1.5 pakeitimai:", "md__r_e_a_d_m_e.html#autotoc_md4", [
-        [ "Konteinerių našumo palyginimas", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
-        [ "Pirmos strategijos tyrimo rezultatai", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-        [ "Antros strategijos tyrimo rezultatai", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
-        [ "Trečios strategijos tyrimo rezultatai", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-        [ "Struktūrų ir objektų spartos palyginimo rezultatai", "md__r_e_a_d_m_e.html#autotoc_md9", null ]
-      ] ]
-    ] ],
     [ "Klasės", "annotated.html", [
       [ "Klasės", "annotated.html", "annotated_dup" ],
       [ "Klasės Indeksas", "classes.html", null ],
-      [ "Klasių hierarchija", "hierarchy.html", "hierarchy" ],
       [ "Klasių Nariai", "functions.html", [
         [ "Visi", "functions.html", null ],
-        [ "Funkcijos", "functions_func.html", null ],
-        [ "Kintamieji", "functions_vars.html", null ],
-        [ "Susiję Funkcijos", "functions_rela.html", null ]
+        [ "Kintamieji", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "Failai", "files.html", [
       [ "Failai", "files.html", "files_dup" ],
       [ "Failų Nariai", "globals.html", [
         [ "Visi", "globals.html", null ],
-        [ "Funkcijos", "globals_func.html", null ]
+        [ "Funkcijos", "globals_func.html", null ],
+        [ "Kintamieji", "globals_vars.html", null ],
+        [ "Tipų apibrėžimai", "globals_type.html", null ]
       ] ]
     ] ]
   ] ]
@@ -60,7 +47,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_studentas_8h.html"
+"_failai_8h.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

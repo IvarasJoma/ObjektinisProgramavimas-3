@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="lt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ObjektinisProgramavimas-2: strukturosFailai/strukturaDarbasSuFailais.h Failo Nuoroda</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">ObjektinisProgramavimas-2<span id="projectnumber">&#160;2.0</span>
+   </div>
+   <div id="projectbrief">Studentų rezultatų apdorojimo programa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Sugeneruota Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Paieška" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('struktura_darbas_su_failais_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">strukturaDarbasSuFailais.h Failo Nuoroda</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Funkcijos darbui su tekstiniais failais ir studentų duomenų nuskaitymu bei įrašymu.  
+<a href="#details">Daugiau...</a></p>
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
+<code>#include &quot;../Studentas.h&quot;</code><br />
+</div>
+<p><a href="struktura_darbas_su_failais_8h_source.html">Eiti į šio failo programos kodą.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcijos</h2></td></tr>
+<tr class="memitem:a98b203bf31f320046cc5064fa6fc4b7d" id="r_a98b203bf31f320046cc5064fa6fc4b7d"><td class="memItemLeft">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a98b203bf31f320046cc5064fa6fc4b7d">nuskaitytiEilutesIVektoriu</a> (const std::string &amp;failas)</td></tr>
+<tr class="memdesc:a98b203bf31f320046cc5064fa6fc4b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuskaito visas tekstinio failo eilutes į string tipo vektorių.  <br /></td></tr>
+<tr class="memitem:a710c2dbafd713cd41bb6c409eee1b37c" id="r_a710c2dbafd713cd41bb6c409eee1b37c"><td class="memItemLeft">std::vector&lt; Studentas &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a710c2dbafd713cd41bb6c409eee1b37c">nuskaitytiStudentuDuomenisIsFailo</a> (const std::string &amp;failas)</td></tr>
+<tr class="memdesc:a710c2dbafd713cd41bb6c409eee1b37c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuskaito studentų duomenis iš failo į vektorių.  <br /></td></tr>
+<tr class="memitem:a485cd8f8c03a3c3f4d4cb1b4dd267c3c" id="r_a485cd8f8c03a3c3f4d4cb1b4dd267c3c"><td class="memItemLeft"><a id="a485cd8f8c03a3c3f4d4cb1b4dd267c3c" name="a485cd8f8c03a3c3f4d4cb1b4dd267c3c"></a>
+void&#160;</td><td class="memItemRight"><b>vykdytiNuskaitymaIsFailo</b> ()</td></tr>
+<tr class="memdesc:a485cd8f8c03a3c3f4d4cb1b4dd267c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo studentų duomenų nuskaitymo iš failo scenarijų. <br /></td></tr>
+<tr class="memitem:a34dd856e15df627f61ab9819f703819e" id="r_a34dd856e15df627f61ab9819f703819e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a34dd856e15df627f61ab9819f703819e">irasytiDuomenis</a> (std::vector&lt; Studentas &gt; &amp;studentuSarasas)</td></tr>
+<tr class="memdesc:a34dd856e15df627f61ab9819f703819e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Įrašo studentų duomenis pagal pasirinktą išvedimo scenarijų.  <br /></td></tr>
+<tr class="memitem:a185551ed9b9296aece65dd5b1870f712" id="r_a185551ed9b9296aece65dd5b1870f712"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a185551ed9b9296aece65dd5b1870f712">irasytiStudentuDuomenisIFaila</a> (const std::vector&lt; Studentas &gt; &amp;studentuSarasas, const std::string &amp;failoPavadinimas)</td></tr>
+<tr class="memdesc:a185551ed9b9296aece65dd5b1870f712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Įrašo studentų sąrašą į nurodytą failą.  <br /></td></tr>
+<tr class="memitem:a578966f0c23a382fefb62b4f9785afe8" id="r_a578966f0c23a382fefb62b4f9785afe8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a578966f0c23a382fefb62b4f9785afe8">vykdytiSkirstymaIFailus</a> (std::vector&lt; Studentas &gt; &amp;studentuSarasas)</td></tr>
+<tr class="memdesc:a578966f0c23a382fefb62b4f9785afe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vykdo studentų skirstymą į atskirus failus.  <br /></td></tr>
+<tr class="memitem:ab0f6aaabf3f1ac4568fa7f431471a849" id="r_ab0f6aaabf3f1ac4568fa7f431471a849"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab0f6aaabf3f1ac4568fa7f431471a849">irasytiSuskirstytusStudentusIFailus</a> (const std::vector&lt; Studentas &gt; &amp;pazangiuSarasas, const std::vector&lt; Studentas &gt; &amp;silpnuSarasas, const char &amp;skaiciavimoMetodoPasirinkimas)</td></tr>
+<tr class="memdesc:ab0f6aaabf3f1ac4568fa7f431471a849"><td class="mdescLeft">&#160;</td><td class="mdescRight">Įrašo pažangius ir silpnus studentus į atskirus failus.  <br /></td></tr>
+<tr class="memitem:a80f213b029d2d4979c729a8c0904ea9b" id="r_a80f213b029d2d4979c729a8c0904ea9b"><td class="memItemLeft">std::vector&lt; std::filesystem::path &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a80f213b029d2d4979c729a8c0904ea9b">gautiTekstiniusFailus</a> (const std::string &amp;katalogas)</td></tr>
+<tr class="memdesc:a80f213b029d2d4979c729a8c0904ea9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina visus tekstinius failus iš nurodyto katalogo.  <br /></td></tr>
+<tr class="memitem:a2f7e70283762ac3ae14dbc06cb5c303c" id="r_a2f7e70283762ac3ae14dbc06cb5c303c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2f7e70283762ac3ae14dbc06cb5c303c">praleistiTarpaIsFailo</a> (const char *&amp;rodykle)</td></tr>
+<tr class="memdesc:a2f7e70283762ac3ae14dbc06cb5c303c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Praleidžia tarpo simbolius skaitant tekstą iš simbolių rodyklės.  <br /></td></tr>
+<tr class="memitem:a90cb36e798bccc7b6270da794b04596b" id="r_a90cb36e798bccc7b6270da794b04596b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a90cb36e798bccc7b6270da794b04596b">nuskaitytiZodiIsFailo</a> (const char *&amp;rodykle, std::string &amp;isvestis)</td></tr>
+<tr class="memdesc:a90cb36e798bccc7b6270da794b04596b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuskaito vieną žodį iš simbolių rodyklės.  <br /></td></tr>
+<tr class="memitem:a015e93e433801e64fd45324591956223" id="r_a015e93e433801e64fd45324591956223"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a015e93e433801e64fd45324591956223">nuskaitytiSveikaSkaiciuIsFailo</a> (const char *&amp;rodykle, int &amp;x)</td></tr>
+<tr class="memdesc:a015e93e433801e64fd45324591956223"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuskaito sveikąjį skaičių iš simbolių rodyklės.  <br /></td></tr>
+<tr class="memitem:a0edac601a356507b16cb34220d8c7ae1" id="r_a0edac601a356507b16cb34220d8c7ae1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0edac601a356507b16cb34220d8c7ae1">nuskaitytiDuomenis</a> (int pasirinkimasNuskaitymo, std::vector&lt; Studentas &gt; &amp;studentuSarasas, const std::string &amp;katalogas)</td></tr>
+<tr class="memdesc:a0edac601a356507b16cb34220d8c7ae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuskaito studentų duomenis pagal pasirinktą failą iš katalogo.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Smulkus aprašymas</h2>
+<div class="textblock"><p>Funkcijos darbui su tekstiniais failais ir studentų duomenų nuskaitymu bei įrašymu. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Funkcijos Dokumentacija</h2>
+<a id="a80f213b029d2d4979c729a8c0904ea9b" name="a80f213b029d2d4979c729a8c0904ea9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80f213b029d2d4979c729a8c0904ea9b">&#9670;&#160;</a></span>gautiTekstiniusFailus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::filesystem::path &gt; gautiTekstiniusFailus </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>katalogas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Grąžina visus tekstinius failus iš nurodyto katalogo. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">katalogas</td><td>Katalogo kelias. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Tekstinių failų kelių vektorius. </dd></dl>
+
+</div>
+</div>
+<a id="a34dd856e15df627f61ab9819f703819e" name="a34dd856e15df627f61ab9819f703819e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34dd856e15df627f61ab9819f703819e">&#9670;&#160;</a></span>irasytiDuomenis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void irasytiDuomenis </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>studentuSarasas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Įrašo studentų duomenis pagal pasirinktą išvedimo scenarijų. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentuSarasas</td><td>Studentų sąrašas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a185551ed9b9296aece65dd5b1870f712" name="a185551ed9b9296aece65dd5b1870f712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a185551ed9b9296aece65dd5b1870f712">&#9670;&#160;</a></span>irasytiStudentuDuomenisIFaila()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void irasytiStudentuDuomenisIFaila </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>studentuSarasas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>failoPavadinimas</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Įrašo studentų sąrašą į nurodytą failą. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentuSarasas</td><td>Studentų sąrašas. </td></tr>
+    <tr><td class="paramname">failoPavadinimas</td><td>Išvesties failo pavadinimas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab0f6aaabf3f1ac4568fa7f431471a849" name="ab0f6aaabf3f1ac4568fa7f431471a849"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0f6aaabf3f1ac4568fa7f431471a849">&#9670;&#160;</a></span>irasytiSuskirstytusStudentusIFailus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void irasytiSuskirstytusStudentusIFailus </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>pazangiuSarasas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>silpnuSarasas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char &amp;</td>          <td class="paramname"><span class="paramname"><em>skaiciavimoMetodoPasirinkimas</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Įrašo pažangius ir silpnus studentus į atskirus failus. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pazangiuSarasas</td><td>Pažangių studentų sąrašas. </td></tr>
+    <tr><td class="paramname">silpnuSarasas</td><td>Silpnų studentų sąrašas. </td></tr>
+    <tr><td class="paramname">skaiciavimoMetodoPasirinkimas</td><td>Galutinio pažymio skaičiavimo metodas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0edac601a356507b16cb34220d8c7ae1" name="a0edac601a356507b16cb34220d8c7ae1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0edac601a356507b16cb34220d8c7ae1">&#9670;&#160;</a></span>nuskaitytiDuomenis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nuskaitytiDuomenis </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>pasirinkimasNuskaitymo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>studentuSarasas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>katalogas</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nuskaito studentų duomenis pagal pasirinktą failą iš katalogo. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pasirinkimasNuskaitymo</td><td>Pasirinkto failo numeris meniu sąraše. </td></tr>
+    <tr><td class="paramname">studentuSarasas</td><td>Studentų sąrašas, į kurį įrašomi nuskaityti duomenys. </td></tr>
+    <tr><td class="paramname">katalogas</td><td>Katalogas, kuriame ieškoma tekstinių failų. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a98b203bf31f320046cc5064fa6fc4b7d" name="a98b203bf31f320046cc5064fa6fc4b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98b203bf31f320046cc5064fa6fc4b7d">&#9670;&#160;</a></span>nuskaitytiEilutesIVektoriu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; nuskaitytiEilutesIVektoriu </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>failas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nuskaito visas tekstinio failo eilutes į string tipo vektorių. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">failas</td><td>Failo kelias. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Vektorius su nuskaitytomis eilutėmis. </dd></dl>
+
+</div>
+</div>
+<a id="a710c2dbafd713cd41bb6c409eee1b37c" name="a710c2dbafd713cd41bb6c409eee1b37c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710c2dbafd713cd41bb6c409eee1b37c">&#9670;&#160;</a></span>nuskaitytiStudentuDuomenisIsFailo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; Studentas &gt; nuskaitytiStudentuDuomenisIsFailo </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>failas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nuskaito studentų duomenis iš failo į vektorių. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">failas</td><td>Failo kelias. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Studentų vektorius. </dd></dl>
+
+</div>
+</div>
+<a id="a015e93e433801e64fd45324591956223" name="a015e93e433801e64fd45324591956223"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a015e93e433801e64fd45324591956223">&#9670;&#160;</a></span>nuskaitytiSveikaSkaiciuIsFailo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nuskaitytiSveikaSkaiciuIsFailo </td>
+          <td>(</td>
+          <td class="paramtype">const char *&amp;</td>          <td class="paramname"><span class="paramname"><em>rodykle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nuskaito sveikąjį skaičių iš simbolių rodyklės. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rodykle</td><td>Rodyklė į einamąją teksto poziciją. </td></tr>
+    <tr><td class="paramname">x</td><td>Kintamasis, į kurį įrašomas nuskaitytas skaičius. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd><span class="tt">true</span>, jei skaičius nuskaitytas sėkmingai, kitu atveju <span class="tt">false</span>. </dd></dl>
+
+</div>
+</div>
+<a id="a90cb36e798bccc7b6270da794b04596b" name="a90cb36e798bccc7b6270da794b04596b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90cb36e798bccc7b6270da794b04596b">&#9670;&#160;</a></span>nuskaitytiZodiIsFailo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nuskaitytiZodiIsFailo </td>
+          <td>(</td>
+          <td class="paramtype">const char *&amp;</td>          <td class="paramname"><span class="paramname"><em>rodykle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>isvestis</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nuskaito vieną žodį iš simbolių rodyklės. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rodykle</td><td>Rodyklė į einamąją teksto poziciją. </td></tr>
+    <tr><td class="paramname">isvestis</td><td>Kintamasis, į kurį įrašomas nuskaitytas žodis. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd><span class="tt">true</span>, jei žodis nuskaitytas sėkmingai, kitu atveju <span class="tt">false</span>. </dd></dl>
+
+</div>
+</div>
+<a id="a2f7e70283762ac3ae14dbc06cb5c303c" name="a2f7e70283762ac3ae14dbc06cb5c303c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f7e70283762ac3ae14dbc06cb5c303c">&#9670;&#160;</a></span>praleistiTarpaIsFailo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void praleistiTarpaIsFailo </td>
+          <td>(</td>
+          <td class="paramtype">const char *&amp;</td>          <td class="paramname"><span class="paramname"><em>rodykle</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Praleidžia tarpo simbolius skaitant tekstą iš simbolių rodyklės. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rodykle</td><td>Rodyklė į einamąją teksto poziciją. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a578966f0c23a382fefb62b4f9785afe8" name="a578966f0c23a382fefb62b4f9785afe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a578966f0c23a382fefb62b4f9785afe8">&#9670;&#160;</a></span>vykdytiSkirstymaIFailus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vykdytiSkirstymaIFailus </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; Studentas &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>studentuSarasas</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vykdo studentų skirstymą į atskirus failus. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">studentuSarasas</td><td>Studentų sąrašas. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>strukturosFailai</b></li><li class="navelem"><a href="struktura_darbas_su_failais_8h.html">strukturaDarbasSuFailais.h</a></li>
+    <li class="footer">Sugeneruota <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -95,7 +95,10 @@ Studentas::Studentas(Studentas&& other) noexcept
       examGrade_(other.examGrade_),
       homeworkGrades_(std::move(other.homeworkGrades_)),
       finalGrade_(other.finalGrade_) {
+    other.name_.clear();
+    other.surname_.clear();
     other.examGrade_ = 0;
+    other.homeworkGrades_.clear();
     other.finalGrade_ = 0.0;
 }
 
@@ -107,7 +110,10 @@ Studentas& Studentas::operator=(Studentas&& other) noexcept {
         homeworkGrades_ = std::move(other.homeworkGrades_);
         finalGrade_ = other.finalGrade_;
 
+        other.name_.clear();
+        other.surname_.clear();
         other.examGrade_ = 0;
+        other.homeworkGrades_.clear();
         other.finalGrade_ = 0.0;
     }
     return *this;

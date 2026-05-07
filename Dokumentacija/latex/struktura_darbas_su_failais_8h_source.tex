@@ -1,0 +1,42 @@
+\doxysection{struktura\+Darbas\+Su\+Failais.\+h}
+\hypertarget{struktura_darbas_su_failais_8h_source}{}\label{struktura_darbas_su_failais_8h_source}\index{strukturosFailai/strukturaDarbasSuFailais.h@{strukturosFailai/strukturaDarbasSuFailais.h}}
+\doxymbox{\hyperlink{struktura_darbas_su_failais_8h}{Eiti į šio failo dokumentaciją.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STRUKTURADARBASSUFAILAIS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STRUKTURADARBASSUFAILAIS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Studentas.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_failai}{Failai}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ std::vector<std::string>\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a98b203bf31f320046cc5064fa6fc4b7d}{nuskaitytiEilutesIVektoriu}}(\textcolor{keyword}{const}\ std::string\&\ failas);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00028\ std::vector<Studentas>\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a710c2dbafd713cd41bb6c409eee1b37c}{nuskaitytiStudentuDuomenisIsFailo}}(\textcolor{keyword}{const}\ std::string\&\ failas);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a485cd8f8c03a3c3f4d4cb1b4dd267c3c}{vykdytiNuskaitymaIsFailo}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a34dd856e15df627f61ab9819f703819e}{irasytiDuomenis}}(std::vector<Studentas>\&\ studentuSarasas);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a185551ed9b9296aece65dd5b1870f712}{irasytiStudentuDuomenisIFaila}}(\textcolor{keyword}{const}\ std::vector<Studentas>\&\ studentuSarasas,\ \textcolor{keyword}{const}\ std::string\&\ failoPavadinimas);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a578966f0c23a382fefb62b4f9785afe8}{vykdytiSkirstymaIFailus}}(std::vector<Studentas>\&\ studentuSarasas);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_ab0f6aaabf3f1ac4568fa7f431471a849}{irasytiSuskirstytusStudentusIFailus}}(\textcolor{keyword}{const}\ std::vector<Studentas>\&\ pazangiuSarasas,\ \textcolor{keyword}{const}\ std::vector<Studentas>\&\ silpnuSarasas,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\&\ skaiciavimoMetodoPasirinkimas);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00067\ std::vector<std::filesystem::path>\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a80f213b029d2d4979c729a8c0904ea9b}{gautiTekstiniusFailus}}(\textcolor{keyword}{const}\ std::string\&\ katalogas);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a2f7e70283762ac3ae14dbc06cb5c303c}{praleistiTarpaIsFailo}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\&\ rodykle);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a90cb36e798bccc7b6270da794b04596b}{nuskaitytiZodiIsFailo}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\&\ rodykle,\ std::string\&\ isvestis);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00089\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a015e93e433801e64fd45324591956223}{nuskaitytiSveikaSkaiciuIsFailo}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\&\ rodykle,\ \textcolor{keywordtype}{int}\&\ x);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00097\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a0edac601a356507b16cb34220d8c7ae1}{nuskaitytiDuomenis}}(\textcolor{keywordtype}{int}\ pasirinkimasNuskaitymo,\ std::vector<Studentas>\&\ studentuSarasas,\ \textcolor{keyword}{const}\ std::string\&\ katalogas);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
