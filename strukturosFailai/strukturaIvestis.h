@@ -81,7 +81,11 @@ void tikrintiIvesti(const std::string& ivestis);
  * @param klaidosPranesimas Klaidos pranešimas neteisingos įvesties atveju.
  * @return Sutvarkytas vardas arba pavardė.
  */
-std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvarkyti)(std::string&), const char* klaidosPranesimas);
+std::string nuskaitytiVardaArPavarde(
+    const char* ivestiesPranesimas,
+    void(*tvarkyti)(std::string&),
+    const char* klaidosPranesimas
+);
 
 /**
  * @brief Paklausia naudotojo, ar pridėti dar vieną studentą.
@@ -93,4 +97,62 @@ bool patvirtintiNaujoStudentoPridejima();
  * @brief Vykdo studentų įvedimo procesą.
  * @param generuotiPazymius Nurodo, ar pažymius generuoti automatiškai.
  */
+void vykdytiStudentuIvedima(bool generuotiPazymius);
+
+/**
+ * @brief Vykdo pilną studentų generavimo scenarijų.
+ * @param failai Vardų ir pavardžių failų duomenys.
+ */
+void vykdytiPilnaGeneravima(Failai& failai);
+
+/**
+ * @brief Sutvarko vardo įvestį.
+ * @param ivestis Tvarkoma vardo eilutė.
+ */
+void tvarkytiVarda(std::string& ivestis);
+
+/**
+ * @brief Sutvarko pavardės įvestį.
+ * @param ivestis Tvarkoma pavardės eilutė.
+ */
+void tvarkytiPavarde(std::string& ivestis);
+
+/**
+ * @brief Saugiai nuskaito vieną eilutę iš standartinės įvesties.
+ * @return Nuskaityta eilutė.
+ */
+std::string saugiaiNuskaitytiEilute();
+
+/**
+ * @brief Parenka pažangių ir silpnų studentų rikiavimo būdus.
+ * @param pasirinkimasRikiavimoPazangiu Pažangių studentų rikiavimo pasirinkimas.
+ * @param pasirinkimasRikiavimoSilpnu Silpnų studentų rikiavimo pasirinkimas.
+ */
+void parinktiRikiavimoBudus(
+    int& pasirinkimasRikiavimoPazangiu,
+    int& pasirinkimasRikiavimoSilpnu
+);
+
+/**
+ * @brief Suformuoja studento įvesties eilutę iš atskirų laukų.
+ * @param vardas Studento vardas.
+ * @param pavarde Studento pavardė.
+ * @param namuDarbai Namų darbų pažymių vektorius.
+ * @param egzaminoPazymys Egzamino pažymys.
+ * @return Suformuota studento duomenų eilutė.
+ */
+std::string suformuotiStudentoIvestiesEilute(
+    const std::string& vardas,
+    const std::string& pavarde,
+    const std::vector<int>& namuDarbai,
+    int egzaminoPazymys
+);
+
+/**
+ * @brief Sukuria studentą iš tekstinės eilutės naudojant įvesties operatorių.
+ * @param eilute Studento duomenų eilutė.
+ * @return Sukurtas @ref Studentas objektas.
+ */
+Studentas sukurtiStudentaIsEilutesPerOperatoriu(const std::string& eilute);
+
 #endif

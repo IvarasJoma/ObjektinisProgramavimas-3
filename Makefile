@@ -9,7 +9,7 @@ COMMON_INCLUDES := -I. -IstrukturosFailai
 
 APP_SOURCES := programaVektoriai.cpp pagalbinesFunkcijos/*.cpp Studentas.cpp
 
-TEST_SOURCES := gtest.cpp pagalbinesFunkcijos/*.cpp Studentas.cpp
+TEST_SOURCES := pagalbinesFunkcijos/*.cpp Studentas.cpp
 
 GTEST_REPO := https://github.com/google/googletest.git
 GTEST_ROOT := googletest
