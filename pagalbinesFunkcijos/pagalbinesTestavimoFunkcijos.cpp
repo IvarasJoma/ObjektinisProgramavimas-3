@@ -285,154 +285,236 @@ void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
     spausdintiVidurkius(laikai);
 }                    
 
+namespace {
 
-bool spausdintiTestoRezultata(const std::string& pavadinimas, bool salyga) {
-    std::cout << (salyga ? "[OK]   " : "[FAIL] ") << pavadinimas << '\n';
-    return salyga;
+bool teksteYra(const std::string& tekstas, const std::string& ieskoma) {
+    return tekstas.find(ieskoma) != std::string::npos;
 }
 
+Studentas sukurtiTestiniStudenta() {
+    Studentas s;
+    s.setName("Vardas");
+    s.setSurname("Pavarde");
+    s.setHomeworkGrades({8, 9, 10});
+    s.setExamGrade(7);
+    s.setFinalGrade(s.calculateFinalGrade('v'));
+    return s;
+}
+
+} // namespace
+
 void testuotiStudenta() {
-    std::cout << "========================================\n";
-    std::cout << "Pradedami Studentas klases testai\n";
-    std::cout << "========================================\n\n";
-    int kiekPraejo = 0;
-    int kiekViso = 0;
-    auto testas = [&](const std::string& pavadinimas, bool salyga) {
-        ++kiekViso;
-        if (spausdintiTestoRezultata(pavadinimas, salyga)) ++kiekPraejo;
-    };
-    std::cout << "0. Testuojami konstruktoriai\n";
-    Studentas numatytasis;
-    std::cout << "   Default konstruktorius sukure objekta.\n";
-    testas("default konstruktorius vardas tuscias", numatytasis.getName().empty());
-    testas("default konstruktorius pavarde tuscia", numatytasis.getSurname().empty());
-    testas("default konstruktorius egzaminas = 0", numatytasis.getExamGrade() == 0);
-    testas("default konstruktorius nd tuscias", numatytasis.getHomeworkGrades().empty());
-    testas("default konstruktorius galutinis = 0", numatytasis.getFinalGrade() == 0.0);
-    Studentas parametrinis("Vardenis", "Pavardenis", 8, {9, 10, 8}, 8.4);
-    std::cout << "   Parametrinis konstruktorius sukure: " << parametrinis.getName() << ' ' << parametrinis.getSurname() << '\n';
-    testas("parametrinis konstruktorius vardas", parametrinis.getName() == "Vardenis");
-    testas("parametrinis konstruktorius pavarde", parametrinis.getSurname() == "Pavardenis");
-    testas("parametrinis konstruktorius egzaminas", parametrinis.getExamGrade() == 8);
-    testas("parametrinis konstruktorius nd kiekis", parametrinis.getHomeworkGrades().size() == 3);
-    testas("parametrinis konstruktorius galutinis", parametrinis.getFinalGrade() == 8.4);
-    const char* eilute = "Vardas Pavardenis 10 9 8 7 6";
-    Studentas isEilutes(eilute, static_cast<std::size_t>(4));
-    std::cout << "   Konstruktorius is eilutes sukure: " << isEilutes.getName() << ' ' << isEilutes.getSurname() << '\n';
-    testas("eilutes konstruktorius vardas", isEilutes.getName() == "Vardas");
-    testas("eilutes konstruktorius pavarde", isEilutes.getSurname() == "Pavardenis");
-    testas("eilutes konstruktorius nd kiekis", isEilutes.getHomeworkGrades().size() == 4);
-    testas("eilutes konstruktorius pirmas nd", !isEilutes.getHomeworkGrades().empty() && isEilutes.getHomeworkGrades()[0] == 10);
-    testas("eilutes konstruktorius egzaminas", isEilutes.getExamGrade() == 6);
-    std::cout << "\n   Rankinio konstruktoriaus testas\n";
-    std::cout << "   Dabar bus kvieciamas Studentas(bool generuotiPazymius, int ndKiekis).\n";
-    std::cout << "   Iveskite duomenis pagal pateikiamus klausimus.\n";
-    Studentas interaktyvus(false, 2);
-    std::cout << "   Rankiniu budu sukurtas studentas:\n";
-    std::cout << "   Vardas: " << interaktyvus.getName() << '\n';
-    std::cout << "   Pavarde: " << interaktyvus.getSurname() << '\n';
-    std::cout << "   Egzaminas: " << interaktyvus.getExamGrade() << '\n';
-    std::cout << "   ND kiekis: " << interaktyvus.getHomeworkGrades().size() << '\n';
-    testas("rankinio konstruktoriaus vardas netuscias", !interaktyvus.getName().empty());
-    testas("rankinio konstruktoriaus pavarde netuscia", !interaktyvus.getSurname().empty());
-    testas("rankinio konstruktoriaus nd kiekis = 2", interaktyvus.getHomeworkGrades().size() == 2);
-    testas("rankinio konstruktoriaus egzaminas intervale [1,10]",
-           interaktyvus.getExamGrade() >= 1 && interaktyvus.getExamGrade() <= 10);
-    std::cout << "\n1. Kuriamas pradinis objektas\n";
-    Studentas s1;
-    s1.setName("Vardas");
-    s1.setSurname("Pavarde");
-    s1.addHomeworkGrade(8);
-    s1.addHomeworkGrade(9);
-    s1.addHomeworkGrade(10);
-    s1.setExamGrade(7);
-    s1.setFinalGrade(s1.calculateFinalGrade('v'));
-    std::cout << "   Vardas: " << s1.getName() << '\n';
-    std::cout << "   Pavarde: " << s1.getSurname() << '\n';
-    std::cout << "   Egzaminas: " << s1.getExamGrade() << '\n';
-    std::cout << "   ND kiekis: " << s1.getHomeworkGrades().size() << '\n';
-    std::cout << "   Galutinis: " << s1.getFinalGrade() << "\n\n";
-    testas("set/get vardas", s1.getName() == "Vardas");
-    testas("set/get pavarde", s1.getSurname() == "Pavarde");
-    testas("set/get egzamino pazymys", s1.getExamGrade() == 7);
-    testas("namu darbu kiekis", s1.getHomeworkGrades().size() == 3);
-    const double tiketinasVidurkis = 0.4 * 9.0 + 0.6 * 7.0;
-    testas("galutinio balo skaiciavimas (vidurkis)", s1.getFinalGrade() == tiketinasVidurkis);
-    std::cout << "\n2. Testuojamas copy konstruktorius\n";
-    Studentas s2(s1);
-    std::cout << "   Nukopijuotas studentas: " << s2.getName() << ' ' << s2.getSurname() << "\n\n";
-    testas("copy konstruktorius vardas", s2.getName() == s1.getName());
-    testas("copy konstruktorius  pavarde", s2.getSurname() == s1.getSurname());
-    testas("copy konstruktorius  egzaminas", s2.getExamGrade() == s1.getExamGrade());
-    testas("copy konstruktorius nd", s2.getHomeworkGrades() == s1.getHomeworkGrades());
-    std::cout << "\n3. Testuojamas copy priskyrimo operatorius\n";
-    Studentas s3;
-    s3 = s1;
-    std::cout << "   Priskirtas studentas: " << s3.getName() << ' ' << s3.getSurname() << "\n\n";
-    testas("copy priskyrimo operatorius vardas", s3.getName() == s1.getName());
-    testas("copy priskyrimo operatorius pavarde", s3.getSurname() == s1.getSurname());
-    testas("copy priskyrimo operatorius egzaminas", s3.getExamGrade() == s1.getExamGrade());
-    testas("copy priskyrimo operatorius nd", s3.getHomeworkGrades() == s1.getHomeworkGrades());
-    std::cout << "\n4. Testuojamas move konstruktorius\n";
-    Studentas laikinas("Pavardenis", "Vardenis", 9, {10, 9, 8}, 0.0);
-    Studentas s4(std::move(laikinas));
-    std::cout << "   Perkeltas studentas: " << s4.getName() << ' ' << s4.getSurname() << "\n\n";
-    testas("move konstruktorius vardas", s4.getName() == "Pavardenis");
-    testas("move konstruktorius pavarde", s4.getSurname() == "Vardenis");
-    testas("move konstruktorius egzaminas", s4.getExamGrade() == 9);
-    testas("move konstruktorius nd kiekis", s4.getHomeworkGrades().size() == 3);
-    std::cout << "\n5. Testuojamas move priskyrimo operatorius\n";
-    Studentas s5;
-    s5 = std::move(s4);
-    std::cout << "   Perimtas studentas: " << s5.getName() << ' ' << s5.getSurname() << "\n\n";
-    testas("move priskyrimo operatorius vardas", s5.getName() == "Pavardenis");
-    testas("move priskyrimo operatorius pavarde", s5.getSurname() == "Vardenis");
-    testas("move priskyrimo operatorius egzaminas", s5.getExamGrade() == 9);
-    testas("move priskyrimo operatorius nd kiekis", s5.getHomeworkGrades().size() == 3);
-    std::cout << "\n6. Testuojamas operator<<\n";
-    std::ostringstream out;
-    out << s1;
-    std::string tekstas = out.str();
-    std::cout << "   Sugeneruota isvestis: " << tekstas << "\n\n";
-    testas("operator<< sugeneruoja netuscia teksta", !tekstas.empty());
-    std::cout << "\n7. Testuojamas operator>>\n";
-    std::istringstream in("Vardyte Pavardyte 4 10 9 8 7 6");
-    Studentas s6;
-    in >> s6;
-    std::cout << "   Nuskaitytas studentas:\n";
-    std::cout << "   Vardas: " << s6.getName() << '\n';
-    std::cout << "   Pavarde: " << s6.getSurname() << '\n';
-    std::cout << "   Egzaminas: " << s6.getExamGrade() << '\n';
-    std::cout << "   ND kiekis: " << s6.getHomeworkGrades().size() << "\n\n";
-    testas("operator>> vardas", s6.getName() == "Vardyte");
-    testas("operator>> pavarde", s6.getSurname() == "Pavardyte");
-    testas("operator>> nd kiekis", s6.getHomeworkGrades().size() == 4);
-    testas("operator>> egzamino pazymys", s6.getExamGrade() == 6);
-    std::cout << "\n8. Testuojamas destruktorius\n";
-    std::cout << "   Kuriamas lokalus objektas...\n";
-    Studentas::arSpausdintiDestruktoriu = true;
-    {
-        Studentas s7;
-        s7.setName("Destruktorius");
-        s7.setSurname("Veikiantis");
-        s7.addHomeworkGrade(10);
-        s7.setExamGrade(9);
-        std::cout << "   Objektas sukurtas: " << s7.getName() << ' ' << s7.getSurname() << '\n';
-        std::cout << "   Iseinant is sio bloko turetu buti iskviestas destruktorius.\n";
-    }
     Studentas::arSpausdintiDestruktoriu = false;
-    std::cout << "   Jei auksciau pasirode [DTOR] eilute, destruktorius veikia.\n";
-    testas("destruktorius vizualiai iskviestas", true);
-    std::cout << "9. Testuojama paveldimumo struktura\n";
-    bool abstrakti = std::is_abstract<Zmogus>::value;
-    bool derived   = std::is_base_of<Zmogus, Studentas>::value;
-    std::cout << "   Zmogus abstrakti klase: " << (abstrakti ? "TAIP" : "NE") << '\n';
-    std::cout << "   Studentas isvestine klase: " << (derived ? "TAIP" : "NE") << "\n\n";
-    testas("Zmogus yra abstrakti klase", abstrakti);
-    testas("Studentas paveldi is Zmogus", derived);
-    std::cout << "\n========================================\n";
-    std::cout << "Testu santrauka: " << kiekPraejo << " / " << kiekViso << " praejo\n";
-    std::cout << (kiekPraejo == kiekViso ? "Visi Studentas klases testai sekmingi.\n"
-                                         : "Dalis testu nepraejo.\n");
-    std::cout << "========================================\n";
+
+    SCOPED_TRACE("0. Default konstruktorius");
+    {
+        const Studentas s;
+
+        EXPECT_TRUE(s.getName().empty());
+        EXPECT_TRUE(s.getSurname().empty());
+        EXPECT_EQ(s.getExamGrade(), 0);
+        EXPECT_TRUE(s.getHomeworkGrades().empty());
+        EXPECT_DOUBLE_EQ(s.getFinalGrade(), 0.0);
+    }
+
+    SCOPED_TRACE("1. Parametrinis konstruktorius");
+    {
+        const Studentas s("Vardenis", "Pavardenis", 8, {9, 10, 8}, 8.4);
+
+        EXPECT_EQ(s.getName(), "Vardenis");
+        EXPECT_EQ(s.getSurname(), "Pavardenis");
+        EXPECT_EQ(s.getExamGrade(), 8);
+        EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({9, 10, 8}));
+        EXPECT_DOUBLE_EQ(s.getFinalGrade(), 8.4);
+    }
+
+    SCOPED_TRACE("2. Konstruktorius iš eilutės");
+    {
+        const char* eilute = "Vardas Pavardenis 10 9 8 7 6";
+        const Studentas s(eilute, static_cast<std::size_t>(4));
+
+        EXPECT_EQ(s.getName(), "Vardas");
+        EXPECT_EQ(s.getSurname(), "Pavardenis");
+        EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({10, 9, 8, 7}));
+        EXPECT_EQ(s.getExamGrade(), 6);
+    }
+
+    SCOPED_TRACE("3. Setteriai ir getteriai");
+    {
+        Studentas s;
+
+        s.setName("Vardas");
+        s.setSurname("Pavarde");
+        s.setExamGrade(7);
+        s.setFinalGrade(8.5);
+        s.setHomeworkGrades({8, 9, 10});
+
+        EXPECT_EQ(s.getName(), "Vardas");
+        EXPECT_EQ(s.getSurname(), "Pavarde");
+        EXPECT_EQ(s.getExamGrade(), 7);
+        EXPECT_DOUBLE_EQ(s.getFinalGrade(), 8.5);
+        EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    }
+
+    SCOPED_TRACE("4. Namų darbų pažymių valdymas");
+    {
+        Studentas s;
+
+        s.reserveHomeworkGrades(5);
+        EXPECT_GE(s.getHomeworkGrades().capacity(), static_cast<std::size_t>(5));
+
+        s.addHomeworkGrade(8);
+        s.addHomeworkGrade(9);
+        s.addHomeworkGrade(10);
+
+        EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+
+        s.clearHomeworkGrades();
+
+        EXPECT_TRUE(s.getHomeworkGrades().empty());
+    }
+
+    SCOPED_TRACE("5. Galutinio pažymio skaičiavimas pagal vidurkį");
+    {
+        Studentas s;
+        s.setHomeworkGrades({8, 9, 10});
+        s.setExamGrade(7);
+
+        const double tiketinasVidurkis = 0.4 * 9.0 + 0.6 * 7.0;
+
+        EXPECT_NEAR(s.calculateFinalGrade('v'), tiketinasVidurkis, 1e-9);
+    }
+
+    SCOPED_TRACE("6. Copy konstruktorius");
+    {
+        Studentas originalas = sukurtiTestiniStudenta();
+        Studentas kopija(originalas);
+
+        EXPECT_EQ(kopija.getName(), originalas.getName());
+        EXPECT_EQ(kopija.getSurname(), originalas.getSurname());
+        EXPECT_EQ(kopija.getExamGrade(), originalas.getExamGrade());
+        EXPECT_EQ(kopija.getHomeworkGrades(), originalas.getHomeworkGrades());
+        EXPECT_DOUBLE_EQ(kopija.getFinalGrade(), originalas.getFinalGrade());
+
+        originalas.setName("Kitas");
+        originalas.addHomeworkGrade(1);
+
+        EXPECT_EQ(kopija.getName(), "Vardas");
+        EXPECT_EQ(kopija.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    }
+
+    SCOPED_TRACE("7. Copy priskyrimo operatorius");
+    {
+        Studentas originalas = sukurtiTestiniStudenta();
+        Studentas priskirtas;
+
+        priskirtas = originalas;
+
+        EXPECT_EQ(priskirtas.getName(), originalas.getName());
+        EXPECT_EQ(priskirtas.getSurname(), originalas.getSurname());
+        EXPECT_EQ(priskirtas.getExamGrade(), originalas.getExamGrade());
+        EXPECT_EQ(priskirtas.getHomeworkGrades(), originalas.getHomeworkGrades());
+        EXPECT_DOUBLE_EQ(priskirtas.getFinalGrade(), originalas.getFinalGrade());
+
+        originalas.setSurname("KitaPavarde");
+        originalas.clearHomeworkGrades();
+
+        EXPECT_EQ(priskirtas.getSurname(), "Pavarde");
+        EXPECT_EQ(priskirtas.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    }
+
+    SCOPED_TRACE("8. Self copy assignment");
+    {
+        Studentas s = sukurtiTestiniStudenta();
+
+        Studentas& self = s;
+        s = self;
+
+        EXPECT_EQ(s.getName(), "Vardas");
+        EXPECT_EQ(s.getSurname(), "Pavarde");
+        EXPECT_EQ(s.getExamGrade(), 7);
+        EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    }
+
+    SCOPED_TRACE("9. Move konstruktorius");
+    {
+        Studentas laikinas("Pavardenis", "Vardenis", 9, {10, 9, 8}, 0.0);
+        Studentas perkeltas(std::move(laikinas));
+
+        EXPECT_EQ(perkeltas.getName(), "Pavardenis");
+        EXPECT_EQ(perkeltas.getSurname(), "Vardenis");
+        EXPECT_EQ(perkeltas.getExamGrade(), 9);
+        EXPECT_EQ(perkeltas.getHomeworkGrades(), std::vector<int>({10, 9, 8}));
+        EXPECT_DOUBLE_EQ(perkeltas.getFinalGrade(), 0.0);
+    }
+
+    SCOPED_TRACE("10. Move priskyrimo operatorius");
+    {
+        Studentas saltinis("Pavardenis", "Vardenis", 9, {10, 9, 8}, 0.0);
+        Studentas tikslas;
+
+        tikslas = std::move(saltinis);
+
+        EXPECT_EQ(tikslas.getName(), "Pavardenis");
+        EXPECT_EQ(tikslas.getSurname(), "Vardenis");
+        EXPECT_EQ(tikslas.getExamGrade(), 9);
+        EXPECT_EQ(tikslas.getHomeworkGrades(), std::vector<int>({10, 9, 8}));
+        EXPECT_DOUBLE_EQ(tikslas.getFinalGrade(), 0.0);
+    }
+
+    SCOPED_TRACE("11. operator<<");
+    {
+        const Studentas s = sukurtiTestiniStudenta();
+        std::ostringstream out;
+
+        out << s;
+
+        const std::string tekstas = out.str();
+
+        EXPECT_FALSE(tekstas.empty());
+        EXPECT_TRUE(teksteYra(tekstas, "Vardas"));
+        EXPECT_TRUE(teksteYra(tekstas, "Pavarde"));
+    }
+
+    SCOPED_TRACE("12. operator>>");
+    {
+        std::istringstream in("Vardyte Pavardyte 4 10 9 8 7 6");
+        Studentas s;
+
+        in >> s;
+
+        ASSERT_FALSE(in.fail());
+        EXPECT_EQ(s.getName(), "Vardyte");
+        EXPECT_EQ(s.getSurname(), "Pavardyte");
+        EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({10, 9, 8, 7}));
+        EXPECT_EQ(s.getExamGrade(), 6);
+    }
+
+    SCOPED_TRACE("13. StudentasLentelei operator<<");
+    {
+        const Studentas s = sukurtiTestiniStudenta();
+        const StudentasLentelei eilute{s};
+        std::ostringstream out;
+
+        out << eilute;
+
+        const std::string tekstas = out.str();
+
+        EXPECT_FALSE(tekstas.empty());
+        EXPECT_TRUE(teksteYra(tekstas, "Vardas"));
+        EXPECT_TRUE(teksteYra(tekstas, "Pavarde"));
+    }
+
+    SCOPED_TRACE("14. Paveldimumo struktūra");
+    {
+        EXPECT_TRUE(std::is_abstract<Zmogus>::value);
+        EXPECT_TRUE((std::is_base_of<Zmogus, Studentas>::value));
+        EXPECT_TRUE(std::has_virtual_destructor<Zmogus>::value);
+    }
+
+    Studentas::arSpausdintiDestruktoriu = false;
+}
+
+TEST(StudentasGoogleTest, TestuotiStudenta) {
+    testuotiStudenta();
 }
