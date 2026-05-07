@@ -1,6 +1,14 @@
 #ifndef STRUKTURAVISI_H
 #define STRUKTURAVISI_H
 
+/**
+ * @file strukturaVisi.h
+ * @brief Bendras antraštinis failas, įtraukiantis visus pagrindinius projekto modulius.
+ *
+ * Šis failas naudojamas patogiam visų svarbiausių projekto struktūrų ir funkcijų
+ * įtraukimui vienoje vietoje.
+ */
+
 #include "../strukturosFailai/strukturaDarbasSuFailais.h"
 #include "../Studentas.h"
 #include "../strukturosFailai/strukturaGeneravimas.h"

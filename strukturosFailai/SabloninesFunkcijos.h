@@ -11,6 +11,27 @@
 #include <type_traits>
 #include <utility>
 
+/**
+ * @file SabloninesFunkcijos.h
+ * @brief Šabloninės funkcijos, leidžiančios apdoroti studentus skirtinguose konteineriuose.
+ *
+ * Funkcijos pritaikytos darbui su tokiais konteineriais kaip `std::vector` ir `std::list`.
+ * Kai įmanoma, naudojamos konteinerio specifinės operacijos, pavyzdžiui, `list::sort`.
+ */
+
+/**
+ * @brief Nuskaito studentų duomenis iš failo į pasirinktą konteinerį.
+ *
+ * Funkcija nuskaito failo antraštę, pagal ją nustato namų darbų kiekį,
+ * o kiekvieną kitą eilutę bando konvertuoti į @ref Studentas objektą.
+ * Nekorektiškos eilutės praleidžiamos.
+ *
+ * @tparam StudentuKonteineris Konteinerio tipas, pvz. `std::vector<Studentas>` arba `std::list<Studentas>`.
+ * @param failas Failo kelias.
+ * @return Konteineris su nuskaitytais studentais.
+ *
+ * @throws std::runtime_error Jei failo nepavyksta atidaryti.
+ */
 template <typename StudentuKonteineris>
 StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
     StudentuKonteineris studentuSarasas;
@@ -52,6 +73,20 @@ StudentuKonteineris nuskaitytiStudentuDuomenisIsFailo(const std::string& failas)
     }
 }
 
+/**
+ * @brief Rikiuoja studentus pagal pasirinktą kriterijų.
+ *
+ * Pasirinkimai:
+ * - `1` — pagal vardą;
+ * - `2` — pagal pavardę;
+ * - `3` — pagal galutinį pažymį.
+ *
+ * Jei konteineris turi metodą `sort`, naudojamas jis. Kitu atveju naudojama `std::sort`.
+ *
+ * @tparam StudentuKonteineris Studentų konteinerio tipas.
+ * @param pasirinkimasRikiavimo Rikiavimo kriterijaus numeris.
+ * @param studentuSarasas Studentų konteineris, kuris bus rikiuojamas.
+ */
 template <typename StudentuKonteineris>
 void rikiuotiStudentus(int pasirinkimasRikiavimo, StudentuKonteineris& studentuSarasas) {
     using StudentasTipas = typename StudentuKonteineris::value_type;
@@ -64,11 +99,29 @@ void rikiuotiStudentus(int pasirinkimasRikiavimo, StudentuKonteineris& studentuS
     else if (pasirinkimasRikiavimo == 3) rikiuoti(lygintiElementusPagalDidejanciaReiksme(&StudentasTipas::getFinalGrade));
 }
 
+/**
+ * @brief Apskaičiuoja galutinį pažymį visiems studentams konteineryje.
+ * @tparam StudentuKonteineris Studentų konteinerio tipas.
+ * @param duomenys Studentų konteineris.
+ * @param metodas Skaičiavimo metodas, pvz. vidurkis arba mediana.
+ */
 template <typename StudentuKonteineris>
 void apskaiciuotiGalutiniusPazymius(StudentuKonteineris& duomenys, char metodas) {
     for (auto& studentas : duomenys) studentas.setFinalGrade(studentas.calculateFinalGrade(metodas));
 }
 
+/**
+ * @brief Perkelia studentus į pažangių ir silpnų studentų konteinerius.
+ *
+ * Studentai, kurių galutinis pažymys mažesnis nei `5.0`, perkeliami į silpnų studentų sąrašą.
+ * Kiti studentai perkeliami į pažangių studentų sąrašą.
+ *
+ * @tparam SaltinioKonteineris Pradinio studentų konteinerio tipas.
+ * @tparam RezultatoKonteineris Rezultato konteinerio tipas.
+ * @param studentai Pradinis studentų konteineris.
+ * @param pazangusStudentai Konteineris pažangiems studentams.
+ * @param silpniStudentai Konteineris silpniems studentams.
+ */
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
 void perkeltiStudentus(SaltinioKonteineris& studentai,
                        RezultatoKonteineris& pazangusStudentai,
@@ -83,6 +136,17 @@ void perkeltiStudentus(SaltinioKonteineris& studentai,
     }
 }
 
+/**
+ * @brief Išskiria silpnus studentus iš pradinio konteinerio naudojant `std::partition`.
+ *
+ * Po funkcijos vykdymo pradiniame konteineryje lieka tik pažangūs studentai,
+ * o silpni studentai perkeliami į atskirą konteinerį.
+ *
+ * @tparam SaltinioKonteineris Pradinio studentų konteinerio tipas.
+ * @tparam RezultatoKonteineris Rezultato konteinerio tipas.
+ * @param studentai Pradinis studentų konteineris.
+ * @param silpniStudentai Konteineris silpniems studentams.
+ */
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
 void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai,
                                  RezultatoKonteineris& silpniStudentai) {
@@ -93,6 +157,17 @@ void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai,
     studentai.erase(studentai.begin(), it);
 }
 
+/**
+ * @brief Išskiria silpnus studentus naudojant `std::remove_if`.
+ *
+ * Funkcija nukopijuoja silpnus studentus į rezultatų konteinerį ir pašalina juos
+ * iš pradinio konteinerio.
+ *
+ * @tparam SaltinioKonteineris Pradinio studentų konteinerio tipas.
+ * @tparam RezultatoKonteineris Rezultato konteinerio tipas.
+ * @param studentai Pradinis studentų konteineris.
+ * @param silpniStudentai Konteineris silpniems studentams.
+ */
 template <typename SaltinioKonteineris, typename RezultatoKonteineris>
 void skirstytiIstrinantStudentusEfektyviau(SaltinioKonteineris& studentai, RezultatoKonteineris& silpniStudentai) {
     silpniStudentai.clear();
@@ -107,6 +182,13 @@ void skirstytiIstrinantStudentusEfektyviau(SaltinioKonteineris& studentai, Rezul
     studentai.erase(it, studentai.end());
 }
 
+/**
+ * @brief Nuskaito studentų duomenis iš pasirinkto katalogo failo į pasirinktą konteinerį.
+ * @tparam StudentuKonteineris Studentų konteinerio tipas.
+ * @param pasirinkimasNuskaitymo Pasirinkto failo numeris.
+ * @param studentuSarasas Studentų konteineris, į kurį bus įrašyti duomenys.
+ * @param katalogas Katalogas, kuriame ieškoma `.txt` failų.
+ */
 template <typename StudentuKonteineris>
 void nuskaitytiDuomenisGeneric(int pasirinkimasNuskaitymo, StudentuKonteineris& studentuSarasas, std::string& katalogas) {
     try {
@@ -126,6 +208,14 @@ void nuskaitytiDuomenisGeneric(int pasirinkimasNuskaitymo, StudentuKonteineris& 
     }
 }
 
+/**
+ * @brief Rikiuoja pažangių ir silpnų studentų konteinerius pagal pasirinktus kriterijus.
+ * @tparam StudentuKonteineris Studentų konteinerio tipas.
+ * @param pazangiuSarasas Pažangių studentų konteineris.
+ * @param silpnuSarasas Silpnų studentų konteineris.
+ * @param pasirinkimasRikiavimoPazangiu Pažangių studentų rikiavimo kriterijus.
+ * @param pasirinkimasRikiavimoSilpnu Silpnų studentų rikiavimo kriterijus.
+ */
 template <typename StudentuKonteineris>
 void rikiuotiSuskirstytusStudentus(StudentuKonteineris& pazangiuSarasas, StudentuKonteineris& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu) {
     rikiuotiStudentus(pasirinkimasRikiavimoPazangiu, pazangiuSarasas);

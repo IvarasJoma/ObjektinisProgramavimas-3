@@ -3,25 +3,88 @@
 
 #include <vector>
 #include "../Studentas.h"
+/**
+ * @file strukturaSkaiciavimai.h
+ * @brief Funkcijos studentų pažymių skaičiavimui ir skirstymui.
+ */
 
+/**
+ * @brief Apskaičiuoja namų darbų pažymių vidurkį.
+ * @param ndPazymiai Namų darbų pažymių vektorius.
+ * @return Namų darbų pažymių vidurkis.
+ */
 double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai);
+
+/**
+ * @brief Apskaičiuoja galutinį pažymį pagal namų darbų vidurkį.
+ * @param studentas Studentas, kurio pažymys skaičiuojamas.
+ * @return Galutinis pažymys pagal vidurkį.
+ */
 double skaiciuotiGalutiniVidurki(const Studentas& studentas);
+
+/**
+ * @brief Apskaičiuoja namų darbų pažymių medianą.
+ * @param ndPazymiai Namų darbų pažymių vektorius.
+ * @return Namų darbų pažymių mediana.
+ */
 double skaiciuotiNDMediana(std::vector<int> ndPazymiai);
+
+/**
+ * @brief Apskaičiuoja galutinį pažymį pagal namų darbų medianą.
+ * @param studentas Studentas, kurio pažymys skaičiuojamas.
+ * @return Galutinis pažymys pagal medianą.
+ */
 double skaiciuotiGalutineMediana(const Studentas& studentas);
+/**
+ * @brief Sukuria palyginimo funkciją rikiavimui didėjančia tvarka.
+ *
+ * @tparam T Objekto tipas.
+ * @tparam Ret Getter funkcijos grąžinamas tipas.
+ * @param getter Klasės getter metodo rodyklė.
+ * @return Lambda funkcija, tinkama rikiavimui didėjančia tvarka.
+ */
 template<typename T, typename Ret>
 auto lygintiElementusPagalDidejanciaReiksme(Ret (T::*getter)() const) {
     return [getter](const T& a, const T& b) {
         return (a.*getter)() < (b.*getter)();
     };
 }
+/**
+ * @brief Sukuria palyginimo funkciją rikiavimui mažėjančia tvarka.
+ *
+ * @tparam T Objekto tipas.
+ * @tparam Ret Getter funkcijos grąžinamas tipas.
+ * @param getter Klasės getter metodo rodyklė.
+ * @return Lambda funkcija, tinkama rikiavimui mažėjančia tvarka.
+ */
 template<typename T, typename Ret>
 auto lygintiElementusPagalMazejanciaReiksme(Ret (T::*getter)() const) {
     return [getter](const T& a, const T& b) {
         return (a.*getter)() > (b.*getter)();
     };
 }
+/**
+ * @brief Apskaičiuoja ir nustato vieno studento galutinį pažymį.
+ * @param studentas Studentas, kurio pažymys skaičiuojamas.
+ * @param skaiciavimoMetodoPasirinkimas Skaičiavimo metodo pasirinkimas.
+ */
 void apskaiciuotiGalutiniPazymi(Studentas& studentas, char skaiciavimoMetodoPasirinkimas);
+/**
+ * @brief Apskaičiuoja ir nustato galutinius pažymius visiems studentams.
+ * @param studentuSarasas Studentų sąrašas.
+ * @param skaiciavimoMetodoPasirinkimas Skaičiavimo metodo pasirinkimas.
+ */
 void apskaiciuotiGalutiniusPazymius(std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
+/**
+ * @brief Suskirsto studentus į pažangius ir silpnus pagal galutinį pažymį.
+ *
+ * Studentai, kurių galutinis pažymys mažesnis nei `5.0`, priskiriami silpniems.
+ * Likę studentai priskiriami pažangiems.
+ *
+ * @param studentuSarasas Pradinis studentų sąrašas.
+ * @param pazangiuSarasas Pažangių studentų sąrašas.
+ * @param silpnuSarasas Silpnų studentų sąrašas.
+ */
 void suskirstytiStudentus(const std::vector<Studentas>& studentuSarasas, std::vector<Studentas>& pazangiuSarasas, std::vector<Studentas>& silpnuSarasas);
 
 #endif
