@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="lt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ObjektinisProgramavimas-2: README</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">ObjektinisProgramavimas-2<span id="projectnumber">&#160;2.0</span>
+   </div>
+   <div id="projectbrief">Studentų rezultatų apdorojimo programa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Sugeneruota Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Paieška" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('md__r_e_a_d_m_e.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">README </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>Programos aprašymas</h2>
+<p>Programa yra skirta studentų (jų akademinių pasiekimų) duomenų įvedimui, apdorojimui ir išvedimui. </p><h4><b> Programos funkcijos: </b> </h4>
+<ol>
+<li>
+Įvesti visus studentų duomenis ranka </li>
+<li>
+Įvesti studentų vardus, pavardes, atsitiktine tvarka generuoti pažymius </li>
+<li>
+Atsitiktinai generuoti studentų vardus, pavardes ir pažymius </li>
+<li>
+Nuskaityti duomenis iš failo </li>
+<li>
+Generuoti pasirinktino ilgio failą su atsitiktinai sugeneruotais studentų duomenimis </li>
+</ol>
+<p>Idant būtų galima išmatuoti programos veikimo laiko priklausomybę nuo naudojamų konteinerių (<b>vector, list, deque</b>) skirstant studentus į pažangius ir nepažangius, buvo pasitelktos trys strategijos:</p>
+<ol>
+<li>
+Bendro studentų konteinerio (<b>vector, list ir deque tipų</b>) išskaidymas į du naujai sukurtus to paties tipo konteinerius: pažangius ir nepažangius. </li>
+<li>
+Bendro studentų konteinerio (<b>vector, list ir deque</b>) išskaidymas panaudojant tik nepažangių mokinių konteinerį (jei studentas nepažangus, jis perkeliamas į naują konteinerį, iš senojo ištrinamas). </li>
+<li>
+Bendro studentų konteinerio (<b>vector, list ir deque</b>) išskaidant optimizuojant antrąją strategiją. </li>
+</ol>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
+v1.2 pakeitimai:</h1>
+<p>Realizuotas įvesties ir išvesties operatorių perdengimas bei sukurti testai visiems studento klasės metodams bei konstruktoriams. Realizuota penkių metodų taisyklė: </p><ol>
+<li>
+Copy konstruktorius  </li>
+<li>
+Move konstruktorius  </li>
+<li>
+Copy assignment operatorius  </li>
+<li>
+Move assignment operatorius  </li>
+<li>
+Destruktorius  </li>
+</ol>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Išvesties operatoriaus naudojimas:</h3>
+<p>Naudojant <span class="tt">operator&lt;&lt;</span>, įmanomi du išvedimo būdai: tik su visais išvestais pažymiais bei tik su išvestu galutiniu balu. Pastarajam variantui naudojamas papildomas struct wrapper <a class="el" href="struct_studentas_lentelei.html" title="Pagalbinė struktūra studento išvedimui lentelės formatu.">StudentasLentelei</a>: </p><pre class="fragment">Studentas studentas;
+std::cout &lt;&lt; studentas;
+std::cout &lt;&lt; StudentasLentelei{studentas};
+std::ostringstream tekstoSrautas;
+tekstoSrautas &lt;&lt; studentas;
+tekstoSrautas &lt;&lt; StudentasLentelei{studentas};
+std::ofstream failoSrautas("testavimas.txt");
+failoSrautas &lt;&lt; studentas;
+failoSrautas &lt;&lt; StudentasLentelei{studentas};
+</pre><h3 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+Įvesties operatoriaus naudojimas:</h3>
+<p>Naudojant <span class="tt">operator&gt;&gt;</span>, pažymių kiekis nustatomas rankiniu būdu: pirmas skaičiuspo vardo ir pavardės nusako namų darbų pažymių kiekį, o pats paskutinis yra priskiriamas egzamino pažymiui. </p><pre class="fragment">Studentas studentas;
+std::istringstream tekstoSrautas("Vardenis Pavardenis 2 3 4 10");
+tekstoSrautas &gt;&gt; studentas;
+</pre><h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+Studento klasės metodų testavimo nuotraukos:</h2>
+<p><img src="https://github.com/user-attachments/assets/7b77ac56-2c40-420c-8346-adfb9b08a9a3" alt="image" width="686" height="525" class="inline"/></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+v1.5 pakeitimai:</h1>
+<p>Pridėta abstrakti <a class="el" href="class_zmogus.html" title="Abstrakti bazinė klasė žmogaus vardui ir pavardei saugoti.">Zmogus</a> klasė, kuri implementuojama <a class="el" href="class_studentas.html" title="Saugo vieno studento duomenis ir leidžia apskaičiuoti galutinį pažymį.">Studentas</a> klasėje ir pridėtas testas patikrinti abstrakčios / išvestinės klasės funkcionalumą.</p>
+<p>Testavimo nuotrauka: <img src="https://github.com/user-attachments/assets/f05d1762-d95b-4b9e-8e5b-aa2767b45fa5" alt="image" width="301" height="160" class="inline"/></p>
+<h2>Naudojimosi instrukcija</h2>
+<ol>
+<li>
+Parsisiųsti ir įsirašyti <a href="https://gnuwin32.sourceforge.net/packages/make.htm">make</a> programinį paketą (tik jei naudojate Windows OS). </li>
+<li>
+Atsidaryti savo OS terminalą </li>
+<li>
+Klonuoti programos repozitoriją git clone <a href="https://github.com/IvarasJoma/ObjektinisProgramavimas.git">https://github.com/IvarasJoma/ObjektinisProgramavimas.git</a> </li>
+<li>
+Terminale rašyti žemiau esančią komandą, norint paleisti programą <pre><code>make run</code></pre> </li>
+</ol>
+<h2>Testavimo apžvalga</h2>
+<p>Testavimas buvo vykdytas šioje sisteminėje aplinkoje:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Kompiuteris  </th><th class="markdownTableHeadNone">Macbook M3 Pro  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Procesorius  </td><td class="markdownTableBodyNone">M3 Pro  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Branduolių skaičius  </td><td class="markdownTableBodyNone">11  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Operatyvios atminties talpa  </td><td class="markdownTableBodyNone">18 GB LPDDR5-6400  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SSD talpa ir greitis  </td><td class="markdownTableBodyNone">512GB, 6200 MB/s Write, 4310 MB/s Read  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+Konteinerių našumo palyginimas</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Įrašų kiekis  </th><th class="markdownTableHeadNone">Konteineris  </th><th class="markdownTableHeadNone">Nuskaitymas (s)  </th><th class="markdownTableHeadNone">Skaičiavimas (s)  </th><th class="markdownTableHeadNone">Rikiavimas (s)  </th><th class="markdownTableHeadNone">Skirstymas (s)  </th><th class="markdownTableHeadNone">Bendras (s)  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">1.46158  </td><td class="markdownTableBodyNone">0.81569  </td><td class="markdownTableBodyNone">0.260966  </td><td class="markdownTableBodyNone">0.135772  </td><td class="markdownTableBodyNone">2.67401  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">1.40333  </td><td class="markdownTableBodyNone">0.842376  </td><td class="markdownTableBodyNone">6.3936  </td><td class="markdownTableBodyNone">1.12494  </td><td class="markdownTableBodyNone">9.76424  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">1.24412  </td><td class="markdownTableBodyNone">0.769542  </td><td class="markdownTableBodyNone">0.281077  </td><td class="markdownTableBodyNone">0.0778298  </td><td class="markdownTableBodyNone">2.37257  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.142898  </td><td class="markdownTableBodyNone">0.0756094  </td><td class="markdownTableBodyNone">0.0258632  </td><td class="markdownTableBodyNone">0.0129843  </td><td class="markdownTableBodyNone">0.257355  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.134814  </td><td class="markdownTableBodyNone">0.0777371  </td><td class="markdownTableBodyNone">0.304793  </td><td class="markdownTableBodyNone">0.0994318  </td><td class="markdownTableBodyNone">0.616776  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.124166  </td><td class="markdownTableBodyNone">0.0769192  </td><td class="markdownTableBodyNone">0.0281017  </td><td class="markdownTableBodyNone">0.00629896  </td><td class="markdownTableBodyNone">0.235486  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.0224329  </td><td class="markdownTableBodyNone">0.00941713  </td><td class="markdownTableBodyNone">0.00296424  </td><td class="markdownTableBodyNone">0.00087957  </td><td class="markdownTableBodyNone">0.0356938  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.0136738  </td><td class="markdownTableBodyNone">0.00784851  </td><td class="markdownTableBodyNone">0.00896157  </td><td class="markdownTableBodyNone">0.0016645  </td><td class="markdownTableBodyNone">0.0321484  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.0127949  </td><td class="markdownTableBodyNone">0.0077215  </td><td class="markdownTableBodyNone">0.00275661  </td><td class="markdownTableBodyNone">0.000633028  </td><td class="markdownTableBodyNone">0.023906  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.00453481  </td><td class="markdownTableBodyNone">0.0019966  </td><td class="markdownTableBodyNone">0.000801319  </td><td class="markdownTableBodyNone">0.000306847  </td><td class="markdownTableBodyNone">0.00763957  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.00266796  </td><td class="markdownTableBodyNone">0.00149164  </td><td class="markdownTableBodyNone">0.00113862  </td><td class="markdownTableBodyNone">0.000238917  </td><td class="markdownTableBodyNone">0.00553714  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.00189549  </td><td class="markdownTableBodyNone">0.00113997  </td><td class="markdownTableBodyNone">0.000420417  </td><td class="markdownTableBodyNone">7.90417e-05  </td><td class="markdownTableBodyNone">0.00353492  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.000993028  </td><td class="markdownTableBodyNone">0.000160139  </td><td class="markdownTableBodyNone">6.36527e-05  </td><td class="markdownTableBodyNone">1.68473e-05  </td><td class="markdownTableBodyNone">0.00123367  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.000450695  </td><td class="markdownTableBodyNone">0.000149583  </td><td class="markdownTableBodyNone">6.34443e-05  </td><td class="markdownTableBodyNone">3.52083e-05  </td><td class="markdownTableBodyNone">0.000698931  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.000581  </td><td class="markdownTableBodyNone">0.000214389  </td><td class="markdownTableBodyNone">7.65277e-05  </td><td class="markdownTableBodyNone">1.73057e-05  </td><td class="markdownTableBodyNone">0.000889222  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Pirmos strategijos tyrimo rezultatai</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Įrašų kiekis  </th><th class="markdownTableHeadNone">Konteineris  </th><th class="markdownTableHeadNone">Bendras (s)  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">3.14749  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">10.1786  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">2.94208  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.294517  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.640355  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.272934  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.036173  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.0341028  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.0247597  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.00635689  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.00606537  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.00382706  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.00123278  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.00101369  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.000924639  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+Antros strategijos tyrimo rezultatai</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Įrašų kiekis  </th><th class="markdownTableHeadNone">Konteineris  </th><th class="markdownTableHeadNone">Bendras (s)  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">2.82279  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">11.8649  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">2.35069  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.257035  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.81136  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.233478  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.0333414  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.0332578  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.0233894  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.006686  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.00513514  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.00340925  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.0009305  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.000728791  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.000778236  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+Trečios strategijos tyrimo rezultatai</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Įrašų kiekis  </th><th class="markdownTableHeadNone">Konteineris  </th><th class="markdownTableHeadNone">Bendras (s)  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">2.36889  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">2.55432  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">2.28066  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.22829  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.258182  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.212768  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.0314771  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.0230683  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.0213107  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.00756633  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.00307204  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.00224785  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Vector  </td><td class="markdownTableBodyNone">0.0011071  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">List  </td><td class="markdownTableBodyNone">0.000699736  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000  </td><td class="markdownTableBodyNone">Deque  </td><td class="markdownTableBodyNone">0.000653847  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+Struktūrų ir objektų spartos palyginimo rezultatai</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Versija  </th><th class="markdownTableHeadNone">Optimizavimo flag'as  </th><th class="markdownTableHeadNone">100k (s)  </th><th class="markdownTableHeadNone">1M (s)  </th><th class="markdownTableHeadNone">Failo dydis (KB)  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">struct  </td><td class="markdownTableBodyNone">O1  </td><td class="markdownTableBodyNone">0.0320068  </td><td class="markdownTableBodyNone">0.234589  </td><td class="markdownTableBodyNone">318  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">struct  </td><td class="markdownTableBodyNone">O2  </td><td class="markdownTableBodyNone">0.027526  </td><td class="markdownTableBodyNone">0.228607  </td><td class="markdownTableBodyNone">301  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">struct  </td><td class="markdownTableBodyNone">O3  </td><td class="markdownTableBodyNone">0.0255881  </td><td class="markdownTableBodyNone">0.221877  </td><td class="markdownTableBodyNone">317  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">class  </td><td class="markdownTableBodyNone">O1  </td><td class="markdownTableBodyNone">0.0347491  </td><td class="markdownTableBodyNone">0.292031  </td><td class="markdownTableBodyNone">214  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">class  </td><td class="markdownTableBodyNone">O2  </td><td class="markdownTableBodyNone">0.0330411  </td><td class="markdownTableBodyNone">0.290745  </td><td class="markdownTableBodyNone">213  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">class  </td><td class="markdownTableBodyNone">O3  </td><td class="markdownTableBodyNone">0.0322129  </td><td class="markdownTableBodyNone">0.289138  </td><td class="markdownTableBodyNone">228  </td></tr>
+</table>
+<h2>Struktūrų ir objektų spartos palyginimo rezultatai</h2>
+<p>Pateikti rezultatai rodo, kad šioje programoje struct realizacija buvo spartesnė už class visais testuotais optimizavimo lygiais – tiek su 100 tūkst., tiek su 1 mln. įrašų ji demonstravo mažesnį vykdymo laiką, o didžiausias našumas pasiektas naudojant O3 optimizaciją; tuo tarpu class versija taip pat pagerėjo didinant optimizaciją, tačiau išliko lėtesnė. Tai leidžia daryti išvadą, kad struct šiuo atveju yra efektyvesnis sprendimas laiko atžvilgiu, tikėtina dėl paprastesnės struktūros ir mažesnės abstrakcijos kainos, nors skirtumai nėra kritiniai, todėl praktikoje pasirinkimas turėtų priklausyti ir nuo kodo organizavimo bei aiškumo aspektų. Kita vertus, pastebėta, kad class realizacija generuoja mažesnio dydžio vykdomuosius failus (pvz., su O2: 213 KB prieš 301 KB), todėl ji gali būti palankesnė, kai svarbus programos kompaktiškumas.</p>
+<h2>Programos testavimo nuotraukos</h2>
+<p><img src="https://github.com/user-attachments/assets/2821790d-aef5-4263-aa79-571a808f9db3" alt="image" width="695" height="1259" class="inline"/> <img src="https://github.com/user-attachments/assets/08e49c65-879d-47d0-9b17-cde5ab35d04b" alt="image" width="695" height="1348" class="inline"/> <img src="https://github.com/user-attachments/assets/1604353b-4e80-429e-ab38-ababd5650b09" alt="image" width="695" height="1348" class="inline"/></p>
+<h2>Išvados</h2>
+<ol>
+<li>
+Konteinerių tyrime std::deque ir std::vector buvo greičiausi konteineriai. </li>
+<li>
+Studentų skaidymo į du naujus konteinerius veikė lėčiau nei perkėlimo ir ištrynimo strategija.  </li>
+</ol>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Sugeneruota <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

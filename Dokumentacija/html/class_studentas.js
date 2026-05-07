@@ -1,0 +1,28 @@
+var class_studentas =
+[
+    [ "Studentas", "class_studentas.html#ab459e995e8c9b24cdc9aec5b09a66539", null ],
+    [ "Studentas", "class_studentas.html#adacf55b0d14091478cee809777d87e9e", null ],
+    [ "Studentas", "class_studentas.html#a8f213f6c4f1e61061340160e1f42bf3b", null ],
+    [ "Studentas", "class_studentas.html#a377fcf9fd618150c96799156fb3916ee", null ],
+    [ "~Studentas", "class_studentas.html#a63e449e0f51a0b14340d02ee71b4be23", null ],
+    [ "Studentas", "class_studentas.html#aef0484fe46cf05746f8ffc0d083fcf3e", null ],
+    [ "Studentas", "class_studentas.html#a732b15e3745fa8e35ff0002cfc4b73b5", null ],
+    [ "addHomeworkGrade", "class_studentas.html#a10bef2723857ae433d4f12f9628064a6", null ],
+    [ "calculateFinalGrade", "class_studentas.html#a90a2567d49bea9bf207b21b27f6d18fa", null ],
+    [ "clearHomeworkGrades", "class_studentas.html#a1b12604cc59e3e36350f5dc51ad674a1", null ],
+    [ "getExamGrade", "class_studentas.html#a46a5ec0fe33ef04ea7918c999aa2ae11", null ],
+    [ "getFinalGrade", "class_studentas.html#aba83d97095d23a9781c84cb390f62cc1", null ],
+    [ "getHomeworkGrades", "class_studentas.html#acfef54ae695430c93281164e001e018c", null ],
+    [ "getName", "class_studentas.html#aedbf85a5ca5b70585d32245bc3dcd1e6", null ],
+    [ "getSurname", "class_studentas.html#a7761e6d92ac02b72a008a73170ad340c", null ],
+    [ "operator=", "class_studentas.html#a25bcc531503d3bc490dab4a656e3b8e9", null ],
+    [ "operator=", "class_studentas.html#a6379482d741209e9a2d902023676fb45", null ],
+    [ "reserveHomeworkGrades", "class_studentas.html#ad6865102e796876d332b2be33be06acc", null ],
+    [ "setExamGrade", "class_studentas.html#ab26e063e5cfce73a87ec839293991119", null ],
+    [ "setFinalGrade", "class_studentas.html#a021246cfdb36ea359b2f766cb51b8455", null ],
+    [ "setHomeworkGrades", "class_studentas.html#ab4def3510be12fcb6898a6f692f36ef2", null ],
+    [ "setName", "class_studentas.html#aac8c7d76ea82622d7f380424df9d9682", null ],
+    [ "setSurname", "class_studentas.html#a0a3c84026a3c447aa3adfa5db1703044", null ],
+    [ "operator<<", "class_studentas.html#a4062cbd3f4c44fac2063e38cfa00a8cf", null ],
+    [ "operator>>", "class_studentas.html#ac63003b577b137ac6ad5b1fb176bd59a", null ]
+];

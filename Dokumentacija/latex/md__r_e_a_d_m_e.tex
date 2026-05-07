@@ -1,0 +1,184 @@
+\chapter{README }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{README@{README}}
+\doxysubsection*{Programos aprašymas}
+
+Programa yra skirta studentų (jų akademinių pasiekimų) duomenų įvedimui, apdorojimui ir išvedimui. \doxysubsubsubsection*{{\bfseries{ Programos funkcijos:\+ }} }
+
+
+\begin{DoxyEnumerate}
+\item Įvesti visus studentų duomenis ranka 
+\item Įvesti studentų vardus, pavardes, atsitiktine tvarka generuoti pažymius 
+\item Atsitiktinai generuoti studentų vardus, pavardes ir pažymius 
+\item Nuskaityti duomenis iš failo 
+\item Generuoti pasirinktino ilgio failą su atsitiktinai sugeneruotais studentų duomenimis 
+\end{DoxyEnumerate}
+
+Idant būtų galima išmatuoti programos veikimo laiko priklausomybę nuo naudojamų konteinerių ({\bfseries{vector, list, deque}}) skirstant studentus į pažangius ir nepažangius, buvo pasitelktos trys strategijos:\+
+
+
+\begin{DoxyEnumerate}
+\item Bendro studentų konteinerio ({\bfseries{vector, list ir deque tipų}}) išskaidymas į du naujai sukurtus to paties tipo konteinerius:\+ pažangius ir nepažangius. 
+\item Bendro studentų konteinerio ({\bfseries{vector, list ir deque}}) išskaidymas panaudojant tik nepažangių mokinių konteinerį (jei studentas nepažangus, jis perkeliamas į naują konteinerį, iš senojo ištrinamas). 
+\item Bendro studentų konteinerio ({\bfseries{vector, list ir deque}}) išskaidant optimizuojant antrąją strategiją. 
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md0}{}\doxysection{\texorpdfstring{v1.\+2 pakeitimai:\+}{v1.\+2 pakeitimai:\+}}\label{md__r_e_a_d_m_e_autotoc_md0}
+Realizuotas įvesties ir išvesties operatorių perdengimas bei sukurti testai visiems studento klasės metodams bei konstruktoriams. Realizuota penkių metodų taisyklė:\+ 
+\begin{DoxyEnumerate}
+\item Copy konstruktorius  
+\item Move konstruktorius  
+\item Copy assignment operatorius  
+\item Move assignment operatorius  
+\item Destruktorius  
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{Išvesties operatoriaus naudojimas:\+}{Išvesties operatoriaus naudojimas:\+}}\label{md__r_e_a_d_m_e_autotoc_md1}
+Naudojant {\ttfamily operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}}, įmanomi du išvedimo būdai:\+ tik su visais išvestais pažymiais bei tik su išvestu galutiniu balu. Pastarajam variantui naudojamas papildomas struct wrapper \doxylink{struct_studentas_lentelei}{Studentas\+Lentelei}:\+ \begin{DoxyVerb}Studentas studentas;
+std::cout << studentas;
+std::cout << StudentasLentelei{studentas};
+std::ostringstream tekstoSrautas;
+tekstoSrautas << studentas;
+tekstoSrautas << StudentasLentelei{studentas};
+std::ofstream failoSrautas("testavimas.txt");
+failoSrautas << studentas;
+failoSrautas << StudentasLentelei{studentas};
+\end{DoxyVerb}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{Įvesties operatoriaus naudojimas:\+}{Įvesties operatoriaus naudojimas:\+}}\label{md__r_e_a_d_m_e_autotoc_md2}
+Naudojant {\ttfamily operator\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}}, pažymių kiekis nustatomas rankiniu būdu:\+ pirmas skaičiuspo vardo ir pavardės nusako namų darbų pažymių kiekį, o pats paskutinis yra priskiriamas egzamino pažymiui. \begin{DoxyVerb}Studentas studentas;
+std::istringstream tekstoSrautas("Vardenis Pavardenis 2 3 4 10");
+tekstoSrautas >> studentas;
+\end{DoxyVerb}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{\texorpdfstring{Studento klasės metodų testavimo nuotraukos:\+}{Studento klasės metodų testavimo nuotraukos:\+}}\label{md__r_e_a_d_m_e_autotoc_md3}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{\texorpdfstring{v1.\+5 pakeitimai:\+}{v1.\+5 pakeitimai:\+}}\label{md__r_e_a_d_m_e_autotoc_md4}
+Pridėta abstrakti \doxylink{class_zmogus}{Zmogus} klasė, kuri implementuojama \doxylink{class_studentas}{Studentas} klasėje ir pridėtas testas patikrinti abstrakčios /\+ išvestinės klasės funkcionalumą.
+
+Testavimo nuotrauka:\+ 
+
+\doxysubsection*{Naudojimosi instrukcija}
+
+
+\begin{DoxyEnumerate}
+\item Parsisiųsti ir įsirašyti \href{https://gnuwin32.sourceforge.net/packages/make.htm}{\texttt{make}} programinį paketą (tik jei naudojate Windows OS). 
+\item Atsidaryti savo OS terminalą 
+\item Klonuoti programos repozitoriją git clone \href{https://github.com/IvarasJoma/ObjektinisProgramavimas.git}{\texttt{https:\+/\+/\+github.\+com/\+\+Ivaras\+Joma/\+\+Objektinis\+Programavimas.\+git}} 
+\item Terminale rašyti žemiau esančią komandą, norint paleisti programą 
+\begin{DoxyPre}{\ttfamily make run}\end{DoxyPre}
+ 
+\end{DoxyEnumerate}
+
+\doxysubsection*{Testavimo apžvalga}
+
+Testavimas buvo vykdytas šioje sisteminėje aplinkoje:\+
+
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Kompiuteris  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Macbook M3 Pro  \\
+Procesorius  &M3 Pro  \\
+Branduolių skaičius  &11  \\
+Operatyvios atminties talpa  &18 GB LPDDR5-\/6400  \\
+SSD talpa ir greitis  &512GB, 6200 MB/\+s Write, 4310 MB/\+s Read  \\
+\end{DoxyTable}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{Konteinerių našumo palyginimas}{Konteinerių našumo palyginimas}}\label{md__r_e_a_d_m_e_autotoc_md5}
+
+\begin{DoxyTable}{7}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Įrašų kiekis  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Konteineris  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Nuskaitymas (s)  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Skaičiavimas (s)  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Rikiavimas (s)  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Skirstymas (s)  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Bendras (s)  \\
+10000000  &Vector  &1.\+46158  &0.\+81569  &0.\+260966  &0.\+135772  &2.\+67401  \\
+10000000  &List  &1.\+40333  &0.\+842376  &6.\+3936  &1.\+12494  &9.\+76424  \\
+10000000  &Deque  &1.\+24412  &0.\+769542  &0.\+281077  &0.\+0778298  &2.\+37257  \\
+1000000  &Vector  &0.\+142898  &0.\+0756094  &0.\+0258632  &0.\+0129843  &0.\+257355  \\
+1000000  &List  &0.\+134814  &0.\+0777371  &0.\+304793  &0.\+0994318  &0.\+616776  \\
+1000000  &Deque  &0.\+124166  &0.\+0769192  &0.\+0281017  &0.\+00629896  &0.\+235486  \\
+100000  &Vector  &0.\+0224329  &0.\+00941713  &0.\+00296424  &0.\+00087957  &0.\+0356938  \\
+100000  &List  &0.\+0136738  &0.\+00784851  &0.\+00896157  &0.\+0016645  &0.\+0321484  \\
+100000  &Deque  &0.\+0127949  &0.\+0077215  &0.\+00275661  &0.\+000633028  &0.\+023906  \\
+10000  &Vector  &0.\+00453481  &0.\+0019966  &0.\+000801319  &0.\+000306847  &0.\+00763957  \\
+10000  &List  &0.\+00266796  &0.\+00149164  &0.\+00113862  &0.\+000238917  &0.\+00553714  \\
+10000  &Deque  &0.\+00189549  &0.\+00113997  &0.\+000420417  &7.\+90417e-\/05  &0.\+00353492  \\
+1000  &Vector  &0.\+000993028  &0.\+000160139  &6.\+36527e-\/05  &1.\+68473e-\/05  &0.\+00123367  \\
+1000  &List  &0.\+000450695  &0.\+000149583  &6.\+34443e-\/05  &3.\+52083e-\/05  &0.\+000698931  \\
+1000  &Deque  &0.\+000581  &0.\+000214389  &7.\+65277e-\/05  &1.\+73057e-\/05  &0.\+000889222  \\
+\end{DoxyTable}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{\texorpdfstring{Pirmos strategijos tyrimo rezultatai}{Pirmos strategijos tyrimo rezultatai}}\label{md__r_e_a_d_m_e_autotoc_md6}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Įrašų kiekis  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Konteineris  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Bendras (s)  \\
+10000000  &Vector  &3.\+14749  \\
+10000000  &List  &10.\+1786  \\
+10000000  &Deque  &2.\+94208  \\
+1000000  &Vector  &0.\+294517  \\
+1000000  &List  &0.\+640355  \\
+1000000  &Deque  &0.\+272934  \\
+100000  &Vector  &0.\+036173  \\
+100000  &List  &0.\+0341028  \\
+100000  &Deque  &0.\+0247597  \\
+10000  &Vector  &0.\+00635689  \\
+10000  &List  &0.\+00606537  \\
+10000  &Deque  &0.\+00382706  \\
+1000  &Vector  &0.\+00123278  \\
+1000  &List  &0.\+00101369  \\
+1000  &Deque  &0.\+000924639  \\
+\end{DoxyTable}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{\texorpdfstring{Antros strategijos tyrimo rezultatai}{Antros strategijos tyrimo rezultatai}}\label{md__r_e_a_d_m_e_autotoc_md7}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Įrašų kiekis  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Konteineris  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Bendras (s)  \\
+10000000  &Vector  &2.\+82279  \\
+10000000  &List  &11.\+8649  \\
+10000000  &Deque  &2.\+35069  \\
+1000000  &Vector  &0.\+257035  \\
+1000000  &List  &0.\+81136  \\
+1000000  &Deque  &0.\+233478  \\
+100000  &Vector  &0.\+0333414  \\
+100000  &List  &0.\+0332578  \\
+100000  &Deque  &0.\+0233894  \\
+10000  &Vector  &0.\+006686  \\
+10000  &List  &0.\+00513514  \\
+10000  &Deque  &0.\+00340925  \\
+1000  &Vector  &0.\+0009305  \\
+1000  &List  &0.\+000728791  \\
+1000  &Deque  &0.\+000778236  \\
+\end{DoxyTable}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsection{\texorpdfstring{Trečios strategijos tyrimo rezultatai}{Trečios strategijos tyrimo rezultatai}}\label{md__r_e_a_d_m_e_autotoc_md8}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Įrašų kiekis  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Konteineris  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Bendras (s)  \\
+10000000  &Vector  &2.\+36889  \\
+10000000  &List  &2.\+55432  \\
+10000000  &Deque  &2.\+28066  \\
+1000000  &Vector  &0.\+22829  \\
+1000000  &List  &0.\+258182  \\
+1000000  &Deque  &0.\+212768  \\
+100000  &Vector  &0.\+0314771  \\
+100000  &List  &0.\+0230683  \\
+100000  &Deque  &0.\+0213107  \\
+10000  &Vector  &0.\+00756633  \\
+10000  &List  &0.\+00307204  \\
+10000  &Deque  &0.\+00224785  \\
+1000  &Vector  &0.\+0011071  \\
+1000  &List  &0.\+000699736  \\
+1000  &Deque  &0.\+000653847  \\
+\end{DoxyTable}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{\texorpdfstring{Struktūrų ir objektų spartos palyginimo rezultatai}{Struktūrų ir objektų spartos palyginimo rezultatai}}\label{md__r_e_a_d_m_e_autotoc_md9}
+
+\begin{DoxyTable}{5}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Versija  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Optimizavimo flag\textquotesingle{}as  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}100k (s)  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}1M (s)  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Failo dydis (KB)  \\
+struct  &O1  &0.\+0320068  &0.\+234589  &318  \\
+struct  &O2  &0.\+027526  &0.\+228607  &301  \\
+struct  &O3  &0.\+0255881  &0.\+221877  &317  \\
+class  &O1  &0.\+0347491  &0.\+292031  &214  \\
+class  &O2  &0.\+0330411  &0.\+290745  &213  \\
+class  &O3  &0.\+0322129  &0.\+289138  &228  \\
+\end{DoxyTable}
+
+
+\doxysubsection*{Struktūrų ir objektų spartos palyginimo rezultatai}
+
+Pateikti rezultatai rodo, kad šioje programoje struct realizacija buvo spartesnė už class visais testuotais optimizavimo lygiais – tiek su 100 tūkst., tiek su 1 mln. įrašų ji demonstravo mažesnį vykdymo laiką, o didžiausias našumas pasiektas naudojant O3 optimizaciją; tuo tarpu class versija taip pat pagerėjo didinant optimizaciją, tačiau išliko lėtesnė. Tai leidžia daryti išvadą, kad struct šiuo atveju yra efektyvesnis sprendimas laiko atžvilgiu, tikėtina dėl paprastesnės struktūros ir mažesnės abstrakcijos kainos, nors skirtumai nėra kritiniai, todėl praktikoje pasirinkimas turėtų priklausyti ir nuo kodo organizavimo bei aiškumo aspektų. Kita vertus, pastebėta, kad class realizacija generuoja mažesnio dydžio vykdomuosius failus (pvz., su O2:\+ 213 KB prieš 301 KB), todėl ji gali būti palankesnė, kai svarbus programos kompaktiškumas.
+
+\doxysubsection*{Programos testavimo nuotraukos}
+
+  
+
+\doxysubsection*{Išvados}
+
+
+\begin{DoxyEnumerate}
+\item Konteinerių tyrime std::\+deque ir std::\+vector buvo greičiausi konteineriai. 
+\item Studentų skaidymo į du naujus konteinerius veikė lėčiau nei perkėlimo ir ištrynimo strategija.  
+\end{DoxyEnumerate}
