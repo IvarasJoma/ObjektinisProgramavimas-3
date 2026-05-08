@@ -59,6 +59,12 @@ Pridėta abstrakti Zmogus klasė, kuri implementuojama Studentas klasėje ir pri
 Testavimo nuotrauka:
 <img width="301" height="160" alt="image" src="https://github.com/user-attachments/assets/f05d1762-d95b-4b9e-8e5b-aa2767b45fa5" />
 
+# v2.0 pakeitimai:
+
+Naudojant Doxygen servisą aprašytas projekto kodas (t.y klasės, jų metodai, pagalbinės funkcijos). Pridėtas modulių testavimo funkcionalumas naudojantis GoogleTest biblioteka.
+
+Testavimo nuotrauka:
+<img width="577" height="579" alt="image" src="https://github.com/user-attachments/assets/5d7f2eec-3134-4a01-a6f4-0585c473b1ec" />
 
 <h2>Naudojimosi instrukcija</h2>
 <ol>
