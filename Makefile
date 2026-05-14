@@ -10,6 +10,7 @@ COMMON_INCLUDES := -I. -IstrukturosFailai
 APP_SOURCES := programaVektoriai.cpp pagalbinesFunkcijos/*.cpp Studentas.cpp
 
 TEST_SOURCES := pagalbinesFunkcijos/*.cpp Studentas.cpp
+VECTOR_TEST_SOURCES := VectorTest.cpp
 
 GTEST_REPO := https://github.com/google/googletest.git
 GTEST_ROOT := googletest
@@ -64,6 +65,15 @@ tests: googletest
 
 test: tests
 	./$(TEST_TARGET)
+
+testVector: googletest
+	$(CXX) $(STD) -O0 -g $(TEST_WARNINGS) $(COMMON_INCLUDES) $(GTEST_INC) \
+		$(VECTOR_TEST_SOURCES) \
+		$(GTEST_SRC) \
+		$(GTEST_MAIN_SRC) \
+		-pthread \
+		-o $(TEST_TARGET)
+	./tests_runner
 
 clean-tests:
 	rm -f $(TEST_TARGET)
