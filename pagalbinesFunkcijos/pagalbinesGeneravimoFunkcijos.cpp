@@ -12,24 +12,24 @@ int generuotiSveikaSkaiciu(int nuo, int iki){
     return distribucija(generatorius);
 }
 
-std::pair<std::string, std::string> generuotiVardaPavarde(const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes){
+std::pair<std::string, std::string> generuotiVardaPavarde(const Vector<std::string>& vyrVardai, const Vector<std::string>& vyrPavardes, const Vector<std::string>& motVardai, const Vector<std::string>& motPavardes){
     if (vyrVardai.empty() || vyrPavardes.empty() || motVardai.empty() || motPavardes.empty()) return {"Vardenis", "Pavardenis"};
     const int lytis = generuotiSveikaSkaiciu(0, 1);
     if (lytis == 0) {
-        const auto vardoIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(vyrVardai.size()) - 1));
-        const auto pavardesIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(vyrPavardes.size()) - 1));
+        const auto vardoIndeksas = static_cast<Vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(vyrVardai.size()) - 1));
+        const auto pavardesIndeksas = static_cast<Vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(vyrPavardes.size()) - 1));
         return {vyrVardai[vardoIndeksas], vyrPavardes[pavardesIndeksas]};
     }
     else {
-        const auto vardoIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(motVardai.size()) - 1));
-        const auto pavardesIndeksas = static_cast<std::vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(motPavardes.size()) - 1));
+        const auto vardoIndeksas = static_cast<Vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(motVardai.size()) - 1));
+        const auto pavardesIndeksas = static_cast<Vector<std::string>::size_type>(generuotiSveikaSkaiciu(0, static_cast<int>(motPavardes.size()) - 1));
         return {motVardai[vardoIndeksas], motPavardes[pavardesIndeksas]};
     }
 }
 
-std::pair<std::vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis) {
+std::pair<Vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis) {
     const std::size_t ndKiekis = static_cast<std::size_t>(maksimalusNDKiekis);
-    std::vector<int> namuDarbai;
+    Vector<int> namuDarbai;
     namuDarbai.reserve(ndKiekis);
     for (std::size_t i = 0; i < ndKiekis; ++i) namuDarbai.push_back(generuotiSveikaSkaiciu(0, 10));
     const int egzaminoPazymys = generuotiSveikaSkaiciu(1, 10);
@@ -43,8 +43,8 @@ Studentas sugeneruotiStudenta(const Failai& failai, int maksimalusNDKiekis){
     return sukurtiStudentaIsEilutesPerOperatoriu(eilute);
 }
 
-std::vector<Studentas> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai){
-    std::vector<Studentas> studentuSarasas;
+Vector<Studentas> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai){
+    Vector<Studentas> studentuSarasas;
     studentuSarasas.reserve(static_cast<std::size_t>(studentuKiekis));
     for (int i = 0; i < studentuKiekis; ++i) studentuSarasas.emplace_back(sugeneruotiStudenta(failai, maksimalusNDKiekis));
     return studentuSarasas;

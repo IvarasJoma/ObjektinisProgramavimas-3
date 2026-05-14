@@ -2,7 +2,7 @@
 #include "../strukturosFailai/strukturaSkaiciavimai.h"
 #include "../Studentas.h"
 
-void rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector<Studentas>& studentuSarasas){              
+void rikiuotiStudentus(int pasirinkimasRikiavimo, Vector<Studentas>& studentuSarasas){              
     if (pasirinkimasRikiavimo == 1) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&Studentas::getName));
     if (pasirinkimasRikiavimo == 2) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&Studentas::getName));
     if (pasirinkimasRikiavimo == 3) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalDidejanciaReiksme(&Studentas::getSurname));
@@ -11,7 +11,7 @@ void rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector<Studentas>& studen
     if (pasirinkimasRikiavimo == 6) std::sort(studentuSarasas.begin(), studentuSarasas.end(), lygintiElementusPagalMazejanciaReiksme(&Studentas::getFinalGrade));
 }
 
-void rikiuotiSuskirstytusStudentus(std::vector<Studentas>& pazangiuSarasas, std::vector<Studentas>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu){
+void rikiuotiSuskirstytusStudentus(Vector<Studentas>& pazangiuSarasas, Vector<Studentas>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu){
     rikiuotiStudentus(pasirinkimasRikiavimoPazangiu, pazangiuSarasas);
     rikiuotiStudentus(pasirinkimasRikiavimoSilpnu, silpnuSarasas);
 }

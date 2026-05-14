@@ -17,7 +17,7 @@
 #include <gtest/gtest.h>
 
 void vykdytiIvedimoTestavima(){
-    std::vector<Studentas> studentuSarasas;
+    Vector<Studentas> studentuSarasas;
     TestoLaikai laikai;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int kartai = nuskaitytiTeigiamaSveikajiSkaiciu("Įveskite norimą testų kiekį ir paspauskite ENTER: ");
@@ -49,9 +49,9 @@ void vykdytiDuomenuApdorojimoTestavima(){
     int pasirinkimasRikiavimoSilpnu = 0;
     parinktiRikiavimoBudus(pasirinkimasRikiavimoPazangiu, pasirinkimasRikiavimoSilpnu);
     for (int i = 0; i < kartai; ++i) {
-        std::vector<Studentas> studentuSarasas;
-        std::vector<Studentas> pazangiuSarasas;
-        std::vector<Studentas> silpnuSarasas;
+        Vector<Studentas> studentuSarasas;
+        Vector<Studentas> pazangiuSarasas;
+        Vector<Studentas> silpnuSarasas;
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, "ApdorojimoTyrimuiSkirtiFailai");});
         laikai.skaiciavimas += ismatuotiLaika([&](){
             apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);
@@ -119,7 +119,7 @@ double apskaiciuotiLaika(std::chrono::steady_clock::time_point startas, std::chr
 }
 
 void vykdytiPirmajaKonteineriuTestavimoStrategija(){
-    using VectorKonteineris = std::vector<Studentas>;
+    using VectorKonteineris = Vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
     TestoLaikai laikai;
@@ -169,7 +169,7 @@ void vykdytiPirmajaKonteineriuTestavimoStrategija(){
 };
 
 void vykdytiAntrajaKonteineriuTestavimoStrategija(){
-    using VectorKonteineris = std::vector<Studentas>;
+    using VectorKonteineris = Vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
     TestoLaikai laikai;
@@ -219,7 +219,7 @@ void vykdytiAntrajaKonteineriuTestavimoStrategija(){
 };
 
 void vykdytiTreciajaKonteineriuTestavimoStrategija(){
-    using VectorKonteineris = std::vector<Studentas>;
+    using VectorKonteineris = Vector<Studentas>;
     using ListKonteineris = std::list<Studentas>;
     using DequeKonteineris = std::deque<Studentas>;
     TestoLaikai laikai;
@@ -275,8 +275,8 @@ void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
     std::string katalogas = "KonteineriuTyrimuiSkirtiFailai";
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu(katalogas));
     for (int i = 0; i < kartai; ++i) {
-        std::vector<Studentas> studentuSarasas;
-        std::vector<Studentas> silpnuSarasas;
+        Vector<Studentas> studentuSarasas;
+        Vector<Studentas> silpnuSarasas;
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
         laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
@@ -323,7 +323,7 @@ void testuotiParametriniKonstruktoriu() {
     EXPECT_EQ(s.getName(), "Vardenis");
     EXPECT_EQ(s.getSurname(), "Pavardenis");
     EXPECT_EQ(s.getExamGrade(), 8);
-    EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({9, 10, 8}));
+    EXPECT_EQ(s.getHomeworkGrades(), Vector<int>({9, 10, 8}));
     EXPECT_DOUBLE_EQ(s.getFinalGrade(), 8.4);
 }
 
@@ -335,7 +335,7 @@ void testuotiKonstruktoriuIsEilutes() {
 
     EXPECT_EQ(s.getName(), "Vardas");
     EXPECT_EQ(s.getSurname(), "Pavardenis");
-    EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({10, 9, 8, 7}));
+    EXPECT_EQ(s.getHomeworkGrades(), Vector<int>({10, 9, 8, 7}));
     EXPECT_EQ(s.getExamGrade(), 6);
 }
 
@@ -354,7 +354,7 @@ void testuotiSetteriusIrGetterius() {
     EXPECT_EQ(s.getSurname(), "Pavarde");
     EXPECT_EQ(s.getExamGrade(), 7);
     EXPECT_DOUBLE_EQ(s.getFinalGrade(), 8.5);
-    EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    EXPECT_EQ(s.getHomeworkGrades(), Vector<int>({8, 9, 10}));
 }
 
 void testuotiNamuDarbuPazymiuValdyma() {
@@ -369,7 +369,7 @@ void testuotiNamuDarbuPazymiuValdyma() {
     s.addHomeworkGrade(9);
     s.addHomeworkGrade(10);
 
-    EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    EXPECT_EQ(s.getHomeworkGrades(), Vector<int>({8, 9, 10}));
 
     s.clearHomeworkGrades();
 
@@ -404,7 +404,7 @@ void testuotiCopyKonstruktoriu() {
     originalas.addHomeworkGrade(1);
 
     EXPECT_EQ(kopija.getName(), "Vardas");
-    EXPECT_EQ(kopija.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    EXPECT_EQ(kopija.getHomeworkGrades(), Vector<int>({8, 9, 10}));
 }
 
 void testuotiCopyPriskyrimoOperatoriu() {
@@ -425,7 +425,7 @@ void testuotiCopyPriskyrimoOperatoriu() {
     originalas.clearHomeworkGrades();
 
     EXPECT_EQ(priskirtas.getSurname(), "Pavarde");
-    EXPECT_EQ(priskirtas.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    EXPECT_EQ(priskirtas.getHomeworkGrades(), Vector<int>({8, 9, 10}));
 }
 
 void testuotiSelfCopyAssignment() {
@@ -439,7 +439,7 @@ void testuotiSelfCopyAssignment() {
     EXPECT_EQ(s.getName(), "Vardas");
     EXPECT_EQ(s.getSurname(), "Pavarde");
     EXPECT_EQ(s.getExamGrade(), 7);
-    EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({8, 9, 10}));
+    EXPECT_EQ(s.getHomeworkGrades(), Vector<int>({8, 9, 10}));
 }
 
 void testuotiMoveKonstruktoriu() {
@@ -460,7 +460,7 @@ void testuotiMoveKonstruktoriu() {
     EXPECT_EQ(perkeltas.getName(), "Pavardenis");
     EXPECT_EQ(perkeltas.getSurname(), "Vardenis");
     EXPECT_EQ(perkeltas.getExamGrade(), 9);
-    EXPECT_EQ(perkeltas.getHomeworkGrades(), std::vector<int>({10, 9, 8}));
+    EXPECT_EQ(perkeltas.getHomeworkGrades(), Vector<int>({10, 9, 8}));
     EXPECT_DOUBLE_EQ(perkeltas.getFinalGrade(), 7.5);
     EXPECT_EQ(perkeltas.getHomeworkGrades().size(), pradinisNdKiekis);
     EXPECT_GE(perkeltas.getHomeworkGrades().capacity(), pradinisNdKiekis);
@@ -490,7 +490,7 @@ void testuotiMovePriskyrimoOperatoriu() {
     EXPECT_EQ(tikslas.getName(), "Pavardenis");
     EXPECT_EQ(tikslas.getSurname(), "Vardenis");
     EXPECT_EQ(tikslas.getExamGrade(), 9);
-    EXPECT_EQ(tikslas.getHomeworkGrades(), std::vector<int>({10, 9, 8}));
+    EXPECT_EQ(tikslas.getHomeworkGrades(), Vector<int>({10, 9, 8}));
     EXPECT_DOUBLE_EQ(tikslas.getFinalGrade(), 7.5);
 
     EXPECT_EQ(tikslas.getHomeworkGrades().size(), saltinioNdKiekis);
@@ -529,7 +529,7 @@ void testuotiIvestiesOperatoriu() {
     ASSERT_FALSE(in.fail());
     EXPECT_EQ(s.getName(), "Vardyte");
     EXPECT_EQ(s.getSurname(), "Pavardyte");
-    EXPECT_EQ(s.getHomeworkGrades(), std::vector<int>({10, 9, 8, 7}));
+    EXPECT_EQ(s.getHomeworkGrades(), Vector<int>({10, 9, 8, 7}));
     EXPECT_EQ(s.getExamGrade(), 6);
 }
 

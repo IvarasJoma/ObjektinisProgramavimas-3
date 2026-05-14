@@ -38,8 +38,8 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x){
     return true;
 }
 
-std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
-    std::vector<Studentas> studentuSarasas;
+Vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas) {
+    Vector<Studentas> studentuSarasas;
     FILE* skaitomasFailas = std::fopen(failas.c_str(), "r");
     if (!skaitomasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
     try {
@@ -73,7 +73,7 @@ std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& fail
     }
 }
 
-void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas) {
+void irasytiStudentuDuomenisIFaila(const Vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas) {
     std::ofstream isvedamasFailas("tekstiniaiFailai/" + failoPavadinimas);
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
     std::size_t ndKiekis = 0;
@@ -85,8 +85,8 @@ void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas
     if (!isvedamasFailas) throw std::runtime_error("Nepavyko įrašyti į failą: " + failoPavadinimas);
 }
 
-std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
-    std::vector<std::string> rezultatas;
+Vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
+    Vector<std::string> rezultatas;
     std::ifstream fin(failas);
     if (!fin.is_open()) throw std::runtime_error("Nepavyko atidaryti failo: " + failas);
     std::string eilute;
@@ -96,7 +96,7 @@ std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas){
     return rezultatas;
 }
 
-void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<Studentas>& studentuSarasas, const std::string& katalogas) {
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, Vector<Studentas>& studentuSarasas, const std::string& katalogas) {
     try {
         auto failai = gautiTekstiniusFailus(katalogas);
         if (failai.empty()) throw std::runtime_error("Kataloge nerasta .txt failų.");
@@ -111,7 +111,7 @@ void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<Studentas>& stud
     }
 }
 
-void irasytiDuomenis(std::vector<Studentas>& studentuSarasas){
+void irasytiDuomenis(Vector<Studentas>& studentuSarasas){
     try {
         std::ostringstream oss;
         oss << "studentai" << studentuSarasas.size() << ".txt";
@@ -125,7 +125,7 @@ void irasytiDuomenis(std::vector<Studentas>& studentuSarasas){
 }
 
 void vykdytiNuskaitymaIsFailo(){
-    std::vector<Studentas> studentuSarasas;
+    Vector<Studentas> studentuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int pasirinkimasNuskaitymo = nuskaitytiMeniuPasirinkima(gautiNuskaitymoMeniu("tekstiniaiFailai"));
     nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, "tekstiniaiFailai");
@@ -141,14 +141,14 @@ void vykdytiIrasymaIFaila(Failai& failai){
     if (pasirinkimasIrasymo == 3) studentuKiekis = 100000;
     if (pasirinkimasIrasymo == 4) studentuKiekis = 1000000;
     if (pasirinkimasIrasymo == 5) studentuKiekis = 10000000;
-    std::vector<Studentas> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
+    Vector<Studentas> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
     irasytiDuomenis(studentuSarasas);
     vykdytiSkirstymaIFailus(studentuSarasas);
 }
 
-void vykdytiSkirstymaIFailus(std::vector<Studentas>& studentuSarasas){
-    std::vector<Studentas> pazangiuSarasas;
-    std::vector<Studentas> silpnuSarasas;
+void vykdytiSkirstymaIFailus(Vector<Studentas>& studentuSarasas){
+    Vector<Studentas> pazangiuSarasas;
+    Vector<Studentas> silpnuSarasas;
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);
     suskirstytiStudentus(studentuSarasas, pazangiuSarasas, silpnuSarasas);
@@ -159,7 +159,7 @@ void vykdytiSkirstymaIFailus(std::vector<Studentas>& studentuSarasas){
     irasytiSuskirstytusStudentusIFailus(pazangiuSarasas, silpnuSarasas, skaiciavimoMetodas);
 }
 
-void irasytiSuskirstytusStudentusIFailus(const std::vector<Studentas>& pazangiuSarasas, const std::vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas){
+void irasytiSuskirstytusStudentusIFailus(const Vector<Studentas>& pazangiuSarasas, const Vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas){
     std::ofstream pazangiuFailas("ApdorojimoTyrimuiSkirtiFailai/PazangusStudentai.txt");
     if (!pazangiuFailas) throw std::runtime_error("Nepavyko atidaryti failo: PazangusStudentai.txt");
     pazangiuFailas << std::format("{:<40}{:<40}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
@@ -172,8 +172,8 @@ void irasytiSuskirstytusStudentusIFailus(const std::vector<Studentas>& pazangiuS
     if (!silpnuFailas) throw std::runtime_error("Nepavyko įrašyti į failą: SilpniStudentai.txt");
 }
 
-std::vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas){
-    std::vector<std::string> meniu;
+Vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas){
+    Vector<std::string> meniu;
     meniu.push_back("Pasirinkite iš kurio failo norite nuskaityti studentų duomenis:");
     int index = 1;
     for (const auto& entry : std::filesystem::directory_iterator(katalogas)){
@@ -185,8 +185,8 @@ std::vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas){
     return meniu;
 }
 
-std::vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas){
-    std::vector<std::filesystem::path> failai;
+Vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas){
+    Vector<std::filesystem::path> failai;
     for (const auto& failas : std::filesystem::directory_iterator(katalogas)) if (failas.is_regular_file() && failas.path().extension() == ".txt") failai.push_back(failas.path());
     return failai;
 }

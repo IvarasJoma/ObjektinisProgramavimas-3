@@ -6,12 +6,12 @@
 #include <format>
 
 
-void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void parodytiRezultatuLentele(std::ostream& out, const Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     out << std::format("{:<40}{:<40}{:<18}\n", "Vardas", "Pavardė", (skaiciavimoMetodoPasirinkimas == 'V' || skaiciavimoMetodoPasirinkimas == 'v' ? "Galutinis (Vid.)" : "Galutinis (Med.)"));
     for (const auto& studentas : studentuSarasas) out << StudentasLentelei{studentas} << "\n";
 }
 
-void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void isvestiStudentus(int pasirinkimasIsvedimo, const Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     if (pasirinkimasIsvedimo == 1) parodytiRezultatuLentele(std::cout, studentuSarasas, skaiciavimoMetodoPasirinkimas);
     if (pasirinkimasIsvedimo == 2){
         std::ofstream isvedimoFailas("studentuRezultatai.txt");
@@ -30,6 +30,6 @@ void spausdintiVidurkius(const TestoLaikai& laikai){
     if (apskaiciuotiBendraLaika(laikai) > 0) std::cout << "Bendras programos veikimas vidutiniškai užtruko: "<< apskaiciuotiBendraLaika(laikai) << "s.\n";
 }
 
-void parodytiStudentus(const std::vector<Studentas>& studentai, char skaiciavimoMetodas){
+void parodytiStudentus(const Vector<Studentas>& studentai, char skaiciavimoMetodas){
     parodytiRezultatuLentele(std::cout, studentai, skaiciavimoMetodas);
 }

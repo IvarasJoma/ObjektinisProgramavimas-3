@@ -84,7 +84,7 @@ void nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme){
     if (rezultatas.ec != std::errc{} || rezultatas.ptr != ivestis.data() + ivestis.size()) throw std::invalid_argument("Įvestis turi būti sveikasis skaičius.");
 }
 
-bool nuskaitytiPagrindinioMeniuPasirinkima(const std::vector<std::string>& eilutes, int& pasirinkimas){
+bool nuskaitytiPagrindinioMeniuPasirinkima(const Vector<std::string>& eilutes, int& pasirinkimas){
     while (true){
         try{
             std::cout << std::string(98, '-') << "\n";
@@ -195,7 +195,7 @@ std::string nuskaitytiVardaArPavarde(const char* ivestiesPranesimas, void(*tvark
     }
 }
 
-void apdorotiIrIsvestiStudentus(std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
+void apdorotiIrIsvestiStudentus(Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas){
     apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodoPasirinkimas);
     int pasirinkimasRikiavimo = nuskaitytiMeniuPasirinkima(RIKIAVIMO_MENIU);
     rikiuotiStudentus(pasirinkimasRikiavimo, studentuSarasas);
@@ -209,7 +209,7 @@ Studentas sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius,
     const std::string vardas = nuskaitytiVardaArPavarde("Įveskite studento vardą: ", tvarkytiVarda, "Studento vardas negali būti tuščia eilutė.");
     const std::string pavarde = nuskaitytiVardaArPavarde("Įveskite studento pavardę: ", tvarkytiPavarde, "Studento pavardė negali būti tuščia eilutė.");
 
-    std::vector<int> namuDarbai;
+    Vector<int> namuDarbai;
     int egzaminoPazymys;
 
     if (generuotiPazymius) {
@@ -224,8 +224,8 @@ Studentas sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(bool generuotiPazymius,
     return sukurtiStudentaIsEilutesPerOperatoriu(eilute);
 }
 
-std::vector<Studentas> ivestiStudentus(bool generuotiPazymius, int maksimalusNDKiekis){
-    std::vector<Studentas> studentai;
+Vector<Studentas> ivestiStudentus(bool generuotiPazymius, int maksimalusNDKiekis){
+    Vector<Studentas> studentai;
     while (patvirtintiNaujoStudentoPridejima()) studentai.push_back(sukurtiStudentaRankaArbaSuGeneruotaisPazymiais(generuotiPazymius, maksimalusNDKiekis));
     return studentai;
 }
@@ -241,7 +241,7 @@ void vykdytiPilnaGeneravima(Failai& failai){
     char skaiciavimoMetodas = nuskaitytiSkaiciavimoMetoda();
     int studentuKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite norimą generuoti studentų kiekį ir paspauskite ENTER: ");
     int maksimalusNDKiekis = nuskaitytiNeneigiamaSveikajiSkaiciu("Įveskite maksimalų galimą namų pažymių kiekį ir paspauskite ENTER: ");
-    std::vector<Studentas> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
+    Vector<Studentas> studentuSarasas = generuotiStudentus(studentuKiekis, maksimalusNDKiekis, failai);
     int pasirinkimasIsvedimo = nuskaitytiMeniuPasirinkima(ISVEDIMO_MENIU);
     isvestiStudentus(pasirinkimasIsvedimo, studentuSarasas, skaiciavimoMetodas);
 }
@@ -251,7 +251,7 @@ void parinktiRikiavimoBudus(int& pasirinkimasRikiavimoPazangiu, int& pasirinkima
     pasirinkimasRikiavimoSilpnu = nuskaitytiMeniuPasirinkima(SILPNU_RIKIAVIMO_MENIU);
 }
 
-std::string suformuotiStudentoIvestiesEilute(const std::string& vardas, const std::string& pavarde, const std::vector<int>& namuDarbai, int egzaminoPazymys) {
+std::string suformuotiStudentoIvestiesEilute(const std::string& vardas, const std::string& pavarde, const Vector<int>& namuDarbai, int egzaminoPazymys) {
     std::ostringstream out;
     out << vardas << ' ' << pavarde << ' ' << namuDarbai.size();
     for (const int pazymys : namuDarbai) out << ' ' << pazymys;
