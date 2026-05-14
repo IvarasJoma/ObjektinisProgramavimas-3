@@ -1,0 +1,400 @@
+\doxysection{strukturos\+Failai/\+struktura\+Ivestis.h Failo Nuoroda}
+\hypertarget{struktura_ivestis_8h}{}\label{struktura_ivestis_8h}\index{strukturosFailai/strukturaIvestis.h@{strukturosFailai/strukturaIvestis.h}}
+
+
+Funkcijos naudotojo įvesties nuskaitymui, tikrinimui ir apdorojimui.  
+
+
+{\ttfamily \+\#include $<$vector$>$}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include "{}../\+\+Studentas.\+h"{}}\newline
+{\ttfamily \+\#include "{}../\+strukturos\+Failai/\+\+Failai.\+h"{}}\newline
+\doxysubsubsection*{Funkcijos}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_a76eef35f5c0fe568516f727866aafa2e}{nuskaityti\+Namu\+Darbu\+Pazymius}} (Vector$<$ int $>$ \&namu\+Darbu\+Pazymiai, int maksimalus\+NDKiekis)
+\begin{DoxyCompactList}\small\item\em Nuskaito namų darbų pažymius iš naudotojo. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{struktura_ivestis_8h_a5a7da01c1c130ec19575bcc14d1cd6ce}{nuskaityti\+Meniu\+Pasirinkima}} (const Vector$<$ std::\+string $>$ \&eilutes)
+\begin{DoxyCompactList}\small\item\em Nuskaito meniu pasirinkimą iš tekstinių eilučių sąrašo. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struktura_ivestis_8h_a4035362cbede2b50076fa67a584844de}{nuskaityti\+Pagrindinio\+Meniu\+Pasirinkima}} (const Vector$<$ std::\+string $>$ \&eilutes, int \&pasirinkimas)
+\begin{DoxyCompactList}\small\item\em Nuskaito pagrindinio meniu pasirinkimą. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{struktura_ivestis_8h_ab485bd49fd0f46e39d9bb55367b92d0d}{nuskaityti\+Neneigiama\+Sveikaji\+Skaiciu}} (const char \texorpdfstring{$\ast$}{*}pranesimas)
+\begin{DoxyCompactList}\small\item\em Nuskaito neneigiamą sveikąjį skaičių. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{struktura_ivestis_8h_a0664185c678005d91c841bb4d221910f}{nuskaityti\+Teigiama\+Sveikaji\+Skaiciu}} (const char \texorpdfstring{$\ast$}{*}pranesimas)
+\begin{DoxyCompactList}\small\item\em Nuskaito teigiamą sveikąjį skaičių. \end{DoxyCompactList}\item 
+char \doxymbox{\hyperlink{struktura_ivestis_8h_a90c75724821094af56f0095322dc24fb}{nuskaityti\+Skaiciavimo\+Metoda}} ()
+\begin{DoxyCompactList}\small\item\em Nuskaito galutinio pažymio skaičiavimo metodą. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{struktura_ivestis_8h_a4a642c24997d2d874d79d463ed43a1ab}{nuskaityti\+Pazymi\+Nuo1iki10}} (const char \texorpdfstring{$\ast$}{*}pranesimas)
+\begin{DoxyCompactList}\small\item\em Nuskaito pažymį nuo 1 iki 10. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_ac80e465576fe5e8435c9471f823645a3}{nuskaityti\+Sveikaji\+Skaiciu}} (const std::\+string \&ivestis, int \&reiksme)
+\begin{DoxyCompactList}\small\item\em Konvertuoja tekstinę įvestį į sveikąjį skaičių. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_a9d1096374764a3cae3f9cb9bc8e2b29e}{tikrinti\+Ivesti}} (const std::\+string \&ivestis)
+\begin{DoxyCompactList}\small\item\em Patikrina, ar įvestis yra korektiška. \end{DoxyCompactList}\item 
+std::\+string \doxymbox{\hyperlink{struktura_ivestis_8h_accc1f2d10e27c328c530a7f2cfc87e4b}{nuskaityti\+Varda\+Ar\+Pavarde}} (const char \texorpdfstring{$\ast$}{*}ivesties\+Pranesimas, void(\texorpdfstring{$\ast$}{*}tvarkyti)(std::\+string \&), const char \texorpdfstring{$\ast$}{*}klaidos\+Pranesimas)
+\begin{DoxyCompactList}\small\item\em Nuskaito vardą arba pavardę ir pritaiko nurodytą tvarkymo funkciją. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struktura_ivestis_8h_a11a5c2f8c383f707d6097a323ce74771}{patvirtinti\+Naujo\+Studento\+Pridejima}} ()
+\begin{DoxyCompactList}\small\item\em Paklausia naudotojo, ar pridėti dar vieną studentą. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_ae98fd1ab85819f303adf91f3e3e97641}{vykdyti\+Studentu\+Ivedima}} (bool generuoti\+Pazymius)
+\begin{DoxyCompactList}\small\item\em Vykdo studentų įvedimo procesą. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_a4334241ec0fc3b6a4627da459271a13a}{vykdyti\+Pilna\+Generavima}} (\doxymbox{\hyperlink{struct_failai}{Failai}} \&failai)
+\begin{DoxyCompactList}\small\item\em Vykdo pilną studentų generavimo scenarijų. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_ad0fe2a7434f8562364234172f6cd53f8}{tvarkyti\+Varda}} (std::\+string \&ivestis)
+\begin{DoxyCompactList}\small\item\em Sutvarko vardo įvestį. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_a14839bcd3461a6cc7f5e37f373ec2f8b}{tvarkyti\+Pavarde}} (std::\+string \&ivestis)
+\begin{DoxyCompactList}\small\item\em Sutvarko pavardės įvestį. \end{DoxyCompactList}\item 
+std::\+string \doxymbox{\hyperlink{struktura_ivestis_8h_a46bffc9f4124a7313da54dd57df16b10}{saugiai\+Nuskaityti\+Eilute}} ()
+\begin{DoxyCompactList}\small\item\em Saugiai nuskaito vieną eilutę iš standartinės įvesties. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_ivestis_8h_a4a7c80a4d60a43e9957583c4bc600b1f}{parinkti\+Rikiavimo\+Budus}} (int \&pasirinkimas\+Rikiavimo\+Pazangiu, int \&pasirinkimas\+Rikiavimo\+Silpnu)
+\begin{DoxyCompactList}\small\item\em Parenka pažangių ir silpnų studentų rikiavimo būdus. \end{DoxyCompactList}\item 
+std::\+string \doxymbox{\hyperlink{struktura_ivestis_8h_a70fa2b68bbf613f6384b782102bd1acf}{suformuoti\+Studento\+Ivesties\+Eilute}} (const std::\+string \&vardas, const std::\+string \&pavarde, const Vector$<$ int $>$ \&namu\+Darbai, int egzamino\+Pazymys)
+\begin{DoxyCompactList}\small\item\em Suformuoja studento įvesties eilutę iš atskirų laukų. \end{DoxyCompactList}\item 
+Studentas \doxymbox{\hyperlink{struktura_ivestis_8h_a402d45dae45cc539d1b60166999895c5}{sukurti\+Studenta\+Is\+Eilutes\+Per\+Operatoriu}} (const std::\+string \&eilute)
+\begin{DoxyCompactList}\small\item\em Sukuria studentą iš tekstinės eilutės naudojant įvesties operatorių. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Smulkus aprašymas}
+Funkcijos naudotojo įvesties nuskaitymui, tikrinimui ir apdorojimui. 
+
+
+
+\label{struktura_ivestis_8h_doc-func-members}
+\Hypertarget{struktura_ivestis_8h_doc-func-members}
+\doxysubsection{Funkcijos Dokumentacija}
+\Hypertarget{struktura_ivestis_8h_a5a7da01c1c130ec19575bcc14d1cd6ce}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiMeniuPasirinkima@{nuskaitytiMeniuPasirinkima}}
+\index{nuskaitytiMeniuPasirinkima@{nuskaitytiMeniuPasirinkima}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiMeniuPasirinkima()}{nuskaitytiMeniuPasirinkima()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a5a7da01c1c130ec19575bcc14d1cd6ce} 
+int nuskaityti\+Meniu\+Pasirinkima (\begin{DoxyParamCaption}\item[{const Vector$<$ std::\+string $>$ \&}]{eilutes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Nuskaito meniu pasirinkimą iš tekstinių eilučių sąrašo. 
+
+Nuskaito pasirinkimą iš dinaminio meniu eilučių vektoriaus.
+
+
+\begin{DoxyParams}{Parametrai}
+{\em eilutes} & Meniu eilučių vektorius. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Pasirinktas meniu punktas.
+\end{DoxyReturn}
+Nuskaito meniu pasirinkimą iš tekstinių eilučių sąrašo.
+
+
+\begin{DoxyParams}{Parametrai}
+{\em eilutes} & Meniu eilučių vektorius. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Pasirinkto meniu punkto numeris. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a76eef35f5c0fe568516f727866aafa2e}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiNamuDarbuPazymius@{nuskaitytiNamuDarbuPazymius}}
+\index{nuskaitytiNamuDarbuPazymius@{nuskaitytiNamuDarbuPazymius}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiNamuDarbuPazymius()}{nuskaitytiNamuDarbuPazymius()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a76eef35f5c0fe568516f727866aafa2e} 
+void nuskaityti\+Namu\+Darbu\+Pazymius (\begin{DoxyParamCaption}\item[{Vector$<$ int $>$ \&}]{namu\+Darbu\+Pazymiai}{, }\item[{int}]{maksimalus\+NDKiekis}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito namų darbų pažymius iš naudotojo. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em namu\+Darbu\+Pazymiai} & Vektorius, į kurį įrašomi pažymiai. \\
+\hline
+{\em maksimalus\+NDKiekis} & Maksimalus leidžiamas namų darbų kiekis. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_ivestis_8h_ab485bd49fd0f46e39d9bb55367b92d0d}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiNeneigiamaSveikajiSkaiciu@{nuskaitytiNeneigiamaSveikajiSkaiciu}}
+\index{nuskaitytiNeneigiamaSveikajiSkaiciu@{nuskaitytiNeneigiamaSveikajiSkaiciu}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiNeneigiamaSveikajiSkaiciu()}{nuskaitytiNeneigiamaSveikajiSkaiciu()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_ab485bd49fd0f46e39d9bb55367b92d0d} 
+int nuskaityti\+Neneigiama\+Sveikaji\+Skaiciu (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{pranesimas}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito neneigiamą sveikąjį skaičių. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em pranesimas} & Įvesties pranešimas naudotojui. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Neneigiamas sveikasis skaičius. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a4035362cbede2b50076fa67a584844de}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiPagrindinioMeniuPasirinkima@{nuskaitytiPagrindinioMeniuPasirinkima}}
+\index{nuskaitytiPagrindinioMeniuPasirinkima@{nuskaitytiPagrindinioMeniuPasirinkima}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiPagrindinioMeniuPasirinkima()}{nuskaitytiPagrindinioMeniuPasirinkima()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a4035362cbede2b50076fa67a584844de} 
+bool nuskaityti\+Pagrindinio\+Meniu\+Pasirinkima (\begin{DoxyParamCaption}\item[{const Vector$<$ std::\+string $>$ \&}]{eilutes}{, }\item[{int \&}]{pasirinkimas}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito pagrindinio meniu pasirinkimą. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em eilutes} & Meniu eilučių vektorius. \\
+\hline
+{\em pasirinkimas} & Kintamasis, į kurį įrašomas pasirinkimas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+{\ttfamily true}, jei pasirinkimas nuskaitytas sėkmingai. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a4a642c24997d2d874d79d463ed43a1ab}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiPazymiNuo1iki10@{nuskaitytiPazymiNuo1iki10}}
+\index{nuskaitytiPazymiNuo1iki10@{nuskaitytiPazymiNuo1iki10}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiPazymiNuo1iki10()}{nuskaitytiPazymiNuo1iki10()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a4a642c24997d2d874d79d463ed43a1ab} 
+int nuskaityti\+Pazymi\+Nuo1iki10 (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{pranesimas}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito pažymį nuo 1 iki 10. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em pranesimas} & Įvesties pranešimas naudotojui. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Pažymys intervale {\ttfamily \+[1; 10]\+}. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a90c75724821094af56f0095322dc24fb}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiSkaiciavimoMetoda@{nuskaitytiSkaiciavimoMetoda}}
+\index{nuskaitytiSkaiciavimoMetoda@{nuskaitytiSkaiciavimoMetoda}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiSkaiciavimoMetoda()}{nuskaitytiSkaiciavimoMetoda()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a90c75724821094af56f0095322dc24fb} 
+char nuskaityti\+Skaiciavimo\+Metoda (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito galutinio pažymio skaičiavimo metodą. 
+
+\begin{DoxyReturn}{Gražina}
+Skaičiavimo metodo simbolis. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_ac80e465576fe5e8435c9471f823645a3}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiSveikajiSkaiciu@{nuskaitytiSveikajiSkaiciu}}
+\index{nuskaitytiSveikajiSkaiciu@{nuskaitytiSveikajiSkaiciu}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiSveikajiSkaiciu()}{nuskaitytiSveikajiSkaiciu()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_ac80e465576fe5e8435c9471f823645a3} 
+void nuskaityti\+Sveikaji\+Skaiciu (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{ivestis}{, }\item[{int \&}]{reiksme}{}\end{DoxyParamCaption})}
+
+
+
+Konvertuoja tekstinę įvestį į sveikąjį skaičių. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em ivestis} & Tekstinė įvestis. \\
+\hline
+{\em reiksme} & Kintamasis, į kurį įrašoma konvertuota reikšmė. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_ivestis_8h_a0664185c678005d91c841bb4d221910f}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiTeigiamaSveikajiSkaiciu@{nuskaitytiTeigiamaSveikajiSkaiciu}}
+\index{nuskaitytiTeigiamaSveikajiSkaiciu@{nuskaitytiTeigiamaSveikajiSkaiciu}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiTeigiamaSveikajiSkaiciu()}{nuskaitytiTeigiamaSveikajiSkaiciu()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a0664185c678005d91c841bb4d221910f} 
+int nuskaityti\+Teigiama\+Sveikaji\+Skaiciu (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{pranesimas}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito teigiamą sveikąjį skaičių. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em pranesimas} & Įvesties pranešimas naudotojui. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Teigiamas sveikasis skaičius. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_accc1f2d10e27c328c530a7f2cfc87e4b}\index{strukturaIvestis.h@{strukturaIvestis.h}!nuskaitytiVardaArPavarde@{nuskaitytiVardaArPavarde}}
+\index{nuskaitytiVardaArPavarde@{nuskaitytiVardaArPavarde}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiVardaArPavarde()}{nuskaitytiVardaArPavarde()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_accc1f2d10e27c328c530a7f2cfc87e4b} 
+std::\+string nuskaityti\+Varda\+Ar\+Pavarde (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{ivesties\+Pranesimas}{, }\item[{void(\texorpdfstring{$\ast$}{*}}]{tvarkyti~}{)(std::\+string \&), }\item[{const char \texorpdfstring{$\ast$}{*}}]{klaidos\+Pranesimas}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito vardą arba pavardę ir pritaiko nurodytą tvarkymo funkciją. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em ivesties\+Pranesimas} & Pranešimas naudotojui. \\
+\hline
+{\em tvarkyti} & Funkcija vardui arba pavardei tvarkyti. \\
+\hline
+{\em klaidos\+Pranesimas} & Klaidos pranešimas neteisingos įvesties atveju. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Sutvarkytas vardas arba pavardė. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a4a7c80a4d60a43e9957583c4bc600b1f}\index{strukturaIvestis.h@{strukturaIvestis.h}!parinktiRikiavimoBudus@{parinktiRikiavimoBudus}}
+\index{parinktiRikiavimoBudus@{parinktiRikiavimoBudus}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{parinktiRikiavimoBudus()}{parinktiRikiavimoBudus()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a4a7c80a4d60a43e9957583c4bc600b1f} 
+void parinkti\+Rikiavimo\+Budus (\begin{DoxyParamCaption}\item[{int \&}]{pasirinkimas\+Rikiavimo\+Pazangiu}{, }\item[{int \&}]{pasirinkimas\+Rikiavimo\+Silpnu}{}\end{DoxyParamCaption})}
+
+
+
+Parenka pažangių ir silpnų studentų rikiavimo būdus. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em pasirinkimas\+Rikiavimo\+Pazangiu} & Pažangių studentų rikiavimo pasirinkimas. \\
+\hline
+{\em pasirinkimas\+Rikiavimo\+Silpnu} & Silpnų studentų rikiavimo pasirinkimas. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_ivestis_8h_a11a5c2f8c383f707d6097a323ce74771}\index{strukturaIvestis.h@{strukturaIvestis.h}!patvirtintiNaujoStudentoPridejima@{patvirtintiNaujoStudentoPridejima}}
+\index{patvirtintiNaujoStudentoPridejima@{patvirtintiNaujoStudentoPridejima}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{patvirtintiNaujoStudentoPridejima()}{patvirtintiNaujoStudentoPridejima()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a11a5c2f8c383f707d6097a323ce74771} 
+bool patvirtinti\+Naujo\+Studento\+Pridejima (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Paklausia naudotojo, ar pridėti dar vieną studentą. 
+
+\begin{DoxyReturn}{Gražina}
+{\ttfamily true}, jei naudotojas patvirtina naujo studento pridėjimą. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a46bffc9f4124a7313da54dd57df16b10}\index{strukturaIvestis.h@{strukturaIvestis.h}!saugiaiNuskaitytiEilute@{saugiaiNuskaitytiEilute}}
+\index{saugiaiNuskaitytiEilute@{saugiaiNuskaitytiEilute}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{saugiaiNuskaitytiEilute()}{saugiaiNuskaitytiEilute()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a46bffc9f4124a7313da54dd57df16b10} 
+std::\+string saugiai\+Nuskaityti\+Eilute (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Saugiai nuskaito vieną eilutę iš standartinės įvesties. 
+
+\begin{DoxyReturn}{Gražina}
+Nuskaityta eilutė. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a70fa2b68bbf613f6384b782102bd1acf}\index{strukturaIvestis.h@{strukturaIvestis.h}!suformuotiStudentoIvestiesEilute@{suformuotiStudentoIvestiesEilute}}
+\index{suformuotiStudentoIvestiesEilute@{suformuotiStudentoIvestiesEilute}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{suformuotiStudentoIvestiesEilute()}{suformuotiStudentoIvestiesEilute()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a70fa2b68bbf613f6384b782102bd1acf} 
+std::\+string suformuoti\+Studento\+Ivesties\+Eilute (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{vardas}{, }\item[{const std::\+string \&}]{pavarde}{, }\item[{const Vector$<$ int $>$ \&}]{namu\+Darbai}{, }\item[{int}]{egzamino\+Pazymys}{}\end{DoxyParamCaption})}
+
+
+
+Suformuoja studento įvesties eilutę iš atskirų laukų. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em vardas} & Studento vardas. \\
+\hline
+{\em pavarde} & Studento pavardė. \\
+\hline
+{\em namu\+Darbai} & Namų darbų pažymių vektorius. \\
+\hline
+{\em egzamino\+Pazymys} & Egzamino pažymys. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Suformuota studento duomenų eilutė. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a402d45dae45cc539d1b60166999895c5}\index{strukturaIvestis.h@{strukturaIvestis.h}!sukurtiStudentaIsEilutesPerOperatoriu@{sukurtiStudentaIsEilutesPerOperatoriu}}
+\index{sukurtiStudentaIsEilutesPerOperatoriu@{sukurtiStudentaIsEilutesPerOperatoriu}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{sukurtiStudentaIsEilutesPerOperatoriu()}{sukurtiStudentaIsEilutesPerOperatoriu()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a402d45dae45cc539d1b60166999895c5} 
+Studentas sukurti\+Studenta\+Is\+Eilutes\+Per\+Operatoriu (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{eilute}{}\end{DoxyParamCaption})}
+
+
+
+Sukuria studentą iš tekstinės eilutės naudojant įvesties operatorių. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em eilute} & Studento duomenų eilutė. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Sukurtas Studentas objektas. 
+\end{DoxyReturn}
+\Hypertarget{struktura_ivestis_8h_a9d1096374764a3cae3f9cb9bc8e2b29e}\index{strukturaIvestis.h@{strukturaIvestis.h}!tikrintiIvesti@{tikrintiIvesti}}
+\index{tikrintiIvesti@{tikrintiIvesti}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{tikrintiIvesti()}{tikrintiIvesti()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a9d1096374764a3cae3f9cb9bc8e2b29e} 
+void tikrinti\+Ivesti (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{ivestis}{}\end{DoxyParamCaption})}
+
+
+
+Patikrina, ar įvestis yra korektiška. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em ivestis} & Tikrinama tekstinė įvestis. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Išimtys}
+{\em std::\+exception} & Jei įvestis nekorektiška. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{struktura_ivestis_8h_a14839bcd3461a6cc7f5e37f373ec2f8b}\index{strukturaIvestis.h@{strukturaIvestis.h}!tvarkytiPavarde@{tvarkytiPavarde}}
+\index{tvarkytiPavarde@{tvarkytiPavarde}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{tvarkytiPavarde()}{tvarkytiPavarde()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a14839bcd3461a6cc7f5e37f373ec2f8b} 
+void tvarkyti\+Pavarde (\begin{DoxyParamCaption}\item[{std::\+string \&}]{ivestis}{}\end{DoxyParamCaption})}
+
+
+
+Sutvarko pavardės įvestį. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em ivestis} & Tvarkoma pavardės eilutė. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_ivestis_8h_ad0fe2a7434f8562364234172f6cd53f8}\index{strukturaIvestis.h@{strukturaIvestis.h}!tvarkytiVarda@{tvarkytiVarda}}
+\index{tvarkytiVarda@{tvarkytiVarda}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{tvarkytiVarda()}{tvarkytiVarda()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_ad0fe2a7434f8562364234172f6cd53f8} 
+void tvarkyti\+Varda (\begin{DoxyParamCaption}\item[{std::\+string \&}]{ivestis}{}\end{DoxyParamCaption})}
+
+
+
+Sutvarko vardo įvestį. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em ivestis} & Tvarkoma vardo eilutė. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_ivestis_8h_a4334241ec0fc3b6a4627da459271a13a}\index{strukturaIvestis.h@{strukturaIvestis.h}!vykdytiPilnaGeneravima@{vykdytiPilnaGeneravima}}
+\index{vykdytiPilnaGeneravima@{vykdytiPilnaGeneravima}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{vykdytiPilnaGeneravima()}{vykdytiPilnaGeneravima()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_a4334241ec0fc3b6a4627da459271a13a} 
+void vykdyti\+Pilna\+Generavima (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_failai}{Failai}} \&}]{failai}{}\end{DoxyParamCaption})}
+
+
+
+Vykdo pilną studentų generavimo scenarijų. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em failai} & Vardų ir pavardžių failų duomenys. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_ivestis_8h_ae98fd1ab85819f303adf91f3e3e97641}\index{strukturaIvestis.h@{strukturaIvestis.h}!vykdytiStudentuIvedima@{vykdytiStudentuIvedima}}
+\index{vykdytiStudentuIvedima@{vykdytiStudentuIvedima}!strukturaIvestis.h@{strukturaIvestis.h}}
+\doxysubsubsection{\texorpdfstring{vykdytiStudentuIvedima()}{vykdytiStudentuIvedima()}}
+{\footnotesize\ttfamily \label{struktura_ivestis_8h_ae98fd1ab85819f303adf91f3e3e97641} 
+void vykdyti\+Studentu\+Ivedima (\begin{DoxyParamCaption}\item[{bool}]{generuoti\+Pazymius}{}\end{DoxyParamCaption})}
+
+
+
+Vykdo studentų įvedimo procesą. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em generuoti\+Pazymius} & Nurodo, ar pažymius generuoti automatiškai. \\
+\hline
+\end{DoxyParams}

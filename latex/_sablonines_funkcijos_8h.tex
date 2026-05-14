@@ -1,0 +1,266 @@
+\doxysection{strukturos\+Failai/\+\+Sablonines\+Funkcijos.h Failo Nuoroda}
+\hypertarget{_sablonines_funkcijos_8h}{}\label{_sablonines_funkcijos_8h}\index{strukturosFailai/SabloninesFunkcijos.h@{strukturosFailai/SabloninesFunkcijos.h}}
+
+
+Šabloninės funkcijos, leidžiančios apdoroti studentus skirtinguose konteineriuose.  
+
+
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include $<$algorithm$>$}\newline
+{\ttfamily \+\#include $<$numeric$>$}\newline
+{\ttfamily \+\#include $<$iostream$>$}\newline
+{\ttfamily \+\#include "{}../\+strukturos\+Failai/\+struktura\+Darbas\+Su\+Failais.\+h"{}}\newline
+{\ttfamily \+\#include $<$fstream$>$}\newline
+{\ttfamily \+\#include $<$list$>$}\newline
+{\ttfamily \+\#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \+\#include $<$utility$>$}\newline
+\doxysubsubsection*{Funkcijos}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Studentu\+Konteineris$>$ }\\Studentu\+Konteineris \doxymbox{\hyperlink{_sablonines_funkcijos_8h_a7ddbf5712eeafc9e7120943b98d1f159}{nuskaityti\+Studentu\+Duomenis\+Is\+Failo}} (const std::\+string \&failas)
+\begin{DoxyCompactList}\small\item\em Nuskaito studentų duomenis iš failo į pasirinktą konteinerį. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Studentu\+Konteineris$>$ }\\void \doxymbox{\hyperlink{_sablonines_funkcijos_8h_a30e1e1532e5602fdf39c845ad8f26bf7}{rikiuoti\+Studentus}} (int pasirinkimas\+Rikiavimo, Studentu\+Konteineris \&studentu\+Sarasas)
+\begin{DoxyCompactList}\small\item\em Rikiuoja studentus pagal pasirinktą kriterijų. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Studentu\+Konteineris$>$ }\\void \doxymbox{\hyperlink{_sablonines_funkcijos_8h_add1ae8d2b16cbaa780cc6c759bffdd0a}{apskaiciuoti\+Galutinius\+Pazymius}} (Studentu\+Konteineris \&duomenys, char metodas)
+\begin{DoxyCompactList}\small\item\em Apskaičiuoja galutinį pažymį visiems studentams konteineryje. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Saltinio\+Konteineris, typename Rezultato\+Konteineris$>$ }\\void \doxymbox{\hyperlink{_sablonines_funkcijos_8h_af8e70ef1d02a8a6404e3f0bc9729c0e9}{perkelti\+Studentus}} (Saltinio\+Konteineris \&studentai, Rezultato\+Konteineris \&pazangus\+Studentai, Rezultato\+Konteineris \&silpni\+Studentai)
+\begin{DoxyCompactList}\small\item\em Perkelia studentus į pažangių ir silpnų studentų konteinerius. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Saltinio\+Konteineris, typename Rezultato\+Konteineris$>$ }\\void \doxymbox{\hyperlink{_sablonines_funkcijos_8h_ab60a25b258f3bb8022f8822b2b6520e7}{skirstyti\+Istrinant\+Studentus}} (Saltinio\+Konteineris \&studentai, Rezultato\+Konteineris \&silpni\+Studentai)
+\begin{DoxyCompactList}\small\item\em Išskiria silpnus studentus iš pradinio konteinerio naudojant {\ttfamily std::\+partition}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Saltinio\+Konteineris, typename Rezultato\+Konteineris$>$ }\\void \doxymbox{\hyperlink{_sablonines_funkcijos_8h_a7639f0e3fdc21481d3acd39d58285263}{skirstyti\+Istrinant\+Studentus\+Efektyviau}} (Saltinio\+Konteineris \&studentai, Rezultato\+Konteineris \&silpni\+Studentai)
+\begin{DoxyCompactList}\small\item\em Išskiria silpnus studentus naudojant {\ttfamily std::\+remove\+\_\+if}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Studentu\+Konteineris$>$ }\\void \doxymbox{\hyperlink{_sablonines_funkcijos_8h_a2ac5d8ac0ec0832c1a54d03ad51d086e}{nuskaityti\+Duomenis\+Generic}} (int pasirinkimas\+Nuskaitymo, Studentu\+Konteineris \&studentu\+Sarasas, std::\+string \&katalogas)
+\begin{DoxyCompactList}\small\item\em Nuskaito studentų duomenis iš pasirinkto katalogo failo į pasirinktą konteinerį. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Studentu\+Konteineris$>$ }\\void \doxymbox{\hyperlink{_sablonines_funkcijos_8h_a146fa3618b4949685aad13bec08d68a0}{rikiuoti\+Suskirstytus\+Studentus}} (Studentu\+Konteineris \&pazangiu\+Sarasas, Studentu\+Konteineris \&silpnu\+Sarasas, int pasirinkimas\+Rikiavimo\+Pazangiu, int pasirinkimas\+Rikiavimo\+Silpnu)
+\begin{DoxyCompactList}\small\item\em Rikiuoja pažangių ir silpnų studentų konteinerius pagal pasirinktus kriterijus. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Smulkus aprašymas}
+Šabloninės funkcijos, leidžiančios apdoroti studentus skirtinguose konteineriuose. 
+
+Funkcijos pritaikytos darbui su tokiais konteineriais kaip {\ttfamily Vector} ir {\ttfamily std::\+list}. Kai įmanoma, naudojamos konteinerio specifinės operacijos, pavyzdžiui, {\ttfamily list::\+sort}. 
+
+\label{_sablonines_funkcijos_8h_doc-func-members}
+\Hypertarget{_sablonines_funkcijos_8h_doc-func-members}
+\doxysubsection{Funkcijos Dokumentacija}
+\Hypertarget{_sablonines_funkcijos_8h_add1ae8d2b16cbaa780cc6c759bffdd0a}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!apskaiciuotiGalutiniusPazymius@{apskaiciuotiGalutiniusPazymius}}
+\index{apskaiciuotiGalutiniusPazymius@{apskaiciuotiGalutiniusPazymius}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{apskaiciuotiGalutiniusPazymius()}{apskaiciuotiGalutiniusPazymius()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_add1ae8d2b16cbaa780cc6c759bffdd0a} 
+template$<$typename Studentu\+Konteineris$>$ \\
+void apskaiciuoti\+Galutinius\+Pazymius (\begin{DoxyParamCaption}\item[{Studentu\+Konteineris \&}]{duomenys}{, }\item[{char}]{metodas}{}\end{DoxyParamCaption})}
+
+
+
+Apskaičiuoja galutinį pažymį visiems studentams konteineryje. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Studentu\+Konteineris} & Studentų konteinerio tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em duomenys} & Studentų konteineris. \\
+\hline
+{\em metodas} & Skaičiavimo metodas, pvz. vidurkis arba mediana. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_sablonines_funkcijos_8h_a2ac5d8ac0ec0832c1a54d03ad51d086e}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!nuskaitytiDuomenisGeneric@{nuskaitytiDuomenisGeneric}}
+\index{nuskaitytiDuomenisGeneric@{nuskaitytiDuomenisGeneric}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiDuomenisGeneric()}{nuskaitytiDuomenisGeneric()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_a2ac5d8ac0ec0832c1a54d03ad51d086e} 
+template$<$typename Studentu\+Konteineris$>$ \\
+void nuskaityti\+Duomenis\+Generic (\begin{DoxyParamCaption}\item[{int}]{pasirinkimas\+Nuskaitymo}{, }\item[{Studentu\+Konteineris \&}]{studentu\+Sarasas}{, }\item[{std::\+string \&}]{katalogas}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito studentų duomenis iš pasirinkto katalogo failo į pasirinktą konteinerį. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Studentu\+Konteineris} & Studentų konteinerio tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em pasirinkimas\+Nuskaitymo} & Pasirinkto failo numeris. \\
+\hline
+{\em studentu\+Sarasas} & Studentų konteineris, į kurį bus įrašyti duomenys. \\
+\hline
+{\em katalogas} & Katalogas, kuriame ieškoma {\ttfamily .txt} failų. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_sablonines_funkcijos_8h_a7ddbf5712eeafc9e7120943b98d1f159}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!nuskaitytiStudentuDuomenisIsFailo@{nuskaitytiStudentuDuomenisIsFailo}}
+\index{nuskaitytiStudentuDuomenisIsFailo@{nuskaitytiStudentuDuomenisIsFailo}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{nuskaitytiStudentuDuomenisIsFailo()}{nuskaitytiStudentuDuomenisIsFailo()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_a7ddbf5712eeafc9e7120943b98d1f159} 
+template$<$typename Studentu\+Konteineris$>$ \\
+Studentu\+Konteineris nuskaityti\+Studentu\+Duomenis\+Is\+Failo (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{failas}{}\end{DoxyParamCaption})}
+
+
+
+Nuskaito studentų duomenis iš failo į pasirinktą konteinerį. 
+
+Funkcija nuskaito failo antraštę, pagal ją nustato namų darbų kiekį, o kiekvieną kitą eilutę bando konvertuoti į Studentas objektą. Nekorektiškos eilutės praleidžiamos.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Studentu\+Konteineris} & Konteinerio tipas, pvz. {\ttfamily Vector\texorpdfstring{$<$}{<}Studentas\texorpdfstring{$>$}{>}} arba {\ttfamily std::\+list\texorpdfstring{$<$}{<}Studentas\texorpdfstring{$>$}{>}}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em failas} & Failo kelias. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Konteineris su nuskaitytais studentais.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Išimtys}
+{\em std::\+runtime\+\_\+error} & Jei failo nepavyksta atidaryti. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{_sablonines_funkcijos_8h_af8e70ef1d02a8a6404e3f0bc9729c0e9}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!perkeltiStudentus@{perkeltiStudentus}}
+\index{perkeltiStudentus@{perkeltiStudentus}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{perkeltiStudentus()}{perkeltiStudentus()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_af8e70ef1d02a8a6404e3f0bc9729c0e9} 
+template$<$typename Saltinio\+Konteineris, typename Rezultato\+Konteineris$>$ \\
+void perkelti\+Studentus (\begin{DoxyParamCaption}\item[{Saltinio\+Konteineris \&}]{studentai}{, }\item[{Rezultato\+Konteineris \&}]{pazangus\+Studentai}{, }\item[{Rezultato\+Konteineris \&}]{silpni\+Studentai}{}\end{DoxyParamCaption})}
+
+
+
+Perkelia studentus į pažangių ir silpnų studentų konteinerius. 
+
+Studentai, kurių galutinis pažymys mažesnis nei {\ttfamily 5.\+0}, perkeliami į silpnų studentų sąrašą. Kiti studentai perkeliami į pažangių studentų sąrašą.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Saltinio\+Konteineris} & Pradinio studentų konteinerio tipas. \\
+\hline
+{\em Rezultato\+Konteineris} & Rezultato konteinerio tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em studentai} & Pradinis studentų konteineris. \\
+\hline
+{\em pazangus\+Studentai} & Konteineris pažangiems studentams. \\
+\hline
+{\em silpni\+Studentai} & Konteineris silpniems studentams. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_sablonines_funkcijos_8h_a30e1e1532e5602fdf39c845ad8f26bf7}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!rikiuotiStudentus@{rikiuotiStudentus}}
+\index{rikiuotiStudentus@{rikiuotiStudentus}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{rikiuotiStudentus()}{rikiuotiStudentus()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_a30e1e1532e5602fdf39c845ad8f26bf7} 
+template$<$typename Studentu\+Konteineris$>$ \\
+void rikiuoti\+Studentus (\begin{DoxyParamCaption}\item[{int}]{pasirinkimas\+Rikiavimo}{, }\item[{Studentu\+Konteineris \&}]{studentu\+Sarasas}{}\end{DoxyParamCaption})}
+
+
+
+Rikiuoja studentus pagal pasirinktą kriterijų. 
+
+Pasirinkimai:\+
+\begin{DoxyItemize}
+\item {\ttfamily 1} — pagal vardą;
+\item {\ttfamily 2} — pagal pavardę;
+\item {\ttfamily 3} — pagal galutinį pažymį.
+\end{DoxyItemize}
+
+Jei konteineris turi metodą {\ttfamily sort}, naudojamas jis. Kitu atveju naudojama {\ttfamily std::\+sort}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Studentu\+Konteineris} & Studentų konteinerio tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em pasirinkimas\+Rikiavimo} & Rikiavimo kriterijaus numeris. \\
+\hline
+{\em studentu\+Sarasas} & Studentų konteineris, kuris bus rikiuojamas. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_sablonines_funkcijos_8h_a146fa3618b4949685aad13bec08d68a0}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!rikiuotiSuskirstytusStudentus@{rikiuotiSuskirstytusStudentus}}
+\index{rikiuotiSuskirstytusStudentus@{rikiuotiSuskirstytusStudentus}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{rikiuotiSuskirstytusStudentus()}{rikiuotiSuskirstytusStudentus()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_a146fa3618b4949685aad13bec08d68a0} 
+template$<$typename Studentu\+Konteineris$>$ \\
+void rikiuoti\+Suskirstytus\+Studentus (\begin{DoxyParamCaption}\item[{Studentu\+Konteineris \&}]{pazangiu\+Sarasas}{, }\item[{Studentu\+Konteineris \&}]{silpnu\+Sarasas}{, }\item[{int}]{pasirinkimas\+Rikiavimo\+Pazangiu}{, }\item[{int}]{pasirinkimas\+Rikiavimo\+Silpnu}{}\end{DoxyParamCaption})}
+
+
+
+Rikiuoja pažangių ir silpnų studentų konteinerius pagal pasirinktus kriterijus. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Studentu\+Konteineris} & Studentų konteinerio tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em pazangiu\+Sarasas} & Pažangių studentų konteineris. \\
+\hline
+{\em silpnu\+Sarasas} & Silpnų studentų konteineris. \\
+\hline
+{\em pasirinkimas\+Rikiavimo\+Pazangiu} & Pažangių studentų rikiavimo kriterijus. \\
+\hline
+{\em pasirinkimas\+Rikiavimo\+Silpnu} & Silpnų studentų rikiavimo kriterijus. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_sablonines_funkcijos_8h_ab60a25b258f3bb8022f8822b2b6520e7}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!skirstytiIstrinantStudentus@{skirstytiIstrinantStudentus}}
+\index{skirstytiIstrinantStudentus@{skirstytiIstrinantStudentus}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{skirstytiIstrinantStudentus()}{skirstytiIstrinantStudentus()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_ab60a25b258f3bb8022f8822b2b6520e7} 
+template$<$typename Saltinio\+Konteineris, typename Rezultato\+Konteineris$>$ \\
+void skirstyti\+Istrinant\+Studentus (\begin{DoxyParamCaption}\item[{Saltinio\+Konteineris \&}]{studentai}{, }\item[{Rezultato\+Konteineris \&}]{silpni\+Studentai}{}\end{DoxyParamCaption})}
+
+
+
+Išskiria silpnus studentus iš pradinio konteinerio naudojant {\ttfamily std::\+partition}. 
+
+Po funkcijos vykdymo pradiniame konteineryje lieka tik pažangūs studentai, o silpni studentai perkeliami į atskirą konteinerį.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Saltinio\+Konteineris} & Pradinio studentų konteinerio tipas. \\
+\hline
+{\em Rezultato\+Konteineris} & Rezultato konteinerio tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em studentai} & Pradinis studentų konteineris. \\
+\hline
+{\em silpni\+Studentai} & Konteineris silpniems studentams. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_sablonines_funkcijos_8h_a7639f0e3fdc21481d3acd39d58285263}\index{SabloninesFunkcijos.h@{SabloninesFunkcijos.h}!skirstytiIstrinantStudentusEfektyviau@{skirstytiIstrinantStudentusEfektyviau}}
+\index{skirstytiIstrinantStudentusEfektyviau@{skirstytiIstrinantStudentusEfektyviau}!SabloninesFunkcijos.h@{SabloninesFunkcijos.h}}
+\doxysubsubsection{\texorpdfstring{skirstytiIstrinantStudentusEfektyviau()}{skirstytiIstrinantStudentusEfektyviau()}}
+{\footnotesize\ttfamily \label{_sablonines_funkcijos_8h_a7639f0e3fdc21481d3acd39d58285263} 
+template$<$typename Saltinio\+Konteineris, typename Rezultato\+Konteineris$>$ \\
+void skirstyti\+Istrinant\+Studentus\+Efektyviau (\begin{DoxyParamCaption}\item[{Saltinio\+Konteineris \&}]{studentai}{, }\item[{Rezultato\+Konteineris \&}]{silpni\+Studentai}{}\end{DoxyParamCaption})}
+
+
+
+Išskiria silpnus studentus naudojant {\ttfamily std::\+remove\+\_\+if}. 
+
+Funkcija nukopijuoja silpnus studentus į rezultatų konteinerį ir pašalina juos iš pradinio konteinerio.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Saltinio\+Konteineris} & Pradinio studentų konteinerio tipas. \\
+\hline
+{\em Rezultato\+Konteineris} & Rezultato konteinerio tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em studentai} & Pradinis studentų konteineris. \\
+\hline
+{\em silpni\+Studentai} & Konteineris silpniems studentams. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,66 @@
+\doxysection{struktura\+Ivestis.\+h}
+\hypertarget{struktura_ivestis_8h_source}{}\label{struktura_ivestis_8h_source}\index{strukturosFailai/strukturaIvestis.h@{strukturosFailai/strukturaIvestis.h}}
+\doxymbox{\hyperlink{struktura_ivestis_8h}{Eiti į šio failo dokumentaciją.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STRUKTURAIVESTIS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STRUKTURAIVESTIS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Studentas.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_failai_8h}{../strukturosFailai/Failai.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a76eef35f5c0fe568516f727866aafa2e}{nuskaitytiNamuDarbuPazymius}}(Vector<int>\&\ namuDarbuPazymiai,\ \textcolor{keywordtype}{int}\ maksimalusNDKiekis);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a5a7da01c1c130ec19575bcc14d1cd6ce}{nuskaitytiMeniuPasirinkima}}(\textcolor{keyword}{const}\ Vector<std::string>\&\ eilutes);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a4035362cbede2b50076fa67a584844de}{nuskaitytiPagrindinioMeniuPasirinkima}}(\textcolor{keyword}{const}\ Vector<std::string>\&\ eilutes,\ \textcolor{keywordtype}{int}\&\ pasirinkimas);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{struktura_ivestis_8h_ab485bd49fd0f46e39d9bb55367b92d0d}{nuskaitytiNeneigiamaSveikajiSkaiciu}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pranesimas);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a0664185c678005d91c841bb4d221910f}{nuskaitytiTeigiamaSveikajiSkaiciu}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pranesimas);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{char}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a90c75724821094af56f0095322dc24fb}{nuskaitytiSkaiciavimoMetoda}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a4a642c24997d2d874d79d463ed43a1ab}{nuskaitytiPazymiNuo1iki10}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pranesimas);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_ac80e465576fe5e8435c9471f823645a3}{nuskaitytiSveikajiSkaiciu}}(\textcolor{keyword}{const}\ std::string\&\ ivestis,\ \textcolor{keywordtype}{int}\&\ reiksme);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a9d1096374764a3cae3f9cb9bc8e2b29e}{tikrintiIvesti}}(\textcolor{keyword}{const}\ std::string\&\ ivestis);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00084\ std::string\ \doxymbox{\hyperlink{struktura_ivestis_8h_accc1f2d10e27c328c530a7f2cfc87e4b}{nuskaitytiVardaArPavarde}}(}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ivestiesPranesimas,}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}(*tvarkyti)(std::string\&),}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ klaidosPranesimas}
+\DoxyCodeLine{00088\ );}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a11a5c2f8c383f707d6097a323ce74771}{patvirtintiNaujoStudentoPridejima}}();}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_ae98fd1ab85819f303adf91f3e3e97641}{vykdytiStudentuIvedima}}(\textcolor{keywordtype}{bool}\ generuotiPazymius);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a4334241ec0fc3b6a4627da459271a13a}{vykdytiPilnaGeneravima}}(\doxymbox{\hyperlink{struct_failai}{Failai}}\&\ failai);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00112\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_ad0fe2a7434f8562364234172f6cd53f8}{tvarkytiVarda}}(std::string\&\ ivestis);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00118\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a14839bcd3461a6cc7f5e37f373ec2f8b}{tvarkytiPavarde}}(std::string\&\ ivestis);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ std::string\ \doxymbox{\hyperlink{struktura_ivestis_8h_a46bffc9f4124a7313da54dd57df16b10}{saugiaiNuskaitytiEilute}}();}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00131\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struktura_ivestis_8h_a4a7c80a4d60a43e9957583c4bc600b1f}{parinktiRikiavimoBudus}}(}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{int}\&\ pasirinkimasRikiavimoPazangiu,}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{int}\&\ pasirinkimasRikiavimoSilpnu}
+\DoxyCodeLine{00134\ );}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00144\ std::string\ \doxymbox{\hyperlink{struktura_ivestis_8h_a70fa2b68bbf613f6384b782102bd1acf}{suformuotiStudentoIvestiesEilute}}(}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ vardas,}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ pavarde,}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{const}\ Vector<int>\&\ namuDarbai,}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{int}\ egzaminoPazymys}
+\DoxyCodeLine{00149\ );}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00156\ Studentas\ \doxymbox{\hyperlink{struktura_ivestis_8h_a402d45dae45cc539d1b60166999895c5}{sukurtiStudentaIsEilutesPerOperatoriu}}(\textcolor{keyword}{const}\ std::string\&\ eilute);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,162 @@
+\doxysection{strukturos\+Failai/\+struktura\+Isvestis.h Failo Nuoroda}
+\hypertarget{struktura_isvestis_8h}{}\label{struktura_isvestis_8h}\index{strukturosFailai/strukturaIsvestis.h@{strukturosFailai/strukturaIsvestis.h}}
+
+
+Funkcijos studentų duomenų ir testavimo rezultatų išvedimui.  
+
+
+{\ttfamily \+\#include $<$vector$>$}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include $<$ostream$>$}\newline
+{\ttfamily \+\#include "{}../\+\+Studentas.\+h"{}}\newline
+{\ttfamily \+\#include "{}../\+strukturos\+Failai/\+struktura\+Testavimas.\+h"{}}\newline
+\doxysubsubsection*{Funkcijos}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{struktura_isvestis_8h_aea6673d3d6ae972d56d26d247385d715}{parodyti\+Rezultatu\+Lentele}} (std::\+ostream \&out, const Vector$<$ Studentas $>$ \&studentu\+Sarasas, char skaiciavimo\+Metodo\+Pasirinkimas)
+\begin{DoxyCompactList}\small\item\em Parodo studentų rezultatų lentelę nurodytame išvesties sraute. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_isvestis_8h_a4c3fb2fc8ae68248c545807a656b1304}{isvesti\+Studentus}} (int pasirinkimas\+Isvedimo, const Vector$<$ Studentas $>$ \&studentu\+Sarasas, char skaiciavimo\+Metodo\+Pasirinkimas)
+\begin{DoxyCompactList}\small\item\em Išveda studentų sąrašą pagal pasirinktą išvedimo būdą. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_isvestis_8h_ae4d34b5481e414c2043534c7e03cf4b5}{apdoroti\+Ir\+Isvesti\+Studentus}} (Vector$<$ Studentas $>$ \&studentu\+Sarasas, char skaiciavimo\+Metodo\+Pasirinkimas)
+\begin{DoxyCompactList}\small\item\em Apdoroja studentų sąrašą ir išveda rezultatus. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_isvestis_8h_a5b6182f8cc2eb0ac999e50d3b8ae40b8}{parodyti\+Studentus}} (const Vector$<$ Studentas $>$ \&studentai, char skaiciavimo\+Metodas)
+\begin{DoxyCompactList}\small\item\em Išveda studentus į ekraną. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_isvestis_8h_a027c59c441f18697fe536a60fa3f18ab}{spausdinti\+Vidurkius}} (const \doxymbox{\hyperlink{struct_testo_laikai}{Testo\+Laikai}} \&laikai)
+\begin{DoxyCompactList}\small\item\em Spausdina testavimo laikų vidurkius. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_isvestis_8h_a558ec181ccdfa86bc93c3590047a226c}{vykdyti\+Irasyma\+IFaila}} (\doxymbox{\hyperlink{struct_failai}{Failai}} \&failai)
+\begin{DoxyCompactList}\small\item\em Vykdo studentų duomenų generavimą ir įrašymą į failą. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struktura_isvestis_8h_afe32c83664409e803143552ce8e445c4}{irasyti\+Studentu\+Duomenis\+IFaila}} (Vector$<$ Studentas $>$ \&studentu\+Sarasas, int maksimalus\+NDKiekis, int studentu\+Kiekis, \doxymbox{\hyperlink{struct_failai}{Failai}} \&failai)
+\begin{DoxyCompactList}\small\item\em Įrašo sugeneruotus studentų duomenis į failą. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Smulkus aprašymas}
+Funkcijos studentų duomenų ir testavimo rezultatų išvedimui. 
+
+
+
+\label{struktura_isvestis_8h_doc-func-members}
+\Hypertarget{struktura_isvestis_8h_doc-func-members}
+\doxysubsection{Funkcijos Dokumentacija}
+\Hypertarget{struktura_isvestis_8h_ae4d34b5481e414c2043534c7e03cf4b5}\index{strukturaIsvestis.h@{strukturaIsvestis.h}!apdorotiIrIsvestiStudentus@{apdorotiIrIsvestiStudentus}}
+\index{apdorotiIrIsvestiStudentus@{apdorotiIrIsvestiStudentus}!strukturaIsvestis.h@{strukturaIsvestis.h}}
+\doxysubsubsection{\texorpdfstring{apdorotiIrIsvestiStudentus()}{apdorotiIrIsvestiStudentus()}}
+{\footnotesize\ttfamily \label{struktura_isvestis_8h_ae4d34b5481e414c2043534c7e03cf4b5} 
+void apdoroti\+Ir\+Isvesti\+Studentus (\begin{DoxyParamCaption}\item[{Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{char}]{skaiciavimo\+Metodo\+Pasirinkimas}{}\end{DoxyParamCaption})}
+
+
+
+Apdoroja studentų sąrašą ir išveda rezultatus. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em studentu\+Sarasas} & Studentų sąrašas. \\
+\hline
+{\em skaiciavimo\+Metodo\+Pasirinkimas} & Galutinio pažymio skaičiavimo metodas. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_isvestis_8h_afe32c83664409e803143552ce8e445c4}\index{strukturaIsvestis.h@{strukturaIsvestis.h}!irasytiStudentuDuomenisIFaila@{irasytiStudentuDuomenisIFaila}}
+\index{irasytiStudentuDuomenisIFaila@{irasytiStudentuDuomenisIFaila}!strukturaIsvestis.h@{strukturaIsvestis.h}}
+\doxysubsubsection{\texorpdfstring{irasytiStudentuDuomenisIFaila()}{irasytiStudentuDuomenisIFaila()}}
+{\footnotesize\ttfamily \label{struktura_isvestis_8h_afe32c83664409e803143552ce8e445c4} 
+void irasyti\+Studentu\+Duomenis\+IFaila (\begin{DoxyParamCaption}\item[{Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{int}]{maksimalus\+NDKiekis}{, }\item[{int}]{studentu\+Kiekis}{, }\item[{\doxymbox{\hyperlink{struct_failai}{Failai}} \&}]{failai}{}\end{DoxyParamCaption})}
+
+
+
+Įrašo sugeneruotus studentų duomenis į failą. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em studentu\+Sarasas} & Studentų sąrašas. \\
+\hline
+{\em maksimalus\+NDKiekis} & Maksimalus namų darbų kiekis. \\
+\hline
+{\em studentu\+Kiekis} & Studentų kiekis. \\
+\hline
+{\em failai} & Vardų ir pavardžių failų duomenų struktūra. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_isvestis_8h_a4c3fb2fc8ae68248c545807a656b1304}\index{strukturaIsvestis.h@{strukturaIsvestis.h}!isvestiStudentus@{isvestiStudentus}}
+\index{isvestiStudentus@{isvestiStudentus}!strukturaIsvestis.h@{strukturaIsvestis.h}}
+\doxysubsubsection{\texorpdfstring{isvestiStudentus()}{isvestiStudentus()}}
+{\footnotesize\ttfamily \label{struktura_isvestis_8h_a4c3fb2fc8ae68248c545807a656b1304} 
+void isvesti\+Studentus (\begin{DoxyParamCaption}\item[{int}]{pasirinkimas\+Isvedimo}{, }\item[{const Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{char}]{skaiciavimo\+Metodo\+Pasirinkimas}{}\end{DoxyParamCaption})}
+
+
+
+Išveda studentų sąrašą pagal pasirinktą išvedimo būdą. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em pasirinkimas\+Isvedimo} & Išvedimo būdo numeris. \\
+\hline
+{\em studentu\+Sarasas} & Studentų sąrašas. \\
+\hline
+{\em skaiciavimo\+Metodo\+Pasirinkimas} & Galutinio pažymio skaičiavimo metodas. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_isvestis_8h_aea6673d3d6ae972d56d26d247385d715}\index{strukturaIsvestis.h@{strukturaIsvestis.h}!parodytiRezultatuLentele@{parodytiRezultatuLentele}}
+\index{parodytiRezultatuLentele@{parodytiRezultatuLentele}!strukturaIsvestis.h@{strukturaIsvestis.h}}
+\doxysubsubsection{\texorpdfstring{parodytiRezultatuLentele()}{parodytiRezultatuLentele()}}
+{\footnotesize\ttfamily \label{struktura_isvestis_8h_aea6673d3d6ae972d56d26d247385d715} 
+void parodyti\+Rezultatu\+Lentele (\begin{DoxyParamCaption}\item[{std::\+ostream \&}]{out}{, }\item[{const Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{char}]{skaiciavimo\+Metodo\+Pasirinkimas}{}\end{DoxyParamCaption})}
+
+
+
+Parodo studentų rezultatų lentelę nurodytame išvesties sraute. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em out} & Išvesties srautas. \\
+\hline
+{\em studentu\+Sarasas} & Studentų sąrašas. \\
+\hline
+{\em skaiciavimo\+Metodo\+Pasirinkimas} & Galutinio pažymio skaičiavimo metodas. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_isvestis_8h_a5b6182f8cc2eb0ac999e50d3b8ae40b8}\index{strukturaIsvestis.h@{strukturaIsvestis.h}!parodytiStudentus@{parodytiStudentus}}
+\index{parodytiStudentus@{parodytiStudentus}!strukturaIsvestis.h@{strukturaIsvestis.h}}
+\doxysubsubsection{\texorpdfstring{parodytiStudentus()}{parodytiStudentus()}}
+{\footnotesize\ttfamily \label{struktura_isvestis_8h_a5b6182f8cc2eb0ac999e50d3b8ae40b8} 
+void parodyti\+Studentus (\begin{DoxyParamCaption}\item[{const Vector$<$ Studentas $>$ \&}]{studentai}{, }\item[{char}]{skaiciavimo\+Metodas}{}\end{DoxyParamCaption})}
+
+
+
+Išveda studentus į ekraną. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em studentai} & Studentų sąrašas. \\
+\hline
+{\em skaiciavimo\+Metodas} & Galutinio pažymio skaičiavimo metodas. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_isvestis_8h_a027c59c441f18697fe536a60fa3f18ab}\index{strukturaIsvestis.h@{strukturaIsvestis.h}!spausdintiVidurkius@{spausdintiVidurkius}}
+\index{spausdintiVidurkius@{spausdintiVidurkius}!strukturaIsvestis.h@{strukturaIsvestis.h}}
+\doxysubsubsection{\texorpdfstring{spausdintiVidurkius()}{spausdintiVidurkius()}}
+{\footnotesize\ttfamily \label{struktura_isvestis_8h_a027c59c441f18697fe536a60fa3f18ab} 
+void spausdinti\+Vidurkius (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_testo_laikai}{Testo\+Laikai}} \&}]{laikai}{}\end{DoxyParamCaption})}
+
+
+
+Spausdina testavimo laikų vidurkius. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em laikai} & Testavimo laikų struktūra. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{struktura_isvestis_8h_a558ec181ccdfa86bc93c3590047a226c}\index{strukturaIsvestis.h@{strukturaIsvestis.h}!vykdytiIrasymaIFaila@{vykdytiIrasymaIFaila}}
+\index{vykdytiIrasymaIFaila@{vykdytiIrasymaIFaila}!strukturaIsvestis.h@{strukturaIsvestis.h}}
+\doxysubsubsection{\texorpdfstring{vykdytiIrasymaIFaila()}{vykdytiIrasymaIFaila()}}
+{\footnotesize\ttfamily \label{struktura_isvestis_8h_a558ec181ccdfa86bc93c3590047a226c} 
+void vykdyti\+Irasyma\+IFaila (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_failai}{Failai}} \&}]{failai}{}\end{DoxyParamCaption})}
+
+
+
+Vykdo studentų duomenų generavimą ir įrašymą į failą. 
+
+
+\begin{DoxyParams}{Parametrai}
+{\em failai} & Vardų ir pavardžių failų duomenų struktūra. \\
+\hline
+\end{DoxyParams}
