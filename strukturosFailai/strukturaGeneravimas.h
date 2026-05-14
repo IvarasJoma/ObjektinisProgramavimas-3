@@ -2,6 +2,7 @@
 #define STRUKTURAGENERAVIMAS_H
 
 #include <vector>
+#include "../Vector.h"
 #include "../Studentas.h"
 #include "../strukturosFailai/Failai.h"
 

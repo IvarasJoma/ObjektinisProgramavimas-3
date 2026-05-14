@@ -3,6 +3,7 @@
 
 #include <string>
 #include <algorithm>
+#include "../Vector.h"
 #include <numeric>
 #include <iostream>
 #include "../strukturosFailai/strukturaDarbasSuFailais.h"
@@ -152,7 +153,7 @@ void skirstytiIstrinantStudentus(SaltinioKonteineris& studentai,
                                  RezultatoKonteineris& silpniStudentai) {
     silpniStudentai.clear();
     if constexpr (requires { silpniStudentai.reserve(studentai.size() / 2); }) silpniStudentai.reserve(studentai.size() / 2);
-    auto it = std::partition(studentai.begin(), studentai.end(), [](const Studentas& studentas) { return studentas.getFinalGrade() < 5.0; });
+    auto it = std::stable_partition(studentai.begin(), studentai.end(), [](const Studentas& studentas) { return studentas.getFinalGrade() < 5.0; });
     silpniStudentai.insert(silpniStudentai.end(), std::make_move_iterator(studentai.begin()), std::make_move_iterator(it));
     studentai.erase(studentai.begin(), it);
 }

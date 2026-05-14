@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "../strukturosFailai/strukturaDarbasSuFailais.h"
+#include "../Vector.h"
 
 /**
  * @file Failai.h

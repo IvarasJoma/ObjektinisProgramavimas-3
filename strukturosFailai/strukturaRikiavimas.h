@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "../Studentas.h"
+#include "../Vector.h"
 
 /**
  * @file strukturaRikiavimas.h

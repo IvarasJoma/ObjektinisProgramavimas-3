@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "Zmogus.h"
+#include "Vector.h"
 
 /**
  * @file Studentas.h
@@ -29,7 +30,7 @@ private:
     int examGrade_;
 
     /** @brief Studento namų darbų pažymių sąrašas. */
-    std::vector<int> homeworkGrades_;
+    Vector<int> homeworkGrades_;
 
     /** @brief Studento galutinis pažymys. */
     double finalGrade_;
@@ -58,7 +59,7 @@ public:
     Studentas(const std::string& name,
               const std::string& surname,
               int examGrade,
-              const std::vector<int>& homeworkGrades,
+              const Vector<int>& homeworkGrades,
               double finalGrade)
         : Zmogus(name, surname),
           examGrade_(examGrade),
@@ -142,7 +143,7 @@ public:
      * @brief Grąžina studento namų darbų pažymių sąrašą.
      * @return Konstantinė nuoroda į namų darbų pažymių vektorių.
      */
-    inline const std::vector<int>& getHomeworkGrades() const { return homeworkGrades_; }
+    inline const Vector<int>& getHomeworkGrades() const { return homeworkGrades_; }
 
     /**
      * @brief Apskaičiuoja studento galutinį pažymį pagal pasirinktą metodą.
@@ -182,7 +183,7 @@ public:
      * @brief Nustato visą namų darbų pažymių sąrašą.
      * @param homeworkGrades Naujas namų darbų pažymių vektorius.
      */
-    void setHomeworkGrades(const std::vector<int>& homeworkGrades) {homeworkGrades_ = homeworkGrades;}
+    void setHomeworkGrades(const Vector<int>& homeworkGrades) {homeworkGrades_ = homeworkGrades;}
 
     /**
      * @brief Prideda vieną namų darbo pažymį.

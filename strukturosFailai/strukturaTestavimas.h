@@ -3,6 +3,7 @@
 
 #include "../strukturosFailai/Failai.h"
 #include <chrono>
+#include "../Vector.h"
 
 /**
  * @file strukturaTestavimas.h
@@ -28,6 +29,7 @@ struct TestoLaikai {
 
     /** @brief Rezultatų išvedimo laikas sekundėmis. */
     double isvedimas = 0.0;
+    
 };
 
 /**

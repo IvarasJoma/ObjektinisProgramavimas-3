@@ -5,6 +5,7 @@
 #include <string>
 #include "../Studentas.h"
 #include "../strukturosFailai/Failai.h"
+#include "../Vector.h"
 
 /**
  * @file strukturaIvestis.h

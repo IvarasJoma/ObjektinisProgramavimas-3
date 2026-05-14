@@ -14,7 +14,6 @@
 #include <list>
 #include <cassert>
 #include <type_traits>
-#include <gtest/gtest.h>
 
 void vykdytiIvedimoTestavima(){
     Vector<Studentas> studentuSarasas;
@@ -279,13 +278,15 @@ void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais(){
         Vector<Studentas> silpnuSarasas;
         laikai.nuskaitymas += ismatuotiLaika([&](){nuskaitytiDuomenis(pasirinkimasNuskaitymo, studentuSarasas, katalogas);});
         laikai.skaiciavimas += ismatuotiLaika([&](){apskaiciuotiGalutiniusPazymius(studentuSarasas, skaiciavimoMetodas);});
-        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentusEfektyviau(studentuSarasas, silpnuSarasas);});
-        irasytiSuskirstytusStudentusIFailus(studentuSarasas, silpnuSarasas, skaiciavimoMetodas);
+        laikai.rikiavimas += ismatuotiLaika([&](){rikiuotiStudentus(5, studentuSarasas);});
+        laikai.skirstymas += ismatuotiLaika([&](){skirstytiIstrinantStudentus(studentuSarasas, silpnuSarasas);});
+        laikai.isvedimas += ismatuotiLaika([&](){irasytiSuskirstytusStudentusIFailus(studentuSarasas, silpnuSarasas, skaiciavimoMetodas);});
     }
     gautiVidurki(laikai, kartai);
     spausdintiVidurkius(laikai);
 }                    
 
+/*
 namespace {
 
 bool teksteYra(const std::string& tekstas, const std::string& ieskoma) {
@@ -683,3 +684,4 @@ TEST(StudentasGoogleTest, Destruktorius) {
     testuotiDestruktoriu();
     Studentas::arSpausdintiDestruktoriu = false;
 }
+*/

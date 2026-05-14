@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "../Studentas.h"
+#include "../Vector.h"
 /**
  * @file strukturaSkaiciavimai.h
  * @brief Funkcijos studentų pažymių skaičiavimui ir skirstymui.

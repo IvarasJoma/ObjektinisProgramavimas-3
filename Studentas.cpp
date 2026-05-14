@@ -41,7 +41,7 @@ double Studentas::calculateFinalGrade(char method) const {
         double sum = std::accumulate(homeworkGrades_.begin(), homeworkGrades_.end(), 0.0);
         finalHomeworkGrade = sum / homeworkGrades_.size();
     } else {
-        std::vector<int> temp = homeworkGrades_;
+        Vector<int> temp = homeworkGrades_;
         std::sort(temp.begin(), temp.end());
         std::size_t n = temp.size();
         if (n % 2 == 0) finalHomeworkGrade = (temp[n / 2 - 1] + temp[n / 2]) / 2.0;
@@ -67,7 +67,7 @@ std::istream& operator>>(std::istream& is, Studentas& s) {
     std::string surname;
     std::size_t homeworkSize = 0;
     if (!(is >> name >> surname >> homeworkSize)) return is;
-    std::vector<int> homeworkGrades;
+    Vector<int> homeworkGrades;
     homeworkGrades.reserve(homeworkSize);
     for (std::size_t i = 0; i < homeworkSize; ++i) {
         int homeworkGrade = 0;

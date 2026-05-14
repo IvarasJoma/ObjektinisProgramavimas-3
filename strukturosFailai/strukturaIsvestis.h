@@ -6,6 +6,7 @@
 #include <ostream>
 #include "../Studentas.h"
 #include "../strukturosFailai/strukturaTestavimas.h"
+#include "../Vector.h"
 
 /**
  * @file strukturaIsvestis.h
