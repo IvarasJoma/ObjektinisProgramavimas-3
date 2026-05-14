@@ -18,7 +18,7 @@
  * @param studentuSarasas Studentų sąrašas.
  * @param skaiciavimoMetodoPasirinkimas Galutinio pažymio skaičiavimo metodas.
  */
-void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
+void parodytiRezultatuLentele(std::ostream& out, const Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 
 /**
  * @brief Išveda studentų sąrašą pagal pasirinktą išvedimo būdą.
@@ -26,21 +26,21 @@ void parodytiRezultatuLentele(std::ostream& out, const std::vector<Studentas>& s
  * @param studentuSarasas Studentų sąrašas.
  * @param skaiciavimoMetodoPasirinkimas Galutinio pažymio skaičiavimo metodas.
  */
-void isvestiStudentus(int pasirinkimasIsvedimo, const std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
+void isvestiStudentus(int pasirinkimasIsvedimo, const Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 
 /**
  * @brief Apdoroja studentų sąrašą ir išveda rezultatus.
  * @param studentuSarasas Studentų sąrašas.
  * @param skaiciavimoMetodoPasirinkimas Galutinio pažymio skaičiavimo metodas.
  */
-void apdorotiIrIsvestiStudentus(std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
+void apdorotiIrIsvestiStudentus(Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 
 /**
  * @brief Išveda studentus į ekraną.
  * @param studentai Studentų sąrašas.
  * @param skaiciavimoMetodas Galutinio pažymio skaičiavimo metodas.
  */
-void parodytiStudentus(const std::vector<Studentas>& studentai, char skaiciavimoMetodas);
+void parodytiStudentus(const Vector<Studentas>& studentai, char skaiciavimoMetodas);
 
 /**
  * @brief Spausdina testavimo laikų vidurkius.
@@ -61,6 +61,6 @@ void vykdytiIrasymaIFaila(Failai& failai);
  * @param studentuKiekis Studentų kiekis.
  * @param failai Vardų ir pavardžių failų duomenų struktūra.
  */
-void irasytiStudentuDuomenisIFaila(std::vector<Studentas>& studentuSarasas, int maksimalusNDKiekis, int studentuKiekis, Failai& failai);
+void irasytiStudentuDuomenisIFaila(Vector<Studentas>& studentuSarasas, int maksimalusNDKiekis, int studentuKiekis, Failai& failai);
 
 #endif

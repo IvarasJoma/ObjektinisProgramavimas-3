@@ -73,7 +73,7 @@ int nuskaitytiMeniuPasirinkima(const std::array<std::string_view, N>& eilutes) {
  * @param katalogas Katalogas, kuriame ieškoma tekstinių failų.
  * @return Meniu eilučių vektorius.
  */
-std::vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas);
+Vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas);
 
 /**
  * @brief Nuskaito pagrindinio meniu pasirinkimą iš statinio meniu masyvo.
@@ -112,7 +112,7 @@ bool nuskaitytiPagrindinioMeniuPasirinkima(const std::array<std::string_view, N>
  * @param eilutes Meniu eilučių vektorius.
  * @return Pasirinkto meniu punkto numeris.
  */
-inline int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes) {
+inline int nuskaitytiMeniuPasirinkima(const Vector<std::string>& eilutes) {
     while (true) {
         try {
             std::cout << std::string(98, '-') << "\n";

@@ -13,7 +13,7 @@
  * @param ndPazymiai Namų darbų pažymių vektorius.
  * @return Namų darbų pažymių vidurkis.
  */
-double skaiciuotiNDVidurki(const std::vector<int>& ndPazymiai);
+double skaiciuotiNDVidurki(const Vector<int>& ndPazymiai);
 
 /**
  * @brief Apskaičiuoja galutinį pažymį pagal namų darbų vidurkį.
@@ -27,7 +27,7 @@ double skaiciuotiGalutiniVidurki(const Studentas& studentas);
  * @param ndPazymiai Namų darbų pažymių vektorius.
  * @return Namų darbų pažymių mediana.
  */
-double skaiciuotiNDMediana(std::vector<int> ndPazymiai);
+double skaiciuotiNDMediana(Vector<int> ndPazymiai);
 
 /**
  * @brief Apskaičiuoja galutinį pažymį pagal namų darbų medianą.
@@ -74,7 +74,7 @@ void apskaiciuotiGalutiniPazymi(Studentas& studentas, char skaiciavimoMetodoPasi
  * @param studentuSarasas Studentų sąrašas.
  * @param skaiciavimoMetodoPasirinkimas Skaičiavimo metodo pasirinkimas.
  */
-void apskaiciuotiGalutiniusPazymius(std::vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
+void apskaiciuotiGalutiniusPazymius(Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 /**
  * @brief Suskirsto studentus į pažangius ir silpnus pagal galutinį pažymį.
  *
@@ -85,6 +85,6 @@ void apskaiciuotiGalutiniusPazymius(std::vector<Studentas>& studentuSarasas, cha
  * @param pazangiuSarasas Pažangių studentų sąrašas.
  * @param silpnuSarasas Silpnų studentų sąrašas.
  */
-void suskirstytiStudentus(const std::vector<Studentas>& studentuSarasas, std::vector<Studentas>& pazangiuSarasas, std::vector<Studentas>& silpnuSarasas);
+void suskirstytiStudentus(const Vector<Studentas>& studentuSarasas, Vector<Studentas>& pazangiuSarasas, Vector<Studentas>& silpnuSarasas);
 
 #endif

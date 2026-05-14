@@ -106,7 +106,7 @@ void vykdytiAntrajaKonteineriuTestavimoStrategija();
 void vykdytiTreciajaKonteineriuTestavimoStrategija();
 
 /**
- * @brief Vykdo trečiąją konteinerių testavimo strategiją tik su `std::vector`.
+ * @brief Vykdo trečiąją konteinerių testavimo strategiją tik su `Vector`.
  */
 void vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais();
 

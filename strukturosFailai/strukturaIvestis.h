@@ -16,14 +16,14 @@
  * @param namuDarbuPazymiai Vektorius, į kurį įrašomi pažymiai.
  * @param maksimalusNDKiekis Maksimalus leidžiamas namų darbų kiekis.
  */
-void nuskaitytiNamuDarbuPazymius(std::vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
+void nuskaitytiNamuDarbuPazymius(Vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
 
 /**
  * @brief Nuskaito meniu pasirinkimą iš tekstinių eilučių sąrašo.
  * @param eilutes Meniu eilučių vektorius.
  * @return Pasirinktas meniu punktas.
  */
-int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes);
+int nuskaitytiMeniuPasirinkima(const Vector<std::string>& eilutes);
 
 /**
  * @brief Nuskaito pagrindinio meniu pasirinkimą.
@@ -31,7 +31,7 @@ int nuskaitytiMeniuPasirinkima(const std::vector<std::string>& eilutes);
  * @param pasirinkimas Kintamasis, į kurį įrašomas pasirinkimas.
  * @return `true`, jei pasirinkimas nuskaitytas sėkmingai.
  */
-bool nuskaitytiPagrindinioMeniuPasirinkima(const std::vector<std::string>& eilutes, int& pasirinkimas);
+bool nuskaitytiPagrindinioMeniuPasirinkima(const Vector<std::string>& eilutes, int& pasirinkimas);
 
 /**
  * @brief Nuskaito neneigiamą sveikąjį skaičių.
@@ -144,7 +144,7 @@ void parinktiRikiavimoBudus(
 std::string suformuotiStudentoIvestiesEilute(
     const std::string& vardas,
     const std::string& pavarde,
-    const std::vector<int>& namuDarbai,
+    const Vector<int>& namuDarbai,
     int egzaminoPazymys
 );
 

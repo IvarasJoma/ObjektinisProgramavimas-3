@@ -18,14 +18,14 @@ struct Failai;
  * @return Vektorius su nuskaitytomis eilutėmis.
  */
 
-std::vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
+Vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 
 /**
  * @brief Nuskaito studentų duomenis iš failo į vektorių.
  * @param failas Failo kelias.
  * @return Studentų vektorius.
  */
-std::vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
+Vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
 
 /**
  * @brief Vykdo studentų duomenų nuskaitymo iš failo scenarijų.
@@ -36,20 +36,20 @@ void vykdytiNuskaitymaIsFailo();
  * @brief Įrašo studentų duomenis pagal pasirinktą išvedimo scenarijų.
  * @param studentuSarasas Studentų sąrašas.
  */
-void irasytiDuomenis(std::vector<Studentas>& studentuSarasas);
+void irasytiDuomenis(Vector<Studentas>& studentuSarasas);
 
 /**
  * @brief Įrašo studentų sąrašą į nurodytą failą.
  * @param studentuSarasas Studentų sąrašas.
  * @param failoPavadinimas Išvesties failo pavadinimas.
  */
-void irasytiStudentuDuomenisIFaila(const std::vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas);
+void irasytiStudentuDuomenisIFaila(const Vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas);
 
 /**
  * @brief Vykdo studentų skirstymą į atskirus failus.
  * @param studentuSarasas Studentų sąrašas.
  */
-void vykdytiSkirstymaIFailus(std::vector<Studentas>& studentuSarasas);
+void vykdytiSkirstymaIFailus(Vector<Studentas>& studentuSarasas);
 
 /**
  * @brief Įrašo pažangius ir silpnus studentus į atskirus failus.
@@ -57,14 +57,14 @@ void vykdytiSkirstymaIFailus(std::vector<Studentas>& studentuSarasas);
  * @param silpnuSarasas Silpnų studentų sąrašas.
  * @param skaiciavimoMetodoPasirinkimas Galutinio pažymio skaičiavimo metodas.
  */
-void irasytiSuskirstytusStudentusIFailus(const std::vector<Studentas>& pazangiuSarasas, const std::vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas);
+void irasytiSuskirstytusStudentusIFailus(const Vector<Studentas>& pazangiuSarasas, const Vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas);
 
 /**
  * @brief Grąžina visus tekstinius failus iš nurodyto katalogo.
  * @param katalogas Katalogo kelias.
  * @return Tekstinių failų kelių vektorius.
  */
-std::vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas);
+Vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas);
 
 /**
  * @brief Praleidžia tarpo simbolius skaitant tekstą iš simbolių rodyklės.
@@ -94,6 +94,6 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x);
  * @param studentuSarasas Studentų sąrašas, į kurį įrašomi nuskaityti duomenys.
  * @param katalogas Katalogas, kuriame ieškoma tekstinių failų.
  */
-void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, std::vector<Studentas>& studentuSarasas, const std::string& katalogas);
+void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, Vector<Studentas>& studentuSarasas, const std::string& katalogas);
 
 #endif

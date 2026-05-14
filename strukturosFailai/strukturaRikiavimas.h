@@ -20,7 +20,7 @@
  * @param pasirinkimasRikiavimo Rikiavimo kriterijaus numeris.
  * @param studentuSarasas Studentų sąrašas, kuris bus rikiuojamas.
  */
-void rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector<Studentas>& studentuSarasas);
+void rikiuotiStudentus(int pasirinkimasRikiavimo, Vector<Studentas>& studentuSarasas);
 /**
  * @brief Rikiuoja pažangių ir silpnų studentų sąrašus pagal pasirinktus kriterijus.
  * @param pazangiuSarasas Pažangių studentų sąrašas.
@@ -28,6 +28,6 @@ void rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector<Studentas>& studen
  * @param pasirinkimasRikiavimoPazangiu Pažangių studentų rikiavimo kriterijus.
  * @param pasirinkimasRikiavimoSilpnu Silpnų studentų rikiavimo kriterijus.
  */
-void rikiuotiSuskirstytusStudentus(std::vector<Studentas>& pazangiuSarasas, std::vector<Studentas>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu);
+void rikiuotiSuskirstytusStudentus(Vector<Studentas>& pazangiuSarasas, Vector<Studentas>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu);
 
 #endif

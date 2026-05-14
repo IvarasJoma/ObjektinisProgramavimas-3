@@ -15,7 +15,7 @@
  * @file SabloninesFunkcijos.h
  * @brief Šabloninės funkcijos, leidžiančios apdoroti studentus skirtinguose konteineriuose.
  *
- * Funkcijos pritaikytos darbui su tokiais konteineriais kaip `std::vector` ir `std::list`.
+ * Funkcijos pritaikytos darbui su tokiais konteineriais kaip `Vector` ir `std::list`.
  * Kai įmanoma, naudojamos konteinerio specifinės operacijos, pavyzdžiui, `list::sort`.
  */
 
@@ -26,7 +26,7 @@
  * o kiekvieną kitą eilutę bando konvertuoti į @ref Studentas objektą.
  * Nekorektiškos eilutės praleidžiamos.
  *
- * @tparam StudentuKonteineris Konteinerio tipas, pvz. `std::vector<Studentas>` arba `std::list<Studentas>`.
+ * @tparam StudentuKonteineris Konteinerio tipas, pvz. `Vector<Studentas>` arba `std::list<Studentas>`.
  * @param failas Failo kelias.
  * @return Konteineris su nuskaitytais studentais.
  *

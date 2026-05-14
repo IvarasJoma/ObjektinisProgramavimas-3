@@ -15,7 +15,7 @@
  * @param maksimalusNDKiekis Maksimalus namų darbų kiekis.
  * @return Pora: namų darbų pažymių vektorius ir egzamino pažymys.
  */
-std::pair<std::vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis);
+std::pair<Vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis);
 
 /**
  * @brief Sugeneruoja atsitiktinį vardą ir pavardę.
@@ -25,7 +25,7 @@ std::pair<std::vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis);
  * @param motPavardes Moterų pavardžių sąrašas.
  * @return Pora: sugeneruotas vardas ir pavardė.
  */
-std::pair<std::string, std::string> generuotiVardaPavarde(const std::vector<std::string>& vyrVardai, const std::vector<std::string>& vyrPavardes, const std::vector<std::string>& motVardai, const std::vector<std::string>& motPavardes);
+std::pair<std::string, std::string> generuotiVardaPavarde(const Vector<std::string>& vyrVardai, const Vector<std::string>& vyrPavardes, const Vector<std::string>& motVardai, const Vector<std::string>& motPavardes);
 
 /**
  * @brief Sugeneruoja atsitiktinį sveikąjį skaičių nurodytame intervale.
@@ -42,6 +42,6 @@ int generuotiSveikaSkaiciu(int nuo, int iki);
  * @param failai Struktūra su vardų ir pavardžių sąrašais.
  * @return Sugeneruotų studentų vektorius.
  */
-std::vector<Studentas> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai);
+Vector<Studentas> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai);
 
 #endif
