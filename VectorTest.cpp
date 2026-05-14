@@ -4,9 +4,6 @@
 #include <list>
 #include <sstream>
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Helper: tracks constructor/destructor calls to catch memory errors
-// ─────────────────────────────────────────────────────────────────────────────
 struct Tracked {
     static int live;
     int value;
@@ -26,9 +23,6 @@ struct TrackedFixture : ::testing::Test {
     void TearDown() override { EXPECT_EQ(Tracked::live, 0) << "memory leak or double-destroy"; }
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Construction
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Construction, DefaultConstructor) {
     Vector<int> v;
     EXPECT_EQ(v.size(), 0u);
@@ -66,7 +60,6 @@ TEST(Construction, CopyConstructor) {
     Vector<int> b(a);
     EXPECT_EQ(b.size(), 3u);
     EXPECT_EQ(b[0], 1); EXPECT_EQ(b[2], 3);
-    // deep copy — modifying b must not affect a
     b[0] = 99;
     EXPECT_EQ(a[0], 1);
 }
@@ -76,7 +69,7 @@ TEST(Construction, MoveConstructor) {
     int* original_data = a.data();
     Vector<int> b(std::move(a));
     EXPECT_EQ(b.size(), 3u);
-    EXPECT_EQ(b.data(), original_data);  // pointer was stolen
+    EXPECT_EQ(b.data(), original_data);
     EXPECT_TRUE(a.empty());
 }
 
@@ -91,9 +84,6 @@ TEST_F(TrackedFixture, DestructorCalledOnConstruction) {
     EXPECT_EQ(Tracked::live, 0);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Assignment
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Assignment, CopyAssignment) {
     Vector<int> a{1, 2, 3};
     Vector<int> b{9, 9};
@@ -129,7 +119,6 @@ TEST(Assignment, SelfMoveAssignment) {
 #pragma GCC diagnostic ignored "-Wself-move"
     v = std::move(v);
 #pragma GCC diagnostic pop
-    // just must not crash or corrupt
 }
 
 TEST(Assignment, InitializerListAssignment) {
@@ -161,9 +150,6 @@ TEST(Assignment, AssignInitializerList) {
     EXPECT_EQ(v[1], 20);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Element access
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(ElementAccess, OperatorBracket) {
     Vector<int> v{10, 20, 30};
     EXPECT_EQ(v[0], 10);
@@ -209,9 +195,6 @@ TEST(ElementAccess, Data) {
     EXPECT_EQ(v[0], 99);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Iterators
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Iterators, BeginEnd) {
     Vector<int> v{1, 2, 3};
     int sum = 0;
@@ -246,9 +229,6 @@ TEST(Iterators, EmptyBeginEqualsEnd) {
     EXPECT_EQ(v.cbegin(), v.cend());
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Capacity
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Capacity, Empty) {
     Vector<int> v;
     EXPECT_TRUE(v.empty());
@@ -299,9 +279,6 @@ TEST(Capacity, CapacityGrowsOnPushBack) {
     }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modifiers — push/pop/emplace
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Modifiers, PushBackLvalue) {
     Vector<int> v;
     int x = 42;
@@ -339,7 +316,7 @@ TEST(Modifiers, PopBackToEmpty) {
 
 TEST(Modifiers, PopBackOnEmpty) {
     Vector<int> v;
-    EXPECT_NO_THROW(v.pop_back());  // Vector guards against this
+    EXPECT_NO_THROW(v.pop_back());
 }
 
 TEST(Modifiers, EmplaceBack) {
@@ -368,16 +345,13 @@ TEST_F(TrackedFixture, PushBackDestroyCount) {
     EXPECT_EQ(Tracked::live, 0);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modifiers — clear / resize
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Modifiers, Clear) {
     Vector<int> v{1, 2, 3};
     size_t cap = v.capacity();
     v.clear();
     EXPECT_TRUE(v.empty());
     EXPECT_EQ(v.size(), 0u);
-    EXPECT_EQ(v.capacity(), cap);  // capacity preserved
+    EXPECT_EQ(v.capacity(), cap);
 }
 
 TEST_F(TrackedFixture, ClearDestroys) {
@@ -409,9 +383,6 @@ TEST(Modifiers, ResizeSame) {
     EXPECT_EQ(v.size(), 3u);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modifiers — insert
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Insert, SingleValueAtBegin) {
     Vector<int> v{2, 3, 4};
     auto it = v.insert(v.begin(), 1);
@@ -479,9 +450,6 @@ TEST(Insert, IntoEmpty) {
     EXPECT_EQ(v[0], 42);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modifiers — erase
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Erase, SingleElement) {
     Vector<int> v{1, 2, 3, 4};
     auto it = v.erase(v.begin() + 1);
@@ -526,9 +494,6 @@ TEST_F(TrackedFixture, EraseDestroys) {
     EXPECT_EQ(Tracked::live, 3);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modifiers — emplace
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Emplace, EmplaceAtBegin) {
     Vector<std::pair<int,int>> v{{2,2},{3,3}};
     v.emplace(v.begin(), 1, 1);
@@ -544,9 +509,6 @@ TEST(Emplace, EmplaceInMiddle) {
     for (size_t i = 0; i < 5; ++i) EXPECT_EQ(v[i], static_cast<int>(i) + 1);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Swap
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Swap, MemberSwap) {
     Vector<int> a{1, 2, 3};
     Vector<int> b{4, 5};
@@ -571,9 +533,6 @@ TEST(Swap, SwapWithEmpty) {
     EXPECT_EQ(b.size(), 3u);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Comparison operators
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Comparison, Equal) {
     Vector<int> a{1, 2, 3}, b{1, 2, 3};
     EXPECT_TRUE(a == b);
@@ -599,7 +558,7 @@ TEST(Comparison, LessThan) {
 
 TEST(Comparison, LexicographicOrder) {
     Vector<int> a{1, 2}, b{1, 2, 0};
-    EXPECT_TRUE(a < b);   // shorter is less when prefix matches
+    EXPECT_TRUE(a < b);
 }
 
 TEST(Comparison, Spaceship) {
@@ -609,9 +568,6 @@ TEST(Comparison, Spaceship) {
     EXPECT_EQ(c <=> a, std::strong_ordering::greater);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Non-member erase / erase_if
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(NonMemberErase, EraseByValue) {
     Vector<int> v{1, 2, 2, 3, 2, 4};
     auto n = erase(v, 2);
@@ -643,9 +599,6 @@ TEST(NonMemberErase, EraseIfNone) {
     EXPECT_EQ(v.size(), 3u);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// String (non-trivial type)
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(StringType, PushBackAndAccess) {
     Vector<std::string> v;
     v.push_back("hello");
@@ -669,12 +622,9 @@ TEST(StringType, MoveIntoVector) {
         v.push_back("string_" + std::to_string(i));
     EXPECT_EQ(v.size(), 20u);
     for (size_t i = 0; i < 20; ++i)
-        EXPECT_EQ(v[i], "string_" + std::to_string(i));  // i is size_t here
+        EXPECT_EQ(v[i], "string_" + std::to_string(i));
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Implicit conversions
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Conversions, ToStdVector) {
     Vector<int> v{1, 2, 3};
     std::vector<int> sv = v;
@@ -695,9 +645,6 @@ TEST(Conversions, ToConstSpan) {
     EXPECT_EQ(s.size(), 3u);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Growth and memory
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(Growth, CapacityNeverSmallerThanSize) {
     Vector<int> v;
     for (int i = 0; i < 500; ++i) {
@@ -708,7 +655,7 @@ TEST(Growth, CapacityNeverSmallerThanSize) {
 
 TEST(Growth, ContentsPreservedAcrossReallocation) {
     Vector<int> v;
-    v.reserve(1);  // force small initial capacity
+    v.reserve(1);
     for (int i = 0; i < 200; ++i) v.push_back(i);
     for (size_t i = 0; i < 200; ++i) EXPECT_EQ(v[i], static_cast<int>(i));
 }
@@ -720,9 +667,6 @@ TEST_F(TrackedFixture, NoLeakAfterReallocation) {
     // destructor runs here, TearDown checks live==0
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// C++23 range methods
-// ─────────────────────────────────────────────────────────────────────────────
 TEST(RangeMethods, AssignRange) {
     std::list<int> src{7, 8, 9};
     Vector<int> v{1, 2, 3};
