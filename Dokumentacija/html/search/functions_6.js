@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rikiuotistudentus_0',['rikiuotiStudentus',['../_sablonines_funkcijos_8h.html#a30e1e1532e5602fdf39c845ad8f26bf7',1,'rikiuotiStudentus(int pasirinkimasRikiavimo, StudentuKonteineris &amp;studentuSarasas):&#160;SabloninesFunkcijos.h'],['../struktura_rikiavimas_8h.html#a7626763ae6ff75b024db43dccfe3988d',1,'rikiuotiStudentus(int pasirinkimasRikiavimo, std::vector&lt; Studentas &gt; &amp;studentuSarasas):&#160;strukturaRikiavimas.h']]],
-  ['rikiuotisuskirstytusstudentus_1',['rikiuotiSuskirstytusStudentus',['../_sablonines_funkcijos_8h.html#a146fa3618b4949685aad13bec08d68a0',1,'rikiuotiSuskirstytusStudentus(StudentuKonteineris &amp;pazangiuSarasas, StudentuKonteineris &amp;silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu):&#160;SabloninesFunkcijos.h'],['../struktura_rikiavimas_8h.html#aa9a17512520cfa7b6808214c3cfb9cd0',1,'rikiuotiSuskirstytusStudentus(std::vector&lt; Studentas &gt; &amp;pazangiuSarasas, std::vector&lt; Studentas &gt; &amp;silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu):&#160;strukturaRikiavimas.h']]]
+  ['get_5fallocator_0',['get_allocator',['../class_vector.html#a7057a78e5fc4ba8b4c2afa7baf874c49',1,'Vector']]]
 ];

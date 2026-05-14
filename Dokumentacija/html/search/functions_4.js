@@ -1,18 +1,9 @@
 var searchData=
 [
-  ['nuskaitytiduomenis_0',['nuskaitytiDuomenis',['../struktura_darbas_su_failais_8h.html#a0edac601a356507b16cb34220d8c7ae1',1,'strukturaDarbasSuFailais.h']]],
-  ['nuskaitytiduomenisgeneric_1',['nuskaitytiDuomenisGeneric',['../_sablonines_funkcijos_8h.html#a2ac5d8ac0ec0832c1a54d03ad51d086e',1,'SabloninesFunkcijos.h']]],
-  ['nuskaitytieilutesivektoriu_2',['nuskaitytiEilutesIVektoriu',['../struktura_darbas_su_failais_8h.html#a98b203bf31f320046cc5064fa6fc4b7d',1,'strukturaDarbasSuFailais.h']]],
-  ['nuskaitytimeniupasirinkima_3',['nuskaitytiMeniuPasirinkima',['../struktura_ivestis_8h.html#a8c91b74857b3fd02befcba5b0e6a0400',1,'nuskaitytiMeniuPasirinkima(const std::vector&lt; std::string &gt; &amp;eilutes):&#160;strukturaMeniu.h'],['../struktura_meniu_8h.html#a89e1aa7d72f85ef82adebe688bc06bda',1,'nuskaitytiMeniuPasirinkima(const std::array&lt; std::string_view, N &gt; &amp;eilutes):&#160;strukturaMeniu.h'],['../struktura_meniu_8h.html#a8c91b74857b3fd02befcba5b0e6a0400',1,'nuskaitytiMeniuPasirinkima(const std::vector&lt; std::string &gt; &amp;eilutes):&#160;strukturaMeniu.h']]],
-  ['nuskaitytinamudarbupazymius_4',['nuskaitytiNamuDarbuPazymius',['../struktura_ivestis_8h.html#a4576b6135b0838a24dc1cb7f799dbf3e',1,'strukturaIvestis.h']]],
-  ['nuskaitytineneigiamasveikajiskaiciu_5',['nuskaitytiNeneigiamaSveikajiSkaiciu',['../struktura_ivestis_8h.html#ab485bd49fd0f46e39d9bb55367b92d0d',1,'strukturaIvestis.h']]],
-  ['nuskaitytipagrindiniomeniupasirinkima_6',['nuskaitytiPagrindinioMeniuPasirinkima',['../struktura_ivestis_8h.html#aee3868c50463767776a55c1788db2e74',1,'nuskaitytiPagrindinioMeniuPasirinkima(const std::vector&lt; std::string &gt; &amp;eilutes, int &amp;pasirinkimas):&#160;strukturaIvestis.h'],['../struktura_meniu_8h.html#a3f488e6d66d58819e65f63e72072efc1',1,'nuskaitytiPagrindinioMeniuPasirinkima(const std::array&lt; std::string_view, N &gt; &amp;eilutes, int &amp;pasirinkimas):&#160;strukturaMeniu.h']]],
-  ['nuskaitytipazyminuo1iki10_7',['nuskaitytiPazymiNuo1iki10',['../struktura_ivestis_8h.html#a4a642c24997d2d874d79d463ed43a1ab',1,'strukturaIvestis.h']]],
-  ['nuskaitytiskaiciavimometoda_8',['nuskaitytiSkaiciavimoMetoda',['../struktura_ivestis_8h.html#a90c75724821094af56f0095322dc24fb',1,'strukturaIvestis.h']]],
-  ['nuskaitytistudentuduomenisisfailo_9',['nuskaitytiStudentuDuomenisIsFailo',['../_sablonines_funkcijos_8h.html#a7ddbf5712eeafc9e7120943b98d1f159',1,'nuskaitytiStudentuDuomenisIsFailo(const std::string &amp;failas):&#160;SabloninesFunkcijos.h'],['../struktura_darbas_su_failais_8h.html#a710c2dbafd713cd41bb6c409eee1b37c',1,'nuskaitytiStudentuDuomenisIsFailo(const std::string &amp;failas):&#160;strukturaDarbasSuFailais.h']]],
-  ['nuskaitytisveikajiskaiciu_10',['nuskaitytiSveikajiSkaiciu',['../struktura_ivestis_8h.html#ac80e465576fe5e8435c9471f823645a3',1,'strukturaIvestis.h']]],
-  ['nuskaitytisveikaskaiciuisfailo_11',['nuskaitytiSveikaSkaiciuIsFailo',['../struktura_darbas_su_failais_8h.html#a015e93e433801e64fd45324591956223',1,'strukturaDarbasSuFailais.h']]],
-  ['nuskaitytiteigiamasveikajiskaiciu_12',['nuskaitytiTeigiamaSveikajiSkaiciu',['../struktura_ivestis_8h.html#a0664185c678005d91c841bb4d221910f',1,'strukturaIvestis.h']]],
-  ['nuskaitytivardaarpavarde_13',['nuskaitytiVardaArPavarde',['../struktura_ivestis_8h.html#accc1f2d10e27c328c530a7f2cfc87e4b',1,'strukturaIvestis.h']]],
-  ['nuskaitytizodiisfailo_14',['nuskaitytiZodiIsFailo',['../struktura_darbas_su_failais_8h.html#a90cb36e798bccc7b6270da794b04596b',1,'strukturaDarbasSuFailais.h']]]
+  ['emplace_0',['emplace',['../class_vector.html#ad2dbe74f7837bc41b5471979f6f4ea03',1,'Vector']]],
+  ['emplace_5fback_1',['emplace_back',['../class_vector.html#a14c322c13e01c8556d2e8f4bd8bea1ad',1,'Vector']]],
+  ['empty_2',['empty',['../class_vector.html#a2f639b492129a072de508b75b73fe569',1,'Vector']]],
+  ['end_3',['end',['../class_vector.html#a4af825d34cd281738bfbb8345a198072',1,'Vector::end() noexcept'],['../class_vector.html#a065c6c93dbcf049d7d39c3ac2afbb3fc',1,'Vector::end() const noexcept']]],
+  ['erase_4',['erase',['../class_vector.html#ac8ed1c29958e6ec5f9c493e6184cc2fc',1,'Vector::erase(const_iterator cpos)'],['../class_vector.html#a4d4c440cead6b490493d6c0f7f82074d',1,'Vector::erase(const_iterator cfirst, const_iterator clast)'],['../_vector_8h.html#a3297703efdca3aff7e9ea1e680052349',1,'erase(Vector&lt; T &gt; &amp;v, const U &amp;value):&#160;Vector.h']]],
+  ['erase_5fif_5',['erase_if',['../_vector_8h.html#af01bc0b74814c266c3cf8fb19e3d8ba5',1,'Vector.h']]]
 ];

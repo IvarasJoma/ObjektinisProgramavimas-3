@@ -1,10 +1,10 @@
 var struktura_isvestis_8h =
 [
-    [ "apdorotiIrIsvestiStudentus", "struktura_isvestis_8h.html#a987c6339c7408645507a0e00934184fe", null ],
-    [ "irasytiStudentuDuomenisIFaila", "struktura_isvestis_8h.html#af44473ecb34d1a1ddf49f63183bd7f9b", null ],
-    [ "isvestiStudentus", "struktura_isvestis_8h.html#a30e18828d2b52f3ea1d87720bb5ce675", null ],
-    [ "parodytiRezultatuLentele", "struktura_isvestis_8h.html#afd82616c06f812979097cf19c6714b8b", null ],
-    [ "parodytiStudentus", "struktura_isvestis_8h.html#aee8ff96cf2a9a319e841f5349ca8e535", null ],
+    [ "apdorotiIrIsvestiStudentus", "struktura_isvestis_8h.html#ae4d34b5481e414c2043534c7e03cf4b5", null ],
+    [ "irasytiStudentuDuomenisIFaila", "struktura_isvestis_8h.html#afe32c83664409e803143552ce8e445c4", null ],
+    [ "isvestiStudentus", "struktura_isvestis_8h.html#a4c3fb2fc8ae68248c545807a656b1304", null ],
+    [ "parodytiRezultatuLentele", "struktura_isvestis_8h.html#aea6673d3d6ae972d56d26d247385d715", null ],
+    [ "parodytiStudentus", "struktura_isvestis_8h.html#a5b6182f8cc2eb0ac999e50d3b8ae40b8", null ],
     [ "spausdintiVidurkius", "struktura_isvestis_8h.html#a027c59c441f18697fe536a60fa3f18ab", null ],
     [ "vykdytiIrasymaIFaila", "struktura_isvestis_8h.html#a558ec181ccdfa86bc93c3590047a226c", null ]
 ];

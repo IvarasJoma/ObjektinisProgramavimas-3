@@ -10,11 +10,11 @@ Funkcijos studentų pažymių skaičiavimui ir skirstymui.
 \doxysubsubsection*{Funkcijos}
 \begin{DoxyCompactItemize}
 \item 
-double \doxymbox{\hyperlink{struktura_skaiciavimai_8h_ac8f927c97416854a108779ec5dad0f6d}{skaiciuoti\+NDVidurki}} (const std::\+vector$<$ int $>$ \&nd\+Pazymiai)
+double \doxymbox{\hyperlink{struktura_skaiciavimai_8h_a8cb967ce6b30ed3bfa21c6d755fa05ec}{skaiciuoti\+NDVidurki}} (const Vector$<$ int $>$ \&nd\+Pazymiai)
 \begin{DoxyCompactList}\small\item\em Apskaičiuoja namų darbų pažymių vidurkį. \end{DoxyCompactList}\item 
 double \doxymbox{\hyperlink{struktura_skaiciavimai_8h_aacc265d91dc6a49bcc01b79e0536ceb1}{skaiciuoti\+Galutini\+Vidurki}} (const Studentas \&studentas)
 \begin{DoxyCompactList}\small\item\em Apskaičiuoja galutinį pažymį pagal namų darbų vidurkį. \end{DoxyCompactList}\item 
-double \doxymbox{\hyperlink{struktura_skaiciavimai_8h_a9e4f8618d547baa3b13ca788d3b5e9c9}{skaiciuoti\+NDMediana}} (std::\+vector$<$ int $>$ nd\+Pazymiai)
+double \doxymbox{\hyperlink{struktura_skaiciavimai_8h_ad0399f9ddc36cbc0e3dc1c0973332665}{skaiciuoti\+NDMediana}} (Vector$<$ int $>$ nd\+Pazymiai)
 \begin{DoxyCompactList}\small\item\em Apskaičiuoja namų darbų pažymių medianą. \end{DoxyCompactList}\item 
 double \doxymbox{\hyperlink{struktura_skaiciavimai_8h_ae99728d04af15330779919983304c14c}{skaiciuoti\+Galutine\+Mediana}} (const Studentas \&studentas)
 \begin{DoxyCompactList}\small\item\em Apskaičiuoja galutinį pažymį pagal namų darbų medianą. \end{DoxyCompactList}\item 
@@ -24,9 +24,9 @@ double \doxymbox{\hyperlink{struktura_skaiciavimai_8h_ae99728d04af15330779919983
 \begin{DoxyCompactList}\small\item\em Sukuria palyginimo funkciją rikiavimui mažėjančia tvarka. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{struktura_skaiciavimai_8h_af67ca8beb094fdf915af4b1e63bc5600}{apskaiciuoti\+Galutini\+Pazymi}} (Studentas \&studentas, char skaiciavimo\+Metodo\+Pasirinkimas)
 \begin{DoxyCompactList}\small\item\em Apskaičiuoja ir nustato vieno studento galutinį pažymį. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{struktura_skaiciavimai_8h_a300b8caa14c3ed60a9fac185ca3d1bd0}{apskaiciuoti\+Galutinius\+Pazymius}} (std::\+vector$<$ Studentas $>$ \&studentu\+Sarasas, char skaiciavimo\+Metodo\+Pasirinkimas)
+void \doxymbox{\hyperlink{struktura_skaiciavimai_8h_ade4d55e517ec01295a72c46400305777}{apskaiciuoti\+Galutinius\+Pazymius}} (Vector$<$ Studentas $>$ \&studentu\+Sarasas, char skaiciavimo\+Metodo\+Pasirinkimas)
 \begin{DoxyCompactList}\small\item\em Apskaičiuoja ir nustato galutinius pažymius visiems studentams. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{struktura_skaiciavimai_8h_af843b95f1e12ee983568d705da9871d3}{suskirstyti\+Studentus}} (const std::\+vector$<$ Studentas $>$ \&studentu\+Sarasas, std::\+vector$<$ Studentas $>$ \&pazangiu\+Sarasas, std::\+vector$<$ Studentas $>$ \&silpnu\+Sarasas)
+void \doxymbox{\hyperlink{struktura_skaiciavimai_8h_a480709a710827b54dba72e2e26e98d04}{suskirstyti\+Studentus}} (const Vector$<$ Studentas $>$ \&studentu\+Sarasas, Vector$<$ Studentas $>$ \&pazangiu\+Sarasas, Vector$<$ Studentas $>$ \&silpnu\+Sarasas)
 \begin{DoxyCompactList}\small\item\em Suskirsto studentus į pažangius ir silpnus pagal galutinį pažymį. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -55,11 +55,11 @@ Apskaičiuoja ir nustato vieno studento galutinį pažymį.
 {\em skaiciavimo\+Metodo\+Pasirinkimas} & Skaičiavimo metodo pasirinkimas. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{struktura_skaiciavimai_8h_a300b8caa14c3ed60a9fac185ca3d1bd0}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!apskaiciuotiGalutiniusPazymius@{apskaiciuotiGalutiniusPazymius}}
+\Hypertarget{struktura_skaiciavimai_8h_ade4d55e517ec01295a72c46400305777}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!apskaiciuotiGalutiniusPazymius@{apskaiciuotiGalutiniusPazymius}}
 \index{apskaiciuotiGalutiniusPazymius@{apskaiciuotiGalutiniusPazymius}!strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}}
 \doxysubsubsection{\texorpdfstring{apskaiciuotiGalutiniusPazymius()}{apskaiciuotiGalutiniusPazymius()}}
-{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_a300b8caa14c3ed60a9fac185ca3d1bd0} 
-void apskaiciuoti\+Galutinius\+Pazymius (\begin{DoxyParamCaption}\item[{std::\+vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{char}]{skaiciavimo\+Metodo\+Pasirinkimas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_ade4d55e517ec01295a72c46400305777} 
+void apskaiciuoti\+Galutinius\+Pazymius (\begin{DoxyParamCaption}\item[{Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{char}]{skaiciavimo\+Metodo\+Pasirinkimas}{}\end{DoxyParamCaption})}
 
 
 
@@ -160,11 +160,11 @@ Apskaičiuoja galutinį pažymį pagal namų darbų vidurkį.
 \begin{DoxyReturn}{Gražina}
 Galutinis pažymys pagal vidurkį. 
 \end{DoxyReturn}
-\Hypertarget{struktura_skaiciavimai_8h_a9e4f8618d547baa3b13ca788d3b5e9c9}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!skaiciuotiNDMediana@{skaiciuotiNDMediana}}
+\Hypertarget{struktura_skaiciavimai_8h_ad0399f9ddc36cbc0e3dc1c0973332665}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!skaiciuotiNDMediana@{skaiciuotiNDMediana}}
 \index{skaiciuotiNDMediana@{skaiciuotiNDMediana}!strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}}
 \doxysubsubsection{\texorpdfstring{skaiciuotiNDMediana()}{skaiciuotiNDMediana()}}
-{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_a9e4f8618d547baa3b13ca788d3b5e9c9} 
-double skaiciuoti\+NDMediana (\begin{DoxyParamCaption}\item[{std::\+vector$<$ int $>$}]{nd\+Pazymiai}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_ad0399f9ddc36cbc0e3dc1c0973332665} 
+double skaiciuoti\+NDMediana (\begin{DoxyParamCaption}\item[{Vector$<$ int $>$}]{nd\+Pazymiai}{}\end{DoxyParamCaption})}
 
 
 
@@ -178,11 +178,11 @@ Apskaičiuoja namų darbų pažymių medianą.
 \begin{DoxyReturn}{Gražina}
 Namų darbų pažymių mediana. 
 \end{DoxyReturn}
-\Hypertarget{struktura_skaiciavimai_8h_ac8f927c97416854a108779ec5dad0f6d}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!skaiciuotiNDVidurki@{skaiciuotiNDVidurki}}
+\Hypertarget{struktura_skaiciavimai_8h_a8cb967ce6b30ed3bfa21c6d755fa05ec}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!skaiciuotiNDVidurki@{skaiciuotiNDVidurki}}
 \index{skaiciuotiNDVidurki@{skaiciuotiNDVidurki}!strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}}
 \doxysubsubsection{\texorpdfstring{skaiciuotiNDVidurki()}{skaiciuotiNDVidurki()}}
-{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_ac8f927c97416854a108779ec5dad0f6d} 
-double skaiciuoti\+NDVidurki (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ int $>$ \&}]{nd\+Pazymiai}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_a8cb967ce6b30ed3bfa21c6d755fa05ec} 
+double skaiciuoti\+NDVidurki (\begin{DoxyParamCaption}\item[{const Vector$<$ int $>$ \&}]{nd\+Pazymiai}{}\end{DoxyParamCaption})}
 
 
 
@@ -196,11 +196,11 @@ Apskaičiuoja namų darbų pažymių vidurkį.
 \begin{DoxyReturn}{Gražina}
 Namų darbų pažymių vidurkis. 
 \end{DoxyReturn}
-\Hypertarget{struktura_skaiciavimai_8h_af843b95f1e12ee983568d705da9871d3}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!suskirstytiStudentus@{suskirstytiStudentus}}
+\Hypertarget{struktura_skaiciavimai_8h_a480709a710827b54dba72e2e26e98d04}\index{strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}!suskirstytiStudentus@{suskirstytiStudentus}}
 \index{suskirstytiStudentus@{suskirstytiStudentus}!strukturaSkaiciavimai.h@{strukturaSkaiciavimai.h}}
 \doxysubsubsection{\texorpdfstring{suskirstytiStudentus()}{suskirstytiStudentus()}}
-{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_af843b95f1e12ee983568d705da9871d3} 
-void suskirstyti\+Studentus (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{std::\+vector$<$ Studentas $>$ \&}]{pazangiu\+Sarasas}{, }\item[{std::\+vector$<$ Studentas $>$ \&}]{silpnu\+Sarasas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_skaiciavimai_8h_a480709a710827b54dba72e2e26e98d04} 
+void suskirstyti\+Studentus (\begin{DoxyParamCaption}\item[{const Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{Vector$<$ Studentas $>$ \&}]{pazangiu\+Sarasas}{, }\item[{Vector$<$ Studentas $>$ \&}]{silpnu\+Sarasas}{}\end{DoxyParamCaption})}
 
 
 

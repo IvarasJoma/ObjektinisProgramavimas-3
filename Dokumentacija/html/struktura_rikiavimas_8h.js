@@ -1,5 +1,5 @@
 var struktura_rikiavimas_8h =
 [
-    [ "rikiuotiStudentus", "struktura_rikiavimas_8h.html#a7626763ae6ff75b024db43dccfe3988d", null ],
-    [ "rikiuotiSuskirstytusStudentus", "struktura_rikiavimas_8h.html#aa9a17512520cfa7b6808214c3cfb9cd0", null ]
+    [ "rikiuotiStudentus", "struktura_rikiavimas_8h.html#ab2ddc15f0545c18d5de918855bf7260f", null ],
+    [ "rikiuotiSuskirstytusStudentus", "struktura_rikiavimas_8h.html#a9e01c0b153526f83371d3b98f4ca3787", null ]
 ];

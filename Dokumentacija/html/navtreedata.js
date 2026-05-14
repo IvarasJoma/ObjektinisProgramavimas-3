@@ -24,22 +24,22 @@
 */
 var NAVTREE =
 [
-  [ "ObjektinisProgramavimas-2", "index.html", [
+  [ "ObjektinisProgramavimas-3", "index.html", [
+    [ "Concepts", "concepts.html", "concepts" ],
     [ "Klasės", "annotated.html", [
       [ "Klasės", "annotated.html", "annotated_dup" ],
       [ "Klasės Indeksas", "classes.html", null ],
       [ "Klasių Nariai", "functions.html", [
         [ "Visi", "functions.html", null ],
-        [ "Kintamieji", "functions_vars.html", null ]
+        [ "Funkcijos", "functions_func.html", null ],
+        [ "Tipų apibrėžimai", "functions_type.html", null ]
       ] ]
     ] ],
     [ "Failai", "files.html", [
       [ "Failai", "files.html", "files_dup" ],
       [ "Failų Nariai", "globals.html", [
         [ "Visi", "globals.html", null ],
-        [ "Funkcijos", "globals_func.html", null ],
-        [ "Kintamieji", "globals_vars.html", null ],
-        [ "Tipų apibrėžimai", "globals_type.html", null ]
+        [ "Funkcijos", "globals_func.html", null ]
       ] ]
     ] ]
   ] ]
@@ -47,7 +47,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_failai_8h.html"
+"_vector_8h.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

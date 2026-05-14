@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['lygintielementuspagaldidejanciareiksme_0',['lygintiElementusPagalDidejanciaReiksme',['../struktura_skaiciavimai_8h.html#a43a62cd63fe0a62ece3d3ae6f2099ae2',1,'strukturaSkaiciavimai.h']]],
-  ['lygintielementuspagalmazejanciareiksme_1',['lygintiElementusPagalMazejanciaReiksme',['../struktura_skaiciavimai_8h.html#ad1981b78751754058b3f2e36beb9f60a',1,'strukturaSkaiciavimai.h']]]
+  ['data_0',['data',['../class_vector.html#ae153d7d061e5d4c5e8b857bccdc3d92f',1,'Vector::data() noexcept'],['../class_vector.html#a7a0a30580df4155cd793623ee50ddf50',1,'Vector::data() const noexcept']]]
 ];

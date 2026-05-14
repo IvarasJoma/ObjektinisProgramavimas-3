@@ -11,22 +11,22 @@ Funkcijos darbui su tekstiniais failais ir studentų duomenų nuskaitymu bei įr
 \doxysubsubsection*{Funkcijos}
 \begin{DoxyCompactItemize}
 \item 
-std::\+vector$<$ std::\+string $>$ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a98b203bf31f320046cc5064fa6fc4b7d}{nuskaityti\+Eilutes\+IVektoriu}} (const std::\+string \&failas)
+Vector$<$ std::\+string $>$ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a7f0a568a0e453ba199ed06ac4d2d890f}{nuskaityti\+Eilutes\+IVektoriu}} (const std::\+string \&failas)
 \begin{DoxyCompactList}\small\item\em Nuskaito visas tekstinio failo eilutes į string tipo vektorių. \end{DoxyCompactList}\item 
-std::\+vector$<$ Studentas $>$ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a710c2dbafd713cd41bb6c409eee1b37c}{nuskaityti\+Studentu\+Duomenis\+Is\+Failo}} (const std::\+string \&failas)
+Vector$<$ Studentas $>$ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a28e768340d699119efb30aa14330c54f}{nuskaityti\+Studentu\+Duomenis\+Is\+Failo}} (const std::\+string \&failas)
 \begin{DoxyCompactList}\small\item\em Nuskaito studentų duomenis iš failo į vektorių. \end{DoxyCompactList}\item 
 \Hypertarget{struktura_darbas_su_failais_8h_a485cd8f8c03a3c3f4d4cb1b4dd267c3c}\label{struktura_darbas_su_failais_8h_a485cd8f8c03a3c3f4d4cb1b4dd267c3c} 
 void {\bfseries vykdyti\+Nuskaityma\+Is\+Failo} ()
 \begin{DoxyCompactList}\small\item\em Vykdo studentų duomenų nuskaitymo iš failo scenarijų. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a34dd856e15df627f61ab9819f703819e}{irasyti\+Duomenis}} (std::\+vector$<$ Studentas $>$ \&studentu\+Sarasas)
+void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a5671f579a0dfb18eb006b80d23bab568}{irasyti\+Duomenis}} (Vector$<$ Studentas $>$ \&studentu\+Sarasas)
 \begin{DoxyCompactList}\small\item\em Įrašo studentų duomenis pagal pasirinktą išvedimo scenarijų. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a185551ed9b9296aece65dd5b1870f712}{irasyti\+Studentu\+Duomenis\+IFaila}} (const std::\+vector$<$ Studentas $>$ \&studentu\+Sarasas, const std::\+string \&failo\+Pavadinimas)
+void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_afe4fdf8043f3868aff25dc9cce8002a3}{irasyti\+Studentu\+Duomenis\+IFaila}} (const Vector$<$ Studentas $>$ \&studentu\+Sarasas, const std::\+string \&failo\+Pavadinimas)
 \begin{DoxyCompactList}\small\item\em Įrašo studentų sąrašą į nurodytą failą. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a578966f0c23a382fefb62b4f9785afe8}{vykdyti\+Skirstyma\+IFailus}} (std::\+vector$<$ Studentas $>$ \&studentu\+Sarasas)
+void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_adacfb841cbff46295427b77466fd691c}{vykdyti\+Skirstyma\+IFailus}} (Vector$<$ Studentas $>$ \&studentu\+Sarasas)
 \begin{DoxyCompactList}\small\item\em Vykdo studentų skirstymą į atskirus failus. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_ab0f6aaabf3f1ac4568fa7f431471a849}{irasyti\+Suskirstytus\+Studentus\+IFailus}} (const std::\+vector$<$ Studentas $>$ \&pazangiu\+Sarasas, const std::\+vector$<$ Studentas $>$ \&silpnu\+Sarasas, const char \&skaiciavimo\+Metodo\+Pasirinkimas)
+void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a6cd1d0302b4384d1f3e450c2d6f5cd7a}{irasyti\+Suskirstytus\+Studentus\+IFailus}} (const Vector$<$ Studentas $>$ \&pazangiu\+Sarasas, const Vector$<$ Studentas $>$ \&silpnu\+Sarasas, const char \&skaiciavimo\+Metodo\+Pasirinkimas)
 \begin{DoxyCompactList}\small\item\em Įrašo pažangius ir silpnus studentus į atskirus failus. \end{DoxyCompactList}\item 
-std::\+vector$<$ std::\+filesystem::\+path $>$ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a80f213b029d2d4979c729a8c0904ea9b}{gauti\+Tekstinius\+Failus}} (const std::\+string \&katalogas)
+Vector$<$ std::\+filesystem::\+path $>$ \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_aa8beb3cd1dc899087528b055f1486573}{gauti\+Tekstinius\+Failus}} (const std::\+string \&katalogas)
 \begin{DoxyCompactList}\small\item\em Grąžina visus tekstinius failus iš nurodyto katalogo. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a2f7e70283762ac3ae14dbc06cb5c303c}{praleisti\+Tarpa\+Is\+Failo}} (const char \texorpdfstring{$\ast$}{*}\&rodykle)
 \begin{DoxyCompactList}\small\item\em Praleidžia tarpo simbolius skaitant tekstą iš simbolių rodyklės. \end{DoxyCompactList}\item 
@@ -34,7 +34,7 @@ bool \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a90cb36e798bccc7b6270da
 \begin{DoxyCompactList}\small\item\em Nuskaito vieną žodį iš simbolių rodyklės. \end{DoxyCompactList}\item 
 bool \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a015e93e433801e64fd45324591956223}{nuskaityti\+Sveika\+Skaiciu\+Is\+Failo}} (const char \texorpdfstring{$\ast$}{*}\&rodykle, int \&x)
 \begin{DoxyCompactList}\small\item\em Nuskaito sveikąjį skaičių iš simbolių rodyklės. \end{DoxyCompactList}\item 
-void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a0edac601a356507b16cb34220d8c7ae1}{nuskaityti\+Duomenis}} (int pasirinkimas\+Nuskaitymo, std::\+vector$<$ Studentas $>$ \&studentu\+Sarasas, const std::\+string \&katalogas)
+void \doxymbox{\hyperlink{struktura_darbas_su_failais_8h_a1e5a4ff2c464063f8e746fe754d772c2}{nuskaityti\+Duomenis}} (int pasirinkimas\+Nuskaitymo, Vector$<$ Studentas $>$ \&studentu\+Sarasas, const std::\+string \&katalogas)
 \begin{DoxyCompactList}\small\item\em Nuskaito studentų duomenis pagal pasirinktą failą iš katalogo. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -46,11 +46,11 @@ Funkcijos darbui su tekstiniais failais ir studentų duomenų nuskaitymu bei įr
 \label{struktura_darbas_su_failais_8h_doc-func-members}
 \Hypertarget{struktura_darbas_su_failais_8h_doc-func-members}
 \doxysubsection{Funkcijos Dokumentacija}
-\Hypertarget{struktura_darbas_su_failais_8h_a80f213b029d2d4979c729a8c0904ea9b}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!gautiTekstiniusFailus@{gautiTekstiniusFailus}}
+\Hypertarget{struktura_darbas_su_failais_8h_aa8beb3cd1dc899087528b055f1486573}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!gautiTekstiniusFailus@{gautiTekstiniusFailus}}
 \index{gautiTekstiniusFailus@{gautiTekstiniusFailus}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{gautiTekstiniusFailus()}{gautiTekstiniusFailus()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a80f213b029d2d4979c729a8c0904ea9b} 
-std::\+vector$<$ std::\+filesystem::\+path $>$ gauti\+Tekstinius\+Failus (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{katalogas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_aa8beb3cd1dc899087528b055f1486573} 
+Vector$<$ std::\+filesystem::\+path $>$ gauti\+Tekstinius\+Failus (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{katalogas}{}\end{DoxyParamCaption})}
 
 
 
@@ -64,11 +64,11 @@ Grąžina visus tekstinius failus iš nurodyto katalogo.
 \begin{DoxyReturn}{Gražina}
 Tekstinių failų kelių vektorius. 
 \end{DoxyReturn}
-\Hypertarget{struktura_darbas_su_failais_8h_a34dd856e15df627f61ab9819f703819e}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!irasytiDuomenis@{irasytiDuomenis}}
+\Hypertarget{struktura_darbas_su_failais_8h_a5671f579a0dfb18eb006b80d23bab568}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!irasytiDuomenis@{irasytiDuomenis}}
 \index{irasytiDuomenis@{irasytiDuomenis}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{irasytiDuomenis()}{irasytiDuomenis()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a34dd856e15df627f61ab9819f703819e} 
-void irasyti\+Duomenis (\begin{DoxyParamCaption}\item[{std::\+vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a5671f579a0dfb18eb006b80d23bab568} 
+void irasyti\+Duomenis (\begin{DoxyParamCaption}\item[{Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{}\end{DoxyParamCaption})}
 
 
 
@@ -79,11 +79,11 @@ void irasyti\+Duomenis (\begin{DoxyParamCaption}\item[{std::\+vector$<$ Studenta
 {\em studentu\+Sarasas} & Studentų sąrašas. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{struktura_darbas_su_failais_8h_a185551ed9b9296aece65dd5b1870f712}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!irasytiStudentuDuomenisIFaila@{irasytiStudentuDuomenisIFaila}}
+\Hypertarget{struktura_darbas_su_failais_8h_afe4fdf8043f3868aff25dc9cce8002a3}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!irasytiStudentuDuomenisIFaila@{irasytiStudentuDuomenisIFaila}}
 \index{irasytiStudentuDuomenisIFaila@{irasytiStudentuDuomenisIFaila}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{irasytiStudentuDuomenisIFaila()}{irasytiStudentuDuomenisIFaila()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a185551ed9b9296aece65dd5b1870f712} 
-void irasyti\+Studentu\+Duomenis\+IFaila (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{const std::\+string \&}]{failo\+Pavadinimas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_afe4fdf8043f3868aff25dc9cce8002a3} 
+void irasyti\+Studentu\+Duomenis\+IFaila (\begin{DoxyParamCaption}\item[{const Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{const std::\+string \&}]{failo\+Pavadinimas}{}\end{DoxyParamCaption})}
 
 
 
@@ -96,11 +96,11 @@ void irasyti\+Studentu\+Duomenis\+IFaila (\begin{DoxyParamCaption}\item[{const s
 {\em failo\+Pavadinimas} & Išvesties failo pavadinimas. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{struktura_darbas_su_failais_8h_ab0f6aaabf3f1ac4568fa7f431471a849}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!irasytiSuskirstytusStudentusIFailus@{irasytiSuskirstytusStudentusIFailus}}
+\Hypertarget{struktura_darbas_su_failais_8h_a6cd1d0302b4384d1f3e450c2d6f5cd7a}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!irasytiSuskirstytusStudentusIFailus@{irasytiSuskirstytusStudentusIFailus}}
 \index{irasytiSuskirstytusStudentusIFailus@{irasytiSuskirstytusStudentusIFailus}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{irasytiSuskirstytusStudentusIFailus()}{irasytiSuskirstytusStudentusIFailus()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_ab0f6aaabf3f1ac4568fa7f431471a849} 
-void irasyti\+Suskirstytus\+Studentus\+IFailus (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ Studentas $>$ \&}]{pazangiu\+Sarasas}{, }\item[{const std::\+vector$<$ Studentas $>$ \&}]{silpnu\+Sarasas}{, }\item[{const char \&}]{skaiciavimo\+Metodo\+Pasirinkimas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a6cd1d0302b4384d1f3e450c2d6f5cd7a} 
+void irasyti\+Suskirstytus\+Studentus\+IFailus (\begin{DoxyParamCaption}\item[{const Vector$<$ Studentas $>$ \&}]{pazangiu\+Sarasas}{, }\item[{const Vector$<$ Studentas $>$ \&}]{silpnu\+Sarasas}{, }\item[{const char \&}]{skaiciavimo\+Metodo\+Pasirinkimas}{}\end{DoxyParamCaption})}
 
 
 
@@ -115,11 +115,11 @@ void irasyti\+Suskirstytus\+Studentus\+IFailus (\begin{DoxyParamCaption}\item[{c
 {\em skaiciavimo\+Metodo\+Pasirinkimas} & Galutinio pažymio skaičiavimo metodas. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{struktura_darbas_su_failais_8h_a0edac601a356507b16cb34220d8c7ae1}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!nuskaitytiDuomenis@{nuskaitytiDuomenis}}
+\Hypertarget{struktura_darbas_su_failais_8h_a1e5a4ff2c464063f8e746fe754d772c2}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!nuskaitytiDuomenis@{nuskaitytiDuomenis}}
 \index{nuskaitytiDuomenis@{nuskaitytiDuomenis}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{nuskaitytiDuomenis()}{nuskaitytiDuomenis()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a0edac601a356507b16cb34220d8c7ae1} 
-void nuskaityti\+Duomenis (\begin{DoxyParamCaption}\item[{int}]{pasirinkimas\+Nuskaitymo}{, }\item[{std::\+vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{const std::\+string \&}]{katalogas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a1e5a4ff2c464063f8e746fe754d772c2} 
+void nuskaityti\+Duomenis (\begin{DoxyParamCaption}\item[{int}]{pasirinkimas\+Nuskaitymo}{, }\item[{Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{, }\item[{const std::\+string \&}]{katalogas}{}\end{DoxyParamCaption})}
 
 
 
@@ -134,11 +134,11 @@ Nuskaito studentų duomenis pagal pasirinktą failą iš katalogo.
 {\em katalogas} & Katalogas, kuriame ieškoma tekstinių failų. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{struktura_darbas_su_failais_8h_a98b203bf31f320046cc5064fa6fc4b7d}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!nuskaitytiEilutesIVektoriu@{nuskaitytiEilutesIVektoriu}}
+\Hypertarget{struktura_darbas_su_failais_8h_a7f0a568a0e453ba199ed06ac4d2d890f}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!nuskaitytiEilutesIVektoriu@{nuskaitytiEilutesIVektoriu}}
 \index{nuskaitytiEilutesIVektoriu@{nuskaitytiEilutesIVektoriu}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{nuskaitytiEilutesIVektoriu()}{nuskaitytiEilutesIVektoriu()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a98b203bf31f320046cc5064fa6fc4b7d} 
-std::\+vector$<$ std::\+string $>$ nuskaityti\+Eilutes\+IVektoriu (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{failas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a7f0a568a0e453ba199ed06ac4d2d890f} 
+Vector$<$ std::\+string $>$ nuskaityti\+Eilutes\+IVektoriu (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{failas}{}\end{DoxyParamCaption})}
 
 
 
@@ -152,11 +152,11 @@ Nuskaito visas tekstinio failo eilutes į string tipo vektorių.
 \begin{DoxyReturn}{Gražina}
 Vektorius su nuskaitytomis eilutėmis. 
 \end{DoxyReturn}
-\Hypertarget{struktura_darbas_su_failais_8h_a710c2dbafd713cd41bb6c409eee1b37c}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!nuskaitytiStudentuDuomenisIsFailo@{nuskaitytiStudentuDuomenisIsFailo}}
+\Hypertarget{struktura_darbas_su_failais_8h_a28e768340d699119efb30aa14330c54f}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!nuskaitytiStudentuDuomenisIsFailo@{nuskaitytiStudentuDuomenisIsFailo}}
 \index{nuskaitytiStudentuDuomenisIsFailo@{nuskaitytiStudentuDuomenisIsFailo}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{nuskaitytiStudentuDuomenisIsFailo()}{nuskaitytiStudentuDuomenisIsFailo()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a710c2dbafd713cd41bb6c409eee1b37c} 
-std::\+vector$<$ Studentas $>$ nuskaityti\+Studentu\+Duomenis\+Is\+Failo (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{failas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a28e768340d699119efb30aa14330c54f} 
+Vector$<$ Studentas $>$ nuskaityti\+Studentu\+Duomenis\+Is\+Failo (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{failas}{}\end{DoxyParamCaption})}
 
 
 
@@ -225,11 +225,11 @@ Praleidžia tarpo simbolius skaitant tekstą iš simbolių rodyklės.
 {\em rodykle} & Rodyklė į einamąją teksto poziciją. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{struktura_darbas_su_failais_8h_a578966f0c23a382fefb62b4f9785afe8}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!vykdytiSkirstymaIFailus@{vykdytiSkirstymaIFailus}}
+\Hypertarget{struktura_darbas_su_failais_8h_adacfb841cbff46295427b77466fd691c}\index{strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}!vykdytiSkirstymaIFailus@{vykdytiSkirstymaIFailus}}
 \index{vykdytiSkirstymaIFailus@{vykdytiSkirstymaIFailus}!strukturaDarbasSuFailais.h@{strukturaDarbasSuFailais.h}}
 \doxysubsubsection{\texorpdfstring{vykdytiSkirstymaIFailus()}{vykdytiSkirstymaIFailus()}}
-{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_a578966f0c23a382fefb62b4f9785afe8} 
-void vykdyti\+Skirstyma\+IFailus (\begin{DoxyParamCaption}\item[{std::\+vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{struktura_darbas_su_failais_8h_adacfb841cbff46295427b77466fd691c} 
+void vykdyti\+Skirstyma\+IFailus (\begin{DoxyParamCaption}\item[{Vector$<$ Studentas $>$ \&}]{studentu\+Sarasas}{}\end{DoxyParamCaption})}
 
 
 
