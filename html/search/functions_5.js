@@ -1,9 +1,4 @@
 var searchData=
 [
-  ['parinktirikiavimobudus_0',['parinktiRikiavimoBudus',['../struktura_ivestis_8h.html#a4a7c80a4d60a43e9957583c4bc600b1f',1,'strukturaIvestis.h']]],
-  ['parodytirezultatulentele_1',['parodytiRezultatuLentele',['../struktura_isvestis_8h.html#aea6673d3d6ae972d56d26d247385d715',1,'strukturaIsvestis.h']]],
-  ['parodytistudentus_2',['parodytiStudentus',['../struktura_isvestis_8h.html#a5b6182f8cc2eb0ac999e50d3b8ae40b8',1,'strukturaIsvestis.h']]],
-  ['patvirtintinaujostudentopridejima_3',['patvirtintiNaujoStudentoPridejima',['../struktura_ivestis_8h.html#a11a5c2f8c383f707d6097a323ce74771',1,'strukturaIvestis.h']]],
-  ['perkeltistudentus_4',['perkeltiStudentus',['../_sablonines_funkcijos_8h.html#af8e70ef1d02a8a6404e3f0bc9729c0e9',1,'SabloninesFunkcijos.h']]],
-  ['praleistitarpaisfailo_5',['praleistiTarpaIsFailo',['../struktura_darbas_su_failais_8h.html#a2f7e70283762ac3ae14dbc06cb5c303c',1,'strukturaDarbasSuFailais.h']]]
+  ['front_0',['front',['../class_vector.html#a2f2e14b2a9a0041c783b5ad44dd59593',1,'Vector::front()'],['../class_vector.html#a78dc531e4c79c33f8e7d4574a155f529',1,'Vector::front() const']]]
 ];

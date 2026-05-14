@@ -1,16 +1,15 @@
 var searchData=
 [
-  ['vykdytiantrajakonteineriutestavimostrategija_0',['vykdytiAntrajaKonteineriuTestavimoStrategija',['../struktura_testavimas_8h.html#a37023fcdd0ca6ffb0e8da3b6d37ce3ea',1,'strukturaTestavimas.h']]],
-  ['vykdytiduomenuapdorojimotestavima_1',['vykdytiDuomenuApdorojimoTestavima',['../struktura_testavimas_8h.html#ac938eee83905061a8d0184c4231b819c',1,'strukturaTestavimas.h']]],
-  ['vykdytiirasymaifaila_2',['vykdytiIrasymaIFaila',['../struktura_isvestis_8h.html#a558ec181ccdfa86bc93c3590047a226c',1,'strukturaIsvestis.h']]],
-  ['vykdytiisvedimotestavima_3',['vykdytiIsvedimoTestavima',['../struktura_testavimas_8h.html#abe7eaf9df46ff87e74ad140fdbc8a4a6',1,'strukturaTestavimas.h']]],
-  ['vykdytiivedimotestavima_4',['vykdytiIvedimoTestavima',['../struktura_testavimas_8h.html#a0f3a50e06a879a6a5f00a7809f4066fb',1,'strukturaTestavimas.h']]],
-  ['vykdytinulintajakonteineriutestavimostrategija_5',['vykdytiNulintajaKonteineriuTestavimoStrategija',['../struktura_testavimas_8h.html#aec3d72db97b842c3e7ef7e6b79cd94c5',1,'strukturaTestavimas.h']]],
-  ['vykdytinuskaitymaisfailo_6',['vykdytiNuskaitymaIsFailo',['../struktura_darbas_su_failais_8h.html#a485cd8f8c03a3c3f4d4cb1b4dd267c3c',1,'strukturaDarbasSuFailais.h']]],
-  ['vykdytipilnageneravima_7',['vykdytiPilnaGeneravima',['../struktura_ivestis_8h.html#a4334241ec0fc3b6a4627da459271a13a',1,'strukturaIvestis.h']]],
-  ['vykdytipirmajakonteineriutestavimostrategija_8',['vykdytiPirmajaKonteineriuTestavimoStrategija',['../struktura_testavimas_8h.html#a70ad9ce1434446367a5b90e78e2ca121',1,'strukturaTestavimas.h']]],
-  ['vykdytiskirstymaifailus_9',['vykdytiSkirstymaIFailus',['../struktura_darbas_su_failais_8h.html#adacfb841cbff46295427b77466fd691c',1,'strukturaDarbasSuFailais.h']]],
-  ['vykdytistudentuivedima_10',['vykdytiStudentuIvedima',['../struktura_ivestis_8h.html#ae98fd1ab85819f303adf91f3e3e97641',1,'strukturaIvestis.h']]],
-  ['vykdytitreciajakonteineriutestavimostrategija_11',['vykdytiTreciajaKonteineriuTestavimoStrategija',['../struktura_testavimas_8h.html#a28466a85efc66fd5fc0eabf20ae30a53',1,'strukturaTestavimas.h']]],
-  ['vykdytitreciajakonteineriutestavimostrategijatiksuvektoriais_12',['vykdytiTreciajaKonteineriuTestavimoStrategijaTikSuVektoriais',['../struktura_testavimas_8h.html#a0884fee05d655560f6fa7a2cc87749ab',1,'strukturaTestavimas.h']]]
+  ['operator_20std_3a_3aspan_3c_20const_20t_20_3e_0',['span&lt; const T &gt;',['../class_vector.html#aa37f30f44dcc6646277b7986d84e1b45',1,'Vector']]],
+  ['operator_20std_3a_3aspan_3c_20t_20_3e_1',['span&lt; T &gt;',['../class_vector.html#af8092d8220cd2a0c1fca6ee2a8e8d62d',1,'Vector']]],
+  ['operator_20std_3a_3avector_3c_20t_20_3e_2',['vector&lt; T &gt;',['../class_vector.html#ad558d02bbae36ed3bb982d22f1afde59',1,'Vector']]],
+  ['operator_21_3d_3',['operator!=',['../class_vector.html#aeb226de8807a211671abc6864858bf6b',1,'Vector']]],
+  ['operator_3c_4',['operator&lt;',['../class_vector.html#abd4fc7036719f7a2d6603d314382b89d',1,'Vector']]],
+  ['operator_3c_3d_5',['operator&lt;=',['../class_vector.html#aacfd8d2dffb899bc87935b062a5693b4',1,'Vector']]],
+  ['operator_3c_3d_3e_6',['operator&lt;=&gt;',['../class_vector.html#ad5c8511e401075762c6f72f92d827db0',1,'Vector']]],
+  ['operator_3d_7',['operator=',['../class_vector.html#a2fe37b54a47d28015829196cb5abec05',1,'Vector::operator=(const Vector &amp;other)'],['../class_vector.html#ac7a5d1c7410208d7ce8f13497e31dd87',1,'Vector::operator=(Vector &amp;&amp;other) noexcept'],['../class_vector.html#ac40bd041feba192fce001dea39d5e820',1,'Vector::operator=(std::initializer_list&lt; T &gt; il)']]],
+  ['operator_3d_3d_8',['operator==',['../class_vector.html#a1b2b4d9dc3df91e091a709322b76859a',1,'Vector']]],
+  ['operator_3e_9',['operator&gt;',['../class_vector.html#aba5a2729dbecd9873a9d4f7b2d0d2ce7',1,'Vector']]],
+  ['operator_3e_3d_10',['operator&gt;=',['../class_vector.html#aa52b8c5b80c74523303491db09fb4636',1,'Vector']]],
+  ['operator_5b_5d_11',['operator[]',['../class_vector.html#a65cbd2b5b3b33d0d10ec2ee06047286c',1,'Vector::operator[](size_type n)'],['../class_vector.html#aa481e20d0337a65066f767ba1fe58b01',1,'Vector::operator[](size_type n) const']]]
 ];

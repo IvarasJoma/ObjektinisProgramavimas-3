@@ -1,0 +1,30 @@
+\doxysection{Vector\+Element Concept Reference}
+\hypertarget{concept_vector_element}{}\label{concept_vector_element}\index{VectorElement@{VectorElement}}
+
+
+Sąvoka, reikalaujanti, kad tipas {\ttfamily T} būtų perkeliamas ({\ttfamily std::\+movable}).  
+
+
+
+
+{\ttfamily \+\#include $<$Vector.\+h$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{concept_vector_element}{VectorElement}}\ =\ std::movable<T>}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Smulkus aprašymas}
+Sąvoka, reikalaujanti, kad tipas {\ttfamily T} būtų perkeliamas ({\ttfamily std::\+movable}). 
+
+Tik tokie tipai gali būti {\ttfamily \doxylink{class_vector}{Vector}} elementais.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tikrinamas tipas. \\
+\hline
+\end{DoxyTemplParams}

@@ -1,0 +1,145 @@
+\doxysection{Vector.\+h Failo Nuoroda}
+\hypertarget{_vector_8h}{}\label{_vector_8h}\index{Vector.h@{Vector.h}}
+
+
+Dinaminio masyvo šabloninė klasė, analogiška {\ttfamily std::\+vector}.  
+
+
+{\ttfamily \+\#include $<$algorithm$>$}\newline
+{\ttfamily \+\#include $<$compare$>$}\newline
+{\ttfamily \+\#include $<$concepts$>$}\newline
+{\ttfamily \+\#include $<$initializer\+\_\+list$>$}\newline
+{\ttfamily \+\#include $<$iterator$>$}\newline
+{\ttfamily \+\#include $<$limits$>$}\newline
+{\ttfamily \+\#include $<$memory$>$}\newline
+{\ttfamily \+\#include $<$span$>$}\newline
+{\ttfamily \+\#include $<$stdexcept$>$}\newline
+{\ttfamily \+\#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \+\#include $<$vector$>$}\newline
+\doxysubsubsection*{Klasės}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_vector}{Vector$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Dinaminio masyvo šabloninė klasė. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \doxymbox{\hyperlink{concept_vector_element}{Vector\+Element}}
+\begin{DoxyCompactList}\small\item\em Sąvoka, reikalaujanti, kad tipas {\ttfamily T} būtų perkeliamas ({\ttfamily std::\+movable}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcijos}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{concept_vector_element}{Vector\+Element}} T$>$ }\\void \doxymbox{\hyperlink{_vector_8h_a121f6c55e3c9b59ade573ea0294fd971}{swap}} (\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&a, \doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&b) noexcept
+\begin{DoxyCompactList}\small\item\em Nenarė funkcija keitimuisi dviem {\ttfamily \doxylink{class_vector}{Vector}} objektais. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{concept_vector_element}{Vector\+Element}} T, typename U$>$ }\\\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$::\+size\+\_\+type \doxymbox{\hyperlink{_vector_8h_a3297703efdca3aff7e9ea1e680052349}{erase}} (\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&v, const U \&value)
+\begin{DoxyCompactList}\small\item\em Pašalina visus elementus, lygius {\ttfamily value} (C++20). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{concept_vector_element}{Vector\+Element}} T, typename Pred$>$ }\\\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$::\+size\+\_\+type \doxymbox{\hyperlink{_vector_8h_af01bc0b74814c266c3cf8fb19e3d8ba5}{erase\+\_\+if}} (\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&v, Pred pred)
+\begin{DoxyCompactList}\small\item\em Pašalina visus elementus, tenkinančius predikato sąlygą (C++20). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Smulkus aprašymas}
+Dinaminio masyvo šabloninė klasė, analogiška {\ttfamily std::\+vector}. 
+
+Šiame faile apibrėžta {\ttfamily \doxylink{class_vector}{Vector}\texorpdfstring{$<$}{<}T\texorpdfstring{$>$}{>}} klasė — pilnavertis dinaminis masyvas, suderinamas su C++20/\+23 standartais. Palaikomi:\+
+\begin{DoxyItemize}
+\item pilnas iteratorių rinkinys (tiesioginiai ir atvirkštiniai),
+\item {\ttfamily emplace\+\_\+back}, {\ttfamily insert}, {\ttfamily \doxylink{_vector_8h_a3297703efdca3aff7e9ea1e680052349}{erase}} su stipria išimčių garantija,
+\item C++20 trijų krypčių palyginimo operatorius ({\ttfamily \texorpdfstring{$<$}{<}=\texorpdfstring{$>$}{>}}),
+\item C++23 operacijos {\ttfamily append\+\_\+range}, {\ttfamily assign\+\_\+range}, {\ttfamily insert\+\_\+range}.
+\end{DoxyItemize}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Elementų tipas; turi tenkinti {\ttfamily \doxylink{concept_vector_element}{Vector\+Element}} sąvoką (t.\+y. būti perkeliamas). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{_vector_8h_doc-func-members}
+\Hypertarget{_vector_8h_doc-func-members}
+\doxysubsection{Funkcijos Dokumentacija}
+\Hypertarget{_vector_8h_a3297703efdca3aff7e9ea1e680052349}\index{Vector.h@{Vector.h}!erase@{erase}}
+\index{erase@{erase}!Vector.h@{Vector.h}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily \label{_vector_8h_a3297703efdca3aff7e9ea1e680052349} 
+template$<$\doxymbox{\hyperlink{concept_vector_element}{Vector\+Element}} T, typename U$>$ \\
+\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$::\+size\+\_\+type erase (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&}]{v}{, }\item[{const U \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Pašalina visus elementus, lygius {\ttfamily value} (C++20). 
+
+Viduje naudoja {\ttfamily std::\+remove} + {\ttfamily \doxylink{class_vector_ac8ed1c29958e6ec5f9c493e6184cc2fc}{Vector::\+erase}}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Elementų tipas. \\
+\hline
+{\em U} & Lyginamos reikšmės tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em v} & Masyvas, iš kurio šalinama. \\
+\hline
+{\em value} & Reikšmė, kurią atitinkantys elementai šalinami. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Pašalintų elementų skaičius. 
+\end{DoxyReturn}
+\Hypertarget{_vector_8h_af01bc0b74814c266c3cf8fb19e3d8ba5}\index{Vector.h@{Vector.h}!erase\_if@{erase\_if}}
+\index{erase\_if@{erase\_if}!Vector.h@{Vector.h}}
+\doxysubsubsection{\texorpdfstring{erase\_if()}{erase\_if()}}
+{\footnotesize\ttfamily \label{_vector_8h_af01bc0b74814c266c3cf8fb19e3d8ba5} 
+template$<$\doxymbox{\hyperlink{concept_vector_element}{Vector\+Element}} T, typename Pred$>$ \\
+\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$::\+size\+\_\+type erase\+\_\+if (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&}]{v}{, }\item[{Pred}]{pred}{}\end{DoxyParamCaption})}
+
+
+
+Pašalina visus elementus, tenkinančius predikato sąlygą (C++20). 
+
+Viduje naudoja {\ttfamily std::\+remove\+\_\+if} + {\ttfamily \doxylink{class_vector_ac8ed1c29958e6ec5f9c493e6184cc2fc}{Vector::\+erase}}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Elementų tipas. \\
+\hline
+{\em Pred} & Unarinio predikato tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em v} & Masyvas, iš kurio šalinama. \\
+\hline
+{\em pred} & Predikatas; elementas šalinamas, jei {\ttfamily pred(elem)} grąžina {\ttfamily true}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Gražina}
+Pašalintų elementų skaičius. 
+\end{DoxyReturn}
+\Hypertarget{_vector_8h_a121f6c55e3c9b59ade573ea0294fd971}\index{Vector.h@{Vector.h}!swap@{swap}}
+\index{swap@{swap}!Vector.h@{Vector.h}}
+\doxysubsubsection{\texorpdfstring{swap()}{swap()}}
+{\footnotesize\ttfamily \label{_vector_8h_a121f6c55e3c9b59ade573ea0294fd971} 
+template$<$\doxymbox{\hyperlink{concept_vector_element}{Vector\+Element}} T$>$ \\
+void swap (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&}]{a}{, }\item[{\doxymbox{\hyperlink{class_vector}{Vector}}$<$ T $>$ \&}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Nenarė funkcija keitimuisi dviem {\ttfamily \doxylink{class_vector}{Vector}} objektais. 
+
+Iškviečia {\ttfamily a.\+swap(b)}, O(1) sudėtingumas.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Elementų tipas. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parametrai}
+{\em a} & Pirmas masyvas. \\
+\hline
+{\em b} & Antras masyvas. \\
+\hline
+\end{DoxyParams}

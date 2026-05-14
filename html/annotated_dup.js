@@ -1,5 +1,4 @@
 var annotated_dup =
 [
-    [ "Failai", "struct_failai.html", null ],
-    [ "TestoLaikai", "struct_testo_laikai.html", "struct_testo_laikai" ]
+    [ "Vector", "class_vector.html", "class_vector" ]
 ];
