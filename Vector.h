@@ -416,19 +416,31 @@ public:
 
     // ── Iteratoriai ───────────────────────────────────────────────────────────
 
-    iterator       begin()        noexcept { return dat; }
-    const_iterator begin()  const noexcept { return dat; }
-    const_iterator cbegin() const noexcept { return dat; }
-    iterator       end()          noexcept { return avail; }
-    const_iterator end()    const noexcept { return avail; }
-    const_iterator cend()   const noexcept { return avail; }
+    /** @brief Iteratorius į pirmą elementą. */
+iterator       begin()        noexcept { return dat; }
+/** @brief Konstantinis iteratorius į pirmą elementą. */
+const_iterator begin()  const noexcept { return dat; }
+/** @brief Konstantinis iteratorius į pirmą elementą. */
+const_iterator cbegin() const noexcept { return dat; }
+/** @brief Iteratorius po paskutinio elemento. */
+iterator       end()          noexcept { return avail; }
+/** @brief Konstantinis iteratorius po paskutinio elemento. */
+const_iterator end()    const noexcept { return avail; }
+/** @brief Konstantinis iteratorius po paskutinio elemento. */
+const_iterator cend()   const noexcept { return avail; }
 
-    reverse_iterator       rbegin()        noexcept { return reverse_iterator(end()); }
-    const_reverse_iterator rbegin()  const noexcept { return const_reverse_iterator(end()); }
-    const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator(end()); }
-    reverse_iterator       rend()          noexcept { return reverse_iterator(begin()); }
-    const_reverse_iterator rend()    const noexcept { return const_reverse_iterator(begin()); }
-    const_reverse_iterator crend()   const noexcept { return const_reverse_iterator(begin()); }
+/** @brief Atvirkštinis iteratorius į paskutinį elementą. */
+reverse_iterator       rbegin()        noexcept { return reverse_iterator(end()); }
+/** @brief Konstantinis atvirkštinis iteratorius į paskutinį elementą. */
+const_reverse_iterator rbegin()  const noexcept { return const_reverse_iterator(end()); }
+/** @brief Konstantinis atvirkštinis iteratorius į paskutinį elementą. */
+const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator(end()); }
+/** @brief Atvirkštinis iteratorius prieš pirmą elementą. */
+reverse_iterator       rend()          noexcept { return reverse_iterator(begin()); }
+/** @brief Konstantinis atvirkštinis iteratorius prieš pirmą elementą. */
+const_reverse_iterator rend()    const noexcept { return const_reverse_iterator(begin()); }
+/** @brief Konstantinis atvirkštinis iteratorius prieš pirmą elementą. */
+const_reverse_iterator crend()   const noexcept { return const_reverse_iterator(begin()); }
 
     // ── Talpa ─────────────────────────────────────────────────────────────────
 
@@ -847,11 +859,16 @@ public:
             begin(), end(), other.begin(), other.end());
     }
 
-    bool operator!=(const Vector& other) const { return !(*this == other); }
-    bool operator< (const Vector& other) const { return (*this <=> other) < 0; }
-    bool operator<=(const Vector& other) const { return (*this <=> other) <= 0; }
-    bool operator> (const Vector& other) const { return (*this <=> other) > 0; }
-    bool operator>=(const Vector& other) const { return (*this <=> other) >= 0; }
+    /** @brief Nelygybė — `true` jei masyvai skiriasi. */
+bool operator!=(const Vector& other) const { return !(*this == other); }
+/** @brief Leksikografinė mažiau-už relacija. */
+bool operator< (const Vector& other) const { return (*this <=> other) < 0; }
+/** @brief Leksikografinė mažiau-arba-lygu relacija. */
+bool operator<=(const Vector& other) const { return (*this <=> other) <= 0; }
+/** @brief Leksikografinė daugiau-už relacija. */
+bool operator> (const Vector& other) const { return (*this <=> other) > 0; }
+/** @brief Leksikografinė daugiau-arba-lygu relacija. */
+bool operator>=(const Vector& other) const { return (*this <=> other) >= 0; }
 
 private:
     iterator  dat   = nullptr; ///< Rodyklė į pirmą elementą.

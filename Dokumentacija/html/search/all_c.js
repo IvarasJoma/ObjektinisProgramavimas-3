@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['shrink_5fto_5ffit_0',['shrink_to_fit',['../class_vector.html#ad6454ce193263b8000d4c18cb0c3a0c8',1,'Vector']]],
-  ['size_1',['size',['../class_vector.html#a820aa7774df7f171db7ced1049adce57',1,'Vector']]],
-  ['size_5ftype_2',['size_type',['../class_vector.html#abafb4cad9801440d5379d777088cf3ef',1,'Vector']]],
-  ['swap_3',['swap',['../class_vector.html#a04719915f34b27674e1eca2c42e48eb2',1,'Vector::swap()'],['../_vector_8h.html#a121f6c55e3c9b59ade573ea0294fd971',1,'swap():&#160;Vector.h']]]
+  ['shrink_5fto_5ffit_0',['shrink_to_fit',['../class_vector.html#a5746026edae1b2adb3b2133b99996f32',1,'Vector']]],
+  ['size_1',['size',['../class_vector.html#ade9ce4c7602280a9c935c919afe10098',1,'Vector']]],
+  ['size_5ftype_2',['size_type',['../class_vector.html#aa296bc76ecea23add35328135cfd420e',1,'Vector']]],
+  ['strategija_3a_3',['Strategija:',['../class_vector.html#autotoc_md1',1,'']]],
+  ['swap_4',['swap',['../class_vector.html#ae1387b115ad4874d76690acc701ce976',1,'Vector::swap()'],['../_vector_8h.html#afe89534c8d60008708757367261c2bdf',1,'swap():&#160;Vector.h']]]
 ];
