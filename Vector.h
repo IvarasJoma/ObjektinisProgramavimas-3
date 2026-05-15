@@ -440,7 +440,11 @@ public:
      * tačiau ši implementacija visada ją vykdo.
      */
     void shrink_to_fit() {
-        if (limit != avail) {
+    if (limit != avail) {
+        if (size() == 0) {
+            raw_deallocate();
+            dat = avail = limit = nullptr;
+        } else {
             size_type sz      = size();
             iterator  new_dat = alloc.allocate(sz);
             trivial_move_or_uninit_move(dat, avail, new_dat);
@@ -448,6 +452,7 @@ public:
             dat = new_dat;
             avail = limit = dat + sz;
         }
+    }
     }
 
     /**
@@ -812,6 +817,7 @@ private:
      * @brief Allokuoja ir pilda `n` kopijomis `val`.
      */
     void create(size_type n, const T& val) {
+        if (n == 0) { dat = avail = limit = nullptr; return; }
         dat = alloc.allocate(n);
         limit = avail = dat + n;
         std::uninitialized_fill(dat, limit, val);
@@ -823,10 +829,10 @@ private:
      * Nenaudoja kopijavimo — tinkama `move-only` tipams.
      */
     void create_default(size_type n) {
+        if (n == 0) { dat = avail = limit = nullptr; return; }
         dat = alloc.allocate(n);
         avail = limit = dat + n;
-        for (iterator it = dat; it != avail; ++it)
-            alloc_traits::construct(alloc, it);
+        for (iterator it = dat; it != avail; ++it) alloc_traits::construct(alloc, it);
     }
 
     /**
@@ -838,6 +844,7 @@ private:
     template <typename InputIt>
     void create(InputIt first, InputIt last) {
         size_type n = static_cast<size_type>(std::distance(first, last));
+        if (n == 0) { dat = avail = limit = nullptr; return; }
         dat = alloc.allocate(n);
         if constexpr (std::is_trivially_copyable_v<T> && std::is_pointer_v<InputIt>) {
             std::memcpy(dat, first, n * sizeof(T));
