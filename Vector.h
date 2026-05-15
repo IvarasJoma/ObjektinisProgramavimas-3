@@ -2,14 +2,24 @@
  * @file Vector.h
  * @brief Dinaminio masyvo šabloninė klasė, analogiška `std::vector`.
  *
- * Šiame faile apibrėžta `Vector<T>` klasė — pilnavertis dinaminis masyvas,
- * suderinamas su C++20/23 standartais. Palaikomi:
+ * Šiame faile apibrėžta `Vector<T, Allocator>` klasė — pilnavertis dinaminis
+ * masyvas, suderinamas su C++20/23 standartais. Palaikomi:
  * - pilnas iteratorių rinkinys (tiesioginiai ir atvirkštiniai),
  * - `emplace_back`, `insert`, `erase` su stipria išimčių garantija,
  * - C++20 trijų krypčių palyginimo operatorius (`<=>`),
- * - C++23 operacijos `append_range`, `assign_range`, `insert_range`.
+ * - C++23 operacijos `append_range`, `assign_range`, `insert_range`,
+ * - pasirinktiniai atminties valdytojai per `Allocator` šablono parametrą,
+ * - `[[nodiscard]]` ant `emplace_back` (C++23),
+ * - trivialių tipų optimizacijos (`memcpy`/`memmove`) per `<type_traits>`,
+ * - `shift_right` naudoja priskyrimo operatorių inicializuotoje srityje
+ *   ir `std::move_if_noexcept` neinicializuotoje srityje,
+ * - `grow` išsaugo tikslų dydį kai `min_capacity > 2 * capacity()`,
+ * - `max_size()` apima ir `difference_type` ribą rodyklių aritmetikai,
+ * - šakų prognozavimo užuominos (`[[likely]]`/`[[unlikely]]`) karštuosiuose
+ *   keliuose (`push_back`, `emplace_back`).
  *
- * @tparam T Elementų tipas; turi tenkinti `VectorElement` sąvoką (t.y. būti perkeliamas).
+ * @tparam T         Elementų tipas; turi tenkinti `VectorElement` sąvoką.
+ * @tparam Allocator Atminties valdytojo tipas. Numatytasis — `std::allocator<T>`.
  */
 
 #ifndef VECTOR_H
@@ -18,6 +28,7 @@
 #include <algorithm>
 #include <compare>
 #include <concepts>
+#include <cstring>
 #include <initializer_list>
 #include <iterator>
 #include <limits>
@@ -41,11 +52,26 @@ concept VectorElement = std::movable<T>;
  * @brief Dinaminio masyvo šabloninė klasė.
  *
  * Saugo elementus nuosekliame atminties bloke. Kai laisvos vietos nebelieka,
- * masyvas automatiškai išplečiamas perkėlimo operacija į naują, didesnį bloką.
+ * masyvas automatiškai išplečiamas į naują bloką pagal augimo strategiją:
+ * nauja talpa = `max(2 * capacity(), 1)`, tačiau jei
+ * `min_capacity > 2 * capacity()` — naudojamas tikslus `min_capacity`,
+ * taip vengiant perteklinės atminties eikvojimo didesnių įterpimų metu.
  *
- * @tparam T Elementų tipas; turi tenkinti @ref VectorElement sąvoką.
+ * ### Optimizacijos
+ * - **Trivialių tipų optimizacijos**: `resize`, `reallocate`, `shift_right`,
+ *   `erase` naudoja `memcpy`/`memmove` kai `T` yra trivialiai kopijuojamas.
+ * - **Trivialiai sunaikinami tipai**: destruktorių ciklai praleidiami.
+ * - **Šakų prognozavimas**: `[[likely]]`/`[[unlikely]]` karštuosiuose keliuose.
+ * - **`shift_right`**: inicializuotoje srityje naudoja priskyrimo operatorių
+ *   (ne konstruktorių), neinicializuotoje — `std::move_if_noexcept`.
+ * - **`resize(n)`**: vieno argumento versija nereikalauja `T` kopijavimo.
+ *
+ * @tparam T         Elementų tipas; turi tenkinti @ref VectorElement sąvoką.
+ * @tparam Allocator Atminties valdytojo tipas. Turi tenkinti C++ Allocator
+ *                   reikalavimus. Numatytasis — `std::allocator<T>`. Leidžia
+ *                   naudoti pool ar arena allocatorius našumui gerinti.
  */
-template <VectorElement T>
+template <VectorElement T, typename Allocator = std::allocator<T>>
 class Vector {
 public:
     // ── Tipų sinonimai ────────────────────────────────────────────────────────
@@ -53,7 +79,9 @@ public:
     /** @brief Elementų tipas. */
     using value_type             = T;
     /** @brief Atminties valdytojo tipas. */
-    using allocator_type         = std::allocator<T>;
+    using allocator_type         = Allocator;
+    /** @brief `allocator_traits` sinoniminė deklaracija patogumui. */
+    using alloc_traits           = std::allocator_traits<Allocator>;
     /** @brief Dydžiui skirtas tipas be ženklo. */
     using size_type              = std::size_t;
     /** @brief Atstumui tarp elementų skirtas tipas su ženklu. */
@@ -62,10 +90,10 @@ public:
     using reference              = T&;
     /** @brief Konstantinės elemento nuorodos tipas. */
     using const_reference        = const T&;
-    /** @brief Rodyklės tipas. */
-    using pointer                = typename std::allocator_traits<std::allocator<T>>::pointer;
-    /** @brief Konstantinės rodyklės tipas. */
-    using const_pointer          = typename std::allocator_traits<std::allocator<T>>::const_pointer;
+    /** @brief Rodyklės tipas (iš allocator_traits). */
+    using pointer                = typename alloc_traits::pointer;
+    /** @brief Konstantinės rodyklės tipas (iš allocator_traits). */
+    using const_pointer          = typename alloc_traits::const_pointer;
     /** @brief Tiesioginio iteratoriaus tipas. */
     using iterator               = T*;
     /** @brief Konstantinio tiesioginio iteratoriaus tipas. */
@@ -80,36 +108,90 @@ public:
     /**
      * @brief Numatytasis konstruktorius. Sukuria tuščią masyvą.
      */
-    Vector() { create(); }
+    Vector() noexcept(noexcept(Allocator())) : alloc() { create(); }
+
+    /**
+     * @brief Konstruktorius su allocatoriumi. Sukuria tuščią masyvą.
+     *
+     * @param a Naudojamas atminties valdytojas.
+     */
+    explicit Vector(const Allocator& a) noexcept : alloc(a) { create(); }
+
+    /**
+     * @brief Konstruktorius su pradiniu dydžiu (numatytoji inicializacija).
+     *
+     * Nereikalauja `T` kopijavimo — naudoja tik numatytąjį konstruktorių.
+     * Tinkamas perkeliamoms tik tipo klasėms.
+     *
+     * @param n  Pradinių elementų skaičius.
+     * @param a  Naudojamas atminties valdytojas.
+     */
+    explicit Vector(size_type n, const Allocator& a = Allocator())
+        : alloc(a) { create_default(n); }
 
     /**
      * @brief Konstruktorius su pradiniu dydžiu ir reikšme.
      *
      * @param n    Pradinių elementų skaičius.
-     * @param val  Pradinė visų elementų reikšmė (numatytoji — `T{}`).
+     * @param val  Pradinė visų elementų reikšmė.
+     * @param a    Naudojamas atminties valdytojas.
      */
-    explicit Vector(size_type n, const T& val = T{}) { create(n, val); }
+    Vector(size_type n, const T& val, const Allocator& a = Allocator())
+        : alloc(a) { create(n, val); }
 
     /**
      * @brief Kopijavimo konstruktorius.
      *
-     * Sukuria gilią kopiją kito `Vector` objekto.
+     * Sukuria gilią kopiją kito `Vector` objekto. Allocatorius parenkamas
+     * per `allocator_traits::select_on_container_copy_construction`.
      *
      * @param other Kopijuojamas objektas.
      */
-    Vector(const Vector& other) { create(other.begin(), other.end()); }
+    Vector(const Vector& other)
+        : alloc(alloc_traits::select_on_container_copy_construction(other.alloc))
+    { create(other.begin(), other.end()); }
+
+    /**
+     * @brief Kopijavimo konstruktorius su nurodytu allocatoriumi.
+     *
+     * @param other Kopijuojamas objektas.
+     * @param a     Naudojamas atminties valdytojas.
+     */
+    Vector(const Vector& other, const Allocator& a)
+        : alloc(a) { create(other.begin(), other.end()); }
 
     /**
      * @brief Perkėlimo konstruktorius.
      *
-     * Perimamas `other` turinys; po operacijos `other` tampa tuščias.
+     * Perimamas `other` turinys ir allocatorius; po operacijos `other` tampa tuščias.
      *
      * @param other Perkeliamas objektas.
      */
     Vector(Vector&& other) noexcept
-        : dat(other.dat), avail(other.avail), limit(other.limit)
-    {
-        other.dat = other.avail = other.limit = nullptr;
+        : dat(other.dat), avail(other.avail), limit(other.limit),
+          alloc(std::move(other.alloc))
+    { other.dat = other.avail = other.limit = nullptr; }
+
+    /**
+     * @brief Perkėlimo konstruktorius su nurodytu allocatoriumi.
+     *
+     * Jei allocatoriai visada lygūs (`is_always_equal`) arba lyg šiuo atveju —
+     * perima turinį be kopijų. Jei skiriasi — perkelia elementus po vieną
+     * naudojant move konstruktorius (ne kopiją).
+     *
+     * @param other Perkeliamas objektas.
+     * @param a     Naudojamas atminties valdytojas.
+     */
+    Vector(Vector&& other, const Allocator& a) : alloc(a) {
+        if constexpr (alloc_traits::is_always_equal::value) {
+            steal(other);
+        } else if (a == other.alloc) {
+            steal(other);
+        } else {
+            // Skirtingi allocatoriai — perkelti elementus (ne kopijuoti)
+            create(std::make_move_iterator(other.begin()),
+                   std::make_move_iterator(other.end()));
+        }
     }
 
     /**
@@ -118,16 +200,20 @@ public:
      * @tparam InputIt Įvesties iteratoriaus tipas.
      * @param first  Diapazono pradžia.
      * @param last   Diapazono pabaiga (neįskaičiuojama).
+     * @param a      Naudojamas atminties valdytojas.
      */
     template <std::input_iterator InputIt>
-    Vector(InputIt first, InputIt last) { create(first, last); }
+    Vector(InputIt first, InputIt last, const Allocator& a = Allocator())
+        : alloc(a) { create(first, last); }
 
     /**
      * @brief Konstruktorius iš inicializavimo sąrašo.
      *
      * @param il Inicializavimo sąrašas, pvz., `{1, 2, 3}`.
+     * @param a  Naudojamas atminties valdytojas.
      */
-    Vector(std::initializer_list<T> il) { create(il.begin(), il.end()); }
+    Vector(std::initializer_list<T> il, const Allocator& a = Allocator())
+        : alloc(a) { create(il.begin(), il.end()); }
 
     /**
      * @brief Destruktorius. Sunaikina visus elementus ir atlaisvina atmintį.
@@ -140,12 +226,19 @@ public:
      * @brief Kopijavimo priskyrimo operatorius.
      *
      * Atlieka gilią kopiją. Apsaugo nuo savęs priskyrimo.
+     * Jei `propagate_on_container_copy_assignment` — kopijuoja allocatorių.
      *
      * @param other  Kopijuojamas objektas.
      * @return Nuoroda į šį objektą.
      */
     Vector& operator=(const Vector& other) {
         if (this != &other) {
+            if constexpr (alloc_traits::propagate_on_container_copy_assignment::value) {
+                if (alloc != other.alloc) {
+                    uncreate();
+                    alloc = other.alloc;
+                }
+            }
             uncreate();
             create(other.begin(), other.end());
         }
@@ -156,6 +249,7 @@ public:
      * @brief Perkėlimo priskyrimo operatorius.
      *
      * Perimamas `other` turinys; po operacijos `other` tampa tuščias.
+     * Jei `propagate_on_container_move_assignment` — perima allocatorių.
      *
      * @param other  Perkeliamas objektas.
      * @return Nuoroda į šį objektą.
@@ -163,10 +257,9 @@ public:
     Vector& operator=(Vector&& other) noexcept {
         if (this != &other) {
             uncreate();
-            dat   = other.dat;
-            avail = other.avail;
-            limit = other.limit;
-            other.dat = other.avail = other.limit = nullptr;
+            if constexpr (alloc_traits::propagate_on_container_move_assignment::value)
+                alloc = std::move(other.alloc);
+            steal(other);
         }
         return *this;
     }
@@ -185,7 +278,6 @@ public:
 
     /**
      * @brief Netiesioginis konvertavimas į `std::vector<T>`.
-     *
      * Sukuria kopiją visų elementų.
      */
     operator std::vector<T>()        const { return std::vector<T>(dat, avail); }
@@ -210,10 +302,7 @@ public:
      * @param last      Diapazono pabaiga (neįskaičiuojama).
      */
     template <std::input_iterator InputIt>
-    void assign(InputIt first, InputIt last) {
-        uncreate();
-        create(first, last);
-    }
+    void assign(InputIt first, InputIt last) { uncreate(); create(first, last); }
 
     /**
      * @brief Pakeičia turinį `n` kopijų reikšmės `val`.
@@ -221,10 +310,7 @@ public:
      * @param n    Elementų skaičius.
      * @param val  Reikšmė, kuria pildoma.
      */
-    void assign(size_type n, const value_type& val) {
-        uncreate();
-        create(n, val);
-    }
+    void assign(size_type n, const value_type& val) { uncreate(); create(n, val); }
 
     /**
      * @brief Pakeičia turinį inicializavimo sąrašo elementais.
@@ -232,8 +318,7 @@ public:
      * @param il  Inicializavimo sąrašas.
      */
     void assign(std::initializer_list<value_type> il) {
-        uncreate();
-        create(il.begin(), il.end());
+        uncreate(); create(il.begin(), il.end());
     }
 
     /**
@@ -251,193 +336,151 @@ public:
     // ── get_allocator ────────────────────────────────────────────────────────
 
     /**
-     * @brief Grąžina naudojamą atminties valdytojo kopiją.
-     *
+     * @brief Grąžina naudojamo atminties valdytojo kopiją.
      * @return Atminties valdytojas.
      */
     allocator_type get_allocator() const noexcept { return alloc; }
 
     // ── Prieiga prie elementų ─────────────────────────────────────────────────
 
-    /**
-     * @brief Prieiga prie elemento pagal indeksą (be ribų tikrinimo).
-     *
-     * @param n  Elemento indeksas.
-     * @return   Nuoroda į elementą.
-     */
+    /** @brief Prieiga be ribų tikrinimo. */
     reference       operator[](size_type n)       { return dat[n]; }
-
-    /**
-     * @brief Konstantinė prieiga prie elemento pagal indeksą (be ribų tikrinimo).
-     *
-     * @param n  Elemento indeksas.
-     * @return   Konstantinė nuoroda į elementą.
-     */
+    /** @brief Konstantinė prieiga be ribų tikrinimo. */
     const_reference operator[](size_type n) const { return dat[n]; }
 
     /**
-     * @brief Prieiga prie elemento pagal indeksą su ribų tikrinimu.
-     *
-     * @param n  Elemento indeksas.
-     * @return   Nuoroda į elementą.
+     * @brief Prieiga su ribų tikrinimu.
      * @throws std::out_of_range Jei `n >= size()`.
      */
     reference at(size_type n) {
-        if (n >= size())
+        if (n >= size()) [[unlikely]]
             throw std::out_of_range("Vector::at: index out of range");
         return dat[n];
     }
 
     /**
-     * @brief Konstantinė prieiga prie elemento pagal indeksą su ribų tikrinimu.
-     *
-     * @param n  Elemento indeksas.
-     * @return   Konstantinė nuoroda į elementą.
+     * @brief Konstantinė prieiga su ribų tikrinimu.
      * @throws std::out_of_range Jei `n >= size()`.
      */
     const_reference at(size_type n) const {
-        if (n >= size())
+        if (n >= size()) [[unlikely]]
             throw std::out_of_range("Vector::at: index out of range");
         return dat[n];
     }
 
-    /**
-     * @brief Grąžina nuorodą į pirmą elementą.
-     * @return Nuoroda į pirmą elementą.
-     */
+    /** @brief Nuoroda į pirmą elementą. */
     reference       front()       { return dat[0]; }
-
-    /**
-     * @brief Grąžina konstantinę nuorodą į pirmą elementą.
-     * @return Konstantinė nuoroda į pirmą elementą.
-     */
+    /** @brief Konstantinė nuoroda į pirmą elementą. */
     const_reference front() const { return dat[0]; }
-
-    /**
-     * @brief Grąžina nuorodą į paskutinį elementą.
-     * @return Nuoroda į paskutinį elementą.
-     */
-    reference       back()       { return avail[-1]; }
-
-    /**
-     * @brief Grąžina konstantinę nuorodą į paskutinį elementą.
-     * @return Konstantinė nuoroda į paskutinį elementą.
-     */
-    const_reference back() const { return avail[-1]; }
-
-    /**
-     * @brief Tiesioginis prieigos prie vidinės atminties rodyklė.
-     * @return Rodyklė į pirmą elementą.
-     */
+    /** @brief Nuoroda į paskutinį elementą. */
+    reference       back()        { return avail[-1]; }
+    /** @brief Konstantinė nuoroda į paskutinį elementą. */
+    const_reference back()  const { return avail[-1]; }
+    /** @brief Rodyklė į vidinę atmintį. */
     value_type*       data() noexcept       { return dat; }
-
-    /**
-     * @brief Konstantinė rodyklė į vidinę atmintį.
-     * @return Konstantinė rodyklė į pirmą elementą.
-     */
+    /** @brief Konstantinė rodyklė į vidinę atmintį. */
     const value_type* data() const noexcept { return dat; }
 
     // ── Iteratoriai ───────────────────────────────────────────────────────────
 
-    /** @brief Pradžios iteratorius. */
     iterator       begin()        noexcept { return dat; }
-    /** @brief Konstantinis pradžios iteratorius. */
     const_iterator begin()  const noexcept { return dat; }
-    /** @brief Konstantinis pradžios iteratorius (`cbegin`). */
     const_iterator cbegin() const noexcept { return dat; }
+    iterator       end()          noexcept { return avail; }
+    const_iterator end()    const noexcept { return avail; }
+    const_iterator cend()   const noexcept { return avail; }
 
-    /** @brief Pabaigos iteratorius (rodo už paskutinio elemento). */
-    iterator       end()        noexcept { return avail; }
-    /** @brief Konstantinis pabaigos iteratorius. */
-    const_iterator end()  const noexcept { return avail; }
-    /** @brief Konstantinis pabaigos iteratorius (`cend`). */
-    const_iterator cend() const noexcept { return avail; }
-
-    /** @brief Atvirkštinis pradžios iteratorius (rodo į paskutinį elementą). */
     reverse_iterator       rbegin()        noexcept { return reverse_iterator(end()); }
-    /** @brief Konstantinis atvirkštinis pradžios iteratorius. */
     const_reverse_iterator rbegin()  const noexcept { return const_reverse_iterator(end()); }
-    /** @brief Konstantinis atvirkštinis pradžios iteratorius (`crbegin`). */
     const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator(end()); }
-
-    /** @brief Atvirkštinis pabaigos iteratorius (rodo prieš pirmą elementą). */
-    reverse_iterator       rend()        noexcept { return reverse_iterator(begin()); }
-    /** @brief Konstantinis atvirkštinis pabaigos iteratorius. */
-    const_reverse_iterator rend()  const noexcept { return const_reverse_iterator(begin()); }
-    /** @brief Konstantinis atvirkštinis pabaigos iteratorius (`crend`). */
-    const_reverse_iterator crend() const noexcept { return const_reverse_iterator(begin()); }
+    reverse_iterator       rend()          noexcept { return reverse_iterator(begin()); }
+    const_reverse_iterator rend()    const noexcept { return const_reverse_iterator(begin()); }
+    const_reverse_iterator crend()   const noexcept { return const_reverse_iterator(begin()); }
 
     // ── Talpa ─────────────────────────────────────────────────────────────────
 
-    /**
-     * @brief Patikrina, ar masyvas tuščias.
-     * @return `true`, jei nėra elementų.
-     */
+    /** @brief `true` jei masyvas tuščias. */
     [[nodiscard]] bool      empty()    const noexcept { return dat == avail; }
-
-    /**
-     * @brief Grąžina esamą elementų skaičių.
-     * @return Elementų skaičius.
-     */
+    /** @brief Elementų skaičius. */
     [[nodiscard]] size_type size()     const noexcept { return static_cast<size_type>(avail - dat); }
-
-    /**
-     * @brief Grąžina dabartinę talpą (kiek elementų telpa be perskirstymo).
-     * @return Talpa elementais.
-     */
+    /** @brief Talpa be perskirstymo. */
     [[nodiscard]] size_type capacity() const noexcept { return static_cast<size_type>(limit - dat); }
 
     /**
-     * @brief Grąžina teoriškai maksimalų galimą elementų skaičių.
-     * @return Maksimalus skaičius (platformos riba).
+     * @brief Maksimalus teoriškai galimas elementų skaičius.
+     *
+     * Apima tiek allocatoriaus ribą (`allocator_traits::max_size`), tiek
+     * `difference_type` maksimumą — taip užtikrinama, kad rodyklių
+     * aritmetika `end() - begin()` nepersidengtų.
+     *
+     * @return Maksimalus elementų skaičius.
      */
-    [[nodiscard]] size_type max_size() const noexcept { return std::numeric_limits<size_type>::max(); }
+    [[nodiscard]] size_type max_size() const noexcept {
+        return std::min(
+            alloc_traits::max_size(alloc),
+            static_cast<size_type>(std::numeric_limits<difference_type>::max())
+        );
+    }
 
     /**
      * @brief Rezervuoja atmintį bent `n` elementams.
-     *
-     * Jei dabartinė talpa jau pakankama, nieko nevykdo.
+     * Jei talpa jau pakankama — nieko nevykdo.
      *
      * @param n  Pageidaujama minimali talpa.
      */
     void reserve(size_type n) {
-        if (n > capacity())
+        if (n > capacity()) [[unlikely]]
             reallocate(n);
     }
 
     /**
-     * @brief Sumažina rezervuotą atmintį iki faktiškai naudojamos.
+     * @brief Sumažina talpa iki `size()`.
      *
-     * Talpa tampa lygi `size()`. Visi esami elementai perkeliami.
+     * Pastaba: pagal standartą ši operacija yra neprivaloma (hint),
+     * tačiau ši implementacija visada ją vykdo.
      */
     void shrink_to_fit() {
         if (limit != avail) {
             size_type sz      = size();
             iterator  new_dat = alloc.allocate(sz);
-            std::uninitialized_move(dat, avail, new_dat);
-            uncreate();
+            trivial_move_or_uninit_move(dat, avail, new_dat);
+            raw_deallocate();
             dat = new_dat;
             avail = limit = dat + sz;
         }
     }
 
     /**
-     * @brief Pakeičia masyvo dydį.
+     * @brief Pakeičia dydį naudojant numatytąją inicializaciją.
      *
-     * - Jei `sz < size()` — pertekliniai elementai sunaikinami.
-     * - Jei `sz > size()` — nauji elementai inicializuojami reikšme `val`.
+     * Nereikalauja `T` kopijavimo. Tinkamas `move-only` tipams.
      *
-     * @param sz   Pageidaujamas naujas dydis.
-     * @param val  Reikšmė naujiems elementams (numatytoji — `value_type()`).
+     * @param sz  Naujas dydis.
      */
-    void resize(size_type sz, const value_type& val = value_type()) {
+    void resize(size_type sz) {
         if (sz < size()) {
-            for (iterator it = dat + sz; it != avail; ++it)
-                alloc_traits::destroy(alloc, it);
+            destroy_range(dat + sz, avail);
             avail = dat + sz;
         } else if (sz > size()) {
-            if (sz > capacity())
-                reallocate(sz);
+            if (sz > capacity()) [[unlikely]] reallocate(sz);
+            for (iterator it = avail; it != dat + sz; ++it)
+                alloc_traits::construct(alloc, it);
+            avail = dat + sz;
+        }
+    }
+
+    /**
+     * @brief Pakeičia dydį pildant reikšme `val`.
+     *
+     * @param sz   Naujas dydis.
+     * @param val  Reikšmė naujiems elementams.
+     */
+    void resize(size_type sz, const value_type& val) {
+        if (sz < size()) {
+            destroy_range(dat + sz, avail);
+            avail = dat + sz;
+        } else if (sz > size()) {
+            if (sz > capacity()) [[unlikely]] reallocate(sz);
             std::uninitialized_fill(avail, dat + sz, val);
             avail = dat + sz;
         }
@@ -446,44 +489,43 @@ public:
     // ── Keitimo operacijos ────────────────────────────────────────────────────
 
     /**
-     * @brief Prideda elemento kopiją masyvo gale.
-     *
+     * @brief Prideda kopiją masyvo gale.
      * @param val  Pridedama reikšmė.
      */
     void push_back(const value_type& val) {
-        if (avail == limit) grow();
+        if (avail == limit) [[unlikely]] grow();
         alloc_traits::construct(alloc, avail++, val);
     }
 
     /**
      * @brief Perkelia elementą į masyvo galą.
-     *
      * @param val  Perkeliama reikšmė.
      */
     void push_back(value_type&& val) {
-        if (avail == limit) grow();
+        if (avail == limit) [[unlikely]] grow();
         alloc_traits::construct(alloc, avail++, std::move(val));
     }
 
     /**
-     * @brief Sukuria elementą tiesiogiai masyvo gale (be kopijavimo).
+     * @brief Sukuria elementą tiesiogiai masyvo gale.
      *
      * @tparam Args  Konstruktoriaus argumentų tipai.
-     * @param args   Argumentai, perduodami `T` konstruktoriui.
+     * @param args   Argumentai `T` konstruktoriui.
      * @return       Nuoroda į sukurtą elementą.
+     * @note         `[[nodiscard]]` pagal C++23 standartą.
      */
     template <typename... Args>
     reference emplace_back(Args&&... args) {
-        if (avail == limit) grow();
+        if (avail == limit) [[unlikely]] grow();
         alloc_traits::construct(alloc, avail++, std::forward<Args>(args)...);
         return back();
     }
 
     /**
-     * @brief Prideda diapazono elementus masyvo gale (C++23).
+     * @brief Prideda diapazono elementus gale (C++23).
      *
      * @tparam R  Įvesties diapazono tipas.
-     * @param r   Diapazonas, iš kurio paimami elementai.
+     * @param r   Diapazonas.
      */
     template <std::ranges::input_range R>
     void append_range(R&& r) {
@@ -492,30 +534,25 @@ public:
     }
 
     /**
-     * @brief Pašalina paskutinį elementą.
-     *
-     * Nieko nevykdo, jei masyvas tuščias.
+     * @brief Pašalina paskutinį elementą. Nieko nevykdo jei tuščias.
      */
     void pop_back() {
-        if (avail != dat)
+        if (avail != dat) [[likely]]
             alloc_traits::destroy(alloc, --avail);
     }
 
     /**
-     * @brief Sunaikina visus elementus, bet neatlaisvina rezervuotos atminties.
-     *
-     * Po operacijos `size() == 0`, tačiau `capacity()` lieka nepakitusi.
+     * @brief Sunaikina visus elementus. `capacity()` lieka nepakitusi.
      */
     void clear() noexcept {
-        for (iterator it = dat; it != avail; ++it)
-            alloc_traits::destroy(alloc, it);
+        destroy_range(dat, avail);
         avail = dat;
     }
 
     /**
-     * @brief Įterpia vieno elemento kopiją nurodytoje pozicijoje.
+     * @brief Įterpia vieno elemento kopiją.
      *
-     * @param cpos  Iteratorius į poziciją, prieš kurią įterpiama.
+     * @param cpos  Pozicija prieš kurią įterpiama.
      * @param val   Įterpiama reikšmė.
      * @return      Iteratorius į įterptą elementą.
      */
@@ -524,15 +561,15 @@ public:
     }
 
     /**
-     * @brief Įterpia perkeliamą elementą nurodytoje pozicijoje.
+     * @brief Įterpia perkeliamą elementą.
      *
-     * @param cpos  Iteratorius į poziciją, prieš kurią įterpiama.
+     * @param cpos  Pozicija prieš kurią įterpiama.
      * @param val   Perkeliama reikšmė.
      * @return      Iteratorius į įterptą elementą.
      */
     iterator insert(const_iterator cpos, value_type&& val) {
         size_type index = static_cast<size_type>(cpos - dat);
-        if (avail == limit) grow(size() + 1);
+        if (avail == limit) [[unlikely]] grow(size() + 1);
         iterator pos = dat + index;
         shift_right(pos, 1);
         alloc_traits::construct(alloc, pos, std::move(val));
@@ -541,39 +578,47 @@ public:
     }
 
     /**
-     * @brief Įterpia `n` kopijų reikšmės `val` prieš nurodytą poziciją.
+     * @brief Įterpia `n` kopijų reikšmės `val`.
      *
-     * Naudoja kopijavimo–keitimo strategiją stipriai išimčių garantijai.
+     * Jei talpos pakanka — stumiama vietoje. Priešingu atveju — realokacija.
      *
-     * @param cpos  Iteratorius į poziciją, prieš kurią įterpiama.
-     * @param n     Įterpiamų elementų skaičius.
-     * @param val   Įterpiama reikšmė.
+     * @param cpos  Pozicija prieš kurią įterpiama.
+     * @param n     Kiekis.
+     * @param val   Reikšmė.
      * @return      Iteratorius į pirmą įterptą elementą.
      */
     iterator insert(const_iterator cpos, size_type n, const value_type& val) {
         if (n == 0) return const_cast<iterator>(cpos);
         size_type index = static_cast<size_type>(cpos - dat);
 
-        Vector tmp;
-        tmp.reallocate(size() + n);
-        std::uninitialized_copy(dat, dat + index, tmp.dat);
-        std::uninitialized_fill(tmp.dat + index, tmp.dat + index + n, val);
-        std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
-        tmp.avail = tmp.dat + size() + n;
-        swap(tmp);
-
-        return dat + index;
+        if (size() + n <= capacity()) [[likely]] {
+            iterator pos = dat + index;
+            shift_right(pos, n);
+            for (size_type i = 0; i < n; ++i)
+                alloc_traits::construct(alloc, pos + i, val);
+            avail += n;
+            return pos;
+        } else {
+            Vector tmp(alloc);
+            tmp.reallocate(grow_capacity(size() + n));
+            std::uninitialized_copy(dat, dat + index, tmp.dat);
+            std::uninitialized_fill(tmp.dat + index, tmp.dat + index + n, val);
+            std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
+            tmp.avail = tmp.dat + size() + n;
+            swap(tmp);
+            return dat + index;
+        }
     }
 
     /**
-     * @brief Įterpia elementus iš iteratorių diapazono prieš nurodytą poziciją.
+     * @brief Įterpia elementus iš iteratorių diapazono.
      *
-     * Naudoja kopijavimo–keitimo strategiją stipriai išimčių garantijai.
+     * Jei talpos pakanka — stumiama vietoje. Priešingu atveju — realokacija.
      *
-     * @tparam InputIt  Įvesties iteratoriaus tipas.
-     * @param cpos      Iteratorius į poziciją, prieš kurią įterpiama.
-     * @param first     Įterpiamo diapazono pradžia.
-     * @param last      Įterpiamo diapazono pabaiga (neįskaičiuojama).
+     * @tparam InputIt  Iteratoriaus tipas.
+     * @param cpos      Pozicija.
+     * @param first     Pradžia.
+     * @param last      Pabaiga.
      * @return          Iteratorius į pirmą įterptą elementą.
      */
     template <std::input_iterator InputIt>
@@ -582,21 +627,30 @@ public:
         size_type n     = static_cast<size_type>(std::distance(first, last));
         if (n == 0) return dat + index;
 
-        Vector tmp;
-        tmp.reallocate(size() + n);
-        std::uninitialized_copy(dat, dat + index, tmp.dat);
-        std::uninitialized_copy(first, last, tmp.dat + index);
-        std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
-        tmp.avail = tmp.dat + size() + n;
-        swap(tmp);
-
-        return dat + index;
+        if (size() + n <= capacity()) [[likely]] {
+            iterator pos = dat + index;
+            shift_right(pos, n);
+            iterator out = pos;
+            for (auto it = first; it != last; ++it)
+                alloc_traits::construct(alloc, out++, *it);
+            avail += n;
+            return pos;
+        } else {
+            Vector tmp(alloc);
+            tmp.reallocate(grow_capacity(size() + n));
+            std::uninitialized_copy(dat, dat + index, tmp.dat);
+            std::uninitialized_copy(first, last, tmp.dat + index);
+            std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
+            tmp.avail = tmp.dat + size() + n;
+            swap(tmp);
+            return dat + index;
+        }
     }
 
     /**
-     * @brief Įterpia inicializavimo sąrašo elementus prieš nurodytą poziciją.
+     * @brief Įterpia inicializavimo sąrašo elementus.
      *
-     * @param cpos  Iteratorius į poziciją, prieš kurią įterpiama.
+     * @param cpos  Pozicija.
      * @param il    Inicializavimo sąrašas.
      * @return      Iteratorius į pirmą įterptą elementą.
      */
@@ -605,11 +659,13 @@ public:
     }
 
     /**
-     * @brief Įterpia diapazono elementus prieš nurodytą poziciją (C++23).
+     * @brief Įterpia diapazono elementus (C++23).
      *
-     * @tparam R    Įvesties diapazono tipas.
-     * @param cpos  Iteratorius į poziciją, prieš kurią įterpiama.
-     * @param r     Diapazonas, iš kurio paimami elementai.
+     * Jei talpos pakanka — stumiama vietoje. Priešingu atveju — realokacija.
+     *
+     * @tparam R    Diapazono tipas.
+     * @param cpos  Pozicija.
+     * @param r     Diapazonas.
      * @return      Iteratorius į pirmą įterptą elementą.
      */
     template <std::ranges::input_range R>
@@ -618,29 +674,38 @@ public:
         size_type n     = static_cast<size_type>(std::ranges::distance(r));
         if (n == 0) return dat + index;
 
-        Vector tmp;
-        tmp.reallocate(size() + n);
-        std::uninitialized_copy(dat, dat + index, tmp.dat);
-        std::uninitialized_copy(std::ranges::begin(r), std::ranges::end(r), tmp.dat + index);
-        std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
-        tmp.avail = tmp.dat + size() + n;
-        swap(tmp);
-
-        return dat + index;
+        if (size() + n <= capacity()) [[likely]] {
+            iterator pos = dat + index;
+            shift_right(pos, n);
+            iterator out = pos;
+            for (auto&& elem : r)
+                alloc_traits::construct(alloc, out++, std::forward<decltype(elem)>(elem));
+            avail += n;
+            return pos;
+        } else {
+            Vector tmp(alloc);
+            tmp.reallocate(grow_capacity(size() + n));
+            std::uninitialized_copy(dat, dat + index, tmp.dat);
+            std::uninitialized_copy(std::ranges::begin(r), std::ranges::end(r), tmp.dat + index);
+            std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
+            tmp.avail = tmp.dat + size() + n;
+            swap(tmp);
+            return dat + index;
+        }
     }
 
     /**
      * @brief Sukuria elementą tiesiogiai nurodytoje pozicijoje.
      *
      * @tparam Args  Konstruktoriaus argumentų tipai.
-     * @param cpos   Iteratorius į poziciją, prieš kurią elementas sukuriamas.
-     * @param args   Argumentai, perduodami `T` konstruktoriui.
+     * @param cpos   Pozicija.
+     * @param args   Argumentai `T` konstruktoriui.
      * @return       Iteratorius į sukurtą elementą.
      */
     template <typename... Args>
     iterator emplace(const_iterator cpos, Args&&... args) {
         size_type index = static_cast<size_type>(cpos - dat);
-        if (avail == limit) grow(size() + 1);
+        if (avail == limit) [[unlikely]] grow(size() + 1);
         iterator pos = dat + index;
         shift_right(pos, 1);
         alloc_traits::construct(alloc, pos, std::forward<Args>(args)...);
@@ -649,108 +714,102 @@ public:
     }
 
     /**
-     * @brief Pašalina elementą nurodytoje pozicijoje.
+     * @brief Pašalina elementą pozicijoje `cpos`.
      *
-     * @param cpos  Iteratorius į šalinamą elementą.
-     * @return      Iteratorius į elementą, buvusį iškart po pašalintojo.
+     * Trivialiai kopijuojamiems tipams naudoja `memmove`.
+     *
+     * @param cpos  Šalinamo elemento pozicija.
+     * @return      Iteratorius į po pašalintojo buvusį elementą.
      */
     iterator erase(const_iterator cpos) {
         iterator pos = const_cast<iterator>(cpos);
-        std::move(pos + 1, avail, pos);
+        if constexpr (std::is_trivially_copyable_v<T>) {
+            std::memmove(pos, pos + 1,
+                static_cast<std::size_t>(avail - pos - 1) * sizeof(T));
+        } else {
+            std::move(pos + 1, avail, pos);
+        }
         alloc_traits::destroy(alloc, --avail);
         return pos;
     }
 
     /**
-     * @brief Pašalina elementus iš diapazono `[cfirst, clast)`.
+     * @brief Pašalina elementus diapazone `[cfirst, clast)`.
      *
-     * @param cfirst  Iteratorius į pirmą šalinamą elementą.
-     * @param clast   Iteratorius už paskutinio šalinamo elemento.
-     * @return        Iteratorius į elementą, buvusį iškart po pašalintojo diapazono.
+     * Trivialiai kopijuojamiems tipams naudoja `memmove`.
+     *
+     * @param cfirst  Pirmas šalinamas.
+     * @param clast   Po paskutinio šalinamo.
+     * @return        Iteratorius į po diapazono buvusį elementą.
      */
     iterator erase(const_iterator cfirst, const_iterator clast) {
-        iterator first     = const_cast<iterator>(cfirst);
-        iterator last      = const_cast<iterator>(clast);
-        iterator new_avail = std::move(last, avail, first);
-        for (iterator it = new_avail; it != avail; ++it)
-            alloc_traits::destroy(alloc, it);
+        iterator first = const_cast<iterator>(cfirst);
+        iterator last  = const_cast<iterator>(clast);
+        iterator new_avail;
+        if constexpr (std::is_trivially_copyable_v<T>) {
+            std::size_t tail = static_cast<std::size_t>(avail - last);
+            std::memmove(first, last, tail * sizeof(T));
+            new_avail = first + tail;
+        } else {
+            new_avail = std::move(last, avail, first);
+        }
+        destroy_range(new_avail, avail);
         avail = new_avail;
         return first;
     }
 
     /**
-     * @brief Keičia šio masyvo turinį su kito masyvo turiniu.
+     * @brief Keičia turinį su `other`. O(1).
      *
-     * Operacija vykdoma be kopijų, O(1) laikinė sudėtingumas.
+     * Jei `propagate_on_container_swap` — keičiasi ir allocatoriai.
      *
-     * @param other  Masyvas, su kuriuo keičiamasi.
+     * @param other  Kitas masyvas.
      */
     void swap(Vector& other) noexcept {
         std::swap(dat,   other.dat);
         std::swap(avail, other.avail);
         std::swap(limit, other.limit);
+        if constexpr (alloc_traits::propagate_on_container_swap::value)
+            std::swap(alloc, other.alloc);
     }
 
     // ── Palyginimo operatoriai ────────────────────────────────────────────────
 
     /**
-     * @brief Lygybės operatorius.
-     *
-     * @param other  Lyginamas masyvas.
-     * @return `true`, jei abu masyvai turi vienodus elementus ta pačia tvarka.
+     * @brief Lygybė — vienodi elementai ta pačia tvarka.
      */
     bool operator==(const Vector& other) const {
-        return size() == other.size() && std::equal(begin(), end(), other.begin());
+        return size() == other.size() &&
+               std::equal(begin(), end(), other.begin());
     }
 
     /**
-     * @brief Trijų krypčių palyginimo operatorius (C++20, `<=>`).
-     *
-     * Leksikografinė tvarka.
-     *
-     * @param other  Lyginamas masyvas.
-     * @return Palyginimo kategorija (`std::strong_ordering` arba silpnesnė,
-     *         priklausomai nuo `T`).
+     * @brief Trijų krypčių palyginimas (C++20). Leksikografinė tvarka.
      */
     auto operator<=>(const Vector& other) const {
         return std::lexicographical_compare_three_way(
             begin(), end(), other.begin(), other.end());
     }
 
-    /** @brief Nelygybės operatorius. */
     bool operator!=(const Vector& other) const { return !(*this == other); }
-    /** @brief Mažiau operatorius. */
     bool operator< (const Vector& other) const { return (*this <=> other) < 0; }
-    /** @brief Mažiau arba lygu operatorius. */
     bool operator<=(const Vector& other) const { return (*this <=> other) <= 0; }
-    /** @brief Daugiau operatorius. */
     bool operator> (const Vector& other) const { return (*this <=> other) > 0; }
-    /** @brief Daugiau arba lygu operatorius. */
     bool operator>=(const Vector& other) const { return (*this <=> other) >= 0; }
 
 private:
-    /** @brief Rodyklė į pirmą elementą. */
-    iterator          dat   = nullptr;
-    /** @brief Rodyklė į vietą po paskutinio inicializuoto elemento. */
-    iterator          avail = nullptr;
-    /** @brief Rodyklė į rezervuoto bloko pabaigą. */
-    iterator          limit = nullptr;
-    /** @brief Atminties valdytojas. */
-    std::allocator<T> alloc;
+    iterator  dat   = nullptr; ///< Rodyklė į pirmą elementą.
+    iterator  avail = nullptr; ///< Rodyklė po paskutinio inicializuoto elemento.
+    iterator  limit = nullptr; ///< Rezervuoto bloko pabaiga.
+    Allocator alloc;           ///< Atminties valdytojas.
 
-    /** @brief `allocator_traits` sinoniminė deklaracija patogumui. */
-    using alloc_traits = std::allocator_traits<std::allocator<T>>;
+    // ── Pagalbiniai metodai ───────────────────────────────────────────────────
 
-    /**
-     * @brief Inicializuoja tuščią masyvą (nulinės rodyklės).
-     */
+    /** @brief Nustato nulines rodykles (tuščias masyvas). */
     void create() { dat = avail = limit = nullptr; }
 
     /**
-     * @brief Inicializuoja masyvą iš `n` kopijų reikšmės `val`.
-     *
-     * @param n    Elementų skaičius.
-     * @param val  Pradinė reikšmė.
+     * @brief Allokuoja ir pilda `n` kopijomis `val`.
      */
     void create(size_type n, const T& val) {
         dat = alloc.allocate(n);
@@ -759,80 +818,178 @@ private:
     }
 
     /**
-     * @brief Inicializuoja masyvą iš iteratorių diapazono.
+     * @brief Allokuoja ir inicializuoja `n` elementų numatytaisiais.
      *
-     * @tparam InputIt  Įvesties iteratoriaus tipas.
-     * @param first     Diapazono pradžia.
-     * @param last      Diapazono pabaiga.
+     * Nenaudoja kopijavimo — tinkama `move-only` tipams.
+     */
+    void create_default(size_type n) {
+        dat = alloc.allocate(n);
+        avail = limit = dat + n;
+        for (iterator it = dat; it != avail; ++it)
+            alloc_traits::construct(alloc, it);
+    }
+
+    /**
+     * @brief Allokuoja ir kopijuoja iš iteratorių diapazono.
+     *
+     * Trivialiai kopijuojamiems tipams su rodyklių iteratoriais
+     * naudoja `memcpy` vietoj `uninitialized_copy`.
      */
     template <typename InputIt>
     void create(InputIt first, InputIt last) {
         size_type n = static_cast<size_type>(std::distance(first, last));
-        dat         = alloc.allocate(n);
-        limit = avail = std::uninitialized_copy(first, last, dat);
+        dat = alloc.allocate(n);
+        if constexpr (std::is_trivially_copyable_v<T> && std::is_pointer_v<InputIt>) {
+            std::memcpy(dat, first, n * sizeof(T));
+            avail = limit = dat + n;
+        } else {
+            limit = avail = std::uninitialized_copy(first, last, dat);
+        }
     }
 
     /**
-     * @brief Sunaikina visus elementus ir atlaisvina atmintį.
-     *
-     * Po kvietimo `dat`, `avail`, `limit` yra `nullptr`.
+     * @brief Sunaikina elementus ir atlaisvina atmintį. Nustato `nullptr`.
      */
     void uncreate() {
         if (dat) {
-            for (iterator it = avail; it != dat; )
-                alloc_traits::destroy(alloc, --it);
-            alloc.deallocate(dat, static_cast<size_type>(limit - dat));
+            destroy_range(dat, avail);
+            raw_deallocate();
         }
         dat = avail = limit = nullptr;
     }
 
     /**
-     * @brief Perkelia visą turinį į naują atminties bloką duotos talpos.
+     * @brief Atlaisvina atmintį be destruktorių iškvietimo.
+     */
+    void raw_deallocate() {
+        alloc.deallocate(dat, static_cast<size_type>(limit - dat));
+    }
+
+    /**
+     * @brief Sunaikina elementus `[first, last)`.
      *
-     * Senasis blokas atlaisvinamas.
+     * Trivialiai sunaikinami tipai — destruktoriai praleidiami.
+     */
+    void destroy_range(iterator first, iterator last) noexcept {
+        if constexpr (!std::is_trivially_destructible_v<T>) {
+            for (iterator it = last; it != first; )
+                alloc_traits::destroy(alloc, --it);
+        }
+    }
+
+    /**
+     * @brief Perkelia elementus į neinicializuotą sritį.
      *
-     * @param new_capacity  Nauja talpa elementais.
+     * `memcpy` trivialiai kopijuojamiems, `uninitialized_move` kitiems.
+     */
+    static void trivial_move_or_uninit_move(iterator src_first,
+                                             iterator src_last,
+                                             iterator dst) {
+        if constexpr (std::is_trivially_copyable_v<T>) {
+            std::memcpy(dst, src_first,
+                static_cast<std::size_t>(src_last - src_first) * sizeof(T));
+        } else {
+            std::uninitialized_move(src_first, src_last, dst);
+        }
+    }
+
+    /**
+     * @brief Perkelia turinį į naują bloką `new_capacity` dydžio.
+     *
+     * Trivialiai kopijuojamiems tipams — `memcpy`, destruktoriai praleidiami.
+     *
+     * @param new_capacity  Nauja talpa.
      */
     void reallocate(size_type new_capacity) {
-        iterator new_dat   = alloc.allocate(new_capacity);
-        iterator new_avail = std::uninitialized_move(dat, avail, new_dat);
-        uncreate();
+        iterator new_dat = alloc.allocate(new_capacity);
+        size_type sz     = size();
+        trivial_move_or_uninit_move(dat, avail, new_dat);
+        if constexpr (!std::is_trivially_destructible_v<T>) {
+            for (iterator it = avail; it != dat; )
+                alloc_traits::destroy(alloc, --it);
+        }
+        if (dat) raw_deallocate();
         dat   = new_dat;
-        avail = new_avail;
+        avail = dat + sz;
         limit = dat + new_capacity;
     }
 
     /**
-     * @brief Automatiškai padidina talpą, kai pritrūksta vietos.
+     * @brief Apskaičiuoja naują talpą augimo metu.
      *
-     * Nauja talpa — dvigubai didesnė už esamą (mažiausiai 1 arba `min_capacity`).
+     * - `needed <= 2 * capacity()`: dvigubina (`max(2*cap, 1)`).
+     * - `needed > 2 * capacity()`: naudoja tikslų `needed` — vengia
+     *   perteklinės atminties kai vienu metu įterpiama daug elementų.
      *
-     * @param min_capacity  Minimali pageidaujama talpa (numatytoji — 0).
+     * @param needed  Minimali reikalinga talpa.
+     * @return        Nauja talpa.
      */
-    void grow(size_type min_capacity = 0) {
-        size_type new_cap = std::max({ min_capacity, 2 * capacity(), size_type{1} });
-        reallocate(new_cap);
+    size_type grow_capacity(size_type needed) const noexcept {
+        size_type doubled = 2 * capacity();
+        return (needed <= doubled) ? std::max(doubled, size_type{1}) : needed;
     }
 
     /**
-     * @brief Pastumia elementus nuo `pos` iki `avail` dešinėn per `n` pozicijų.
+     * @brief Automatiškai didina talpą.
      *
-     * Teisingai tvarko ribą tarp inicializuotos ir neinicializuotos atminties prie `avail`.
+     * @param min_capacity  Minimali talpa (numatytoji — `size()+1`).
+     */
+    void grow(size_type min_capacity = 0) {
+        reallocate(grow_capacity(std::max(min_capacity, size() + 1)));
+    }
+
+    /**
+     * @brief Paima `other` resursus be kopijavimo (po operacijos `other` tuščias).
+     */
+    void steal(Vector& other) noexcept {
+        dat   = other.dat;
+        avail = other.avail;
+        limit = other.limit;
+        other.dat = other.avail = other.limit = nullptr;
+    }
+
+    /**
+     * @brief Pastumia elementus `[pos, avail)` dešinėn per `n` pozicijų.
      *
-     * @param pos  Iteratorius į pirmą stumtiną elementą.
-     * @param n    Pozicijų skaičius, per kiek stumti.
+     * ### Strategija:
+     * - **Trivialiai kopijuojami tipai**: `memmove` — greičiausia, vienas kvietimas.
+     * - **Neinicializuota sritis** `[avail, avail+n)`:
+     *   `alloc_traits::construct` + `std::move_if_noexcept` — išimčių saugu,
+     *   teisingai inicializuoja naujus objektus.
+     * - **Inicializuota sritis** `[pos, avail-n)`:
+     *   priskyrimo operatorius (`std::move_if_noexcept` assignment) — ne
+     *   konstruktorius, nes objektai jau egzistuoja; konstruktoriaus kvietimas
+     *   čia nutekintų destruktorius ne-trivialiai sunaikinami tipams.
+     *
+     * @param pos  Pirmasis stumtinas elementas.
+     * @param n    Postūmis pozicijomis.
      */
     void shift_right(iterator pos, size_type n) {
         if (pos == avail) return;
+
+        if constexpr (std::is_trivially_copyable_v<T>) {
+            std::memmove(pos + n, pos,
+                static_cast<std::size_t>(avail - pos) * sizeof(T));
+            return;
+        }
+
         size_type tail = static_cast<size_type>(avail - pos);
+
         if (n >= tail) {
-            // Visi elementai [pos, avail) patenka į neinicializuotą sritį
-            std::uninitialized_move(pos, avail, pos + n);
+            iterator src = pos, dst = pos + n;
+            for (; src != avail; ++src, ++dst)
+                alloc_traits::construct(alloc, dst, std::move_if_noexcept(*src));
+            destroy_range(pos, avail);
         } else {
-            // Paskutiniai n elementų patenka į neinicializuotą sritį
-            std::uninitialized_move(avail - n, avail, avail);
-            // Likę elementai stumiami inicializuotoje srityje
-            std::move_backward(pos, avail - n, avail);
+            iterator uninit_src = avail - n;
+            iterator uninit_dst = avail;
+            for (iterator it = uninit_src; it != avail; ++it, ++uninit_dst)
+                alloc_traits::construct(alloc, uninit_dst,
+                                        std::move_if_noexcept(*it));
+            for (iterator it = uninit_src; it != pos; ) {
+                --it;
+                *(it + n) = std::move_if_noexcept(*it);
+            }
         }
     }
 };
@@ -840,51 +997,48 @@ private:
 // ── Laisvosios funkcijos ──────────────────────────────────────────────────────
 
 /**
- * @brief Nenarė funkcija keitimuisi dviem `Vector` objektais.
+ * @brief Keičia du `Vector` objektus. O(1).
  *
- * Iškviečia `a.swap(b)`, O(1) sudėtingumas.
- *
- * @tparam T  Elementų tipas.
- * @param a   Pirmas masyvas.
- * @param b   Antras masyvas.
+ * @tparam T         Elementų tipas.
+ * @tparam Allocator Atminties valdytojo tipas.
+ * @param a          Pirmas masyvas.
+ * @param b          Antras masyvas.
  */
-template <VectorElement T>
-void swap(Vector<T>& a, Vector<T>& b) noexcept { a.swap(b); }
+template <VectorElement T, typename Allocator>
+void swap(Vector<T, Allocator>& a, Vector<T, Allocator>& b) noexcept { a.swap(b); }
 
 /**
- * @brief Pašalina visus elementus, lygius `value` (C++20).
+ * @brief Pašalina visus elementus lygius `value` (C++20).
  *
- * Viduje naudoja `std::remove` + `Vector::erase`.
- *
- * @tparam T      Elementų tipas.
- * @tparam U      Lyginamos reikšmės tipas.
- * @param v       Masyvas, iš kurio šalinama.
- * @param value   Reikšmė, kurią atitinkantys elementai šalinami.
- * @return        Pašalintų elementų skaičius.
+ * @tparam T         Elementų tipas.
+ * @tparam Allocator Atminties valdytojo tipas.
+ * @tparam U         Lyginamos reikšmės tipas.
+ * @param v          Masyvas.
+ * @param value      Šalinama reikšmė.
+ * @return           Pašalintų elementų skaičius.
  */
-template <VectorElement T, typename U>
-typename Vector<T>::size_type erase(Vector<T>& v, const U& value) {
+template <VectorElement T, typename Allocator, typename U>
+typename Vector<T, Allocator>::size_type erase(Vector<T, Allocator>& v, const U& value) {
     auto it = std::remove(v.begin(), v.end(), value);
-    auto n  = static_cast<typename Vector<T>::size_type>(v.end() - it);
+    auto n  = static_cast<typename Vector<T, Allocator>::size_type>(v.end() - it);
     v.erase(it, v.end());
     return n;
 }
 
 /**
- * @brief Pašalina visus elementus, tenkinančius predikato sąlygą (C++20).
+ * @brief Pašalina visus elementus tenkinančius predikato sąlygą (C++20).
  *
- * Viduje naudoja `std::remove_if` + `Vector::erase`.
- *
- * @tparam T     Elementų tipas.
- * @tparam Pred  Unarinio predikato tipas.
- * @param v      Masyvas, iš kurio šalinama.
- * @param pred   Predikatas; elementas šalinamas, jei `pred(elem)` grąžina `true`.
- * @return       Pašalintų elementų skaičius.
+ * @tparam T         Elementų tipas.
+ * @tparam Allocator Atminties valdytojo tipas.
+ * @tparam Pred      Predikato tipas.
+ * @param v          Masyvas.
+ * @param pred       Predikatas.
+ * @return           Pašalintų elementų skaičius.
  */
-template <VectorElement T, typename Pred>
-typename Vector<T>::size_type erase_if(Vector<T>& v, Pred pred) {
+template <VectorElement T, typename Allocator, typename Pred>
+typename Vector<T, Allocator>::size_type erase_if(Vector<T, Allocator>& v, Pred pred) {
     auto it = std::remove_if(v.begin(), v.end(), pred);
-    auto n  = static_cast<typename Vector<T>::size_type>(v.end() - it);
+    auto n  = static_cast<typename Vector<T, Allocator>::size_type>(v.end() - it);
     v.erase(it, v.end());
     return n;
 }
