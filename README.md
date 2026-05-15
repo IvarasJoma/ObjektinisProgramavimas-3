@@ -66,6 +66,78 @@ Naudojant Doxygen servisą aprašytas projekto kodas (t.y klasės, jų metodai, 
 Testavimo nuotrauka:
 <img width="577" height="579" alt="image" src="https://github.com/user-attachments/assets/5d7f2eec-3134-4a01-a6f4-0585c473b1ec" />
 
+## Vektoriaus klasės funkcijų naudojimo pavyzdžiai
+
+### 1. `push_back`
+```cpp
+Vector<int> v;
+v.push_back(1);
+v.push_back(2);
+v.push_back(3);
+// v = {1, 2, 3}
+```
+
+---
+
+### 2. `insert`
+```cpp
+Vector<int> v = {1, 2, 5, 6};
+std::vector<int> viduriniai = {3, 4};
+v.insert(v.begin() + 2, viduriniai.begin(), viduriniai.end());
+// v = {1, 2, 3, 4, 5, 6}
+```
+
+---
+
+### 3. `erase`
+```cpp
+Vector<int> v = {1, 2, 3, 4, 5};
+v.erase(v.begin() + 1, v.begin() + 3);
+// v = {1, 4, 5}
+```
+
+---
+
+### 4. `reserve`
+```cpp
+Vector<int> v;
+v.reserve(100);
+// talpa >= 100, dydis = 0
+// push_back operacijos nevykdys realokacijos
+```
+
+---
+
+### 5. `assign_range`
+```cpp
+Vector<int> v = {1, 2, 3};
+std::vector<int> nauji = {10, 20, 30, 40};
+v.assign_range(nauji);
+// v = {10, 20, 30, 40}
+```
+Sveikų skaičių efektyvumo analizė:
+<img width="433" height="102" alt="image" src="https://github.com/user-attachments/assets/eb86ee8c-0209-4396-a2f2-2288a4ce77dc" />
+Testai:
+<img width="424" height="49" alt="image" src="https://github.com/user-attachments/assets/2a38d249-1637-452b-80ac-1a3eb0dfdcb8" />
+Perskirstymai:
+<img width="424" height="49" alt="image" src="https://github.com/user-attachments/assets/022f1af8-ce9c-4c59-ac19-169ddd21f3d3" />
+
+## `Vector` vs `std::vector` spartos palyginimas (O3, 3 testų vidurkis)
+
+| Įrašų kiekis | Implementacija | Nuskaitymas (s) | Skaičiavimas (s) | Rikiavimas (s) | Skirstymas (s) | Išvedimas (s) | Bendras (s) |
+| ------------ | -------------- | --------------- | ---------------- | -------------- | -------------- | ------------- | ----------- |
+| 100 000      | `Vector`       | 0.2816          | 0.00748          | 0.00407        | 0.000657       | 0.02921       | 0.32302     |
+| 100 000      | `std::vector`  | 0.28376         | 0.00752          | 0.00431        | 0.000554       | 0.03039       | 0.32653     |
+| 1 000 000    | `Vector`       | 2.67621         | 0.07596          | 0.03997        | 0.00738        | 0.29301       | 3.09253     |
+| 1 000 000    | `std::vector`  | 2.7741          | 0.07717          | 0.04362        | 0.00634        | 0.30128       | 3.2025      |
+| 10 000 000   | `Vector`       | 27.7435         | 0.91072          | 0.40326        | 0.12449        | 3.16841       | 32.3504     |
+| 10 000 000   | `std::vector`  | 28.4297         | 0.91024          | 0.46045        | 0.06283        | 3.14886       | 33.012      |
+
+## Programos diegimas pagal vedlį:
+
+    Atsisiųsti ir paleisti setup.exe, sekti nurodymus.
+    Pasibaigus diegimui, iš darbalaukio aplinkos paleisti programą.
+
 <h2>Naudojimosi instrukcija</h2>
 <ol>
     <li>Parsisiųsti ir įsirašyti <a href="https://gnuwin32.sourceforge.net/packages/make.htm">make</a> programinį paketą (tik jei naudojate Windows OS).</li>
