@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "Studentas.h"
-#include "../strukturosFailai/strukturaVisi.h"
+#include "strukturosFailai/strukturaVisi.h"
 
 bool Studentas::arSpausdintiDestruktoriu = false;
 

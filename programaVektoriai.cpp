@@ -1,4 +1,4 @@
-#include "strukturaVisi.h"
+#include "strukturosFailai/strukturaVisi.h"
 #include <iostream>
 #include <algorithm>
 #include <fstream>
