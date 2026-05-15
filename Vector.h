@@ -277,20 +277,20 @@ public:
     }
 
     /**
-     * @brief Netiesioginis konvertavimas į `std::vector<T>`.
+     * @brief Tiesioginis konvertavimas į `std::vector<T>`.
      * Sukuria kopiją visų elementų.
      */
-    operator std::vector<T>()        const { return std::vector<T>(dat, avail); }
+    explicit operator std::vector<T>()        const { return std::vector<T>(dat, avail); }
 
     /**
-     * @brief Netiesioginis konvertavimas į kintamąjį `std::span<T>`.
+     * @brief Tiesioginis konvertavimas į kintamąjį `std::span<T>`.
      */
-    operator std::span<T>()                { return std::span<T>(dat, avail); }
+    explicit operator std::span<T>()                { return std::span<T>(dat, avail); }
 
     /**
-     * @brief Netiesioginis konvertavimas į konstantinį `std::span<const T>`.
+     * @brief Tiesioginis konvertavimas į konstantinį `std::span<const T>`.
      */
-    operator std::span<const T>()    const { return std::span<const T>(dat, avail); }
+    explicit operator std::span<const T>()    const { return std::span<const T>(dat, avail); }
 
     // ── assign ───────────────────────────────────────────────────────────────
 
@@ -520,7 +520,7 @@ public:
      * @note         `[[nodiscard]]` pagal C++23 standartą.
      */
     template <typename... Args>
-    reference emplace_back(Args&&... args) {
+    [[nodiscard]] reference emplace_back(Args&&... args) {
         if (avail == limit) [[unlikely]] grow();
         alloc_traits::construct(alloc, avail++, std::forward<Args>(args)...);
         return back();
@@ -534,6 +534,8 @@ public:
      */
     template <std::ranges::input_range R>
     void append_range(R&& r) {
+        if constexpr (std::ranges::sized_range<R>)
+            reserve(size() + static_cast<size_type>(std::ranges::distance(r)));
         for (auto&& elem : r)
             push_back(std::forward<decltype(elem)>(elem));
     }
@@ -911,10 +913,7 @@ private:
         iterator new_dat = alloc.allocate(new_capacity);
         size_type sz     = size();
         trivial_move_or_uninit_move(dat, avail, new_dat);
-        if constexpr (!std::is_trivially_destructible_v<T>) {
-            for (iterator it = avail; it != dat; )
-                alloc_traits::destroy(alloc, --it);
-        }
+        destroy_range(dat, avail); 
         if (dat) raw_deallocate();
         dat   = new_dat;
         avail = dat + sz;
@@ -924,16 +923,16 @@ private:
     /**
      * @brief Apskaičiuoja naują talpą augimo metu.
      *
-     * - `needed <= 2 * capacity()`: dvigubina (`max(2*cap, 1)`).
-     * - `needed > 2 * capacity()`: naudoja tikslų `needed` — vengia
+     * - `needed <= 3 * capacity()`: trigubina (`max(3*cap, 1)`).
+     * - `needed > 3 * capacity()`: naudoja tikslų `needed` — vengia
      *   perteklinės atminties kai vienu metu įterpiama daug elementų.
      *
      * @param needed  Minimali reikalinga talpa.
      * @return        Nauja talpa.
      */
     size_type grow_capacity(size_type needed) const noexcept {
-        size_type doubled = 3 * capacity();
-        return (needed <= doubled) ? std::max(doubled, size_type{1}) : needed;
+        size_type tripled = 3 * capacity();
+        return (needed <= tripled) ? std::max(tripled, size_type{1}) : needed;
     }
 
     /**
@@ -979,9 +978,7 @@ private:
                 static_cast<std::size_t>(avail - pos) * sizeof(T));
             return;
         }
-
         size_type tail = static_cast<size_type>(avail - pos);
-
         if (n >= tail) {
             iterator src = pos, dst = pos + n;
             for (; src != avail; ++src, ++dst)
