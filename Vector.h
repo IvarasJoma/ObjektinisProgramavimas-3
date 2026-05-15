@@ -932,7 +932,7 @@ private:
      * @return        Nauja talpa.
      */
     size_type grow_capacity(size_type needed) const noexcept {
-        size_type doubled = 2 * capacity();
+        size_type doubled = 3 * capacity();
         return (needed <= doubled) ? std::max(doubled, size_type{1}) : needed;
     }
 
