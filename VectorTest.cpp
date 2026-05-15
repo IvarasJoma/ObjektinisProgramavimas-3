@@ -627,7 +627,7 @@ TEST(StringType, MoveIntoVector) {
 
 TEST(Conversions, ToStdVector) {
     Vector<int> v{1, 2, 3};
-    std::vector<int> sv = v;
+    std::vector<int> sv = static_cast<std::vector<int>>(v);
     EXPECT_EQ(sv.size(), 3u);
     EXPECT_EQ(sv[0], 1); EXPECT_EQ(sv[2], 3);
 }
