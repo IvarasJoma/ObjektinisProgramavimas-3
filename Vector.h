@@ -53,8 +53,8 @@ concept VectorElement = std::movable<T>;
  *
  * Saugo elementus nuosekliame atminties bloke. Kai laisvos vietos nebelieka,
  * masyvas automatiškai išplečiamas į naują bloką pagal augimo strategiją:
- * nauja talpa = `max(2 * capacity(), 1)`, tačiau jei
- * `min_capacity > 2 * capacity()` — naudojamas tikslus `min_capacity`,
+// nauja talpa = `max(3 * capacity(), 1)`, tačiau jei
+// `needed > 3 * capacity()` — naudojamas tikslus `needed`,
  * taip vengiant perteklinės atminties eikvojimo didesnių įterpimų metu.
  *
  * ### Optimizacijos
@@ -302,7 +302,24 @@ public:
      * @param last      Diapazono pabaiga (neįskaičiuojama).
      */
     template <std::input_iterator InputIt>
-    void assign(InputIt first, InputIt last) { uncreate(); create(first, last); }
+    void assign(InputIt first, InputIt last) {
+        size_type n = static_cast<size_type>(std::distance(first, last));
+        if (n <= capacity()) {
+            size_type old_sz = size();
+            if (n <= old_sz) {
+                std::copy(first, last, dat);
+                destroy_range(dat + n, avail);
+            } else {
+                InputIt mid = std::next(first, static_cast<difference_type>(old_sz));
+                std::copy(first, mid, dat);
+                std::uninitialized_copy(mid, last, avail);
+            }
+            avail = dat + n;
+        } else {
+            uncreate();
+            create(first, last);
+        }
+    }
 
     /**
      * @brief Pakeičia turinį `n` kopijų reikšmės `val`.
@@ -310,7 +327,23 @@ public:
      * @param n    Elementų skaičius.
      * @param val  Reikšmė, kuria pildoma.
      */
-    void assign(size_type n, const value_type& val) { uncreate(); create(n, val); }
+    void assign(size_type n, const value_type& val) {
+        if (n <= capacity()) {
+            // Reuse buffer: overwrite existing, construct/destroy the difference
+            size_type old_sz = size();
+            if (n <= old_sz) {
+                std::fill(dat, dat + n, val);
+                destroy_range(dat + n, avail);
+            } else {
+                std::fill(dat, avail, val);
+                std::uninitialized_fill(avail, dat + n, val);
+            }
+            avail = dat + n;
+        } else {
+            uncreate();
+            create(n, val);
+        }
+    }
 
     /**
      * @brief Pakeičia turinį inicializavimo sąrašo elementais.
@@ -446,8 +479,9 @@ public:
             dat = avail = limit = nullptr;
         } else {
             size_type sz      = size();
-            iterator  new_dat = alloc.allocate(sz);
+            iterator  new_dat = alloc_traits::allocate(alloc, sz);
             trivial_move_or_uninit_move(dat, avail, new_dat);
+            destroy_range(dat, avail);
             raw_deallocate();
             dat = new_dat;
             avail = limit = dat + sz;
@@ -520,7 +554,7 @@ public:
      * @note         `[[nodiscard]]` pagal C++23 standartą.
      */
     template <typename... Args>
-    [[nodiscard]] reference emplace_back(Args&&... args) {
+    reference emplace_back(Args&&... args) {
         if (avail == limit) [[unlikely]] grow();
         alloc_traits::construct(alloc, avail++, std::forward<Args>(args)...);
         return back();
@@ -608,9 +642,9 @@ public:
         } else {
             Vector tmp(alloc);
             tmp.reallocate(grow_capacity(size() + n));
-            std::uninitialized_copy(dat, dat + index, tmp.dat);
+            std::uninitialized_move(dat, dat + index, tmp.dat);
             std::uninitialized_fill(tmp.dat + index, tmp.dat + index + n, val);
-            std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
+            std::uninitialized_move(dat + index, avail, tmp.dat + index + n);
             tmp.avail = tmp.dat + size() + n;
             swap(tmp);
             return dat + index;
@@ -645,9 +679,9 @@ public:
         } else {
             Vector tmp(alloc);
             tmp.reallocate(grow_capacity(size() + n));
-            std::uninitialized_copy(dat, dat + index, tmp.dat);
-            std::uninitialized_copy(first, last, tmp.dat + index);
-            std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
+            std::uninitialized_move(dat, dat + index, tmp.dat);
+            std::uninitialized_move(first, last, tmp.dat + index);
+            std::uninitialized_move(dat + index, avail, tmp.dat + index + n);
             tmp.avail = tmp.dat + size() + n;
             swap(tmp);
             return dat + index;
@@ -678,26 +712,41 @@ public:
     template <std::ranges::input_range R>
     iterator insert_range(const_iterator cpos, R&& r) {
         size_type index = static_cast<size_type>(cpos - dat);
-        size_type n     = static_cast<size_type>(std::ranges::distance(r));
-        if (n == 0) return dat + index;
 
-        if (size() + n <= capacity()) [[likely]] {
-            iterator pos = dat + index;
-            shift_right(pos, n);
-            iterator out = pos;
-            for (auto&& elem : r)
-                alloc_traits::construct(alloc, out++, std::forward<decltype(elem)>(elem));
-            avail += n;
-            return pos;
+        if constexpr (std::ranges::sized_range<R>) {
+            size_type n = static_cast<size_type>(std::ranges::distance(r));
+            if (n == 0) return dat + index;
+
+            if (size() + n <= capacity()) {
+                iterator pos = dat + index;
+                shift_right(pos, n);
+                iterator out = pos;
+                for (auto&& elem : r)
+                    alloc_traits::construct(alloc, out++,
+                        std::forward<decltype(elem)>(elem));
+                avail += n;
+                return pos;
+            } else {
+                // reallocation path (same as before)
+                Vector tmp(alloc);
+                tmp.reallocate(grow_capacity(size() + n));
+                std::uninitialized_move(dat, dat + index, tmp.dat);
+                std::uninitialized_copy(std::ranges::begin(r),
+                                        std::ranges::end(r),
+                                        tmp.dat + index);
+                std::uninitialized_move(dat + index, avail,
+                                        tmp.dat + index + n);
+                tmp.avail = tmp.dat + size() + n;
+                swap(tmp);
+                return dat + index;
+            }
         } else {
-            Vector tmp(alloc);
-            tmp.reallocate(grow_capacity(size() + n));
-            std::uninitialized_copy(dat, dat + index, tmp.dat);
-            std::uninitialized_copy(std::ranges::begin(r), std::ranges::end(r), tmp.dat + index);
-            std::uninitialized_copy(dat + index, avail, tmp.dat + index + n);
-            tmp.avail = tmp.dat + size() + n;
-            swap(tmp);
-            return dat + index;
+            // Non-sized / single-pass: collect into a temporary Vector first,
+            // then delegate to the sized overload
+            Vector<T, Allocator> tmp_range(alloc);
+            for (auto&& elem : r)
+                tmp_range.push_back(std::forward<decltype(elem)>(elem));
+            return insert_range(cpos, tmp_range);
         }
     }
 
@@ -841,7 +890,7 @@ private:
      * @brief Allokuoja ir kopijuoja iš iteratorių diapazono.
      *
      * Trivialiai kopijuojamiems tipams su rodyklių iteratoriais
-     * naudoja `memcpy` vietoj `uninitialized_copy`.
+     * naudoja `memcpy` vietoj `uninitialized_move`.
      */
     template <typename InputIt>
     void create(InputIt first, InputIt last) {
@@ -852,7 +901,7 @@ private:
             std::memcpy(dat, first, n * sizeof(T));
             avail = limit = dat + n;
         } else {
-            limit = avail = std::uninitialized_copy(first, last, dat);
+            limit = avail = std::uninitialized_move(first, last, dat);
         }
     }
 
@@ -931,8 +980,12 @@ private:
      * @return        Nauja talpa.
      */
     size_type grow_capacity(size_type needed) const noexcept {
-        size_type tripled = 3 * capacity();
-        return (needed <= tripled) ? std::max(tripled, size_type{1}) : needed;
+        size_type cap     = capacity();
+        size_type tripled = (cap <= std::numeric_limits<size_type>::max() / 3)
+                            ? 3 * cap
+                            : std::numeric_limits<size_type>::max();
+        tripled = std::max(tripled, size_type{1});
+        return (needed <= tripled) ? tripled : needed;
     }
 
     /**
