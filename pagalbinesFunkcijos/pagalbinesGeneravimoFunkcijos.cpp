@@ -1,5 +1,5 @@
-#include "../strukturosFailai/strukturaGeneravimas.h"
 #include "../strukturosFailai/Failai.h"
+#include "../strukturosFailai/strukturaGeneravimas.h"
 #include "../strukturosFailai/strukturaIvestis.h"
 #include <random>
 #include <sstream>
