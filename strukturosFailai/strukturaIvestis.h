@@ -6,6 +6,7 @@
 #include "../Studentas.h"
 #include "../strukturosFailai/Failai.h"
 #include "../Vector.h"
+#include "../StudManAPI.h"
 
 /**
  * @file strukturaIvestis.h
@@ -17,14 +18,14 @@
  * @param namuDarbuPazymiai Vektorius, į kurį įrašomi pažymiai.
  * @param maksimalusNDKiekis Maksimalus leidžiamas namų darbų kiekis.
  */
-void nuskaitytiNamuDarbuPazymius(Vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
+STUDMAN_API void nuskaitytiNamuDarbuPazymius(Vector<int>& namuDarbuPazymiai, int maksimalusNDKiekis);
 
 /**
  * @brief Nuskaito meniu pasirinkimą iš tekstinių eilučių sąrašo.
  * @param eilutes Meniu eilučių vektorius.
  * @return Pasirinktas meniu punktas.
  */
-int nuskaitytiMeniuPasirinkima(const Vector<std::string>& eilutes);
+STUDMAN_API int nuskaitytiMeniuPasirinkima(const Vector<std::string>& eilutes);
 
 /**
  * @brief Nuskaito pagrindinio meniu pasirinkimą.
@@ -32,48 +33,48 @@ int nuskaitytiMeniuPasirinkima(const Vector<std::string>& eilutes);
  * @param pasirinkimas Kintamasis, į kurį įrašomas pasirinkimas.
  * @return `true`, jei pasirinkimas nuskaitytas sėkmingai.
  */
-bool nuskaitytiPagrindinioMeniuPasirinkima(const Vector<std::string>& eilutes, int& pasirinkimas);
+STUDMAN_API bool nuskaitytiPagrindinioMeniuPasirinkima(const Vector<std::string>& eilutes, int& pasirinkimas);
 
 /**
  * @brief Nuskaito neneigiamą sveikąjį skaičių.
  * @param pranesimas Įvesties pranešimas naudotojui.
  * @return Neneigiamas sveikasis skaičius.
  */
-int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas);
+STUDMAN_API int nuskaitytiNeneigiamaSveikajiSkaiciu(const char* pranesimas);
 
 /**
  * @brief Nuskaito teigiamą sveikąjį skaičių.
  * @param pranesimas Įvesties pranešimas naudotojui.
  * @return Teigiamas sveikasis skaičius.
  */
-int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas);
+STUDMAN_API int nuskaitytiTeigiamaSveikajiSkaiciu(const char* pranesimas);
 
 /**
  * @brief Nuskaito galutinio pažymio skaičiavimo metodą.
  * @return Skaičiavimo metodo simbolis.
  */
-char nuskaitytiSkaiciavimoMetoda();
+STUDMAN_API char nuskaitytiSkaiciavimoMetoda();
 
 /**
  * @brief Nuskaito pažymį nuo 1 iki 10.
  * @param pranesimas Įvesties pranešimas naudotojui.
  * @return Pažymys intervale `[1; 10]`.
  */
-int nuskaitytiPazymiNuo1iki10(const char* pranesimas);
+STUDMAN_API int nuskaitytiPazymiNuo1iki10(const char* pranesimas);
 
 /**
  * @brief Konvertuoja tekstinę įvestį į sveikąjį skaičių.
  * @param ivestis Tekstinė įvestis.
  * @param reiksme Kintamasis, į kurį įrašoma konvertuota reikšmė.
  */
-void nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme);
+STUDMAN_API void nuskaitytiSveikajiSkaiciu(const std::string& ivestis, int& reiksme);
 
 /**
  * @brief Patikrina, ar įvestis yra korektiška.
  * @param ivestis Tikrinama tekstinė įvestis.
  * @throws std::exception Jei įvestis nekorektiška.
  */
-void tikrintiIvesti(const std::string& ivestis);
+STUDMAN_API void tikrintiIvesti(const std::string& ivestis);
 
 /**
  * @brief Nuskaito vardą arba pavardę ir pritaiko nurodytą tvarkymo funkciją.
@@ -82,7 +83,7 @@ void tikrintiIvesti(const std::string& ivestis);
  * @param klaidosPranesimas Klaidos pranešimas neteisingos įvesties atveju.
  * @return Sutvarkytas vardas arba pavardė.
  */
-std::string nuskaitytiVardaArPavarde(
+STUDMAN_API std::string nuskaitytiVardaArPavarde(
     const char* ivestiesPranesimas,
     void(*tvarkyti)(std::string&),
     const char* klaidosPranesimas
@@ -92,44 +93,44 @@ std::string nuskaitytiVardaArPavarde(
  * @brief Paklausia naudotojo, ar pridėti dar vieną studentą.
  * @return `true`, jei naudotojas patvirtina naujo studento pridėjimą.
  */
-bool patvirtintiNaujoStudentoPridejima();
+STUDMAN_API bool patvirtintiNaujoStudentoPridejima();
 
 /**
  * @brief Vykdo studentų įvedimo procesą.
  * @param generuotiPazymius Nurodo, ar pažymius generuoti automatiškai.
  */
-void vykdytiStudentuIvedima(bool generuotiPazymius);
+STUDMAN_API void vykdytiStudentuIvedima(bool generuotiPazymius);
 
 /**
  * @brief Vykdo pilną studentų generavimo scenarijų.
  * @param failai Vardų ir pavardžių failų duomenys.
  */
-void vykdytiPilnaGeneravima(Failai& failai);
+STUDMAN_API void vykdytiPilnaGeneravima(Failai& failai);
 
 /**
  * @brief Sutvarko vardo įvestį.
  * @param ivestis Tvarkoma vardo eilutė.
  */
-void tvarkytiVarda(std::string& ivestis);
+STUDMAN_API void tvarkytiVarda(std::string& ivestis);
 
 /**
  * @brief Sutvarko pavardės įvestį.
  * @param ivestis Tvarkoma pavardės eilutė.
  */
-void tvarkytiPavarde(std::string& ivestis);
+STUDMAN_API void tvarkytiPavarde(std::string& ivestis);
 
 /**
  * @brief Saugiai nuskaito vieną eilutę iš standartinės įvesties.
  * @return Nuskaityta eilutė.
  */
-std::string saugiaiNuskaitytiEilute();
+STUDMAN_API std::string saugiaiNuskaitytiEilute();
 
 /**
  * @brief Parenka pažangių ir silpnų studentų rikiavimo būdus.
  * @param pasirinkimasRikiavimoPazangiu Pažangių studentų rikiavimo pasirinkimas.
  * @param pasirinkimasRikiavimoSilpnu Silpnų studentų rikiavimo pasirinkimas.
  */
-void parinktiRikiavimoBudus(
+STUDMAN_API void parinktiRikiavimoBudus(
     int& pasirinkimasRikiavimoPazangiu,
     int& pasirinkimasRikiavimoSilpnu
 );
@@ -142,7 +143,7 @@ void parinktiRikiavimoBudus(
  * @param egzaminoPazymys Egzamino pažymys.
  * @return Suformuota studento duomenų eilutė.
  */
-std::string suformuotiStudentoIvestiesEilute(
+STUDMAN_API std::string suformuotiStudentoIvestiesEilute(
     const std::string& vardas,
     const std::string& pavarde,
     const Vector<int>& namuDarbai,
@@ -154,6 +155,6 @@ std::string suformuotiStudentoIvestiesEilute(
  * @param eilute Studento duomenų eilutė.
  * @return Sukurtas @ref Studentas objektas.
  */
-Studentas sukurtiStudentaIsEilutesPerOperatoriu(const std::string& eilute);
+STUDMAN_API Studentas sukurtiStudentaIsEilutesPerOperatoriu(const std::string& eilute);
 
 #endif

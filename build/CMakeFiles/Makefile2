@@ -63,10 +63,12 @@ CMAKE_BINARY_DIR = /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/bui
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/StudManLib.dir/all
 all: CMakeFiles/StudMan.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
+codegen: CMakeFiles/StudManLib.dir/codegen
 codegen: CMakeFiles/StudMan.dir/codegen
 .PHONY : codegen
 
@@ -75,22 +77,55 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/StudManLib.dir/clean
 clean: CMakeFiles/StudMan.dir/clean
 .PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/StudManLib.dir
+
+# All Build rule for target.
+CMakeFiles/StudManLib.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12 "Built target StudManLib"
+.PHONY : CMakeFiles/StudManLib.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/StudManLib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles 10
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/StudManLib.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles 0
+.PHONY : CMakeFiles/StudManLib.dir/rule
+
+# Convenience name for target.
+StudManLib: CMakeFiles/StudManLib.dir/rule
+.PHONY : StudManLib
+
+# codegen rule for target.
+CMakeFiles/StudManLib.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12 "Finished codegen for target StudManLib"
+.PHONY : CMakeFiles/StudManLib.dir/codegen
+
+# clean rule for target.
+CMakeFiles/StudManLib.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/clean
+.PHONY : CMakeFiles/StudManLib.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/StudMan.dir
 
 # All Build rule for target.
-CMakeFiles/StudMan.dir/all:
+CMakeFiles/StudMan.dir/all: CMakeFiles/StudManLib.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target StudMan"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles --progress-num=1,2 "Built target StudMan"
 .PHONY : CMakeFiles/StudMan.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/StudMan.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/StudMan.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles 0
 .PHONY : CMakeFiles/StudMan.dir/rule
@@ -102,7 +137,7 @@ StudMan: CMakeFiles/StudMan.dir/rule
 # codegen rule for target.
 CMakeFiles/StudMan.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target StudMan"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles --progress-num=1,2 "Finished codegen for target StudMan"
 .PHONY : CMakeFiles/StudMan.dir/codegen
 
 # clean rule for target.

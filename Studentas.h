@@ -6,6 +6,7 @@
 #include <vector>
 #include "Zmogus.h"
 #include "Vector.h"
+#include "StudManAPI.h"
 
 /**
  * @file Studentas.h
@@ -24,7 +25,7 @@
  * pavardės gavimo metodus, saugo pažymių informaciją ir pateikia metodus
  * studento duomenims keisti bei galutiniam pažymiui apskaičiuoti.
  */
-class Studentas : public Zmogus {
+class STUDMAN_API Studentas : public Zmogus {
 private:
     /** @brief Studento egzamino pažymys. */
     int examGrade_;
@@ -219,6 +220,9 @@ public:
     friend std::istream& operator>>(std::istream& is, Studentas& s);
 };
 
+STUDMAN_API std::ostream& operator<<(std::ostream& os, const Studentas& s);
+STUDMAN_API std::istream& operator>>(std::istream& is, Studentas& s);
+
 /**
  * @struct StudentasLentelei
  * @brief Pagalbinė struktūra studento išvedimui lentelės formatu.
@@ -226,7 +230,7 @@ public:
  * Struktūra saugo konstantinę nuorodą į studentą ir naudojama specializuotam
  * išvedimo operatoriui.
  */
-struct StudentasLentelei {
+struct STUDMAN_API StudentasLentelei {
     /** @brief Studentas, kuris bus išvedamas lentelės formatu. */
     const Studentas& s;
 };
@@ -237,6 +241,6 @@ struct StudentasLentelei {
  * @param s Pagalbinė struktūra su studento nuoroda.
  * @return Išvesties srautas.
  */
-std::ostream& operator<<(std::ostream& os, const StudentasLentelei& s);
+STUDMAN_API std::ostream& operator<<(std::ostream& os, const StudentasLentelei& s);
 
 #endif

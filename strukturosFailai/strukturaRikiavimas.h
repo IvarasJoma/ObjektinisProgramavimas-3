@@ -4,6 +4,7 @@
 #include <vector>
 #include "../Studentas.h"
 #include "../Vector.h"
+#include "../StudManAPI.h"
 
 /**
  * @file strukturaRikiavimas.h
@@ -21,7 +22,7 @@
  * @param pasirinkimasRikiavimo Rikiavimo kriterijaus numeris.
  * @param studentuSarasas Studentų sąrašas, kuris bus rikiuojamas.
  */
-void rikiuotiStudentus(int pasirinkimasRikiavimo, Vector<Studentas>& studentuSarasas);
+STUDMAN_API void rikiuotiStudentus(int pasirinkimasRikiavimo, Vector<Studentas>& studentuSarasas);
 /**
  * @brief Rikiuoja pažangių ir silpnų studentų sąrašus pagal pasirinktus kriterijus.
  * @param pazangiuSarasas Pažangių studentų sąrašas.
@@ -29,6 +30,6 @@ void rikiuotiStudentus(int pasirinkimasRikiavimo, Vector<Studentas>& studentuSar
  * @param pasirinkimasRikiavimoPazangiu Pažangių studentų rikiavimo kriterijus.
  * @param pasirinkimasRikiavimoSilpnu Silpnų studentų rikiavimo kriterijus.
  */
-void rikiuotiSuskirstytusStudentus(Vector<Studentas>& pazangiuSarasas, Vector<Studentas>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu);
+STUDMAN_API void rikiuotiSuskirstytusStudentus(Vector<Studentas>& pazangiuSarasas, Vector<Studentas>& silpnuSarasas, int pasirinkimasRikiavimoPazangiu, int pasirinkimasRikiavimoSilpnu);
 
 #endif

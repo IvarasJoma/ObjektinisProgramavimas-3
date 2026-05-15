@@ -22,7 +22,7 @@
  * Struktūra automatiškai inicijuoja keturis vektorius, nuskaitydama duomenis
  * iš nurodytų tekstinių failų.
  */
-struct Failai{
+struct STUDMAN_API Failai{
     Vector<std::string> vyrVardai = nuskaitytiEilutesIVektoriu("VarduIrPavardziuSarasai/Lietuviski_vyru_vardai.txt");
     Vector<std::string> vyrPavardes = nuskaitytiEilutesIVektoriu("VarduIrPavardziuSarasai/Lietuviskos_vyru_pavardes.txt");
     Vector<std::string> motVardai = nuskaitytiEilutesIVektoriu("VarduIrPavardziuSarasai/Lietuviski_moteru_vardai.txt");

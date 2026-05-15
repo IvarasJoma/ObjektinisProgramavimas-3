@@ -5,6 +5,7 @@
 #include "../Vector.h"
 #include "../Studentas.h"
 #include "../strukturosFailai/Failai.h"
+#include "../StudManAPI.h"
 
 /**
  * @file strukturaGeneravimas.h
@@ -16,7 +17,7 @@
  * @param maksimalusNDKiekis Maksimalus namų darbų kiekis.
  * @return Pora: namų darbų pažymių vektorius ir egzamino pažymys.
  */
-std::pair<Vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis);
+STUDMAN_API std::pair<Vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis);
 
 /**
  * @brief Sugeneruoja atsitiktinį vardą ir pavardę.
@@ -26,7 +27,7 @@ std::pair<Vector<int>, int> generuotiRezultatus(int maksimalusNDKiekis);
  * @param motPavardes Moterų pavardžių sąrašas.
  * @return Pora: sugeneruotas vardas ir pavardė.
  */
-std::pair<std::string, std::string> generuotiVardaPavarde(const Vector<std::string>& vyrVardai, const Vector<std::string>& vyrPavardes, const Vector<std::string>& motVardai, const Vector<std::string>& motPavardes);
+STUDMAN_API std::pair<std::string, std::string> generuotiVardaPavarde(const Vector<std::string>& vyrVardai, const Vector<std::string>& vyrPavardes, const Vector<std::string>& motVardai, const Vector<std::string>& motPavardes);
 
 /**
  * @brief Sugeneruoja atsitiktinį sveikąjį skaičių nurodytame intervale.
@@ -34,7 +35,7 @@ std::pair<std::string, std::string> generuotiVardaPavarde(const Vector<std::stri
  * @param iki Viršutinė intervalo riba.
  * @return Atsitiktinis sveikasis skaičius iš intervalo `[nuo; iki]`.
  */
-int generuotiSveikaSkaiciu(int nuo, int iki);
+STUDMAN_API int generuotiSveikaSkaiciu(int nuo, int iki);
 
 /**
  * @brief Sugeneruoja nurodytą kiekį studentų.
@@ -43,6 +44,6 @@ int generuotiSveikaSkaiciu(int nuo, int iki);
  * @param failai Struktūra su vardų ir pavardžių sąrašais.
  * @return Sugeneruotų studentų vektorius.
  */
-Vector<Studentas> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai);
+STUDMAN_API Vector<Studentas> generuotiStudentus(int studentuKiekis, int maksimalusNDKiekis, const Failai& failai);
 
 #endif

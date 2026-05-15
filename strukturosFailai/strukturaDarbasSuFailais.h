@@ -5,6 +5,7 @@
 #include <filesystem>
 #include "../Vector.h"
 #include "../Studentas.h"
+#include "../StudManAPI.h"
 
 /**
  * @file strukturaDarbasSuFailais.h
@@ -19,38 +20,38 @@ struct Failai;
  * @return Vektorius su nuskaitytomis eilutėmis.
  */
 
-Vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
+STUDMAN_API Vector<std::string> nuskaitytiEilutesIVektoriu(const std::string& failas);
 
 /**
  * @brief Nuskaito studentų duomenis iš failo į vektorių.
  * @param failas Failo kelias.
  * @return Studentų vektorius.
  */
-Vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
+STUDMAN_API Vector<Studentas> nuskaitytiStudentuDuomenisIsFailo(const std::string& failas);
 
 /**
  * @brief Vykdo studentų duomenų nuskaitymo iš failo scenarijų.
  */
-void vykdytiNuskaitymaIsFailo();
+STUDMAN_API void vykdytiNuskaitymaIsFailo();
 
 /**
  * @brief Įrašo studentų duomenis pagal pasirinktą išvedimo scenarijų.
  * @param studentuSarasas Studentų sąrašas.
  */
-void irasytiDuomenis(Vector<Studentas>& studentuSarasas);
+STUDMAN_API void irasytiDuomenis(Vector<Studentas>& studentuSarasas);
 
 /**
  * @brief Įrašo studentų sąrašą į nurodytą failą.
  * @param studentuSarasas Studentų sąrašas.
  * @param failoPavadinimas Išvesties failo pavadinimas.
  */
-void irasytiStudentuDuomenisIFaila(const Vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas);
+STUDMAN_API void irasytiStudentuDuomenisIFaila(const Vector<Studentas>& studentuSarasas, const std::string& failoPavadinimas);
 
 /**
  * @brief Vykdo studentų skirstymą į atskirus failus.
  * @param studentuSarasas Studentų sąrašas.
  */
-void vykdytiSkirstymaIFailus(Vector<Studentas>& studentuSarasas);
+STUDMAN_API void vykdytiSkirstymaIFailus(Vector<Studentas>& studentuSarasas);
 
 /**
  * @brief Įrašo pažangius ir silpnus studentus į atskirus failus.
@@ -58,20 +59,20 @@ void vykdytiSkirstymaIFailus(Vector<Studentas>& studentuSarasas);
  * @param silpnuSarasas Silpnų studentų sąrašas.
  * @param skaiciavimoMetodoPasirinkimas Galutinio pažymio skaičiavimo metodas.
  */
-void irasytiSuskirstytusStudentusIFailus(const Vector<Studentas>& pazangiuSarasas, const Vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas);
+STUDMAN_API void irasytiSuskirstytusStudentusIFailus(const Vector<Studentas>& pazangiuSarasas, const Vector<Studentas>& silpnuSarasas, const char& skaiciavimoMetodoPasirinkimas);
 
 /**
  * @brief Grąžina visus tekstinius failus iš nurodyto katalogo.
  * @param katalogas Katalogo kelias.
  * @return Tekstinių failų kelių vektorius.
  */
-Vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas);
+STUDMAN_API Vector<std::filesystem::path> gautiTekstiniusFailus(const std::string& katalogas);
 
 /**
  * @brief Praleidžia tarpo simbolius skaitant tekstą iš simbolių rodyklės.
  * @param rodykle Rodyklė į einamąją teksto poziciją.
  */
-void praleistiTarpaIsFailo(const char*& rodykle);
+STUDMAN_API void praleistiTarpaIsFailo(const char*& rodykle);
 
 /**
  * @brief Nuskaito vieną žodį iš simbolių rodyklės.
@@ -79,7 +80,7 @@ void praleistiTarpaIsFailo(const char*& rodykle);
  * @param isvestis Kintamasis, į kurį įrašomas nuskaitytas žodis.
  * @return `true`, jei žodis nuskaitytas sėkmingai, kitu atveju `false`.
  */
-bool nuskaitytiZodiIsFailo(const char*& rodykle, std::string& isvestis);
+STUDMAN_API bool nuskaitytiZodiIsFailo(const char*& rodykle, std::string& isvestis);
 
 /**
  * @brief Nuskaito sveikąjį skaičių iš simbolių rodyklės.
@@ -87,7 +88,7 @@ bool nuskaitytiZodiIsFailo(const char*& rodykle, std::string& isvestis);
  * @param x Kintamasis, į kurį įrašomas nuskaitytas skaičius.
  * @return `true`, jei skaičius nuskaitytas sėkmingai, kitu atveju `false`.
  */
-bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x);
+STUDMAN_API bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x);
 
 /**
  * @brief Nuskaito studentų duomenis pagal pasirinktą failą iš katalogo.
@@ -95,6 +96,6 @@ bool nuskaitytiSveikaSkaiciuIsFailo(const char*& rodykle, int& x);
  * @param studentuSarasas Studentų sąrašas, į kurį įrašomi nuskaityti duomenys.
  * @param katalogas Katalogas, kuriame ieškoma tekstinių failų.
  */
-void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, Vector<Studentas>& studentuSarasas, const std::string& katalogas);
+STUDMAN_API void nuskaitytiDuomenis(int pasirinkimasNuskaitymo, Vector<Studentas>& studentuSarasas, const std::string& katalogas);
 
 #endif

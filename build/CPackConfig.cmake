@@ -10,6 +10,8 @@
 # usually begin with CPACK_<GENNAME>_xxxx.
 
 
+set(CPACK_ARCHIVE_GID "-1")
+set(CPACK_ARCHIVE_UID "-1")
 set(CPACK_BUILD_SOURCE_DIRS "/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas;/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build")
 set(CPACK_CMAKE_GENERATOR "Unix Makefiles")
 set(CPACK_COMPONENT_UNSPECIFIED_HIDDEN "TRUE")
@@ -36,17 +38,16 @@ set(CPACK_PACKAGE_DESCRIPTION_FILE "/opt/homebrew/share/cmake/Templates/CPack.Ge
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "VardenisPavardenis built using CMake")
 set(CPACK_PACKAGE_DIRECTORY "/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/installer")
 set(CPACK_PACKAGE_EXECUTABLES "StudMan;Vardenis-Pavardenis")
-set(CPACK_PACKAGE_FILE_NAME "Vardenis-Pavardenis-0.1.1-Darwin")
+set(CPACK_PACKAGE_FILE_NAME "setup")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "VU/Vardenis-Pavardenis")
 set(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "VU/Vardenis-Pavardenis")
 set(CPACK_PACKAGE_NAME "Vardenis-Pavardenis")
 set(CPACK_PACKAGE_RELOCATABLE "true")
 set(CPACK_PACKAGE_VENDOR "VU")
-set(CPACK_PACKAGE_VERSION "0.1.1")
+set(CPACK_PACKAGE_VERSION "3.0")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "1")
 set(CPACK_PACKAGE_VERSION_PATCH "1")
-set(CPACK_PRODUCTBUILD_DOMAINS "ON")
 set(CPACK_RESOURCE_FILE_LICENSE "/opt/homebrew/share/cmake/Templates/CPack.GenericLicense.txt")
 set(CPACK_RESOURCE_FILE_README "/opt/homebrew/share/cmake/Templates/CPack.GenericDescription.txt")
 set(CPACK_RESOURCE_FILE_WELCOME "/opt/homebrew/share/cmake/Templates/CPack.GenericWelcome.txt")

@@ -2,6 +2,7 @@
 #define ZMOGUS_H
 
 #include <string>
+#include "StudManAPI.h"
 
 /**
  * @file Zmogus.h
@@ -79,6 +80,6 @@ public:
  * Grynas virtualus destruktorius privalo turėti apibrėžimą, nes jis vis tiek
  * iškviečiamas naikinant išvestinės klasės objektą.
  */
-inline Zmogus::~Zmogus() {}
+STUDMAN_API inline Zmogus::~Zmogus() {}
 
 #endif

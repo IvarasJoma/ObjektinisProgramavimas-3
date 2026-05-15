@@ -8,6 +8,7 @@
 #include <vector>
 #include <stdexcept>
 #include "../strukturosFailai/strukturaIvestis.h"
+#include "../StudManAPI.h"
 
 /**
  * @file strukturaMeniu.h
@@ -18,25 +19,25 @@
 using MeniuEilute = std::string_view;
 
 /** @brief Pagrindinio programos meniu eilutės. */
-extern const std::array<MeniuEilute, 15> PAGRINDINIS_MENIU;
+STUDMAN_API extern const std::array<MeniuEilute, 15> PAGRINDINIS_MENIU;
 
 /** @brief Bendro rikiavimo meniu eilutės. */
-extern const std::array<MeniuEilute, 7> RIKIAVIMO_MENIU;
+STUDMAN_API extern const std::array<MeniuEilute, 7> RIKIAVIMO_MENIU;
 
 /** @brief Rikiavimo tik didėjančia tvarka meniu eilutės. */
-extern const std::array<MeniuEilute, 4> RIKIAVIMO_MENIU_TIK_DIDEJANCIAI;
+STUDMAN_API extern const std::array<MeniuEilute, 4> RIKIAVIMO_MENIU_TIK_DIDEJANCIAI;
 
 /** @brief Pažangių studentų rikiavimo meniu eilutės. */
-extern const std::array<MeniuEilute, 7> PAZANGIU_RIKIAVIMO_MENIU;
+STUDMAN_API extern const std::array<MeniuEilute, 7> PAZANGIU_RIKIAVIMO_MENIU;
 
 /** @brief Silpnų studentų rikiavimo meniu eilutės. */
-extern const std::array<MeniuEilute, 7> SILPNU_RIKIAVIMO_MENIU;
+STUDMAN_API extern const std::array<MeniuEilute, 7> SILPNU_RIKIAVIMO_MENIU;
 
 /** @brief Išvedimo būdų meniu eilutės. */
-extern const std::array<MeniuEilute, 3> ISVEDIMO_MENIU;
+STUDMAN_API extern const std::array<MeniuEilute, 3> ISVEDIMO_MENIU;
 
 /** @brief Išvedimo į failą meniu eilutės. */
-extern const std::array<MeniuEilute, 6> ISVEDIMO_I_FAILA_MENIU;
+STUDMAN_API extern const std::array<MeniuEilute, 6> ISVEDIMO_I_FAILA_MENIU;
 
 /**
  * @brief Nuskaito pasirinkimą iš statinio meniu masyvo.
@@ -73,7 +74,7 @@ int nuskaitytiMeniuPasirinkima(const std::array<std::string_view, N>& eilutes) {
  * @param katalogas Katalogas, kuriame ieškoma tekstinių failų.
  * @return Meniu eilučių vektorius.
  */
-Vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas);
+STUDMAN_API Vector<std::string> gautiNuskaitymoMeniu(const std::string& katalogas);
 
 /**
  * @brief Nuskaito pagrindinio meniu pasirinkimą iš statinio meniu masyvo.

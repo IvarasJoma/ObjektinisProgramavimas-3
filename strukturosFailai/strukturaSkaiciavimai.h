@@ -4,6 +4,8 @@
 #include <vector>
 #include "../Studentas.h"
 #include "../Vector.h"
+#include "../StudManAPI.h"
+
 /**
  * @file strukturaSkaiciavimai.h
  * @brief Funkcijos studentų pažymių skaičiavimui ir skirstymui.
@@ -14,28 +16,28 @@
  * @param ndPazymiai Namų darbų pažymių vektorius.
  * @return Namų darbų pažymių vidurkis.
  */
-double skaiciuotiNDVidurki(const Vector<int>& ndPazymiai);
+STUDMAN_API double skaiciuotiNDVidurki(const Vector<int>& ndPazymiai);
 
 /**
  * @brief Apskaičiuoja galutinį pažymį pagal namų darbų vidurkį.
  * @param studentas Studentas, kurio pažymys skaičiuojamas.
  * @return Galutinis pažymys pagal vidurkį.
  */
-double skaiciuotiGalutiniVidurki(const Studentas& studentas);
+STUDMAN_API double skaiciuotiGalutiniVidurki(const Studentas& studentas);
 
 /**
  * @brief Apskaičiuoja namų darbų pažymių medianą.
  * @param ndPazymiai Namų darbų pažymių vektorius.
  * @return Namų darbų pažymių mediana.
  */
-double skaiciuotiNDMediana(Vector<int> ndPazymiai);
+STUDMAN_API double skaiciuotiNDMediana(Vector<int> ndPazymiai);
 
 /**
  * @brief Apskaičiuoja galutinį pažymį pagal namų darbų medianą.
  * @param studentas Studentas, kurio pažymys skaičiuojamas.
  * @return Galutinis pažymys pagal medianą.
  */
-double skaiciuotiGalutineMediana(const Studentas& studentas);
+STUDMAN_API double skaiciuotiGalutineMediana(const Studentas& studentas);
 /**
  * @brief Sukuria palyginimo funkciją rikiavimui didėjančia tvarka.
  *
@@ -69,13 +71,13 @@ auto lygintiElementusPagalMazejanciaReiksme(Ret (T::*getter)() const) {
  * @param studentas Studentas, kurio pažymys skaičiuojamas.
  * @param skaiciavimoMetodoPasirinkimas Skaičiavimo metodo pasirinkimas.
  */
-void apskaiciuotiGalutiniPazymi(Studentas& studentas, char skaiciavimoMetodoPasirinkimas);
+STUDMAN_API void apskaiciuotiGalutiniPazymi(Studentas& studentas, char skaiciavimoMetodoPasirinkimas);
 /**
  * @brief Apskaičiuoja ir nustato galutinius pažymius visiems studentams.
  * @param studentuSarasas Studentų sąrašas.
  * @param skaiciavimoMetodoPasirinkimas Skaičiavimo metodo pasirinkimas.
  */
-void apskaiciuotiGalutiniusPazymius(Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
+STUDMAN_API void apskaiciuotiGalutiniusPazymius(Vector<Studentas>& studentuSarasas, char skaiciavimoMetodoPasirinkimas);
 /**
  * @brief Suskirsto studentus į pažangius ir silpnus pagal galutinį pažymį.
  *
@@ -86,6 +88,6 @@ void apskaiciuotiGalutiniusPazymius(Vector<Studentas>& studentuSarasas, char ska
  * @param pazangiuSarasas Pažangių studentų sąrašas.
  * @param silpnuSarasas Silpnų studentų sąrašas.
  */
-void suskirstytiStudentus(const Vector<Studentas>& studentuSarasas, Vector<Studentas>& pazangiuSarasas, Vector<Studentas>& silpnuSarasas);
+STUDMAN_API void suskirstytiStudentus(const Vector<Studentas>& studentuSarasas, Vector<Studentas>& pazangiuSarasas, Vector<Studentas>& silpnuSarasas);
 
 #endif

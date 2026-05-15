@@ -3,9 +3,9 @@
 ;--------------------------------
 ; You must define these values
 
-  !define VERSION "0.1.1"
+  !define VERSION "3.0"
   !define PATCH  "1"
-  !define INST_DIR "/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/installer/_CPack_Packages/Darwin/NSIS64/Vardenis-Pavardenis-0.1.1-Darwin"
+  !define INST_DIR "/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/installer/_CPack_Packages/Darwin/NSIS64/setup"
 
 ;--------------------------------
 ;Variables
@@ -32,7 +32,7 @@
 
   ;Name and file
   Name "VU/Vardenis-Pavardenis"
-  OutFile "/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/installer/_CPack_Packages/Darwin/NSIS64/Vardenis-Pavardenis-0.1.1-Darwin.exe"
+  OutFile "/Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/installer/_CPack_Packages/Darwin/NSIS64/setup.exe"
 
   ;Set compression
   SetCompressor lzma
@@ -669,7 +669,7 @@ Section "-Core installation"
   Push "VU/Vardenis-Pavardenis"
   Call ConditionalAddToRegistry
   Push "DisplayVersion"
-  Push "0.1.1"
+  Push "3.0"
   Call ConditionalAddToRegistry
   Push "Publisher"
   Push "VU"
@@ -845,14 +845,23 @@ Section "Uninstall"
 
   ;Remove files we installed.
   ;Keep the list of directories here in sync with the File commands above.
-  Delete "$INSTDIR\testfiles"
-  Delete "$INSTDIR\testfiles\studentai100000.txt"
-  Delete "$INSTDIR\testfiles\studentai10000.txt"
   Delete "$INSTDIR\bin"
   Delete "$INSTDIR\bin\StudMan"
+  Delete "$INSTDIR\bin\VarduIrPavardziuSarasai"
+  Delete "$INSTDIR\bin\VarduIrPavardziuSarasai\Lietuviskos_vyru_pavardes.txt"
+  Delete "$INSTDIR\bin\VarduIrPavardziuSarasai\Lietuviski_moteru_vardai.txt"
+  Delete "$INSTDIR\bin\VarduIrPavardziuSarasai\Lietuviski_vyru_vardai.txt"
+  Delete "$INSTDIR\bin\VarduIrPavardziuSarasai\Lietuviskos_moteru_pavardes.txt"
+  Delete "$INSTDIR\bin\KonteineriuTyrimuiSkirtiFailai"
+  Delete "$INSTDIR\bin\KonteineriuTyrimuiSkirtiFailai\studentai100000.txt"
+  Delete "$INSTDIR\bin\KonteineriuTyrimuiSkirtiFailai\studentai10000.txt"
+  Delete "$INSTDIR\lib"
+  Delete "$INSTDIR\lib\libStudManLib.dylib"
 
-  RMDir "$INSTDIR\testfiles"
+  RMDir "$INSTDIR\bin\VarduIrPavardziuSarasai"
+  RMDir "$INSTDIR\bin\KonteineriuTyrimuiSkirtiFailai"
   RMDir "$INSTDIR\bin"
+  RMDir "$INSTDIR\lib"
 
 
 !ifdef CPACK_NSIS_ADD_REMOVE

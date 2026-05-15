@@ -157,13 +157,6 @@ all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles 0
 .PHONY : all
 
-# The main codegen target
-codegen: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 codegen
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jomaras06/Documents/GitHub/ObjektinisProgramavimas/build/CMakeFiles 0
-.PHONY : codegen
-
 # The main clean target
 clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
@@ -189,6 +182,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named StudManLib
+
+# Build rule for target.
+StudManLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 StudManLib
+.PHONY : StudManLib
+
+# fast build rule for target.
+StudManLib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/build
+.PHONY : StudManLib/fast
+
+#=============================================================================
 # Target rules for targets named StudMan
 
 # Build rule for target.
@@ -206,7 +212,7 @@ Studentas.o: Studentas.cpp.o
 
 # target to build an object file
 Studentas.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/Studentas.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/Studentas.cpp.o
 .PHONY : Studentas.cpp.o
 
 Studentas.i: Studentas.cpp.i
@@ -214,7 +220,7 @@ Studentas.i: Studentas.cpp.i
 
 # target to preprocess a source file
 Studentas.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/Studentas.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/Studentas.cpp.i
 .PHONY : Studentas.cpp.i
 
 Studentas.s: Studentas.cpp.s
@@ -222,7 +228,7 @@ Studentas.s: Studentas.cpp.s
 
 # target to generate assembly for a file
 Studentas.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/Studentas.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/Studentas.cpp.s
 .PHONY : Studentas.cpp.s
 
 pagalbinesFunkcijos/Meniu.o: pagalbinesFunkcijos/Meniu.cpp.o
@@ -230,7 +236,7 @@ pagalbinesFunkcijos/Meniu.o: pagalbinesFunkcijos/Meniu.cpp.o
 
 # target to build an object file
 pagalbinesFunkcijos/Meniu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/Meniu.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/Meniu.cpp.o
 .PHONY : pagalbinesFunkcijos/Meniu.cpp.o
 
 pagalbinesFunkcijos/Meniu.i: pagalbinesFunkcijos/Meniu.cpp.i
@@ -238,7 +244,7 @@ pagalbinesFunkcijos/Meniu.i: pagalbinesFunkcijos/Meniu.cpp.i
 
 # target to preprocess a source file
 pagalbinesFunkcijos/Meniu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/Meniu.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/Meniu.cpp.i
 .PHONY : pagalbinesFunkcijos/Meniu.cpp.i
 
 pagalbinesFunkcijos/Meniu.s: pagalbinesFunkcijos/Meniu.cpp.s
@@ -246,7 +252,7 @@ pagalbinesFunkcijos/Meniu.s: pagalbinesFunkcijos/Meniu.cpp.s
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/Meniu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/Meniu.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/Meniu.cpp.s
 .PHONY : pagalbinesFunkcijos/Meniu.cpp.s
 
 pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.o: pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.o
@@ -254,7 +260,7 @@ pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.o: pagalbinesFunkcijos/pag
 
 # target to build an object file
 pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.o
 .PHONY : pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.o
 
 pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.i: pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.i
@@ -262,7 +268,7 @@ pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.i: pagalbinesFunkcijos/pag
 
 # target to preprocess a source file
 pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.i
 .PHONY : pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.i
 
 pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.s: pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.s
@@ -270,7 +276,7 @@ pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.s: pagalbinesFunkcijos/pag
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.s
 .PHONY : pagalbinesFunkcijos/pagalbinesDarboSuFailaisFunkcijos.cpp.s
 
 pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.o: pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.o
@@ -278,7 +284,7 @@ pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.o: pagalbinesFunkcijos/pagalbi
 
 # target to build an object file
 pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.o
 .PHONY : pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.o
 
 pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.i: pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.i
@@ -286,7 +292,7 @@ pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.i: pagalbinesFunkcijos/pagalbi
 
 # target to preprocess a source file
 pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.i
 .PHONY : pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.i
 
 pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.s: pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.s
@@ -294,7 +300,7 @@ pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.s: pagalbinesFunkcijos/pagalbi
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.s
 .PHONY : pagalbinesFunkcijos/pagalbinesGeneravimoFunkcijos.cpp.s
 
 pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.o: pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.o
@@ -302,7 +308,7 @@ pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.o: pagalbinesFunkcijos/pagalbin
 
 # target to build an object file
 pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.o
 .PHONY : pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.o
 
 pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.i: pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.i
@@ -310,7 +316,7 @@ pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.i: pagalbinesFunkcijos/pagalbin
 
 # target to preprocess a source file
 pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.i
 .PHONY : pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.i
 
 pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.s: pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.s
@@ -318,7 +324,7 @@ pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.s: pagalbinesFunkcijos/pagalbin
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.s
 .PHONY : pagalbinesFunkcijos/pagalbinesIsvestiesFunkcijos.cpp.s
 
 pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.o: pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.o
@@ -326,7 +332,7 @@ pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.o: pagalbinesFunkcijos/pagalbine
 
 # target to build an object file
 pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.o
 .PHONY : pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.o
 
 pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.i: pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.i
@@ -334,7 +340,7 @@ pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.i: pagalbinesFunkcijos/pagalbine
 
 # target to preprocess a source file
 pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.i
 .PHONY : pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.i
 
 pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.s: pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.s
@@ -342,7 +348,7 @@ pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.s: pagalbinesFunkcijos/pagalbine
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.s
 .PHONY : pagalbinesFunkcijos/pagalbinesIvestiesFunkcijos.cpp.s
 
 pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.o: pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.o
@@ -350,7 +356,7 @@ pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.o: pagalbinesFunkcijos/pagalbin
 
 # target to build an object file
 pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.o
 .PHONY : pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.o
 
 pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.i: pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.i
@@ -358,7 +364,7 @@ pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.i: pagalbinesFunkcijos/pagalbin
 
 # target to preprocess a source file
 pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.i
 .PHONY : pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.i
 
 pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.s: pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.s
@@ -366,7 +372,7 @@ pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.s: pagalbinesFunkcijos/pagalbin
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.s
 .PHONY : pagalbinesFunkcijos/pagalbinesRikiavimoFunkcijos.cpp.s
 
 pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.o: pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.o
@@ -374,7 +380,7 @@ pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.o: pagalbinesFunkcijos/pagalb
 
 # target to build an object file
 pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.o
 .PHONY : pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.o
 
 pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.i: pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.i
@@ -382,7 +388,7 @@ pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.i: pagalbinesFunkcijos/pagalb
 
 # target to preprocess a source file
 pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.i
 .PHONY : pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.i
 
 pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.s: pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.s
@@ -390,7 +396,7 @@ pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.s: pagalbinesFunkcijos/pagalb
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.s
 .PHONY : pagalbinesFunkcijos/pagalbinesSkaiciavimuFunkcijos.cpp.s
 
 pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.o: pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.o
@@ -398,7 +404,7 @@ pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.o: pagalbinesFunkcijos/pagalbin
 
 # target to build an object file
 pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.o
 .PHONY : pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.o
 
 pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.i: pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.i
@@ -406,7 +412,7 @@ pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.i: pagalbinesFunkcijos/pagalbin
 
 # target to preprocess a source file
 pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.i
 .PHONY : pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.i
 
 pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.s: pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.s
@@ -414,7 +420,7 @@ pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.s: pagalbinesFunkcijos/pagalbin
 
 # target to generate assembly for a file
 pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudMan.dir/build.make CMakeFiles/StudMan.dir/pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StudManLib.dir/build.make CMakeFiles/StudManLib.dir/pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.s
 .PHONY : pagalbinesFunkcijos/pagalbinesTestavimoFunkcijos.cpp.s
 
 programaVektoriai.o: programaVektoriai.cpp.o
@@ -447,7 +453,6 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... codegen"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
@@ -457,6 +462,7 @@ help:
 	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... StudMan"
+	@echo "... StudManLib"
 	@echo "... Studentas.o"
 	@echo "... Studentas.i"
 	@echo "... Studentas.s"
